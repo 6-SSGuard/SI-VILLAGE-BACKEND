@@ -40,6 +40,23 @@ jobs:
     - name: Push Docker Image to Docker Hub
       run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/github-actions-demo
 
+    - name: Create .env file
+      run: |
+        echo DB_NAME=${{ secrets.DB_NAME }} >> .env
+        echo DB_USERNAME=${{ secrets.DB_USERNAME }} >> .env
+        echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
+
+    - name: Copy Files to EC2
+      uses: appleboy/scp-action@v0.1.6
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_KEY }}
+        source: |
+          docker-compose.yml
+          .env
+        target: /home/ubuntu/
+
     - name: SSH to Server and Deploy
       uses: appleboy/ssh-action@v0.1.6
       with:
@@ -48,8 +65,7 @@ jobs:
         key: ${{ secrets.EC2_KEY }}
         script: |
           cd /home/ubuntu/
-
           # Docker Compose를 사용해 컨테이너 실행
-          docker-compose down
-          docker-compose pull
-          docker-compose up -d
+          docker-compose --env-file .env down
+          docker-compose --env-file .env pull
+          docker-compose --env-file .env up -d
