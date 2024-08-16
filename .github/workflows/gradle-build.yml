@@ -47,13 +47,9 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_KEY }}
         script: |
-          cd /home/ec2-user/myapp
-          # 최신 코드를 pull
-          git pull origin main
-          
-          # docker-compose 환경 파일 로드
-          export $(cat .env | xargs)
+          cd /home/ubuntu/
 
           # Docker Compose를 사용해 컨테이너 실행
+          docker-compose down
           docker-compose pull
           docker-compose up -d
