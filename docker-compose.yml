@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-
   mysql:
     container_name: mysql
     image: mysql
@@ -12,7 +11,7 @@ services:
       MYSQL_DATABASE: siv
     restart: always
     networks:
-      - testnet
+      - mynet
 
   backend:
     container_name: backend
@@ -25,8 +24,12 @@ services:
     depends_on:
       - mysql
     networks:
-      - testnet
-
+      - mynet
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/siv
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
 
 networks:
   mynet:
