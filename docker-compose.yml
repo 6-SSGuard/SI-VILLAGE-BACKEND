@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  app-network:
+    driver: bridge
+
 services:
   db:
     image: mysql:8.0
@@ -13,12 +17,14 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - app-network
 
   app:
     image: ${DOCKERHUB_USERNAME}/github-actions-demo:latest
     container_name: spring_boot_app
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/${DB_NAME}
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/${DB_NAME}
       SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
       SPRING_PROFILES_ACTIVE: prod
@@ -26,6 +32,8 @@ services:
       - "8080:8080"
     depends_on:
       - db
+    networks:
+      - app-network
 
 volumes:
   mysql_data:
