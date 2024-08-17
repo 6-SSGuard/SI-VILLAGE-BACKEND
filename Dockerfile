@@ -19,6 +19,8 @@ WORKDIR /app
 
 # wait-for-it.sh 스크립트를 다운로드 및 설치
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /app/wait-for-it.sh
+
+# root 사용자로 실행 권한 부여
 RUN chmod +x /app/wait-for-it.sh
 
 # 빌드된 JAR 파일 복사 (명시적으로 이름 지정)
