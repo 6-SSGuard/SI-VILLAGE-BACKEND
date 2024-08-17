@@ -11,7 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
       - name: checkout
         uses: actions/checkout@v3
 
@@ -21,16 +20,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-        ## create application-database.yml
+      - name: Set Spring Profile to prod
+        run: echo "SPRING_PROFILES_ACTIVE=prod" >> $GITHUB_ENV
+
       - name: make application-database.yml
         run: |
-
           cd ./src/main/resources
-          
-          # application-database.yml 파일 생성
           touch ./application-database.yml
-          
-          # GitHub-Actions 에서 설정한 값을 application-database.yml 파일에 쓰기
           echo "${{ secrets.DATABASE }}" >> ./application-database.yml
         shell: bash
 
@@ -39,14 +35,12 @@ jobs:
           chmod +x gradlew 
           ./gradlew build -x test
 
-      #          ./gradlew bootJar
-      ## 웹 이미지 빌드 및 도커허브에 push
       - name: web docker build and push
         run: |
           docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_REPO }} . 
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_REPO }} .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_REPO }}
-      ## docker compose up
+
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
