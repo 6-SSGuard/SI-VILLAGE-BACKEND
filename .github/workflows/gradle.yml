@@ -11,7 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
       - name: checkout
         uses: actions/checkout@v3
 
@@ -21,11 +20,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Create resources directory
+        run: mkdir -p ./src/main/resources
+
       - name: make application-prod.yml
         run: |
-          cd ./src/main/resources
-          touch ./application-prod.yml
-          echo "${{ secrets.PROD_APP }}" >> ./application-prod.yml
+          echo "${{ secrets.PROD_APP }}" > ./src/main/resources/application-prod.yml
         shell: bash
 
       - name: Build with Gradle
