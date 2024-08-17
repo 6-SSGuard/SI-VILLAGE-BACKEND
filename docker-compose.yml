@@ -1,39 +1,42 @@
 version: '3.8'
 
-networks:
-  app-network:
-    driver: bridge
-
 services:
-  db:
-    image: mysql:8.0
-    container_name: mysql_container
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - app-network
 
-  app:
-    image: ${DOCKERHUB_USERNAME}/github-actions-demo:latest
-    container_name: spring_boot_app
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://13.124.114.82:3306/${DB_NAME}
-      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
-      SPRING_PROFILES_ACTIVE: prod
+  mysql:
+    container_name: mysql
+    image: mysql
     ports:
-      - "8080:8080"
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: siv
+    restart: always
+    networks:
+      - testnet
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - 6379:6379
+    restart: always
+    networks:
+      - testnet
+
+  backend:
+    container_name: backend
+    image: astar5327/github-actions-demo
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    restart: always
     depends_on:
-      - db
+      - mysql
+      - redis
     networks:
-      - app-network
+      - testnet
 
-volumes:
-  mysql_data:
+
+networks:
+  mynet:
+    driver: bridge
