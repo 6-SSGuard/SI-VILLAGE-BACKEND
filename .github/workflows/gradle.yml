@@ -28,6 +28,9 @@ jobs:
           echo "${{ secrets.PROD_APP }}" > ./src/main/resources/application-prod.yml
         shell: bash
 
+      - name: Check generated application-prod.yml
+        run: cat ./src/main/resources/application-prod.yml
+
       - name: Build with Gradle
         run: |
           chmod +x gradlew 
