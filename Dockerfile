@@ -18,9 +18,7 @@ FROM openjdk:17.0-slim
 WORKDIR /app
 
 # wait-for-it.sh 스크립트를 다운로드 및 설치
-ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /app/wait-for-it.sh
-
-# root 사용자로 실행 권한 부여
+COPY wait-for-it.sh /app/wait-for-it.sh
 RUN chmod +x /app/wait-for-it.sh
 
 # 빌드된 JAR 파일 복사 (명시적으로 이름 지정)
@@ -28,8 +26,5 @@ COPY --from=builder /build/build/libs/*-SNAPSHOT.jar ./app.jar
 
 EXPOSE 8080
 
-# root 대신 nobody 권한으로 실행
-USER nobody
-
-# wait-for-it.sh를 사용하여 MySQL이 준비될 때까지 대기 후 Spring Boot 애플리케이션 실행
+# root 권한으로 실행 (nobody 대신)
 ENTRYPOINT ["/app/wait-for-it.sh", "mysql:3306", "--", "java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "-Dsun.net.inetaddr.ttl=0", "app.jar"]
