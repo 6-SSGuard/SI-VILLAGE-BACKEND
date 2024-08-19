@@ -53,5 +53,5 @@ public enum ErrorCode {
     ;
 
     private final HttpStatus status; // HTTP Status
-    private final String errorMessage; // 에러ㅁ
+    private final String message; // 에러
 }
