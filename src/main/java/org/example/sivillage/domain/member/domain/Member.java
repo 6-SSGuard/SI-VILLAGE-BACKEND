@@ -10,6 +10,7 @@ import org.example.sivillage.domain.member.vo.SignUpRequest;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
