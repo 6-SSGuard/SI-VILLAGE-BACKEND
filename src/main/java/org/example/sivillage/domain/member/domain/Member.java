@@ -1,11 +1,11 @@
-package org.example.sivillage.member.domain;
+package org.example.sivillage.domain.member.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.member.dto.SignUpRequest;
+import org.example.sivillage.domain.member.vo.SignUpRequest;
 
 @Entity
 @Getter

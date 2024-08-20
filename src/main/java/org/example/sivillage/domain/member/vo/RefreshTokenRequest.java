@@ -1,4 +1,4 @@
-package org.example.sivillage.member.dto;
+package org.example.sivillage.domain.member.vo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

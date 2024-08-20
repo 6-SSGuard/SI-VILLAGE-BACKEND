@@ -1,7 +1,7 @@
 package org.example.sivillage.global.auth;
 
 import lombok.Builder;
-import org.example.sivillage.member.domain.Member;
+import org.example.sivillage.domain.member.domain.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

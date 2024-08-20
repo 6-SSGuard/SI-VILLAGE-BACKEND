@@ -1,4 +1,4 @@
-package org.example.sivillage.member.domain;
+package org.example.sivillage.domain.member.domain;
 
 public enum Role {
     MEMBER,

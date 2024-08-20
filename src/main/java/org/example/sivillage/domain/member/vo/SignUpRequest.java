@@ -1,4 +1,4 @@
-package org.example.sivillage.member.dto;
+package org.example.sivillage.domain.member.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.member.domain.Role;
+import org.example.sivillage.domain.member.domain.Role;
 
 @Getter
 @NoArgsConstructor
