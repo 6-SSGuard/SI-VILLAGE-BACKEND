@@ -22,7 +22,7 @@ public class SignUpRequest {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$", message = "비밀번호는 최소 8자 이상, 영문자, 숫자, 특수문자를 각각 1개 이상 포함해야 합니다.")
     private String password;
 
-    @Schema(description = "회원의 역할", example = "STUDENT", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "회원의 역할", example = "ADMIN", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "역할은 필수 입력 값입니다.")
     private Role role;
 
