@@ -12,7 +12,7 @@ import org.example.sivillage.domain.product.vo.CreateProductRequest;
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class ProductInfo {
+public class ProductDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +37,8 @@ public class ProductInfo {
     private Integer stock;
 
     @Builder
-    public static ProductInfo createProductInfo(CreateProductRequest request, Product product) {
-        return ProductInfo.builder()
+    public static ProductDetail createProductInfo(CreateProductRequest request, Product product) {
+        return ProductDetail.builder()
                 .color(request.getColor())
                 .size(request.getSize())
                 .capacity(request.getCapacity())
