@@ -1,4 +1,4 @@
-package org.example.sivillage.member.presentation;
+package org.example.sivillage.domain.member.presentation;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -7,14 +7,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.common.Response;
+import org.example.sivillage.global.common.Response;
 import org.example.sivillage.global.auth.CustomUserDetails;
 import org.example.sivillage.global.auth.JwtToken;
 import org.example.sivillage.global.auth.JwtTokenProvider;
-import org.example.sivillage.member.application.MemberService;
-import org.example.sivillage.member.dto.LogInRequest;
-import org.example.sivillage.member.dto.RefreshTokenRequest;
-import org.example.sivillage.member.dto.SignUpRequest;
+import org.example.sivillage.domain.member.application.MemberService;
+import org.example.sivillage.domain.member.vo.LogInRequest;
+import org.example.sivillage.domain.member.vo.RefreshTokenRequest;
+import org.example.sivillage.domain.member.vo.SignUpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package org.example.sivillage.common;
+package org.example.sivillage.global.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

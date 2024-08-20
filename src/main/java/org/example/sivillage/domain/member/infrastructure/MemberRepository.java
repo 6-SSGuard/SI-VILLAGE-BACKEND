@@ -1,6 +1,6 @@
-package org.example.sivillage.member.infrastructure;
+package org.example.sivillage.domain.member.infrastructure;
 
-import org.example.sivillage.member.domain.Member;
+import org.example.sivillage.domain.member.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
