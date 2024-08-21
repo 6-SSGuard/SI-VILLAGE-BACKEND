@@ -54,6 +54,8 @@ public enum ErrorCode {
     UNAUTHORIZED_TASK(HttpStatus.UNAUTHORIZED, "허용되지 않은 권한입니다."),
 
 
+    // 중복 요청 관련
+    DUPLICATE_PRODUCT(HttpStatus.CONFLICT, "이미 존재하는 상품명입니다."),
     ;
 
     private final HttpStatus status; // HTTP Status
