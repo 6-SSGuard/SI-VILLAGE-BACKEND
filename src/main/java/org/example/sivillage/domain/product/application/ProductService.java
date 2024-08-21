@@ -53,4 +53,14 @@ public class ProductService {
 
         return GetProductDetailsResponse.toDto(product, productOption);
     }
+
+//    @Transactional(readOnly = true)
+//    public GetProductSizeListResponse getProductSizeList(String productName) {
+//        Product product = productRepository.findByName(productName)
+//               .orElseThrow(() -> new CustomException(ErrorCode.PRODUCT_NOT_FOUND));
+//
+//
+//
+////        return GetProductSizeListResponse.toDto(product.getProductOptions());
+////    }
 }
