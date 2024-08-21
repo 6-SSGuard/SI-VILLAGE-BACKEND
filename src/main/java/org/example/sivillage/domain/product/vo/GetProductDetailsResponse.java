@@ -16,8 +16,9 @@ public class GetProductDetailsResponse {
     private String size;
     private String capacity;
     private Integer stock;
+    private Long likesCount;
 
-    public static GetProductDetailsResponse toDto(Product product, ProductOption productOption) {
+    public static GetProductDetailsResponse toDto(Product product, ProductOption productOption, Long likesCount) {
         return GetProductDetailsResponse.builder()
                 .productId(product.getId())
                 .productName(product.getName())
@@ -27,6 +28,7 @@ public class GetProductDetailsResponse {
                 .size(productOption.getSize().name())
                 .capacity(productOption.getCapacity())
                 .stock(productOption.getStock())
+                .likesCount(likesCount)
                 .build();
     }
 }

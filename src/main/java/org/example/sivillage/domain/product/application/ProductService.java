@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.domain.brand.application.BrandService;
 import org.example.sivillage.domain.brand.domain.Brand;
-import org.example.sivillage.domain.brand.infrastructure.BrandRepository;
-import org.example.sivillage.domain.member.application.MemberService;
 import org.example.sivillage.domain.product.domain.Product;
 import org.example.sivillage.domain.product.domain.ProductOption;
 import org.example.sivillage.domain.product.infrastructure.ProductOptionRepository;
@@ -23,12 +21,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProductService {
     private final ProductRepository productRepository;
-    private final MemberService memberService;
-    private final BrandRepository brandRepository;
     private final ProductOptionRepository productOptionRepository;
     private final BrandService brandService;
+    private final ProductLikeService productLikeService;
 
     public void createProduct(CreateProductRequest request) {
+        if (productRepository.existsByName(request.getName())) {
+            throw new CustomException(ErrorCode.DUPLICATE_PRODUCT);
+        }
+
         /** Brand 정보가 DB에 있는지 확인
             Brand 정보가 없으면 새로 생성
             Brand 정보가 있으면 그 객체를 받아오기
@@ -51,7 +52,9 @@ public class ProductService {
         ProductOption productOption = productOptionRepository.findByProduct(product)
                 .orElseThrow(() -> new CustomException(ErrorCode.PRODUCT_OPTION_NOT_FOUND));
 
-        return GetProductDetailsResponse.toDto(product, productOption);
+        Long likesCount = productLikeService.countLikesForProduct(productId);
+
+        return GetProductDetailsResponse.toDto(product, productOption, likesCount);
     }
 
 //    @Transactional(readOnly = true)
