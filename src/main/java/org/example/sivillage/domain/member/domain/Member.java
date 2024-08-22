@@ -47,4 +47,5 @@ public class Member {
                 .name(request.getName())
                 .build();
     }
+
 }

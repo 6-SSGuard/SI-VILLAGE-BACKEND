@@ -2,7 +2,7 @@ package org.example.sivillage.domain.sizeinfo.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.sivillage.domain.beautysizeinfo.domain.BeautySizeInfo;
+import org.example.sivillage.domain.member.domain.Member;
 import org.example.sivillage.domain.product.domain.Size;
 import org.example.sivillage.global.common.BaseEntity;
 
@@ -33,7 +33,7 @@ public class SizeInfo extends BaseEntity {
     private Size pantsSize;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "beauty_size_info_id", nullable = false)
-    private BeautySizeInfo beautySizeInfo;
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
 }
