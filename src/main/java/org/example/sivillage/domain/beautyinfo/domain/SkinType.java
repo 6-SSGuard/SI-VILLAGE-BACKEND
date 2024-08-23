@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public enum SkinType {
+
     DRY("건성"),
     NEUTRAL("중성"),
     OILY("지성"),

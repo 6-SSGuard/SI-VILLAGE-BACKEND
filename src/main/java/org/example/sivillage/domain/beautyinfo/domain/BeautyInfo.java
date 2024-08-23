@@ -32,27 +32,29 @@ public class BeautyInfo extends BaseEntity {
     @Column(nullable = false)
     private String beautyKeyword;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+    @Column(nullable = false, name = "member_id")
+    private Long memberId;
 
     @Builder
-    public BeautyInfo(SkinType skinType, SkinTone skinTone, ScalpTone scalpTone, String beautyKeyword, Long id) {
+    public BeautyInfo(SkinType skinType, SkinTone skinTone, ScalpTone scalpTone, String beautyKeyword, Member member) {
         this.skinType = skinType;
         this.skinTone = skinTone;
         this.scalpTone = scalpTone;
         this.beautyKeyword = beautyKeyword;
+        this.memberId = member.getId();
     }
-//
-//    @Builder
-//    public static BeautyInfo createBeautyInfo (BeautyInfoRequest request) {
-//        return BeautyInfo.builder()
-//                .skinType(request.getSkinType())
-//                .skinTone(request.getSkinTone())
-//                .scalpTone(request.getScalpTone())
-//                .beautyKeyword(request.getBeautyKeyword())
-//                .build();
-//    }
+
+
+    @Builder
+    public static BeautyInfo toEntity (BeautyInfoRequest requestDto) {
+        return BeautyInfo.builder()
+                .skinType(requestDto.getSkinType())
+                .skinTone(requestDto.getSkinTone())
+                .scalpTone(requestDto.getScalpTone())
+                .beautyKeyword(requestDto.getBeautyKeyword())
+                .member(requestDto.getMember())
+                .build();
+    }
 
     }
 

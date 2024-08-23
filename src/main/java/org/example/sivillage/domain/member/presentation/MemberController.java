@@ -7,7 +7,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.sivillage.domain.beautyinfo.application.BeautyInfoService;
 import org.example.sivillage.domain.beautyinfo.dto.BeautyInfoRequest;
+import org.example.sivillage.domain.beautyinfo.vo.BeautyInfoRequestVo;
 import org.example.sivillage.global.common.Response;
 import org.example.sivillage.global.auth.CustomUserDetails;
 import org.example.sivillage.global.auth.JwtToken;
@@ -30,6 +32,7 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
     private final JwtTokenProvider jwtTokenProvider;
+    private final BeautyInfoService beautyInfoService;
 
     @Operation(summary = "회원가입", description = """
     code: String, 6자리 이상
@@ -97,11 +100,13 @@ public class MemberController {
         List<Integer> testList = List.of(1, 2, 3, 4, 5); //테스트
         return ResponseEntity.ok(new Response<>(testList, "테스트 리스트 반환 완료"));
     }
+
     @Operation(summary = "뷰티정보 등록", description = "뷰티정보를 등록합니다.")
     @PostMapping("/beauty-info")
-    public ResponseEntity<Response<Void>> beautyInfo(@Valid @RequestBody BeautyInfoRequest request) {
-        request.getBeautyKeyword();
-        return ResponseEntity.ok(new Response<>(null, "미용정보 등록 성공."));
+    public ResponseEntity<Response<Void>> createBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        String memberId = customUserDetails.getUsername();
+        beautyInfoService.createBeautyInfo(vo,memberId);
+        return ResponseEntity.ok(new Response<>(null, "뷰티정보 등록을 완료하였습니다."));
     }
 
 
