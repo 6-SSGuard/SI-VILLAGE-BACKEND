@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SI-VILLAGE.main.iml" filepath="$PROJECT_DIR$/.idea/modules/SI-VILLAGE.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/sivillage-project.iml" filepath="$PROJECT_DIR$/.idea/sivillage-project.iml" />
+    </modules>
+  </component>
+</project>
