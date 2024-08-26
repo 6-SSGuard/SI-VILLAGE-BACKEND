@@ -27,8 +27,8 @@ public class ProductController {
     
     """)
     @PostMapping("/")
-    public CustomResponseEntity<?> createProduct(@Valid @RequestBody CreateProductRequest request) {
-        productService.createProduct(request);
+    public CustomResponseEntity<?> addProduct(@Valid @RequestBody CreateProductRequest request) {
+        productService.addProduct(request);
         return new CustomResponseEntity<>(HttpStatus.OK, "물품 생성이 완료되었습니다.");
     }
 
@@ -36,8 +36,8 @@ public class ProductController {
     
     """)
     @GetMapping("/details/{productCode}")
-    public CustomResponseEntity<?> getProductDetails(@PathVariable String productCode) {
-        return new CustomResponseEntity<>(HttpStatus.OK, productService.getProductDetails(productCode),
+    public CustomResponseEntity<?> getProductDetail(@PathVariable String productCode) {
+        return new CustomResponseEntity<>(HttpStatus.OK, productService.getProductDetail(productCode),
                 "물품 상세정보 조회가 완료되었습니다.");
     }
 
