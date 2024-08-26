@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 public class BrandService {
     private final BrandRepository brandRepository;
 
-    public Brand createBrand(String name) {
-        return brandRepository.findByName(name)
+    public Brand createBrand(String brandName) {
+        return brandRepository.findByBrandName(brandName)
                 .orElseGet(() -> {
-                    Brand brand = Brand.createBrand(name);
+                    Brand brand = Brand.createBrand(brandName);
                     return brandRepository.save(brand);
                 });
     }
