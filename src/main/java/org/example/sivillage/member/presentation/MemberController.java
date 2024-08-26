@@ -29,7 +29,7 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
     private final JwtTokenProvider jwtTokenProvider;
-    private final BeautyInfoService beautyInfoService;
+//    private final BeautyInfoService beautyInfoService;
 
     @Operation(summary = "회원가입", description = """
     code: String, 6자리 이상
@@ -97,13 +97,13 @@ public class MemberController {
         return new CustomResponseEntity<>(HttpStatus.OK, testList, "테스트 리스트 반환 완료");
     }
 
-    @Operation(summary = "뷰티정보 등록", description = "뷰티정보를 등록합니다.")
-    @PostMapping("/beauty-info")
-    public ResponseEntity<Response<Void>> createBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberId = customUserDetails.getUsername();
-        beautyInfoService.createBeautyInfo(vo,memberId);
-        return ResponseEntity.ok(new Response<>(null, "뷰티정보 등록을 완료하였습니다."));
-    }
+//    @Operation(summary = "뷰티정보 등록", description = "뷰티정보를 등록합니다.")
+//    @PostMapping("/beauty-info")
+//    public ResponseEntity<Response<Void>> createBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+//        String memberId = customUserDetails.getUsername();
+//        beautyInfoService.createBeautyInfo(vo,memberId);
+//        return ResponseEntity.ok(new Response<>(null, "뷰티정보 등록을 완료하였습니다."));
+//    }
 
 
 

@@ -2,7 +2,7 @@ package org.example.sivillage.memberinfo.application;
 
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.memberinfo.domain.BeautyInfo;
-import org.example.sivillage.memberinfo.dto.BeautyInfoRequest;
+import org.example.sivillage.memberinfo.dto.in.BeautyInfoRequestDto;
 import org.example.sivillage.memberinfo.infrastructure.BeautyInfoRepository;
 import org.example.sivillage.memberinfo.vo.BeautyInfoRequestVo;
 import org.example.sivillage.member.domain.Member;
@@ -18,7 +18,7 @@ public class BeautyInfoService {
 
     public void createBeautyInfo(BeautyInfoRequestVo vo, String memberId) {
         Member member = memberRepository.findByEmail(memberId).orElseThrow();
-        BeautyInfoRequest requestDto = BeautyInfoRequest.toDto(vo, member); // vo -> dto
+        BeautyInfoRequestDto requestDto = BeautyInfoRequestDto.toDto(vo, member); // vo -> dto
         beautyInfoRepository.save(BeautyInfo.toEntity(requestDto)); // db 저장;
     }
 

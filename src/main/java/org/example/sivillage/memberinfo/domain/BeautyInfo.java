@@ -2,7 +2,7 @@ package org.example.sivillage.memberinfo.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.sivillage.memberinfo.dto.BeautyInfoRequest;
+import org.example.sivillage.memberinfo.dto.in.BeautyInfoRequestDto;
 import org.example.sivillage.member.domain.Member;
 import org.example.sivillage.global.common.BaseEntity;
 
@@ -46,7 +46,7 @@ public class BeautyInfo extends BaseEntity {
 
 
     @Builder
-    public static BeautyInfo toEntity (BeautyInfoRequest requestDto) {
+    public static BeautyInfo toEntity (BeautyInfoRequestDto requestDto) {
         return BeautyInfo.builder()
                 .skinType(requestDto.getSkinType())
                 .skinTone(requestDto.getSkinTone())
