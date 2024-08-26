@@ -1,6 +1,7 @@
-package org.example.sivillage.global.auth;
+package org.example.sivillage.domain.auth.application;
 
 import lombok.RequiredArgsConstructor;
+import org.example.sivillage.domain.auth.domain.CustomUserDetails;
 import org.example.sivillage.global.error.CustomException;
 import org.example.sivillage.global.error.ErrorCode;
 import org.example.sivillage.domain.member.domain.Member;

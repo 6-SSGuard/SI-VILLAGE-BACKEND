@@ -1,13 +1,13 @@
 package org.example.sivillage.domain.member.application;
 
 import lombok.RequiredArgsConstructor;
-import org.example.sivillage.global.auth.JwtToken;
-import org.example.sivillage.global.auth.JwtTokenProvider;
+import org.example.sivillage.domain.member.domain.Member;
+import org.example.sivillage.domain.member.infrastructure.MemberRepository;
+import org.example.sivillage.domain.member.vo.SignUpRequest;
 import org.example.sivillage.global.error.CustomException;
 import org.example.sivillage.global.error.ErrorCode;
-import org.example.sivillage.domain.member.domain.Member;
-import org.example.sivillage.domain.member.vo.SignUpRequest;
-import org.example.sivillage.domain.member.infrastructure.MemberRepository;
+import org.example.sivillage.global.util.JwtToken;
+import org.example.sivillage.global.util.JwtTokenProvider;
 import org.example.sivillage.global.util.SecurityUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -63,5 +63,4 @@ public class MemberService {
         return memberRepository.findByEmail(email).
                 orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
     }
-
 }

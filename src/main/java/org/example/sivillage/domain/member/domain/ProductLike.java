@@ -1,11 +1,11 @@
-package org.example.sivillage.domain.product.domain;
+package org.example.sivillage.domain.member.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.domain.member.domain.Member;
+import org.example.sivillage.domain.product.domain.Product;
 
 @Entity
 @Getter
@@ -32,5 +32,5 @@ public class ProductLike {
                 .product(product)
                 .member(member)
                 .build();
-    }
+    } // 유저에 가까움 -> member domain으로?
 }

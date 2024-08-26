@@ -1,4 +1,4 @@
-package org.example.sivillage.global.auth;
+package org.example.sivillage.domain.auth.domain;
 
 import lombok.Builder;
 import org.example.sivillage.domain.member.domain.Member;
