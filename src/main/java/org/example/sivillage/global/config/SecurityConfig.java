@@ -1,7 +1,7 @@
 package org.example.sivillage.global.config;
 
 import lombok.RequiredArgsConstructor;
-import org.example.sivillage.domain.auth.application.CustomUserDetailsService;
+import org.example.sivillage.auth.application.CustomUserDetailsService;
 import org.example.sivillage.global.util.JwtAuthenticationFilter;
 import org.example.sivillage.global.util.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
