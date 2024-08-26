@@ -7,7 +7,7 @@ import org.example.sivillage.domain.product.domain.Size;
 import org.example.sivillage.global.common.BaseEntity;
 
 @Entity
-@Getter
+@Getter // beauty 쪽으로 통합
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @AllArgsConstructor

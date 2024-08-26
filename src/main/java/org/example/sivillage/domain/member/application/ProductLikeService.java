@@ -1,10 +1,10 @@
-package org.example.sivillage.domain.product.application;
+package org.example.sivillage.domain.member.application;
 
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.domain.member.domain.Member;
+import org.example.sivillage.domain.member.domain.ProductLike;
 import org.example.sivillage.domain.member.infrastructure.MemberRepository;
 import org.example.sivillage.domain.product.domain.Product;
-import org.example.sivillage.domain.product.domain.ProductLike;
 import org.example.sivillage.domain.product.infrastructure.ProductLikeRepository;
 import org.example.sivillage.domain.product.infrastructure.ProductRepository;
 import org.example.sivillage.domain.product.vo.LikeProductRequest;
@@ -26,14 +26,6 @@ public class ProductLikeService {
     private final ProductRepository productRepository;
     private final MemberRepository memberRepository;
 
-    @CachePut(value = "procductLikes", key = "#product.id + '-' + #member.id")
-    public void likeProduct(LikeProductRequest request) {
-        Product product = getProduct(request.getProductId());
-        Member member = getMember(request.getMemberId());
-
-        ProductLike productLike = ProductLike.createProductLike(product, member);
-        productLikeRepository.save(productLike);
-    }
 
     @CacheEvict(value = "procductLikes", key = "#product.id + '-' + #member.id")
     public void unlikeProduct(UnLikeProductRequest request) {
@@ -47,6 +39,15 @@ public class ProductLikeService {
         Product product = getProduct(productId);
         Member member = getMember(memberId);
         return productLikeRepository.existsByProductAndMember(product, member);
+    }
+
+    @CachePut(value = "procductLikes", key = "#product.id + '-' + #member.id")
+    public void likeProduct(LikeProductRequest request) {
+        Product product = getProduct(request.getProductId());
+        Member member = getMember(request.getMemberId());
+
+        ProductLike productLike = ProductLike.createProductLike(product, member);
+        productLikeRepository.save(productLike);
     }
 
     public long countLikesForProduct(Long productId) {

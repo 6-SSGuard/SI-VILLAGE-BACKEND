@@ -1,4 +1,4 @@
-package org.example.sivillage.global.auth;
+package org.example.sivillage.global.util;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
