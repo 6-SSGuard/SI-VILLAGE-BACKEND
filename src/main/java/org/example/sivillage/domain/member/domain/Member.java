@@ -15,7 +15,10 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
-    private Long id;
+    private Long memberId;
+
+    @Column(nullable = false, unique = true)
+    private String memberUuid;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -31,7 +34,8 @@ public class Member {
     private String password;
 
     @Builder
-    public Member(String email, String password, Role role, String name) {
+    public Member(String memberUuid, String email, String password, Role role, String name) {
+        this.memberUuid = memberUuid;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -39,8 +43,9 @@ public class Member {
     }
 
     @Builder
-    public static Member createMember(SignUpRequest request, String encodedPassword) {
+    public static Member createMember(SignUpRequest request, String memberUuid, String encodedPassword) {
         return Member.builder()
+                .memberUuid(memberUuid)
                 .email(request.getEmail())
                 .password(encodedPassword)
                 .role(request.getRole())

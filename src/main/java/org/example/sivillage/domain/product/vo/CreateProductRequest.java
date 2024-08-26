@@ -11,7 +11,7 @@ import org.example.sivillage.domain.product.domain.Size;
 public class CreateProductRequest {
     @Schema(description = "물품 이름", example = "샘플 물품")
     @NotBlank(message = "물품 이름은 필수 값입니다.")
-    private String name;
+    private String productName;
 
     @Schema(description = "물품 가격", example = "1000")
     @NotNull(message = "물품 가격은 필수 값입니다.")
@@ -35,7 +35,7 @@ public class CreateProductRequest {
 
     @Schema(description = "브랜드 이름", example = "브랜드명")
     @NotBlank(message = "브랜드 이름은 필수 값입니다.")
-    private String brand;
+    private String brandName;
 
     @Schema(description = "물품 상세 설명 html", example = "html 형태의 string")
     @NotBlank(message = "상세 설명은 필수 값입니다.")

@@ -35,9 +35,9 @@ public class ProductController {
     @Operation(summary = "물품 상세 정보 조회", description = """
     
     """)
-    @GetMapping("/details/{productId}")
-    public CustomResponseEntity<?> getProductDetails(@PathVariable Long productId) {
-        return new CustomResponseEntity<>(HttpStatus.OK, productService.getProductDetails(productId),
+    @GetMapping("/details/{productCode}")
+    public CustomResponseEntity<?> getProductDetails(@PathVariable String productCode) {
+        return new CustomResponseEntity<>(HttpStatus.OK, productService.getProductDetails(productCode),
                 "물품 상세정보 조회가 완료되었습니다.");
     }
 
