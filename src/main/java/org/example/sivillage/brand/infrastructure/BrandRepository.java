@@ -1,7 +1,7 @@
-package org.example.sivillage.domain.brand.infrastructure;
+package org.example.sivillage.brand.infrastructure;
 
 import jakarta.validation.constraints.NotBlank;
-import org.example.sivillage.domain.brand.domain.Brand;
+import org.example.sivillage.brand.domain.Brand;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

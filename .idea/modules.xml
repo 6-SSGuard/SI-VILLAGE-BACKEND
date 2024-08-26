@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/SI-VILLAGE.main.iml" filepath="$PROJECT_DIR$/.idea/modules/SI-VILLAGE.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example.SI-VILLAGE.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example.SI-VILLAGE.main.iml" />
     </modules>
   </component>
 </project>

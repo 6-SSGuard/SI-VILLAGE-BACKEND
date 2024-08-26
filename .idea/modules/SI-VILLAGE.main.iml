@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module version="4">
-  <component name="AdditionalModuleElements">
-    <content url="file://$MODULE_DIR$/../../SI-VILLAGE-BACKEND/build/generated/sources/annotationProcessor/java/main">
-      <sourceFolder url="file://$MODULE_DIR$/../../SI-VILLAGE-BACKEND/build/generated/sources/annotationProcessor/java/main" isTestSource="false" generated="true" />
-    </content>
-    <content url="file://$MODULE_DIR$/../../SI-VILLAGE-BACKEND/src/main" dumb="true">
-      <sourceFolder url="file://$MODULE_DIR$/../../SI-VILLAGE-BACKEND/src/main/resources" type="java-resource" />
-    </content>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
