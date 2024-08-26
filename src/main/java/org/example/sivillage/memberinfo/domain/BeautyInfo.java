@@ -15,7 +15,7 @@ public class BeautyInfo extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "beauty_info_id")
-    private Long id;
+    private Long beautyInfoId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -32,8 +32,8 @@ public class BeautyInfo extends BaseEntity {
     @Column(nullable = false)
     private String beautyKeyword;
 
-    @Column(nullable = false, name = "member_id")
-    private Long memberId;
+    @Column(nullable = false)
+    private String memberUuid;
 
     @Builder
     public BeautyInfo(SkinType skinType, SkinTone skinTone, ScalpTone scalpTone, String beautyKeyword, Member member) {
@@ -41,7 +41,7 @@ public class BeautyInfo extends BaseEntity {
         this.skinTone = skinTone;
         this.scalpTone = scalpTone;
         this.beautyKeyword = beautyKeyword;
-        this.memberId = member.getId();
+        this.memberUuid = member.getMemberUuid();
     }
 
 
@@ -55,8 +55,7 @@ public class BeautyInfo extends BaseEntity {
                 .member(requestDto.getMember())
                 .build();
     }
-
-    }
+}
 
 
 
