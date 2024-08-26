@@ -16,7 +16,6 @@ import org.example.sivillage.global.common.CustomResponseEntity;
 import org.example.sivillage.global.util.JwtToken;
 import org.example.sivillage.global.util.JwtTokenProvider;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,9 +44,9 @@ public class MemberController {
             @ApiResponse(responseCode = "409", description = "이메일 중복")
     })
     @PostMapping("/signup")
-    public ResponseEntity<CustomResponseEntity<Void>> signUp(@Valid @RequestBody SignUpRequest signUpRequest) {
+    public CustomResponseEntity<?> signUp(@Valid @RequestBody SignUpRequest signUpRequest) {
         memberService.signUp(signUpRequest);
-        return ResponseEntity.ok(new CustomResponseEntity<>(null, "회원가입이 완료되었습니다!"));
+        return new CustomResponseEntity<>(HttpStatus.OK, "회원가입이 완료되었습니다!");
     }
 
     @Operation(summary = "로그인", description = """
@@ -68,16 +67,15 @@ public class MemberController {
         log.debug("request code = {}, password = {}", code, password);
         log.debug("jwtToken accessToken = {}, refreshToken = {}", jwtToken.getAccessToken(), jwtToken.getRefreshToken());
 
-//        return ResponseEntity.ok(new CustomResponse<>(jwtToken, "로그인 성공."));
         return new CustomResponseEntity<>(HttpStatus.OK, jwtToken, "로그인 성공.");
     }
 
 
     @Operation(summary = "Access Token 재발급", description = "Access Token 만료시 기존에 발급받은 Refresh Token을 이쪽으로 보내서 새로운 Access Token 받아가기")
     @PostMapping("/refresh")
-    public ResponseEntity<CustomResponseEntity<JwtToken>> refreshAccessToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
+    public CustomResponseEntity<?> refreshAccessToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
         JwtToken token = jwtTokenProvider.refreshAccessToken(refreshTokenRequest.getRefreshToken());
-        return ResponseEntity.ok(new CustomResponseEntity<>(token, "Access Token 재발급 완료."));
+        return new CustomResponseEntity<>(HttpStatus.OK, token, "Access Token 재발급 완료.");
     }
 
     @Operation(summary = "로그아웃", description = "현재 로그인 된 계정의 로그아웃")
@@ -86,17 +84,17 @@ public class MemberController {
             @ApiResponse(responseCode = "401", description = "인증 실패")
     })
     @PostMapping("/logout")
-    public ResponseEntity<CustomResponseEntity<Void>> logout(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public CustomResponseEntity<?> logout(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String studentId = customUserDetails.getUsername();
         jwtTokenProvider.deleteRefreshToken(studentId);
-        return ResponseEntity.ok(new CustomResponseEntity<>(null, "로그아웃 되었습니다."));
+        return new CustomResponseEntity<>(HttpStatus.OK, "로그아웃 되었습니다.");
     }
 
     @Operation(summary = "swagger test", description = "swagger 테스트를 위한 엔드포인트 입니다.")
     @GetMapping("/test")
-    public ResponseEntity<CustomResponseEntity<List<Integer>>> test() {
+    public CustomResponseEntity<?> test() {
         List<Integer> testList = List.of(1, 2, 3, 4, 5); //테스트
-        return ResponseEntity.ok(new CustomResponseEntity<>(testList, "테스트 리스트 반환 완료"));
+        return new CustomResponseEntity<>(HttpStatus.OK, testList, "테스트 리스트 반환 완료");
     }
 
     @Operation(summary = "뷰티정보 등록", description = "뷰티정보를 등록합니다.")
