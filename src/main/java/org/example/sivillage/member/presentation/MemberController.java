@@ -87,8 +87,8 @@ public class MemberController {
     })
     @PostMapping("/logout")
     public CustomResponseEntity<?> logout(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String studentId = customUserDetails.getUsername();
-        jwtTokenProvider.deleteRefreshToken(studentId);
+        String email = customUserDetails.getUsername();
+        jwtTokenProvider.deleteRefreshToken(email);
         return new CustomResponseEntity<>(HttpStatus.OK, "로그아웃 되었습니다.");
     }
 

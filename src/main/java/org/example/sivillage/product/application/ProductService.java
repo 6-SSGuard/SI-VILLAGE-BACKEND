@@ -28,7 +28,7 @@ public class ProductService {
     private final ProductLikeService productLikeService;
     private final BrandRepository brandRepository;
 
-    public void createProduct(CreateProductRequest request) {
+    public void addProduct(CreateProductRequest request) {
         Brand brand = brandRepository.findByBrandName(request.getBrandName())
                 .orElseThrow(() -> new CustomException(ErrorCode.BRAND_NOT_FOUND));
 
@@ -43,7 +43,7 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public GetProductDetailsResponse getProductDetails(String productCode) {
+    public GetProductDetailsResponse getProductDetail(String productCode) {
         Product product = productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new CustomException(ErrorCode.PRODUCT_NOT_FOUND));
 
