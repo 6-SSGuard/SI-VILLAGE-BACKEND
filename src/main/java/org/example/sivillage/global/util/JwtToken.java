@@ -1,4 +1,4 @@
-package org.example.sivillage.global.auth;
+package org.example.sivillage.global.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

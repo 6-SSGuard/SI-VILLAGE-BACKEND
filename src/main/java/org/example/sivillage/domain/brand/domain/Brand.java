@@ -28,5 +28,5 @@ public class Brand {
         return Brand.builder()
                 .name(name)
                 .build();
-    }
+    } // 브랜드 crud는 따로 뺴기
 }

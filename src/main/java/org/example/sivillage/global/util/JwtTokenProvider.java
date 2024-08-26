@@ -1,9 +1,11 @@
-package org.example.sivillage.global.auth;
+package org.example.sivillage.global.util;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.example.sivillage.domain.auth.domain.CustomUserDetails;
+import org.example.sivillage.domain.auth.application.CustomUserDetailsService;
 import org.example.sivillage.global.error.CustomException;
 import org.example.sivillage.global.error.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;

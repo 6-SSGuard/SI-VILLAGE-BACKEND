@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.domain.brand.application.BrandService;
 import org.example.sivillage.domain.brand.domain.Brand;
+import org.example.sivillage.domain.member.application.ProductLikeService;
 import org.example.sivillage.domain.product.domain.Product;
 import org.example.sivillage.domain.product.domain.ProductOption;
 import org.example.sivillage.domain.product.infrastructure.ProductOptionRepository;
