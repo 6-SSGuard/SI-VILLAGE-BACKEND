@@ -1,4 +1,5 @@
-package org.example.sivillage.member.dto.in;
+package org.example.sivillage.member.vo;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -7,9 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.example.sivillage.member.domain.memberenum.BeautyKeyword;
-import org.example.sivillage.member.domain.memberenum.SkinType;
 import org.example.sivillage.member.domain.memberenum.ScalpTone;
 import org.example.sivillage.member.domain.memberenum.SkinTone;
+import org.example.sivillage.member.domain.memberenum.SkinType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @Getter
 @Builder
 @AllArgsConstructor
-public class BeautyInfoRequestDto {
+public class BeautyInfoRequestVo {
 
     @Schema(description = "피부타입", example = "DRY", required = true)
     @NotNull
@@ -43,6 +44,5 @@ public class BeautyInfoRequestDto {
                 .map(BeautyKeyword::name) // enum의 이름을 문자열로 변환
                 .collect(Collectors.joining(", "));
     }
-
 
 }

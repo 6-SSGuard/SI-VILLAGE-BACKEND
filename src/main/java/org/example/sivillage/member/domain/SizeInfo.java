@@ -2,6 +2,9 @@ package org.example.sivillage.member.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.sivillage.member.domain.memberenum.BottomSize;
+import org.example.sivillage.member.domain.memberenum.ShoeSize;
+import org.example.sivillage.member.domain.memberenum.TopSize;
 import org.example.sivillage.productoption.domain.Size;
 import org.example.sivillage.global.common.BaseEntity;
 
@@ -25,11 +28,15 @@ public class SizeInfo extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Size topSize;
+    private TopSize topSize;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Size bottomSize;
+    private BottomSize bottomSize;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ShoeSize shoeSize;
 
     @Column(nullable = false)
     private String memberUuid;

@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.example.sivillage.member.domain.*;
+import org.example.sivillage.member.domain.memberenum.ScalpTone;
+import org.example.sivillage.member.domain.memberenum.SkinTone;
+import org.example.sivillage.member.domain.memberenum.SkinType;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
