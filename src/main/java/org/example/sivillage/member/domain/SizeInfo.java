@@ -1,9 +1,8 @@
-package org.example.sivillage.memberinfo.domain;
+package org.example.sivillage.member.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.sivillage.member.domain.Member;
-import org.example.sivillage.product.domain.Size;
+import org.example.sivillage.productoption.domain.Size;
 import org.example.sivillage.global.common.BaseEntity;
 
 @Entity

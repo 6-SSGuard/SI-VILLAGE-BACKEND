@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import org.example.sivillage.product.domain.Color;
-import org.example.sivillage.product.domain.Size;
+import org.example.sivillage.productoption.domain.Size;
 
 @Getter
 public class CreateProductRequest {

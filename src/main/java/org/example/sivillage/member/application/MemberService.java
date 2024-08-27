@@ -3,7 +3,7 @@ package org.example.sivillage.member.application;
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.member.domain.Member;
 import org.example.sivillage.member.infrastructure.MemberRepository;
-import org.example.sivillage.member.vo.SignUpRequest;
+import org.example.sivillage.auth.vo.SignUpRequest;
 import org.example.sivillage.global.error.CustomException;
 import org.example.sivillage.global.error.ErrorCode;
 import org.example.sivillage.global.util.JwtToken;

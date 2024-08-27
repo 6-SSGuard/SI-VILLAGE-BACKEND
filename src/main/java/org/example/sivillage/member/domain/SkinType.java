@@ -1,4 +1,4 @@
-package org.example.sivillage.memberinfo.domain;
+package org.example.sivillage.member.domain;
 
 import lombok.RequiredArgsConstructor;
 

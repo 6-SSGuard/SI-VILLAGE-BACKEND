@@ -104,7 +104,21 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR));
     }
 
+    // 뷰티 정보 관련
+    @ExceptionHandler(CustomException.class)
+    protected ResponseEntity<ErrorResponse> handleExistingBeautyInfoException(final CustomException e) {
+        log.error("handleExistingBeautyInfoException: {}", e.getMessage());
+        return ResponseEntity
+                .status(ErrorCode.DUPLICATE_BEAUTY_INFO.getStatus().value())
+                .body(new ErrorResponse(ErrorCode.DUPLICATE_BEAUTY_INFO));
+    }
 
-
+    @ExceptionHandler(CustomException.class)
+    protected ResponseEntity<ErrorResponse> handleBeautyInfoNotFound(final CustomException e) {
+        log.error("handleBeautyInfoNotFound: {}", e.getMessage());
+        return ResponseEntity
+                .status(ErrorCode.NOT_FOUND_BEAUTY_INFO.getStatus().value())
+                .body(new ErrorResponse(ErrorCode.NOT_FOUND_BEAUTY_INFO));
+    }
 
 }

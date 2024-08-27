@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.member.vo.SignUpRequest;
+import org.example.sivillage.auth.vo.SignUpRequest;
 
 @Entity
 @Getter

@@ -1,14 +1,15 @@
-package org.example.sivillage.memberinfo.vo;
+package org.example.sivillage.member.dto.in;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import org.example.sivillage.memberinfo.domain.BeautyKeyword;
-import org.example.sivillage.memberinfo.domain.SkinType;
-import org.example.sivillage.memberinfo.domain.ScalpTone;
-import org.example.sivillage.memberinfo.domain.SkinTone;
+import org.example.sivillage.member.domain.BeautyKeyword;
+import org.example.sivillage.member.domain.SkinType;
+import org.example.sivillage.member.domain.ScalpTone;
+import org.example.sivillage.member.domain.SkinTone;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 @Getter
 @Builder
 @AllArgsConstructor
-public class BeautyInfoRequestVo {
+public class BeautyInfoRequestDto {
 
     @Schema(description = "피부타입", example = "DRY", required = true)
     @NotNull
@@ -30,16 +31,18 @@ public class BeautyInfoRequestVo {
     @NotNull
     private ScalpTone scalpTone;
 
-    @Schema(description = "뷰티키워드",  example = "[\"WRINKLES\", \"LIFTING\"]", required = true)
+    @Schema(description = "뷰티키워드",  example = "[\"WRINKLES\", \"LIFTING\", \"TROUBLE\"]", required = true)
     @NotEmpty
+    @Size(min = 3, max = 5, message = "뷰티키워드는 3개 이상 5개 이하로 선택 가능합니다.")
     private List<BeautyKeyword> beautyKeyword;
 
 
-    // List 를 string 으로 변환
-    public String convertBeautyKeyword(List<BeautyKeyword> list) {
-        return list.stream()
+    // List -> string
+    public String convertStringBeautyKeyword(List<BeautyKeyword> beautyKeyword) {
+        return beautyKeyword.stream()
                 .map(BeautyKeyword::name) // enum의 이름을 문자열로 변환
                 .collect(Collectors.joining(", "));
     }
+
 
 }
