@@ -26,16 +26,12 @@ public class BrandService {
         brandRepository.save(brand);
     }
 
-    public List<GetBrandsResponseDto> getBrands(String initial) {
+    public List<GetBrandsResponseDto> getBrands() {
 
-        if (initial == null) {
-            return getAllBrands();
-        }
-
-        char firstChar = initial.charAt(0);
-        return isEnglishCharacter(firstChar)
-                ? getBrandsByEngInitial(firstChar)
-                : getBrandsByKorInitial(firstChar);
+        return brandRepository.findAllByOrderByEngName()
+                .stream()
+                .map(GetBrandsResponseDto::toDto)
+                .collect(Collectors.toList());
     }
 
     private void validateDuplicatedBrand(AddBrandRequestDto request) {
@@ -45,28 +41,21 @@ public class BrandService {
         }
     }
 
-    private boolean isEnglishCharacter(char c) {
-        return Character.isAlphabetic(c) && c <= 'z'; // a~z 범위 체크
-    }
-
-    private List<GetBrandsResponseDto> getBrandsByEngInitial(char initial) {
-        return brandRepository.findByEngNameStartingWith(String.valueOf(initial))
-                .stream()
-                .map(GetBrandsResponseDto::toDto)
-                .collect(Collectors.toList());
-    }
-
-    private List<GetBrandsResponseDto> getBrandsByKorInitial(char initial) {
-        return brandRepository.findByKorNameStartingWith(String.valueOf(initial))
-                .stream()
-                .map(GetBrandsResponseDto::toDto)
-                .collect(Collectors.toList());
-    }
-
-    private List<GetBrandsResponseDto> getAllBrands() {
-        return brandRepository.findAllByOrderByEngName()
-                .stream()
-                .map(GetBrandsResponseDto::toDto)
-                .collect(Collectors.toList());
-    }
+//    private boolean isEnglishCharacter(char c) {
+//        return Character.isAlphabetic(c) && c <= 'z'; // a~z 범위 체크
+//    }
+//
+//    private List<GetBrandsResponseDto> getBrandsByEngInitial(char initial) {
+//        return brandRepository.findByEngNameStartingWith(String.valueOf(initial))
+//                .stream()
+//                .map(GetBrandsResponseDto::toDto)
+//                .collect(Collectors.toList());
+//    }
+//
+//    private List<GetBrandsResponseDto> getBrandsByKorInitial(char initial) {
+//        return brandRepository.findByKorNameStartingWith(String.valueOf(initial))
+//                .stream()
+//                .map(GetBrandsResponseDto::toDto)
+//                .collect(Collectors.toList());
+//    }
 }
