@@ -54,4 +54,5 @@ public class ProductController {
         productLikeService.unlikeProduct(request);
         return new CustomResponseEntity<>(HttpStatus.OK, "좋아요가 취소되었습니다.");
     }
+
 }

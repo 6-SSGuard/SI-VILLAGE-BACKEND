@@ -29,10 +29,8 @@ public class SizeInfo extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Size pantsSize;
+    private Size bottomSize;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
-
+    @Column(nullable = false)
+    private String memberUuid;
 }
