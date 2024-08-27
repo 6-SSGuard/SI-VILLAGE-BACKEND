@@ -1,4 +1,4 @@
-package org.example.sivillage.product.domain;
+package org.example.sivillage.productoption.domain;
 
 public enum Size {  // size도 마찬가지로 클래스로 가져가자
     XXS, XS, S, M, L, XL, XXL, XXXL;

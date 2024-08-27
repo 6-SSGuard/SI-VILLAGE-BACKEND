@@ -1,4 +1,4 @@
-package org.example.sivillage.member.vo;
+package org.example.sivillage.auth.vo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
