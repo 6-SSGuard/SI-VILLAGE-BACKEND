@@ -29,7 +29,6 @@ public class BeautyInfoResponseDto {
                 .collect(Collectors.toList());
     }
 
-
     public static BeautyInfoResponseDto toDto (BeautyInfo beautyInfo) {
         return BeautyInfoResponseDto.builder()
                 .skinType(beautyInfo.getSkinType())
