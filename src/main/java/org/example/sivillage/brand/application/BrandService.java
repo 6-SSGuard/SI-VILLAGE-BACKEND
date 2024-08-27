@@ -28,7 +28,7 @@ public class BrandService {
 
     public List<GetBrandsResponseDto> getBrands() {
 
-        return brandRepository.findAllByOrderByEngName()
+        return brandRepository.findAllByOrderByEngNameAsc()
                 .stream()
                 .map(GetBrandsResponseDto::toDto)
                 .collect(Collectors.toList());
