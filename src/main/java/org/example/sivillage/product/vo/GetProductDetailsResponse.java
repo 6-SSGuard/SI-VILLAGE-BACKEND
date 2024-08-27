@@ -23,7 +23,7 @@ public class GetProductDetailsResponse {
                 .productCode(product.getProductCode())
                 .productName(product.getProductName())
                 .price(product.getPrice())
-                .brandName(product.getBrand().getBrandEngName())
+                .brandName(product.getBrand().getBrandName())
                 .color(productOption.getColor().name())
                 .size(productOption.getSize().name())
                 .capacity(productOption.getCapacity())

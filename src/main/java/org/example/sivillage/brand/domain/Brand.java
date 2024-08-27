@@ -1,17 +1,13 @@
 package org.example.sivillage.brand.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
 
 @Entity
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
-@Builder
 public class Brand {
 
     @Id
@@ -20,15 +16,17 @@ public class Brand {
     private Long brandId;
 
     @Column(nullable = false, unique = true)
-    private String brandEngName;
+    private String brandName;
 
-    @Column(nullable = false, unique = true)
-    private String brandKorName;
-
-    public static Brand toEntity(AddBrandRequestDto request) {
-        return Brand.builder()
-                .brandEngName(request.getBrandEngName())
-                .brandKorName(request.getBrandKorName())
-                .build();
+    @Builder
+    public Brand(String brandName) {
+        this.brandName = brandName;
     }
+
+    @Builder
+    public static Brand createBrand(String brandName) {
+        return Brand.builder()
+                .brandName(brandName)
+                .build();
+    } // 브랜드 crud는 따로 뺴기
 }
