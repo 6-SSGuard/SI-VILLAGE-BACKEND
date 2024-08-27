@@ -27,41 +27,41 @@ public class ProductLikeService {
     private final MemberRepository memberRepository;
 
 
-    @CacheEvict(value = "procductLikes", key = "#product.id + '-' + #member.id")
+    @CacheEvict(value = "procductLikes", key = "#product.productCode + '-' + #member.memberUuid")
     public void unlikeProduct(UnLikeProductRequest request) {
-        Product product = getProduct(request.getProductId());
-        Member member = getMember(request.getMemberId());
+        Product product = getProduct(request.getProductCode());
+        Member member = getMember(request.getMemberUuid());
         productLikeRepository.deleteByProductAndMember(product, member);
     }
 
-    @Cacheable(value = "procductLikes", key = "#product.id + '-' + #member.id")
-    public boolean isProductLikedByMember(Long productId, Long memberId) {
-        Product product = getProduct(productId);
-        Member member = getMember(memberId);
+    @Cacheable(value = "procductLikes", key = "#product.productCode + '-' + #member.memberUuid")
+    public boolean isProductLikedByMember(String productCode, String memberUuid) {
+        Product product = getProduct(productCode);
+        Member member = getMember(memberUuid);
         return productLikeRepository.existsByProductAndMember(product, member);
     }
 
-    @CachePut(value = "procductLikes", key = "#product.id + '-' + #member.id")
+    @CachePut(value = "procductLikes", key = "#product.productCode + '-' + #member.memberUuid")
     public void likeProduct(LikeProductRequest request) {
-        Product product = getProduct(request.getProductId());
-        Member member = getMember(request.getMemberId());
+        Product product = getProduct(request.getProductCode());
+        Member member = getMember(request.getMemberUuid());
 
         ProductLike productLike = ProductLike.createProductLike(product, member);
         productLikeRepository.save(productLike);
     }
 
-    public long countLikesForProduct(Long productId) {
-        Product product = getProduct(productId);
+    public long countLikesForProduct(String productCode) {
+        Product product = getProduct(productCode);
         return productLikeRepository.countByProduct(product);
     }
 
-    private Product getProduct(Long productId) {
-        return productRepository.findById(productId)
+    private Product getProduct(String productCode) {
+        return productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new CustomException(ErrorCode.PRODUCT_NOT_FOUND));
     }
 
-    private Member getMember(Long memberId) {
-        return memberRepository.findById(memberId)
+    private Member getMember(String memberUuid) {
+        return memberRepository.findByMemberUuid(memberUuid)
                 .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
     }
 

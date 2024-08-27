@@ -8,7 +8,7 @@ import org.example.sivillage.product.domain.ProductOption;
 @Getter
 @Builder
 public class GetProductDetailsResponse {
-    private Long productId;
+    private String productCode;
     private String productName;
     private Integer price;
     private String brandName;
@@ -20,10 +20,10 @@ public class GetProductDetailsResponse {
 
     public static GetProductDetailsResponse toDto(Product product, ProductOption productOption, Long likesCount) {
         return GetProductDetailsResponse.builder()
-                .productId(product.getId())
-                .productName(product.getName())
+                .productCode(product.getProductCode())
+                .productName(product.getProductName())
                 .price(product.getPrice())
-                .brandName(product.getBrand().getName())
+                .brandName(product.getBrand().getBrandName())
                 .color(productOption.getColor().name())
                 .size(productOption.getSize().name())
                 .capacity(productOption.getCapacity())

@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class LikeProductRequest {
-    private Long productId;
-    private Long memberId;
+    private String productCode;
+    private String memberUuid;
 }

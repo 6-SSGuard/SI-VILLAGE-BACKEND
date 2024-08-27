@@ -8,13 +8,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.CustomUserDetails;
+import org.example.sivillage.global.common.CustomResponseEntity;
+import org.example.sivillage.global.util.JwtToken;
+import org.example.sivillage.global.util.JwtTokenProvider;
 import org.example.sivillage.member.application.MemberService;
 import org.example.sivillage.member.vo.LogInRequest;
 import org.example.sivillage.member.vo.RefreshTokenRequest;
 import org.example.sivillage.member.vo.SignUpRequest;
-import org.example.sivillage.global.common.CustomResponseEntity;
-import org.example.sivillage.global.util.JwtToken;
-import org.example.sivillage.global.util.JwtTokenProvider;
+import org.example.sivillage.memberinfo.application.BeautyInfoService;
+import org.example.sivillage.memberinfo.vo.BeautyInfoRequestVo;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -85,8 +87,8 @@ public class MemberController {
     })
     @PostMapping("/logout")
     public CustomResponseEntity<?> logout(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String studentId = customUserDetails.getUsername();
-        jwtTokenProvider.deleteRefreshToken(studentId);
+        String email = customUserDetails.getUsername();
+        jwtTokenProvider.deleteRefreshToken(email);
         return new CustomResponseEntity<>(HttpStatus.OK, "로그아웃 되었습니다.");
     }
 
@@ -97,6 +99,7 @@ public class MemberController {
         return new CustomResponseEntity<>(HttpStatus.OK, testList, "테스트 리스트 반환 완료");
     }
 
+<<<<<<< HEAD
 //    @Operation(summary = "뷰티정보 등록", description = "뷰티정보를 등록합니다.")
 //    @PostMapping("/beauty-info")
 //    public ResponseEntity<Response<Void>> createBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
@@ -109,4 +112,13 @@ public class MemberController {
 
 
 
+=======
+    @Operation(summary = "뷰티정보 등록", description = "뷰티정보를 등록합니다.")
+    @PostMapping("/beauty-info")
+    public CustomResponseEntity<?> createBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        String memberId = customUserDetails.getUsername();
+        beautyInfoService.createBeautyInfo(vo,memberId);
+        return new CustomResponseEntity<>(HttpStatus.OK, "뷰티정보 등록을 완료하였습니다.");
+    }
+>>>>>>> main
 }

@@ -16,9 +16,15 @@ public class BeautyInfoService {
     private final BeautyInfoRepository beautyInfoRepository;
     private final MemberRepository memberRepository;
 
+<<<<<<< HEAD
     public void createBeautyInfo(BeautyInfoRequestVo vo, String memberId) {
         Member member = memberRepository.findByEmail(memberId).orElseThrow();
         BeautyInfoRequestDto requestDto = BeautyInfoRequestDto.toDto(vo, member); // vo -> dto
+=======
+    public void createBeautyInfo(BeautyInfoRequestVo vo, String memberUuid) {
+        Member member = memberRepository.findByMemberUuid(memberUuid).orElseThrow();
+        BeautyInfoRequest requestDto = BeautyInfoRequest.toDto(vo, member); // vo -> dto
+>>>>>>> main
         beautyInfoRepository.save(BeautyInfo.toEntity(requestDto)); // db 저장;
     }
 

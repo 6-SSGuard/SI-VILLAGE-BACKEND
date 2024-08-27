@@ -16,27 +16,28 @@ public class Product extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Long id;
+    private Long productId;
 
-//    @Column(nullable = false, length = 50, unique = true)
-//    private String productCode;
+    @Column(nullable = false, length = 50, unique = true)
+    private String productCode;
 
     @Column(nullable = false, length = 100)
-    private String name;
+    private String productName;
 
     @Column(nullable = false)
     private Integer price;
 
-//    @Column(nullable = false, length = 10000)
-//    private String detailContent;
+    @Column(nullable = false, length = 10000)
+    private String detailContent;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
-    public static Product createProduct(CreateProductRequest request, Brand brand) {
+    public static Product createProduct(CreateProductRequest request, Brand brand, String productCode) {
         return Product.builder()
-                .name(request.getName())
+                .productName(request.getProductName())
+                .productCode(productCode)
                 .price(request.getPrice())
                 .brand(brand)
                 .build();

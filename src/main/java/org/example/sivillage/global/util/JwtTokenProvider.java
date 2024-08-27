@@ -107,15 +107,15 @@ public class JwtTokenProvider {
     // AccessToken 갱신
     public JwtToken refreshAccessToken(String refreshToken) {
         Claims claims = parseClaims(refreshToken);
-        String code = claims.getSubject();
+        String email = claims.getSubject();
 
         // RT 토큰 유효성 확인
-        validateRefreshToken(refreshToken, code);
+        validateRefreshToken(refreshToken, email);
 
-        String authorities = getUserAuthorities(code);
+        String authorities = getUserAuthorities(email);
         long now = (new Date()).getTime();
         Date accessTokenExpireIn = new Date(now + accessTokenValidityInMilliseconds);
-        String newAccessToken = buildToken(code, authorities, accessTokenExpireIn);
+        String newAccessToken = buildToken(email, authorities, accessTokenExpireIn);
 
         return JwtToken.builder()
                 .grantType("Bearer")
@@ -159,9 +159,9 @@ public class JwtTokenProvider {
         return builder.compact();
     }
 
-    private void storeRefreshToken(String code, String refreshToken) {
+    private void storeRefreshToken(String email, String refreshToken) {
         try {
-            redisTemplate.opsForValue().set(code, refreshToken, refreshTokenValidityInMilliseconds, TimeUnit.MILLISECONDS);
+            redisTemplate.opsForValue().set(email, refreshToken, refreshTokenValidityInMilliseconds, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             log.error("Failed to store Refresh Token in Redis", e);
             throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
@@ -189,7 +189,7 @@ public class JwtTokenProvider {
     }
 
     // Redis에 저장된 RefreshToken을 삭제
-    public void deleteRefreshToken(String code) {
-        redisTemplate.delete(code);
+    public void deleteRefreshToken(String email) {
+        redisTemplate.delete(email);
     }
 }

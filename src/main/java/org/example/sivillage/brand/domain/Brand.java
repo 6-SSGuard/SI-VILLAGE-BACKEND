@@ -13,20 +13,20 @@ public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "brand_id")
-    private Long id;
+    private Long brandId;
 
     @Column(nullable = false, unique = true)
-    private String name;
+    private String brandName;
 
     @Builder
-    public Brand(String name) {
-        this.name = name;
+    public Brand(String brandName) {
+        this.brandName = brandName;
     }
 
     @Builder
-    public static Brand createBrand(String name) {
+    public static Brand createBrand(String brandName) {
         return Brand.builder()
-                .name(name)
+                .brandName(brandName)
                 .build();
     } // 브랜드 crud는 따로 뺴기
 }
