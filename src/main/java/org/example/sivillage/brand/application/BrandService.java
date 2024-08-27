@@ -6,8 +6,8 @@ import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
 import org.example.sivillage.brand.dto.out.GetBrandsResponseDto;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
-import org.example.sivillage.global.error.CustomException;
-import org.example.sivillage.global.error.ErrorCode;
+import org.example.sivillage.global.common.response.BaseResponseStatus;
+import org.example.sivillage.global.error.BaseException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +37,7 @@ public class BrandService {
     private void validateDuplicatedBrand(AddBrandRequestDto request) {
         boolean exist = brandRepository.existsByBrandEngNameOrBrandKorName(request.getBrandEngName(), request.getBrandKorName());
         if (exist) {
-            throw new CustomException(ErrorCode.DUPLICATE_BRAND_NAME);
+            throw new BaseException(BaseResponseStatus.DUPLICATE_BRAND_NAME);
         }
     }
 

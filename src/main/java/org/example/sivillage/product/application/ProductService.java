@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
-import org.example.sivillage.global.error.CustomException;
-import org.example.sivillage.global.error.ErrorCode;
+import org.example.sivillage.global.common.response.BaseResponseStatus;
+import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductOption;
@@ -30,7 +30,7 @@ public class ProductService {
 
     public void addProduct(CreateProductRequestVo request) {
         Brand brand = brandRepository.findByBrandEngName(request.getBrandName())
-                .orElseThrow(() -> new CustomException(ErrorCode.BRAND_NOT_FOUND));
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
 
         String productCode = UUID.randomUUID().toString();
 
@@ -45,10 +45,10 @@ public class ProductService {
     @Transactional(readOnly = true)
     public GetProductDetailsResponse getProductDetail(String productCode) {
         Product product = productRepository.findByProductCode(productCode)
-                .orElseThrow(() -> new CustomException(ErrorCode.PRODUCT_NOT_FOUND));
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
 
         ProductOption productOption = productOptionRepository.findByProduct(product)
-                .orElseThrow(() -> new CustomException(ErrorCode.PRODUCT_OPTION_NOT_FOUND));
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_OPTION_NOT_FOUND));
 
         Long likesCount = productLikeService.countLikesForProduct(productCode);
 
@@ -58,7 +58,7 @@ public class ProductService {
 //    @Transactional(readOnly = true)
 //    public GetProductSizeListResponse getProductSizeList(String productName) {
 //        Product product = productRepository.findByName(productName)
-//               .orElseThrow(() -> new CustomException(ErrorCode.PRODUCT_NOT_FOUND));
+//               .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
 //
 //
 //
