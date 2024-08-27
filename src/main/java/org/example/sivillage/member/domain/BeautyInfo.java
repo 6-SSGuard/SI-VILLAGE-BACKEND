@@ -1,10 +1,9 @@
-package org.example.sivillage.memberinfo.domain;
+package org.example.sivillage.member.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.sivillage.memberinfo.dto.BeautyInfoRequest;
-import org.example.sivillage.member.domain.Member;
 import org.example.sivillage.global.common.BaseEntity;
+import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
 
 
 @Entity
@@ -36,25 +35,27 @@ public class BeautyInfo extends BaseEntity {
     private String memberUuid;
 
     @Builder
-    public BeautyInfo(SkinType skinType, SkinTone skinTone, ScalpTone scalpTone, String beautyKeyword, Member member) {
+    public BeautyInfo(SkinType skinType, SkinTone skinTone, ScalpTone scalpTone, String beautyKeyword, String memberUuid) {
         this.skinType = skinType;
         this.skinTone = skinTone;
         this.scalpTone = scalpTone;
         this.beautyKeyword = beautyKeyword;
-        this.memberUuid = member.getMemberUuid();
+        this.memberUuid = memberUuid;
     }
-
 
     @Builder
-    public static BeautyInfo toEntity (BeautyInfoRequest requestDto) {
+    public static BeautyInfo toEntity (BeautyInfoRequestDto dto, String memberUuid) {
         return BeautyInfo.builder()
-                .skinType(requestDto.getSkinType())
-                .skinTone(requestDto.getSkinTone())
-                .scalpTone(requestDto.getScalpTone())
-                .beautyKeyword(requestDto.getBeautyKeyword())
-                .member(requestDto.getMember())
+                .skinType(dto.getSkinType())
+                .skinTone(dto.getSkinTone())
+                .scalpTone(dto.getScalpTone())
+                .beautyKeyword(dto.convertBeautyKeyword(dto.getBeautyKeyword()))
+                .memberUuid(memberUuid)
                 .build();
     }
+
+
+
 }
 
 

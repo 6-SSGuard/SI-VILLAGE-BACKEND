@@ -1,14 +1,14 @@
-package org.example.sivillage.memberinfo.vo;
+package org.example.sivillage.member.dto.in;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import org.example.sivillage.memberinfo.domain.BeautyKeyword;
-import org.example.sivillage.memberinfo.domain.SkinType;
-import org.example.sivillage.memberinfo.domain.ScalpTone;
-import org.example.sivillage.memberinfo.domain.SkinTone;
+import org.example.sivillage.member.domain.BeautyKeyword;
+import org.example.sivillage.member.domain.SkinType;
+import org.example.sivillage.member.domain.ScalpTone;
+import org.example.sivillage.member.domain.SkinTone;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Getter
 @Builder
 @AllArgsConstructor
-public class BeautyInfoRequestVo {
+public class BeautyInfoRequestDto {
 
     @Schema(description = "피부타입", example = "DRY", required = true)
     @NotNull
@@ -36,10 +36,11 @@ public class BeautyInfoRequestVo {
 
 
     // List 를 string 으로 변환
-    public String convertBeautyKeyword(List<BeautyKeyword> list) {
-        return list.stream()
+    public String convertBeautyKeyword(List<BeautyKeyword> beautyKeyword) {
+        return beautyKeyword.stream()
                 .map(BeautyKeyword::name) // enum의 이름을 문자열로 변환
                 .collect(Collectors.joining(", "));
     }
+
 
 }
