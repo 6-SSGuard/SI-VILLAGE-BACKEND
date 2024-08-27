@@ -30,10 +30,10 @@ public class BrandController {
         a~z, ㄱ~ㅎ: 해당 문자를 기준으로 필터링 후 오름차순 정렬
         """)
     @GetMapping("/")
-    CustomResponseEntity<?> getBrands(@RequestParam(value = "initial", required = false) String initial) {
+    CustomResponseEntity<?> getBrands() {
         return new CustomResponseEntity<>(
                 HttpStatus.OK,
-                brandService.getBrands(initial),
+                brandService.getBrands(),
                 "브랜드 목록 조회 완료"
         );
     }
