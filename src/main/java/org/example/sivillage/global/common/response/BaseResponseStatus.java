@@ -14,6 +14,7 @@ public enum BaseResponseStatus {
 
     // 400: Bad Request
     BAD_REQUEST(HttpStatus.BAD_REQUEST, false, "잘못된 요청입니다."),
+    NOT_FOUND_BEAUTY_INFO(HttpStatus.NOT_FOUND, false,"뷰티 정보가 등록되어 있지 않습니다. 뷰티 정보를 먼저 생성해주세요."),
 
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
@@ -57,6 +58,8 @@ public enum BaseResponseStatus {
     // 중복 요청 관련
     DUPLICATE_PRODUCT(HttpStatus.CONFLICT, false,  "이미 존재하는 상품명입니다."),
     DUPLICATE_BRAND_NAME(HttpStatus.CONFLICT, false,  "이미 존재하는 브랜드명입니다."),
+    DUPLICATE_BEAUTY_INFO(HttpStatus.CONFLICT,false,"이미 존재하는 뷰티 정보입니다."),
+
     ;
 
     private final HttpStatusCode httpStatusCode;
