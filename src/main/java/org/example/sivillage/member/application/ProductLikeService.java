@@ -1,6 +1,8 @@
 package org.example.sivillage.member.application;
 
 import lombok.RequiredArgsConstructor;
+import org.example.sivillage.global.common.response.BaseResponseStatus;
+import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.member.domain.Member;
 import org.example.sivillage.member.domain.ProductLike;
 import org.example.sivillage.member.infrastructure.MemberRepository;
@@ -9,8 +11,6 @@ import org.example.sivillage.product.infrastructure.ProductLikeRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
 import org.example.sivillage.product.vo.LikeProductRequest;
 import org.example.sivillage.product.vo.UnLikeProductRequest;
-import org.example.sivillage.global.error.CustomException;
-import org.example.sivillage.global.error.ErrorCode;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -57,12 +57,12 @@ public class ProductLikeService {
 
     private Product getProduct(String productCode) {
         return productRepository.findByProductCode(productCode)
-                .orElseThrow(() -> new CustomException(ErrorCode.PRODUCT_NOT_FOUND));
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
     }
 
     private Member getMember(String memberUuid) {
         return memberRepository.findByMemberUuid(memberUuid)
-                .orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.MEMBER_NOT_FOUND));
     }
 
 }
