@@ -3,8 +3,10 @@ package org.example.sivillage.member.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.sivillage.global.common.BaseEntity;
+import org.example.sivillage.member.domain.memberenum.ScalpTone;
+import org.example.sivillage.member.domain.memberenum.SkinTone;
+import org.example.sivillage.member.domain.memberenum.SkinType;
 import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
-import org.example.sivillage.member.dto.out.BeautyInfoResponseDto;
 
 
 @Entity
