@@ -29,7 +29,7 @@ public class ProductService {
     private final BrandRepository brandRepository;
 
     public void addProduct(CreateProductRequest request) {
-        Brand brand = brandRepository.findByBrandName(request.getBrandName())
+        Brand brand = brandRepository.findByBrandEngName(request.getBrandName())
                 .orElseThrow(() -> new CustomException(ErrorCode.BRAND_NOT_FOUND));
 
         String productCode = UUID.randomUUID().toString();
