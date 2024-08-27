@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.sivillage.global.common.BaseEntity;
 import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
+import org.example.sivillage.member.dto.out.BeautyInfoResponseDto;
 
 
 @Entity
@@ -49,10 +50,18 @@ public class BeautyInfo extends BaseEntity {
                 .skinType(dto.getSkinType())
                 .skinTone(dto.getSkinTone())
                 .scalpTone(dto.getScalpTone())
-                .beautyKeyword(dto.convertBeautyKeyword(dto.getBeautyKeyword()))
+                .beautyKeyword(dto.convertStringBeautyKeyword(dto.getBeautyKeyword()))
                 .memberUuid(memberUuid)
                 .build();
     }
+
+    public void change(BeautyInfoRequestDto dto) {
+        this.skinType = dto.getSkinType();
+        this.skinTone = dto.getSkinTone();
+        this.scalpTone = dto.getScalpTone();
+        this.beautyKeyword = dto.convertStringBeautyKeyword(dto.getBeautyKeyword());
+    }
+
 
 
 

@@ -12,16 +12,16 @@ import org.example.sivillage.global.common.CustomResponseEntity;
 import org.example.sivillage.global.util.JwtToken;
 import org.example.sivillage.global.util.JwtTokenProvider;
 import org.example.sivillage.member.application.MemberService;
-import org.example.sivillage.member.vo.LogInRequest;
-import org.example.sivillage.member.vo.RefreshTokenRequest;
-import org.example.sivillage.member.vo.SignUpRequest;
+import org.example.sivillage.auth.vo.LogInRequest;
+import org.example.sivillage.auth.vo.RefreshTokenRequest;
+import org.example.sivillage.auth.vo.SignUpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "회원 관리 API", description = "회원 관련 API endpoints")
+@Tag(name = "계정 관리 API", description = "계정 관련 API endpoints")
 @RestController
 @Slf4j
 @RequiredArgsConstructor

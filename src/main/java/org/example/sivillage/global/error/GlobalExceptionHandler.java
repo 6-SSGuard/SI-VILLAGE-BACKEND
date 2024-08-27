@@ -113,6 +113,12 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse(ErrorCode.DUPLICATE_BEAUTY_INFO));
     }
 
-
+    @ExceptionHandler(CustomException.class)
+    protected ResponseEntity<ErrorResponse> handleBeautyInfoNotFound(final CustomException e) {
+        log.error("handleBeautyInfoNotFound: {}", e.getMessage());
+        return ResponseEntity
+                .status(ErrorCode.NOT_FOUND_BEAUTY_INFO.getStatus().value())
+                .body(new ErrorResponse(ErrorCode.NOT_FOUND_BEAUTY_INFO));
+    }
 
 }
