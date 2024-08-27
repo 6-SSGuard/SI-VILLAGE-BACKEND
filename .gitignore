@@ -38,3 +38,5 @@ out/
 *.yml
 !gradle.yml
 .env
+.DS_Store
+*.idea
