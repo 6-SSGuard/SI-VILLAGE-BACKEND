@@ -38,5 +38,10 @@ out/
 *.yml
 !gradle.yml
 .env
+<<<<<<< Updated upstream
 .DS_Store
 *.idea
+=======
+*.idea
+.DS_Store
+>>>>>>> Stashed changes
