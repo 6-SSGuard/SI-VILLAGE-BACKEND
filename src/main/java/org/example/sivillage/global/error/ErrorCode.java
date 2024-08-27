@@ -56,7 +56,7 @@ public enum ErrorCode {
 
     // 중복 요청 관련
     DUPLICATE_PRODUCT(HttpStatus.CONFLICT, "이미 존재하는 상품명입니다."),
-    ;
+    DUPLICATE_BRAND_NAME(HttpStatus.CONFLICT, "이미 존재하는 브랜드명입니다.");
 
     private final HttpStatus status; // HTTP Status
     private final String message; // 에러
