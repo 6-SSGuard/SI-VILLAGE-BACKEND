@@ -8,7 +8,7 @@ import org.example.sivillage.product.domain.Color;
 import org.example.sivillage.productoption.domain.Size;
 
 @Getter
-public class CreateProductRequest {
+public class CreateProductRequestVo {
     @Schema(description = "물품 이름", example = "샘플 물품")
     @NotBlank(message = "물품 이름은 필수 값입니다.")
     private String productName;

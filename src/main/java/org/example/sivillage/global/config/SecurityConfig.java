@@ -2,6 +2,7 @@ package org.example.sivillage.global.config;
 
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.auth.application.CustomUserDetailsService;
+import org.example.sivillage.global.common.BaseExceptionHandlerFilter;
 import org.example.sivillage.global.util.JwtAuthenticationFilter;
 import org.example.sivillage.global.util.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class SecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, BaseExceptionHandlerFilter baseExceptionHandlerFilter) throws Exception {
         http
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
@@ -40,7 +41,8 @@ public class SecurityConfig {
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
-                        UsernamePasswordAuthenticationFilter.class);
+                        UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(baseExceptionHandlerFilter, JwtAuthenticationFilter.class);
 
         return http.build();
     }
