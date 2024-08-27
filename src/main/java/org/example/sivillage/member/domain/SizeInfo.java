@@ -5,7 +5,6 @@ import lombok.*;
 import org.example.sivillage.member.domain.memberenum.BottomSize;
 import org.example.sivillage.member.domain.memberenum.ShoeSize;
 import org.example.sivillage.member.domain.memberenum.TopSize;
-import org.example.sivillage.productoption.domain.Size;
 import org.example.sivillage.global.common.BaseEntity;
 
 @Entity
@@ -18,7 +17,7 @@ public class SizeInfo extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "size_info_id")
-    private Long id;
+    private Long sizeInfoId;
 
     @Column(nullable = false)
     private int height;
