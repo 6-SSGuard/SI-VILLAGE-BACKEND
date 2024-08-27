@@ -59,9 +59,10 @@ public enum ErrorCode {
 
     // 뷰티정보 관련
     DUPLICATE_BEAUTY_INFO(HttpStatus.CONFLICT,"이미 존재하는 뷰티 정보입니다."),
-    NOT_FOUND_BEAUTY_INFO(HttpStatus.NOT_FOUND, "뷰티 정보가 등록되어 있지 않습니다. 뷰티 정보를 먼저 생성해주세요.")
+    NOT_FOUND_BEAUTY_INFO(HttpStatus.NOT_FOUND, "뷰티 정보가 등록되어 있지 않습니다. 뷰티 정보를 먼저 생성해주세요."),
+    DUPLICATE_BRAND_NAME(HttpStatus.CONFLICT, "이미 존재하는 브랜드명입니다.")
+            ;
 
-    ;
 
     private final HttpStatus status; // HTTP Status
     private final String message; // 에러
