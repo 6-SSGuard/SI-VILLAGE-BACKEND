@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.UUID;
 
 @Builder
 public class CustomUserDetails implements UserDetails {
@@ -15,6 +16,10 @@ public class CustomUserDetails implements UserDetails {
 
     public CustomUserDetails(Member member) {
         this.member = member;
+    }
+
+    public String getMemberUuid(){
+        return member.getMemberUuid();
     }
 
     @Override
@@ -51,4 +56,6 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }

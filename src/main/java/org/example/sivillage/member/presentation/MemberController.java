@@ -27,10 +27,8 @@ public class MemberController {
     @Operation(summary = "뷰티 정보 등록", description = "뷰티정보를 등록합니다.")
     @PostMapping("/beauty-info")
     public BaseResponse<Void> addBeautyInfo(@Valid @RequestBody BeautyInfoRequestDto dto, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        //todo: customUserDetails 에서 UUID 가져오는 메소드 만들기
 
-        String memberUuid = customUserDetails.getUsername();
-        System.out.println(memberUuid);
+        String memberUuid = customUserDetails.getMemberUuid();
         beautyInfoService.addBeautyInfo(dto, memberUuid);
         return new BaseResponse<>();
     }
@@ -38,7 +36,7 @@ public class MemberController {
     @Operation(summary = "뷰티 정보 조회", description = "뷰티정보를 조회합니다.")
     @GetMapping("/beauty-info")
     public BaseResponse<BeautyInfoResponseDto> getBeautyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getUsername();
+        String memberUuid = customUserDetails.getMemberUuid();
         BeautyInfoResponseDto responseDto = beautyInfoService.getBeautyInfo(memberUuid);
         return new BaseResponse<>(responseDto);
     }
@@ -46,7 +44,7 @@ public class MemberController {
     @Operation(summary = "뷰티 정보 수정", description = "뷰티정보를 수정합니다.")
     @PutMapping("/beauty-info")
     public BaseResponse<Void> changeBeautyInfo(@Valid @RequestBody BeautyInfoRequestDto dto, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getUsername();
+        String memberUuid = customUserDetails.getMemberUuid();
         beautyInfoService.changeBeautyInfo(dto, memberUuid);
         return new BaseResponse<>();
     }
@@ -54,10 +52,11 @@ public class MemberController {
     @Operation(summary = "뷰티 정보 삭제", description = "뷰티 정보를 삭제합니다.")
     @DeleteMapping("/beauty-info")
     public BaseResponse<Void> deleteBeautyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getUsername();
+        String memberUuid = customUserDetails.getMemberUuid();
         beautyInfoService.removeBeautyInfo(memberUuid);
         return new BaseResponse<>();
     }
+
 }
 
 
