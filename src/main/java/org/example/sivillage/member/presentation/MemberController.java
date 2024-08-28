@@ -12,9 +12,11 @@ import org.example.sivillage.member.application.SizeInfoService;
 import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
 import org.example.sivillage.member.dto.in.SizeInfoRequestDto;
 import org.example.sivillage.member.dto.out.BeautyInfoResponseDto;
+import org.example.sivillage.member.dto.out.SizeInfoResponseDto;
 import org.example.sivillage.member.vo.in.BeautyInfoRequestVo;
 import org.example.sivillage.member.vo.out.BeautyInfoResponseVo;
 import org.example.sivillage.member.vo.in.SizeInfoRequestVo;
+import org.example.sivillage.member.vo.out.SizeInfoResponseVo;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -66,19 +68,46 @@ public class MemberController {
     @PostMapping("/size-info")
     public BaseResponse<Void> addSizeInfo(@Valid @RequestBody SizeInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
+        log.info("SizeInfoRequestVo: {}", vo);
         sizeInfoService.addSizeInfo(modelMapper.map(vo, SizeInfoRequestDto.class), memberUuid); // vo -> dto
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "사이즈 정보 조회", description = "사이즈 정보를 조회합니다.")
+    @GetMapping("/size-info")
+    public BaseResponse<SizeInfoResponseVo> getSizeInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        String memberUuid = customUserDetails.getMemberUuid();
+        SizeInfoResponseDto dto = sizeInfoService.getSizeInfo(memberUuid);
+        return new BaseResponse<>(modelMapper.map(dto, SizeInfoResponseVo.class));
+    }
+
+    @Operation(summary = "사이즈 정보 수정", description = "사이즈 정보를 수정합니다.")
+    @PutMapping("/size-info")
+    public BaseResponse<Void> changeSizeInfo(@Valid @RequestBody SizeInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        String memberUuid = customUserDetails.getMemberUuid();
+        sizeInfoService.changeSizeInfo(modelMapper.map(vo, SizeInfoRequestDto.class), memberUuid);
+        return new BaseResponse<>();
+
+    }
 
 
-
-
-
-
-
+    @Operation(summary = "사이즈 정보 삭제", description = "사이즈 정보를 삭제합니다.")
+    @DeleteMapping("/size-info")
+    public BaseResponse<Void> deleteSizeInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        String memberUuid = customUserDetails.getMemberUuid();
+        sizeInfoService.removeSizeInfo(memberUuid);
+        return new BaseResponse<>();
+    }
 
 }
+
+
+
+
+
+
+
+
 
 
 

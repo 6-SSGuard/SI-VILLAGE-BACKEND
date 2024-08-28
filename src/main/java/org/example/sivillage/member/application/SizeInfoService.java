@@ -2,6 +2,7 @@ package org.example.sivillage.member.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.member.domain.BeautyInfo;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 @Transactional
+@Slf4j
 public class SizeInfoService {
 
     private final SizeInfoRepository sizeInfoRepository;
@@ -26,6 +28,7 @@ public class SizeInfoService {
 
     public void addSizeInfo(SizeInfoRequestDto dto, String memberUuid) {
         Optional<SizeInfo> sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid);
+        log.info("Converted SizeInfoRequestDto: {}", dto);
         if (sizeInfo.isEmpty()) {
             sizeInfoRepository.save(SizeInfo.toEntity(dto, memberUuid));
         } else {

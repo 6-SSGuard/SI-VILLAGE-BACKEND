@@ -9,8 +9,8 @@ import org.example.sivillage.member.domain.memberenum.SkinType;
 
 import java.util.List;
 
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor
 public class BeautyInfoResponseVo {
 
     private SkinType skinType;

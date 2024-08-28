@@ -5,9 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.member.domain.memberenum.*;
-
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor
 public class SizeInfoRequestVo {
 
     @Schema(description = "키", example = "160", required = true)
@@ -22,11 +21,11 @@ public class SizeInfoRequestVo {
     @NotNull
     private TopSize topSize;
 
-    @Schema(description = "하의 사이즈", example = "24", required = true)
+    @Schema(description = "하의 사이즈", example = "SIZE_24", required = true)
     @NotNull
     private BottomSize bottomSize;
 
-    @Schema(description = "신발 사이즈", example = "240", required = true)
+    @Schema(description = "신발 사이즈", example = "SIZE_240", required = true)
     @NotNull
     private ShoeSize shoeSize;
 

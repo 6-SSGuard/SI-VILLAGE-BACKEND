@@ -56,7 +56,6 @@ public class BeautyInfo extends BaseEntity {
                 .memberUuid(memberUuid)
                 .build();
     }
-
     public void change(BeautyInfoRequestDto dto) {
         this.skinType = dto.getSkinType();
         this.skinTone = dto.getSkinTone();
