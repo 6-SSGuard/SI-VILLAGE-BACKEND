@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.CustomUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.application.BeautyInfoService;
+import org.example.sivillage.member.application.BrandLikeService;
 import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
 import org.example.sivillage.member.dto.out.BeautyInfoResponseDto;
 import org.modelmapper.ModelMapper;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final BeautyInfoService beautyInfoService;
+    private final BrandLikeService brandLikeService;
     private final ModelMapper modelMapper;
 
     @Operation(summary = "뷰티 정보 등록", description = "뷰티정보를 등록합니다.")
@@ -54,6 +56,13 @@ public class MemberController {
     public BaseResponse<Void> deleteBeautyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
         beautyInfoService.removeBeautyInfo(memberUuid);
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "브랜드 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
+    @PutMapping("/brand/like/{brandId}")
+    public BaseResponse<Void> toggleBrandLike(@PathVariable Long brandId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        brandLikeService.toggleBrandLike(brandId, customUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 

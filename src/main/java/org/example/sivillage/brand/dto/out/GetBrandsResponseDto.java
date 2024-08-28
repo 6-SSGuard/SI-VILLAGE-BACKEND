@@ -13,4 +13,5 @@ public class GetBrandsResponseDto {
     private Long brandId;
     private String brandEngName;
     private String brandKorName;
+    private boolean isLiked;
 }
