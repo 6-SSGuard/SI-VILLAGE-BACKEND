@@ -1,7 +1,8 @@
-package org.example.sivillage.member.vo;
+package org.example.sivillage.member.vo.out;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.sivillage.member.domain.memberenum.BeautyKeyword;
 import org.example.sivillage.member.domain.memberenum.ScalpTone;
 import org.example.sivillage.member.domain.memberenum.SkinTone;
 import org.example.sivillage.member.domain.memberenum.SkinType;
@@ -15,6 +16,6 @@ public class BeautyInfoResponseVo {
     private SkinType skinType;
     private SkinTone skinTone;
     private ScalpTone scalpTone;
-    private List<String> beautyKeyword;
+    private List<BeautyKeyword> beautyKeyword;
 
 }

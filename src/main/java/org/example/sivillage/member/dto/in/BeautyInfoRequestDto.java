@@ -21,7 +21,7 @@ public class BeautyInfoRequestDto {
 
     private ScalpTone scalpTone;
 
-    private String beautyKeyword;
+    private List<BeautyKeyword> beautyKeyword;
 
     // List -> string
     public String convertStringBeautyKeyword(List<BeautyKeyword> beautyKeyword) {

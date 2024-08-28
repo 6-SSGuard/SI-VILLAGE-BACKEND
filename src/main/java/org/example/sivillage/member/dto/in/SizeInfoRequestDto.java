@@ -7,8 +7,8 @@ import org.example.sivillage.member.domain.memberenum.ShoeSize;
 import org.example.sivillage.member.domain.memberenum.TopSize;
 
 @Getter
-@Builder
 @AllArgsConstructor
+@Builder
 public class SizeInfoRequestDto {
 
     private Integer height;
