@@ -1,4 +1,4 @@
-package org.example.sivillage.product.vo;
+package org.example.sivillage.product.vo.out;
 
 import lombok.Getter;
 

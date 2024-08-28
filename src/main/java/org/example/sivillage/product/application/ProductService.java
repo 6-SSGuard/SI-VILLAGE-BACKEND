@@ -11,8 +11,8 @@ import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductOption;
 import org.example.sivillage.product.infrastructure.ProductOptionRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
-import org.example.sivillage.product.vo.CreateProductRequestVo;
-import org.example.sivillage.product.vo.GetProductDetailsResponse;
+import org.example.sivillage.product.vo.in.CreateProductRequestVo;
+import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +43,7 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public GetProductDetailsResponse getProductDetail(String productCode) {
+    public GetProductDetailsResponseDto getProductDetail(String productCode) {
         Product product = productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
 
@@ -52,7 +52,7 @@ public class ProductService {
 
         Long likesCount = productLikeService.countLikesForProduct(productCode);
 
-        return GetProductDetailsResponse.toDto(product, productOption, likesCount);
+        return GetProductDetailsResponseDto.toDto(product, productOption, likesCount);
     }
 
 //    @Transactional(readOnly = true)

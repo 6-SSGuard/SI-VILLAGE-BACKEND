@@ -1,4 +1,4 @@
-package org.example.sivillage.product.vo;
+package org.example.sivillage.product.dto.out;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import org.example.sivillage.product.domain.ProductOption;
 
 @Getter
 @Builder
-public class GetProductDetailsResponse {
+public class GetProductDetailsResponseDto {
     private String productCode;
     private String productName;
     private Integer price;
@@ -18,8 +18,8 @@ public class GetProductDetailsResponse {
     private Integer stock;
     private Long likesCount;
 
-    public static GetProductDetailsResponse toDto(Product product, ProductOption productOption, Long likesCount) {
-        return GetProductDetailsResponse.builder()
+    public static GetProductDetailsResponseDto toDto(Product product, ProductOption productOption, Long likesCount) {
+        return GetProductDetailsResponseDto.builder()
                 .productCode(product.getProductCode())
                 .productName(product.getProductName())
                 .price(product.getPrice())

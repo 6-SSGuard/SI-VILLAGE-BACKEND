@@ -3,7 +3,7 @@ package org.example.sivillage.product.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.sivillage.brand.domain.Brand;
-import org.example.sivillage.product.vo.CreateProductRequestVo;
+import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.example.sivillage.global.common.BaseEntity;
 
 @Entity
