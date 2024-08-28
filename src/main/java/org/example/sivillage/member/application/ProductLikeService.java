@@ -7,10 +7,10 @@ import org.example.sivillage.member.domain.Member;
 import org.example.sivillage.member.domain.ProductLike;
 import org.example.sivillage.member.infrastructure.MemberRepository;
 import org.example.sivillage.product.domain.Product;
+import org.example.sivillage.product.dto.in.LikeProductRequestDto;
+import org.example.sivillage.product.dto.in.UnlikeProductRequestDto;
 import org.example.sivillage.product.infrastructure.ProductLikeRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
-import org.example.sivillage.product.vo.LikeProductRequest;
-import org.example.sivillage.product.vo.UnLikeProductRequest;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -28,7 +28,7 @@ public class ProductLikeService {
 
 
     @CacheEvict(value = "procductLikes", key = "#product.productCode + '-' + #member.memberUuid")
-    public void unlikeProduct(UnLikeProductRequest request) {
+    public void unlikeProduct(UnlikeProductRequestDto request) {
         Product product = getProduct(request.getProductCode());
         Member member = getMember(request.getMemberUuid());
         productLikeRepository.deleteByProductAndMember(product, member);
@@ -42,7 +42,7 @@ public class ProductLikeService {
     }
 
     @CachePut(value = "procductLikes", key = "#product.productCode + '-' + #member.memberUuid")
-    public void likeProduct(LikeProductRequest request) {
+    public void likeProduct(LikeProductRequestDto request) {
         Product product = getProduct(request.getProductCode());
         Member member = getMember(request.getMemberUuid());
 

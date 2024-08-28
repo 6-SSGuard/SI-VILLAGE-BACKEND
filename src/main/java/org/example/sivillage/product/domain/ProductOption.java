@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.product.vo.CreateProductRequestVo;
+import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.example.sivillage.productoption.domain.Size;
 
 @Entity
