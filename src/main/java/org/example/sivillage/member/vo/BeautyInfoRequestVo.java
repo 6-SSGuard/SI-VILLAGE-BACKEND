@@ -4,20 +4,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.example.sivillage.member.domain.memberenum.BeautyKeyword;
 import org.example.sivillage.member.domain.memberenum.ScalpTone;
 import org.example.sivillage.member.domain.memberenum.SkinTone;
 import org.example.sivillage.member.domain.memberenum.SkinType;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
-@Builder
-@AllArgsConstructor
+@NoArgsConstructor
 public class BeautyInfoRequestVo {
 
     @Schema(description = "피부타입", example = "DRY", required = true)
@@ -36,13 +33,5 @@ public class BeautyInfoRequestVo {
     @NotEmpty
     @Size(min = 3, max = 5, message = "뷰티키워드는 3개 이상 5개 이하로 선택 가능합니다.")
     private List<BeautyKeyword> beautyKeyword;
-
-
-    // List -> string
-    public String convertStringBeautyKeyword(List<BeautyKeyword> beautyKeyword) {
-        return beautyKeyword.stream()
-                .map(BeautyKeyword::name) // enum의 이름을 문자열로 변환
-                .collect(Collectors.joining(", "));
-    }
 
 }

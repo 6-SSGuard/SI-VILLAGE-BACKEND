@@ -8,8 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.CustomUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.application.BeautyInfoService;
+import org.example.sivillage.member.application.SizeInfoService;
+import org.example.sivillage.member.domain.BeautyInfo;
 import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
+import org.example.sivillage.member.dto.in.SizeInfoRequestDto;
 import org.example.sivillage.member.dto.out.BeautyInfoResponseDto;
+import org.example.sivillage.member.vo.BeautyInfoRequestVo;
+import org.example.sivillage.member.vo.BeautyInfoResponseVo;
+import org.example.sivillage.member.vo.SizeInfoRequestVo;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -22,30 +28,30 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
 
     private final BeautyInfoService beautyInfoService;
+    private final SizeInfoService sizeInfoService;
     private final ModelMapper modelMapper;
 
     @Operation(summary = "뷰티 정보 등록", description = "뷰티정보를 등록합니다.")
     @PostMapping("/beauty-info")
-    public BaseResponse<Void> addBeautyInfo(@Valid @RequestBody BeautyInfoRequestDto dto, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-
+    public BaseResponse<Void> addBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
-        beautyInfoService.addBeautyInfo(dto, memberUuid);
+        beautyInfoService.addBeautyInfo(modelMapper.map(vo, BeautyInfoRequestDto.class), memberUuid); // vo -> dto
         return new BaseResponse<>();
     }
 
     @Operation(summary = "뷰티 정보 조회", description = "뷰티정보를 조회합니다.")
     @GetMapping("/beauty-info")
-    public BaseResponse<BeautyInfoResponseDto> getBeautyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public BaseResponse<BeautyInfoResponseVo> getBeautyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
-        BeautyInfoResponseDto responseDto = beautyInfoService.getBeautyInfo(memberUuid);
-        return new BaseResponse<>(responseDto);
+        BeautyInfoResponseDto dto = beautyInfoService.getBeautyInfo(memberUuid);
+        return new BaseResponse<>(modelMapper.map(dto, BeautyInfoResponseVo.class));
     }
 
     @Operation(summary = "뷰티 정보 수정", description = "뷰티정보를 수정합니다.")
     @PutMapping("/beauty-info")
-    public BaseResponse<Void> changeBeautyInfo(@Valid @RequestBody BeautyInfoRequestDto dto, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public BaseResponse<Void> changeBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
-        beautyInfoService.changeBeautyInfo(dto, memberUuid);
+        beautyInfoService.changeBeautyInfo(modelMapper.map(vo, BeautyInfoRequestDto.class), memberUuid);
         return new BaseResponse<>();
     }
 
@@ -57,7 +63,24 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "사이즈 정보 등록", description = "사이즈 정보를 등록합니다.")
+    @PostMapping("/size-info")
+    public BaseResponse<Void> addSizeInfo(@Valid @RequestBody SizeInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        String memberUuid = customUserDetails.getMemberUuid();
+        sizeInfoService.addSizeInfo(modelMapper.map(vo, SizeInfoRequestDto.class), memberUuid); // vo -> dto
+        return new BaseResponse<>();
+    }
+
+
+
+
+
+
+
+
+
 }
+
 
 
 
