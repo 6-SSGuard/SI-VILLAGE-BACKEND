@@ -8,7 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.product.application.ProductService;
-import org.example.sivillage.product.vo.*;
+import org.example.sivillage.product.dto.in.LikeProductRequestDto;
+import org.example.sivillage.product.dto.in.UnlikeProductRequestDto;
+import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
+import org.example.sivillage.product.vo.in.CreateProductRequestVo;
+import org.example.sivillage.product.vo.in.LikeProductRequestVo;
+import org.example.sivillage.product.vo.in.UnLikeProductRequestVo;
+import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,20 +42,23 @@ public class ProductController {
     """)
     @GetMapping("/details/{productCode}")
     public BaseResponse<GetProductDetailsResponseVo> getProductDetail(@PathVariable String productCode) {
-        GetProductDetailsResponse response = productService.getProductDetail(productCode);
-        return new BaseResponse<>(mapper.map(response, GetProductDetailsResponseVo.class));
+        GetProductDetailsResponseDto responseDto = productService.getProductDetail(productCode);
+        GetProductDetailsResponseVo response = mapper.map(responseDto, GetProductDetailsResponseVo.class);
+        return new BaseResponse<>(response);
     }
 
     @Operation(summary = "좋아요 추가", description = "특정 상품에 대해 좋아요를 추가합니다.")
     @PostMapping("/like")
-    public BaseResponse<Void> likeProduct(@RequestBody LikeProductRequest request) {
+    public BaseResponse<Void> likeProduct(@RequestBody LikeProductRequestVo likeProductRequestVo) {
+        LikeProductRequestDto request = mapper.map(likeProductRequestVo, LikeProductRequestDto.class);
         productLikeService.likeProduct(request);
         return new BaseResponse<>();
     }
 
     @Operation(summary = "좋아요 취소", description = "특정 상품에 대해 좋아요를 취소합니다.")
     @DeleteMapping("/like")
-    public BaseResponse<Void> unlikeProduct(@RequestBody UnLikeProductRequest request) {
+    public BaseResponse<Void> unlikeProduct(@RequestBody UnLikeProductRequestVo unLikeProductRequestVo) {
+        UnlikeProductRequestDto request = mapper.map(unLikeProductRequestVo, UnlikeProductRequestDto.class);
         productLikeService.unlikeProduct(request);
         return new BaseResponse<>();
     }

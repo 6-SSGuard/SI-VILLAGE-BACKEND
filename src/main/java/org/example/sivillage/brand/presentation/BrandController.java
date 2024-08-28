@@ -6,14 +6,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.brand.application.BrandService;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
-import org.example.sivillage.brand.dto.out.GetBrandsResponseDto;
+import org.example.sivillage.brand.dto.out.GetBrandsListResponseDto;
 import org.example.sivillage.brand.vo.in.AddBrandRequestVo;
 import org.example.sivillage.brand.vo.out.GetBrandsResponseVo;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -32,16 +30,15 @@ public class BrandController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "브랜드 목록 조회", description = """
-        매개변수 없으면 전체 조회,
-        a~z, ㄱ~ㅎ: 해당 문자를 기준으로 필터링 후 오름차순 정렬
-        """)
+    @Operation(summary = "브랜드 목록 조회")
     @GetMapping("/")
-    BaseResponse<GetBrandsResponseVo> getBrands() {
-        List<GetBrandsResponseDto> getBrandsResponseDto = brandService.getBrands();
-        GetBrandsResponseVo response = new GetBrandsResponseVo();
-        response.setBrands(getBrandsResponseDto);
+    public BaseResponse<GetBrandsResponseVo> getBrands() {
+        GetBrandsListResponseDto getBrandsList = brandService.getBrands();
 
+        // Mapper를 사용하여 GetBrandslistResponseDto를 GetBrandsResponseVo로 매핑
+        GetBrandsResponseVo response = mapper.map(getBrandsList, GetBrandsResponseVo.class);
         return new BaseResponse<>(response);
+        //**
+
     }
 }

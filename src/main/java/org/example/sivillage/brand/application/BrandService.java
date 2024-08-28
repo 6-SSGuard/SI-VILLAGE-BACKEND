@@ -4,10 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
+import org.example.sivillage.brand.dto.out.GetBrandsListResponseDto;
 import org.example.sivillage.brand.dto.out.GetBrandsResponseDto;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BrandService {
     private final BrandRepository brandRepository;
+    private final ModelMapper mapper;
 
     public void addBrand(AddBrandRequestDto request) {
         validateDuplicatedBrand(request);
@@ -26,12 +29,19 @@ public class BrandService {
         brandRepository.save(brand);
     }
 
-    public List<GetBrandsResponseDto> getBrands() {
-
-        return brandRepository.findAllByOrderByEngNameAsc()
+    public GetBrandsListResponseDto getBrands() {
+        List<GetBrandsResponseDto> getBrandsResponseDto = brandRepository.findAllByOrderByEngNameAsc()
                 .stream()
-                .map(GetBrandsResponseDto::toDto)
+//                .map(brand -> mapper.map(brand, GetBrandsResponseDto.class))
+                .map(brand -> {
+                    return GetBrandsResponseDto.builder()
+                            .brandId(brand.getBrandId())
+                            .brandEngName(brand.getBrandEngName())
+                            .brandKorName(brand.getBrandKorName())
+                            .build();
+                })
                 .collect(Collectors.toList());
+        return new GetBrandsListResponseDto(getBrandsResponseDto);
     }
 
     private void validateDuplicatedBrand(AddBrandRequestDto request) {
