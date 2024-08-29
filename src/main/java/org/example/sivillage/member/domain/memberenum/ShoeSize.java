@@ -26,8 +26,8 @@ import lombok.Getter;
        SIZE_270("270"),
        SIZE_275("275"),
        SIZE_280("280"),
-
        SIZE_285("285");
+
        private final String description;
 
 }

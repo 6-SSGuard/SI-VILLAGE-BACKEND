@@ -93,9 +93,7 @@ public class MemberController {
     public BaseResponse<SizeInfoResponseVo> getSizeInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
         SizeInfoResponseDto dto = sizeInfoService.getSizeInfo(memberUuid);
-        System.out.println("DTO Values: " + dto.getHeight() + ", " + dto.getWeight() + ", " + dto.getTopSize() + ", " + dto.getBottomSize() + ", " + dto.getShoeSize());
         SizeInfoResponseVo vo = mapper.map(dto,SizeInfoResponseVo.class);
-        System.out.println(vo.getHeight() + ", " + vo.getWeight() + ",");
         return new BaseResponse<>(vo);
     }
 
