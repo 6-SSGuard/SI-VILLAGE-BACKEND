@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface BrandLikeRepository extends JpaRepository<BrandLike, Long> {
     Optional<BrandLike> findByBrandIdAndMemberUuid(Long brandId, String memberUuid);
+
     @Query("SELECT b.isLiked FROM BrandLike b WHERE b.brandId = :brandId AND b.memberUuid = :memberUuid")
     Optional<Boolean> findIsLikedByBrandIdAndMemberUuid(@Param("brandId") Long brandId, @Param("memberUuid") String memberUuid);
 }
