@@ -36,6 +36,7 @@ public class MemberController {
     @PostMapping("/beauty-info")
     public BaseResponse<Void> addBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
+        log.info("vo: {}", vo);
         beautyInfoService.addBeautyInfo(modelMapper.map(vo, BeautyInfoRequestDto.class), memberUuid); // vo -> dto
         return new BaseResponse<>();
     }
