@@ -1,30 +1,23 @@
-package org.example.sivillage.member.dto.in;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+package org.example.sivillage.member.vo.out;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.example.sivillage.member.domain.memberenum.BeautyKeyword;
-import org.example.sivillage.member.domain.memberenum.SkinType;
 import org.example.sivillage.member.domain.memberenum.ScalpTone;
 import org.example.sivillage.member.domain.memberenum.SkinTone;
+import org.example.sivillage.member.domain.memberenum.SkinType;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
-@Builder
-@AllArgsConstructor
+@Setter
 @NoArgsConstructor
-public class BeautyInfoRequestDto {
+public class BeautyInfoResponseVo {
 
     private SkinType skinType;
-
     private SkinTone skinTone;
-
     private ScalpTone scalpTone;
-
-    private String beautyKeyword;
-
+    private List<BeautyKeyword> beautyKeyword;
 
 }
-

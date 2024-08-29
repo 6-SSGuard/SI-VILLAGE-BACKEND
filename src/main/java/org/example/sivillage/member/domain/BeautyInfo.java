@@ -52,7 +52,7 @@ public class BeautyInfo extends BaseEntity {
                 .skinType(dto.getSkinType())
                 .skinTone(dto.getSkinTone())
                 .scalpTone(dto.getScalpTone())
-                .beautyKeyword(dto.convertStringBeautyKeyword(dto.getBeautyKeyword()))
+                .beautyKeyword(dto.getBeautyKeyword())
                 .memberUuid(memberUuid)
                 .build();
     }
@@ -61,10 +61,8 @@ public class BeautyInfo extends BaseEntity {
         this.skinType = dto.getSkinType();
         this.skinTone = dto.getSkinTone();
         this.scalpTone = dto.getScalpTone();
-        this.beautyKeyword = dto.convertStringBeautyKeyword(dto.getBeautyKeyword());
+        this.beautyKeyword = dto.getBeautyKeyword();
     }
-
-
 
 
 }
