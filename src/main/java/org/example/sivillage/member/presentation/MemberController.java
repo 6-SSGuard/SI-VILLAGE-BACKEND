@@ -59,7 +59,6 @@ public class MemberController {
     public BaseResponse<BeautyInfoResponseVo> getBeautyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
         BeautyInfoResponseDto dto = beautyInfoService.getBeautyInfo(memberUuid);
-        System.out.println(dto.getBeautyKeyword());
         BeautyInfoResponseVo vo = mapper.map(dto, BeautyInfoResponseVo.class);
         return new BaseResponse<>(vo);
     }
@@ -93,9 +92,7 @@ public class MemberController {
     public BaseResponse<SizeInfoResponseVo> getSizeInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
         SizeInfoResponseDto dto = sizeInfoService.getSizeInfo(memberUuid);
-        System.out.println("DTO Values: " + dto.getHeight() + ", " + dto.getWeight() + ", " + dto.getTopSize() + ", " + dto.getBottomSize() + ", " + dto.getShoeSize());
         SizeInfoResponseVo vo = mapper.map(dto,SizeInfoResponseVo.class);
-        System.out.println(vo.getHeight() + ", " + vo.getWeight() + ",");
         return new BaseResponse<>(vo);
     }
 
@@ -120,7 +117,6 @@ public class MemberController {
     @GetMapping("/")
     public BaseResponse<GetBrandsResponseVo> getBrands(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         GetBrandsListResponseDto getBrandsList = brandService.getBrands(customUserDetails.getMemberUuid());
-
         // Mapper를 사용하여 GetBrandslistResponseDto를 GetBrandsResponseVo로 매핑
         GetBrandsResponseVo response = mapper.map(getBrandsList, GetBrandsResponseVo.class);
         return new BaseResponse<>(response);

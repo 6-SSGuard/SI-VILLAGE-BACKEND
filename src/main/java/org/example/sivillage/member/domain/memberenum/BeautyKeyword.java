@@ -18,4 +18,12 @@ public enum BeautyKeyword {
 
     private final String description;
 
+    BeautyKeyword (String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
 }
