@@ -14,8 +14,10 @@ import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
 import org.example.sivillage.member.dto.out.BeautyInfoResponseDto;
 import org.example.sivillage.member.vo.out.GetProductsUuidResponseVo;
 import org.example.sivillage.product.application.ProductService;
+import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.example.sivillage.product.dto.out.GetProductsUuidListResponseDto;
+import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;
 import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -103,6 +105,17 @@ public class MemberController {
         return new BaseResponse<>(response);
     }
 
+    @Operation(summary = "단일 상품에 대한 간략 정보 조회", description = """
+        '상품 리스트에 대한 Uuid 조회' api로 얻어낸 Uuid 정보를 전달하고, 이 api로 받아온 값을 상품 리스트 렌더링에 활용.
+        이미 프론트에서 받아온 정보는 캐싱처리
+        """)
+    @GetMapping("/product/brief/{productUuid}")
+    public BaseResponse<GetProductBriefInfoResponseVo> getProductBriefInfo(@PathVariable String productUuid, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        String memberUuid = customUserDetails.getMemberUuid();
+        GetProductBriefInfoResponseDto responseDto = productService.getProductBriefInfo(productUuid, memberUuid);
+        GetProductBriefInfoResponseVo response = mapper.map(responseDto, GetProductBriefInfoResponseVo.class);
+        return new BaseResponse<>(response);
+    }
 }
 
 

@@ -9,6 +9,7 @@ import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductOption;
+import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.example.sivillage.product.dto.out.GetProductsUuidListResponseDto;
 import org.example.sivillage.product.dto.out.GetProductsUuidResponseDto;
@@ -75,6 +76,17 @@ public class ProductService {
                 .collect(Collectors.toList());
 
         return new GetProductsUuidListResponseDto(getProductsUuidResponseDtos);
+    }
+
+    public GetProductBriefInfoResponseDto getProductBriefInfo(String productUuid, String memberUuid) {
+        Product product = productRepository.findByProductUuid(productUuid)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
+
+        // TODO: 비회원인 경우 isLiked 무조건 false로 반환하기
+        boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productUuid, memberUuid)
+                .orElse(false);
+
+        return GetProductBriefInfoResponseDto.toDto(product, isLiked);
     }
 
 //    @Transactional(readOnly = true)
