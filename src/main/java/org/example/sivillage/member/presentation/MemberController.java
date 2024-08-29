@@ -99,6 +99,7 @@ public class MemberController {
     public BaseResponse<Void> deleteSizeInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
         sizeInfoService.removeSizeInfo(memberUuid);
+        return new BaseResponse<>();
     }
 
     @Operation(summary = "브랜드 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")

@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum BottomSize {
+
     SIZE_23("23"),
     SIZE_24("24"),
     SIZE_25("25"),
@@ -23,6 +24,6 @@ public enum BottomSize {
     SIZE_37("37"),
     SIZE_38("38");
 
-    private final String BottomSize;
+    private final String description;
 
 }
