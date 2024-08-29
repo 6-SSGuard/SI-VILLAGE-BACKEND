@@ -1,17 +1,18 @@
 package org.example.sivillage.brand.vo.in;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
 public class AddBrandRequestVo {
-    @NotNull(message = "Brand English Name cannot be null")
-    @NotEmpty(message = "Brand English Name cannot be empty")
+    @NotBlank(message = "브랜드 영어 이름은 필수입니다.")
+    @Schema(description = "브랜드 영어 이름", example = "brand name")
     private String brandEngName;
-    @NotNull(message = "Brand Korean Name cannot be null")
-    @NotEmpty(message = "Brand Korean Name cannot be empty")
+
+    @NotBlank(message = "브랜드 한글 이름은 필수입니다.")
+    @Schema(description = "브랜드 한글 이름", example = "브랜드 명")
     private String brandKorName;
 }

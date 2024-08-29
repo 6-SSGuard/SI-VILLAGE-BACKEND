@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.product.domain.Product;
 
 @Entity
 @Getter
@@ -18,19 +17,25 @@ public class ProductLike {
     @Column(name = "product_like_id")
     private Long productLikeId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    @Column(nullable = false)
+    private String productUuid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+    @Column(nullable = false)
+    private String memberUuid;
+
+    @Column(nullable = false)
+    private boolean isLiked;
 
     // 좋아요 생성 메서드
-    public static ProductLike createProductLike(Product product, Member member) {
+    public static ProductLike createProductLike(String productUuid, String memberUuid) {
         return ProductLike.builder()
-                .product(product)
-                .member(member)
+                .productUuid(productUuid)
+                .memberUuid(memberUuid)
+                .isLiked(false)
                 .build();
-    } // 유저에 가까움 -> member domain으로?
+    }
+
+    public void toggleLike() {
+        this.isLiked = !this.isLiked;
+    }
 }
