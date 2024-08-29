@@ -1,8 +1,11 @@
 package org.example.sivillage.member.domain.memberenum;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+@Getter
+@AllArgsConstructor
 public enum SkinTone {
 
     COOL("쿨톤"),

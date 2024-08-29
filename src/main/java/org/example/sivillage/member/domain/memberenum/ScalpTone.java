@@ -1,8 +1,11 @@
 package org.example.sivillage.member.domain.memberenum;
 
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum ScalpTone {
 
     DRY("건성"),

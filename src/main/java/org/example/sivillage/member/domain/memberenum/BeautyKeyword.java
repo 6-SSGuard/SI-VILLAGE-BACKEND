@@ -1,10 +1,13 @@
 package org.example.sivillage.member.domain.memberenum;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@JsonFormat(shape = JsonFormat.Shape.STRING)
-@RequiredArgsConstructor
+@Getter
+@AllArgsConstructor
+
 public enum BeautyKeyword {
 
     WRINKLES("주름"),
@@ -18,12 +21,5 @@ public enum BeautyKeyword {
 
     private final String description;
 
-    BeautyKeyword (String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 
 }

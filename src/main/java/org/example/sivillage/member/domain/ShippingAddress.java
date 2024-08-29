@@ -30,7 +30,7 @@ public class ShippingAddress {
     private String detailedAddress;
 
     @Column(nullable = false)
-    private String defaultAddress;
+    private Boolean defaultAddress;
 
     @Column(nullable = false)
     private String memberUuid;

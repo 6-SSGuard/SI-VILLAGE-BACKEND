@@ -26,12 +26,5 @@ public enum BottomSize {
 
     private final String description;
 
-    BottomSize (String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 
 }
