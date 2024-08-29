@@ -6,6 +6,7 @@ import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
 import org.example.sivillage.brand.dto.out.GetBrandsListResponseDto;
 import org.example.sivillage.brand.dto.out.GetBrandsResponseDto;
+import org.example.sivillage.brand.infrastructure.BrandLikeRepository;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BrandService {
     private final BrandRepository brandRepository;
+    private final BrandLikeRepository brandLikeRepository;
     private final ModelMapper mapper;
 
     public void addBrand(AddBrandRequestDto request) {
@@ -29,15 +31,18 @@ public class BrandService {
         brandRepository.save(brand);
     }
 
-    public GetBrandsListResponseDto getBrands() {
+    public GetBrandsListResponseDto getBrands(String memberUuid) {
         List<GetBrandsResponseDto> getBrandsResponseDto = brandRepository.findAllByOrderByEngNameAsc()
                 .stream()
-//                .map(brand -> mapper.map(brand, GetBrandsResponseDto.class))
                 .map(brand -> {
+                    // 좋아요 상태를 조회
+                    boolean isLiked = brandLikeRepository.findIsLikedByBrandIdAndMemberUuid(brand.getBrandId(), memberUuid)
+                            .orElse(false); // 없으면 false 반환
                     return GetBrandsResponseDto.builder()
                             .brandId(brand.getBrandId())
                             .brandEngName(brand.getBrandEngName())
                             .brandKorName(brand.getBrandKorName())
+                            .isLiked(isLiked)
                             .build();
                 })
                 .collect(Collectors.toList());
