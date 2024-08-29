@@ -15,4 +15,5 @@ public class GetProductBriefInfoResponseVo {
     private String productName;
     private Integer price;
     private boolean isLiked;
+    private String productThumbnailUrl;
 }

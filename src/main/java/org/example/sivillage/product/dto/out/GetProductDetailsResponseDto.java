@@ -5,6 +5,8 @@ import lombok.Getter;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductOption;
 
+import java.util.List;
+
 @Getter
 @Builder
 public class GetProductDetailsResponseDto {
@@ -19,8 +21,10 @@ public class GetProductDetailsResponseDto {
     private Integer stock;
     private Integer likesCount;
     private boolean isLiked;
+    private List<String> productImageUrls;
 
-    public static GetProductDetailsResponseDto toDto(Product product, ProductOption productOption, Integer likesCount, boolean isLiked) {
+    public static GetProductDetailsResponseDto toDto(Product product, ProductOption productOption, Integer likesCount,
+                                                     boolean isLiked, List<String> productImageUrls) {
         return GetProductDetailsResponseDto.builder()
                 .productUuid(product.getProductUuid())
                 .productName(product.getProductName())
@@ -33,6 +37,7 @@ public class GetProductDetailsResponseDto {
                 .stock(productOption.getStock())
                 .likesCount(likesCount)
                 .isLiked(isLiked)
+                .productImageUrls(productImageUrls)
                 .build();
     }
 }
