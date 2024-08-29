@@ -8,11 +8,13 @@ import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.product.domain.Product;
+import org.example.sivillage.product.domain.ProductImage;
 import org.example.sivillage.product.domain.ProductOption;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.example.sivillage.product.dto.out.GetProductsUuidListResponseDto;
 import org.example.sivillage.product.dto.out.GetProductsUuidResponseDto;
+import org.example.sivillage.product.infrastructure.ProductImageRepository;
 import org.example.sivillage.product.infrastructure.ProductLikeRepository;
 import org.example.sivillage.product.infrastructure.ProductOptionRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
@@ -34,19 +36,36 @@ public class ProductService {
     private final ProductLikeService productLikeService;
     private final BrandRepository brandRepository;
     private final ProductLikeRepository productLikeRepository;
+    private final ProductImageRepository productImageRepository;
 
     public void addProduct(CreateProductRequestVo request) {
         Brand brand = brandRepository.findByBrandEngName(request.getBrandEngName())
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
 
+        Product product = createAndSaveProduct(request, brand);
+        saveProductImages(request.getProductImageUrls(), product);
+        createAndSaveProductOption(request, product);
+
+    }
+
+    private void createAndSaveProductOption(CreateProductRequestVo request, Product product) {
+        ProductOption productOption = ProductOption.createProductOption(request, product);
+        productOptionRepository.save(productOption);
+    }
+
+    private void saveProductImages(List<String> productImageUrls, Product product) {
+        List<ProductImage> productImageUrl = productImageUrls.stream()
+                .map(url -> ProductImage.createProductImage(url, product))
+                .collect(Collectors.toList());
+        productImageRepository.saveAll(productImageUrl);
+    }
+
+    private Product createAndSaveProduct(CreateProductRequestVo request, Brand brand) {
         String productUuid = UUID.randomUUID().toString();
 
         Product product = Product.createProduct(request, brand, productUuid);
         productRepository.save(product);
-
-        ProductOption productOption = ProductOption.createProductOption(request, product);
-        productOptionRepository.save(productOption);
-
+        return product;
     }
 
     @Transactional(readOnly = true)
@@ -61,7 +80,13 @@ public class ProductService {
 
         boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productUuid, memberUuid)
                 .orElse(false);
-        return GetProductDetailsResponseDto.toDto(product, productOption, likesCount, isLiked);
+
+        List<String> productImageUrls = productImageRepository.findByProduct(product)
+                .stream()
+                .map(ProductImage::getProductImageUrl)
+                .collect(Collectors.toList());
+
+        return GetProductDetailsResponseDto.toDto(product, productOption, likesCount, isLiked, productImageUrls);
     }
 
     @Transactional(readOnly = true)
@@ -86,7 +111,19 @@ public class ProductService {
         boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productUuid, memberUuid)
                 .orElse(false);
 
-        return GetProductBriefInfoResponseDto.toDto(product, isLiked);
+        // 기존 productImage 중 첫번째 이미지를 썸네일로 사용
+        String productThumbnailUrl = getProductThumbnailUrl(product);
+
+        return GetProductBriefInfoResponseDto.toDto(product, isLiked, productThumbnailUrl);
+    }
+
+    private String getProductThumbnailUrl(Product product) {
+        String productThumbnailUrl = productImageRepository.findByProduct(product)
+                .stream()
+                .map(ProductImage::getProductImageUrl)
+                .findFirst()
+                .orElse(null);
+        return productThumbnailUrl;
     }
 
 //    @Transactional(readOnly = true)

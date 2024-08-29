@@ -3,6 +3,8 @@ package org.example.sivillage.product.vo.out;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class GetProductDetailsResponseVo {
@@ -17,4 +19,5 @@ public class GetProductDetailsResponseVo {
     private Integer stock;
     private Integer likesCount;
     private boolean isLiked;
+    private List<String> productImageUrls;
 }
