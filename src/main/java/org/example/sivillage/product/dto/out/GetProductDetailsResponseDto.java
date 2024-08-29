@@ -8,27 +8,31 @@ import org.example.sivillage.product.domain.ProductOption;
 @Getter
 @Builder
 public class GetProductDetailsResponseDto {
-    private String productCode;
+    private String productUuid;
     private String productName;
     private Integer price;
-    private String brandName;
+    private String brandEngName;
+    private String brandKorName;
     private String color;
     private String size;
     private String capacity;
     private Integer stock;
-    private Long likesCount;
+    private Integer likesCount;
+    private boolean isLiked;
 
-    public static GetProductDetailsResponseDto toDto(Product product, ProductOption productOption, Long likesCount) {
+    public static GetProductDetailsResponseDto toDto(Product product, ProductOption productOption, Integer likesCount, boolean isLiked) {
         return GetProductDetailsResponseDto.builder()
-                .productCode(product.getProductCode())
+                .productUuid(product.getProductUuid())
                 .productName(product.getProductName())
                 .price(product.getPrice())
-                .brandName(product.getBrand().getBrandEngName())
+                .brandEngName(product.getBrand().getBrandEngName())
+                .brandKorName(product.getBrand().getBrandKorName())
                 .color(productOption.getColor().name())
                 .size(productOption.getSize().name())
                 .capacity(productOption.getCapacity())
                 .stock(productOption.getStock())
                 .likesCount(likesCount)
+                .isLiked(isLiked)
                 .build();
     }
 }

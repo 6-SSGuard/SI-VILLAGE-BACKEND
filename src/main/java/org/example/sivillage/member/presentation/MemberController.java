@@ -9,8 +9,12 @@ import org.example.sivillage.auth.domain.CustomUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.application.BeautyInfoService;
 import org.example.sivillage.member.application.BrandLikeService;
+import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
 import org.example.sivillage.member.dto.out.BeautyInfoResponseDto;
+import org.example.sivillage.product.application.ProductService;
+import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
+import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +28,9 @@ public class MemberController {
 
     private final BeautyInfoService beautyInfoService;
     private final BrandLikeService brandLikeService;
-    private final ModelMapper modelMapper;
+    private final ProductLikeService productLikeService;
+    private final ProductService productService;
+    private final ModelMapper mapper;
 
     @Operation(summary = "뷰티 정보 등록", description = "뷰티정보를 등록합니다.")
     @PostMapping("/beauty-info")
@@ -63,6 +69,24 @@ public class MemberController {
     @PutMapping("/brand/like/{brandId}")
     public BaseResponse<Void> toggleBrandLike(@PathVariable Long brandId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         brandLikeService.toggleBrandLike(brandId, customUserDetails.getMemberUuid());
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "상품 상세 정보 조회", description = """
+    
+    """)
+    @GetMapping("/details/{productUuid}")
+    public BaseResponse<GetProductDetailsResponseVo> getProductDetail(@PathVariable String productUuid, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        String memberUuid = customUserDetails.getMemberUuid();
+        GetProductDetailsResponseDto responseDto = productService.getProductDetail(productUuid, memberUuid);
+        GetProductDetailsResponseVo response = mapper.map(responseDto, GetProductDetailsResponseVo.class);
+        return new BaseResponse<>(response);
+    }
+
+    @Operation(summary = "상품 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
+    @PutMapping("/product/like/{productUuid}")
+    public BaseResponse<Void> toggleProductLike(@PathVariable String productUuid, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        productLikeService.toggleProductLike(productUuid, customUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
