@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.member.domain.memberenum.*;
+import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
+import org.example.sivillage.member.dto.in.SizeInfoRequestDto;
+
 @Getter
 @NoArgsConstructor
 public class SizeInfoRequestVo {
@@ -28,5 +31,16 @@ public class SizeInfoRequestVo {
     @Schema(description = "신발 사이즈", example = "SIZE_240", required = true)
     @NotNull
     private ShoeSize shoeSize;
+
+    public static SizeInfoRequestDto toDto (SizeInfoRequestVo vo) {
+        return SizeInfoRequestDto.builder()
+                .height(vo.getHeight())
+                .weight(vo.getWeight())
+                .topSize(vo.getTopSize().toString())
+                .bottomSize(vo.getBottomSize().toString())
+                .shoeSize(vo.getShoeSize().toString())
+                .build();
+    }
+
 
 }

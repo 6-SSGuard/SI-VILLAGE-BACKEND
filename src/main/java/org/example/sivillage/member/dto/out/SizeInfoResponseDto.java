@@ -3,25 +3,32 @@ package org.example.sivillage.member.dto.out;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import org.example.sivillage.member.domain.memberenum.BottomSize;
-import org.example.sivillage.member.domain.memberenum.ShoeSize;
-import org.example.sivillage.member.domain.memberenum.TopSize;
+import lombok.NoArgsConstructor;
+import org.example.sivillage.member.domain.SizeInfo;
 
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class SizeInfoResponseDto {
 
     private Integer height;
 
     private Integer weight;
 
-    private TopSize topSize;
+    private String topSize;
 
-    private BottomSize bottomSize;
+    private String bottomSize;
 
-    private ShoeSize shoeSize;
+    private String shoeSize;
 
-    private String memberUuid;
-
+    public static SizeInfoResponseDto toDto (SizeInfo sizeInfo) {
+        return SizeInfoResponseDto.builder()
+                .height(sizeInfo.getHeight())
+                .weight(sizeInfo.getWeight())
+                .topSize(sizeInfo.getTopSize())
+                .bottomSize(sizeInfo.getBottomSize())
+                .shoeSize(sizeInfo.getShoeSize())
+                .build();
+    }
 }

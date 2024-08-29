@@ -11,8 +11,6 @@ import org.example.sivillage.member.application.BeautyInfoService;
 import org.example.sivillage.member.application.SizeInfoService;
 import org.example.sivillage.member.application.BrandLikeService;
 import org.example.sivillage.member.application.ProductLikeService;
-import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
-import org.example.sivillage.member.dto.in.SizeInfoRequestDto;
 import org.example.sivillage.member.dto.out.BeautyInfoResponseDto;
 import org.example.sivillage.member.dto.out.SizeInfoResponseDto;
 import org.example.sivillage.member.vo.in.BeautyInfoRequestVo;
@@ -44,8 +42,7 @@ public class MemberController {
     @PostMapping("/beauty-info")
     public BaseResponse<Void> addBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
-        log.info("vo: {}", vo);
-        beautyInfoService.addBeautyInfo(modelMapper.map(vo, BeautyInfoRequestDto.class), memberUuid); // vo -> dto
+        beautyInfoService.addBeautyInfo(BeautyInfoRequestVo.toDto(vo),memberUuid); // vo -> dto
         return new BaseResponse<>();
     }
 
@@ -54,14 +51,16 @@ public class MemberController {
     public BaseResponse<BeautyInfoResponseVo> getBeautyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
         BeautyInfoResponseDto dto = beautyInfoService.getBeautyInfo(memberUuid);
-        return new BaseResponse<>(modelMapper.map(dto, BeautyInfoResponseVo.class));
+        System.out.println(dto.getBeautyKeyword());
+        BeautyInfoResponseVo vo = mapper.map(dto, BeautyInfoResponseVo.class);
+        return new BaseResponse<>(vo);
     }
 
     @Operation(summary = "뷰티 정보 수정", description = "뷰티정보를 수정합니다.")
     @PutMapping("/beauty-info")
     public BaseResponse<Void> changeBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
-        beautyInfoService.changeBeautyInfo(modelMapper.map(vo, BeautyInfoRequestDto.class), memberUuid);
+        beautyInfoService.changeBeautyInfo(BeautyInfoRequestVo.toDto(vo),memberUuid);
         return new BaseResponse<>();
     }
 
@@ -77,8 +76,7 @@ public class MemberController {
     @PostMapping("/size-info")
     public BaseResponse<Void> addSizeInfo(@Valid @RequestBody SizeInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
-        log.info("SizeInfoRequestVo: {}", vo);
-        sizeInfoService.addSizeInfo(modelMapper.map(vo, SizeInfoRequestDto.class), memberUuid); // vo -> dto
+        sizeInfoService.addSizeInfo(SizeInfoRequestVo.toDto(vo),memberUuid); // vo -> dto
         return new BaseResponse<>();
     }
 
@@ -87,18 +85,20 @@ public class MemberController {
     public BaseResponse<SizeInfoResponseVo> getSizeInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
         SizeInfoResponseDto dto = sizeInfoService.getSizeInfo(memberUuid);
-        return new BaseResponse<>(modelMapper.map(dto, SizeInfoResponseVo.class));
+        System.out.println("DTO Values: " + dto.getHeight() + ", " + dto.getWeight() + ", " + dto.getTopSize() + ", " + dto.getBottomSize() + ", " + dto.getShoeSize());
+        SizeInfoResponseVo vo = mapper.map(dto,SizeInfoResponseVo.class);
+        System.out.println(vo.getHeight() + ", " + vo.getWeight() + ",");
+        return new BaseResponse<>(vo);
     }
 
     @Operation(summary = "사이즈 정보 수정", description = "사이즈 정보를 수정합니다.")
     @PutMapping("/size-info")
     public BaseResponse<Void> changeSizeInfo(@Valid @RequestBody SizeInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
-        sizeInfoService.changeSizeInfo(modelMapper.map(vo, SizeInfoRequestDto.class), memberUuid);
+        sizeInfoService.changeSizeInfo(SizeInfoRequestVo.toDto(vo),memberUuid);
         return new BaseResponse<>();
 
     }
-
 
     @Operation(summary = "사이즈 정보 삭제", description = "사이즈 정보를 삭제합니다.")
     @DeleteMapping("/size-info")
@@ -115,9 +115,7 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "상품 상세 정보 조회", description = """
-    
-    """)
+    @Operation(summary = "상품 상세 정보 조회", description = "")
     @GetMapping("/details/{productUuid}")
     public BaseResponse<GetProductDetailsResponseVo> getProductDetail(@PathVariable String productUuid, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();

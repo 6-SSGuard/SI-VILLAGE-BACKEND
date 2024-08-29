@@ -1,6 +1,4 @@
 package org.example.sivillage.member.domain.memberenum;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -28,8 +26,8 @@ import lombok.Getter;
        SIZE_270("270"),
        SIZE_275("275"),
        SIZE_280("280"),
-       SIZE_285("285");
 
+       SIZE_285("285");
        private final String description;
 
 }

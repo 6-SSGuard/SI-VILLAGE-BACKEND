@@ -11,6 +11,7 @@ import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
 import org.example.sivillage.member.dto.in.SizeInfoRequestDto;
 import org.example.sivillage.member.dto.out.SizeInfoResponseDto;
 import org.example.sivillage.member.infrastructure.SizeInfoRepository;
+import org.example.sivillage.productoption.domain.Size;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +25,9 @@ import java.util.Optional;
 public class SizeInfoService {
 
     private final SizeInfoRepository sizeInfoRepository;
-    private final ModelMapper modelMapper;
 
     public void addSizeInfo(SizeInfoRequestDto dto, String memberUuid) {
         Optional<SizeInfo> sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid);
-        log.info("Converted SizeInfoRequestDto: {}", dto);
         if (sizeInfo.isEmpty()) {
             sizeInfoRepository.save(SizeInfo.toEntity(dto, memberUuid));
         } else {
@@ -37,15 +36,14 @@ public class SizeInfoService {
     }
 
     public SizeInfoResponseDto getSizeInfo(String memberUuid) {
-       SizeInfo sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid)
-               .orElseThrow(()->new BaseException(BaseResponseStatus.NOT_FOUND_SIZE_INFO));
-       return modelMapper.map(sizeInfo, SizeInfoResponseDto.class);
+       Optional <SizeInfo> sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid);
+        return SizeInfoResponseDto.toDto((sizeInfo.orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_SIZE_INFO))));
     }
 
     public void changeSizeInfo(SizeInfoRequestDto dto, String memberUuid) {
       SizeInfo sizeInfo =  sizeInfoRepository.findByMemberUuid(memberUuid)
                 .orElseThrow(()->new BaseException(BaseResponseStatus.NOT_FOUND_SIZE_INFO));
-        modelMapper.map(dto, sizeInfo);
+        sizeInfo.change(dto); // entity로 변환
         sizeInfoRepository.save(sizeInfo);
 
     }

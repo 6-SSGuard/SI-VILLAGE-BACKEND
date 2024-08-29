@@ -23,14 +23,7 @@ public class BeautyInfoRequestDto {
 
     private ScalpTone scalpTone;
 
-    private List<BeautyKeyword> beautyKeyword;
-
-    // List -> string
-    public String convertStringBeautyKeyword(List<BeautyKeyword> beautyKeyword) {
-        return beautyKeyword.stream()
-                .map(BeautyKeyword::name) // enum의 이름을 문자열로 변환
-                .collect(Collectors.joining(", "));
-    }
+    private String beautyKeyword;
 
 
 }

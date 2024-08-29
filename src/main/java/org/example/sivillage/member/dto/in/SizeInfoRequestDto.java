@@ -17,10 +17,10 @@ public class SizeInfoRequestDto {
 
     private Integer weight;
 
-    private TopSize topSize;
+    private String topSize;
 
-    private BottomSize bottomSize;
+    private String bottomSize;
 
-    private ShoeSize shoeSize;
+    private String shoeSize;
 
 }
