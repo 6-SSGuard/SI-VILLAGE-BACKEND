@@ -1,4 +1,4 @@
-package org.example.sivillage.member.domain;
+package org.example.sivillage.member.domain.memberenum;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.RequiredArgsConstructor;

@@ -1,14 +1,14 @@
 package org.example.sivillage.member.application;
 
 import lombok.RequiredArgsConstructor;
-import org.example.sivillage.member.domain.Member;
-import org.example.sivillage.member.infrastructure.MemberRepository;
 import org.example.sivillage.auth.vo.SignUpRequest;
-import org.example.sivillage.global.error.CustomException;
-import org.example.sivillage.global.error.ErrorCode;
+import org.example.sivillage.global.common.response.BaseResponseStatus;
+import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.global.util.JwtToken;
 import org.example.sivillage.global.util.JwtTokenProvider;
 import org.example.sivillage.global.util.SecurityUtil;
+import org.example.sivillage.member.domain.Member;
+import org.example.sivillage.member.infrastructure.MemberRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,7 +30,7 @@ public class MemberService {
 
     public void signUp(SignUpRequest request) {
         if (Boolean.TRUE.equals(memberRepository.existsByEmail(request.getEmail()))) {
-            throw new CustomException(ErrorCode.STUDENT_ID_DUPLICATION);
+            throw new BaseException(BaseResponseStatus.STUDENT_ID_DUPLICATION);
         }
 
         String memberUuid = UUID.randomUUID().toString();
@@ -56,9 +56,9 @@ public class MemberService {
             // 인증 상태이므로 authentication은 인증 여부를 확인하는 authenticated 값이 true 상태이다.
             return jwtTokenProvider.generateToken(authentication);
         } catch (AuthenticationException e) {
-            throw new CustomException(ErrorCode.LOGIN_FAILURE);
+            throw new BaseException(BaseResponseStatus.LOGIN_FAILURE);
         } catch (Exception e) {
-            throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
+            throw new BaseException(BaseResponseStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -66,6 +66,6 @@ public class MemberService {
     public Member getSignedMember() {
         String email = SecurityUtil.getCurrentMemberEmail();
         return memberRepository.findByEmail(email).
-                orElseThrow(() -> new CustomException(ErrorCode.MEMBER_NOT_FOUND));
+                orElseThrow(() -> new BaseException(BaseResponseStatus.MEMBER_NOT_FOUND));
     }
 }

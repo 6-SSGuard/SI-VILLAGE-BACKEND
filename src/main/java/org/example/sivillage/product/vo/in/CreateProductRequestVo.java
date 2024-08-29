@@ -1,4 +1,4 @@
-package org.example.sivillage.product.vo;
+package org.example.sivillage.product.vo.in;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import org.example.sivillage.product.domain.Color;
 import org.example.sivillage.productoption.domain.Size;
 
 @Getter
-public class CreateProductRequest {
+public class CreateProductRequestVo {
     @Schema(description = "물품 이름", example = "샘플 물품")
     @NotBlank(message = "물품 이름은 필수 값입니다.")
     private String productName;
@@ -33,9 +33,9 @@ public class CreateProductRequest {
     @NotNull(message = "물품 크기는 필수 값입니다.")
     private Size size;
 
-    @Schema(description = "브랜드 이름", example = "브랜드명")
-    @NotBlank(message = "브랜드 이름은 필수 값입니다.")
-    private String brandName;
+    @Schema(description = "브랜드 영어 이름", example = "brand name")
+    @NotBlank(message = "브랜드 영어 이름은 필수 값입니다.")
+    private String brandEngName;
 
     @Schema(description = "물품 상세 설명 html", example = "html 형태의 string")
     @NotBlank(message = "상세 설명은 필수 값입니다.")

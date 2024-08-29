@@ -1,11 +1,13 @@
-package org.example.sivillage.product.vo;
+package org.example.sivillage.product.dto.in;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
-public class UnLikeProductRequest {
+public class LikeProductRequestDto {
     private String productCode;
     private String memberUuid;
 }

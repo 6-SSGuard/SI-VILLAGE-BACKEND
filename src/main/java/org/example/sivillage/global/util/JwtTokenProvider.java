@@ -4,10 +4,10 @@ import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.auth.domain.CustomUserDetails;
 import org.example.sivillage.auth.application.CustomUserDetailsService;
-import org.example.sivillage.global.error.CustomException;
-import org.example.sivillage.global.error.ErrorCode;
+import org.example.sivillage.auth.domain.CustomUserDetails;
+import org.example.sivillage.global.common.response.BaseResponseStatus;
+import org.example.sivillage.global.error.BaseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -74,7 +74,7 @@ public class JwtTokenProvider {
         Claims claims = parseClaims(accessToken);
 
         if (claims.get("auth") == null) {
-            throw new CustomException(ErrorCode.UNAUTHORIZED_TOKEN);
+            throw new BaseException(BaseResponseStatus.UNAUTHORIZED_TOKEN);
         }
 
         Collection<? extends GrantedAuthority> authorities =
@@ -126,23 +126,23 @@ public class JwtTokenProvider {
 
     private void validateRefreshToken(String refreshToken, String username) {
         if (username == null || username.isEmpty()) {
-            throw new CustomException(ErrorCode.INVALID_REFRESH_TOKEN);
+            throw new BaseException(BaseResponseStatus.INVALID_REFRESH_TOKEN);
         }
 
         String savedRefreshToken = (String) redisTemplate.opsForValue().get(username);
 
         if (savedRefreshToken == null) {
-            throw new CustomException(ErrorCode.NOT_FOUND_REFRESH_TOKEN);
+            throw new BaseException(BaseResponseStatus.NOT_FOUND_REFRESH_TOKEN);
         }
 
         if (!refreshToken.equals(savedRefreshToken)) {
-            throw new CustomException(ErrorCode.NOT_MATCHED_REFRESH_TOKEN);
+            throw new BaseException(BaseResponseStatus.NOT_MATCHED_REFRESH_TOKEN);
         }
 
         Claims claims = parseClaims(refreshToken);
         if (claims.getExpiration().before(new Date())) {
             redisTemplate.delete(username);
-            throw new CustomException(ErrorCode.EXPIRED_REFRESH_TOKEN);
+            throw new BaseException(BaseResponseStatus.EXPIRED_REFRESH_TOKEN);
         }
     }
 
@@ -164,7 +164,7 @@ public class JwtTokenProvider {
             redisTemplate.opsForValue().set(email, refreshToken, refreshTokenValidityInMilliseconds, TimeUnit.MILLISECONDS);
         } catch (Exception e) {
             log.error("Failed to store Refresh Token in Redis", e);
-            throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
+            throw new BaseException(BaseResponseStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -173,7 +173,7 @@ public class JwtTokenProvider {
         return userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .findFirst()  // 첫 번째 권한을 가져옵니다.
-                .orElseThrow(() -> new CustomException(ErrorCode.NO_AUTHORITY_FOUND));  // 권한이 없을 경우 예외를 던집니다.
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.NO_AUTHORITY_FOUND));  // 권한이 없을 경우 예외를 던집니다.
     }
 
     private Claims parseClaims(String token) {

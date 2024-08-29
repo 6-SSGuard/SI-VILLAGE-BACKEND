@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.product.vo.CreateProductRequest;
+import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.example.sivillage.productoption.domain.Size;
 
 @Entity
@@ -38,7 +38,7 @@ public class ProductOption {
     private Integer stock;
 
     @Builder
-    public static ProductOption createProductOption(CreateProductRequest request, Product product) {
+    public static ProductOption createProductOption(CreateProductRequestVo request, Product product) {
         return ProductOption.builder()
                 .color(request.getColor())
                 .size(request.getSize())

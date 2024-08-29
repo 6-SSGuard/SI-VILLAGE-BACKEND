@@ -3,7 +3,7 @@ package org.example.sivillage.product.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.sivillage.brand.domain.Brand;
-import org.example.sivillage.product.vo.CreateProductRequest;
+import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.example.sivillage.global.common.BaseEntity;
 
 @Entity
@@ -19,7 +19,7 @@ public class Product extends BaseEntity {
     private Long productId;
 
     @Column(nullable = false, length = 50, unique = true)
-    private String productCode;
+    private String productUuid;
 
     @Column(nullable = false, length = 100)
     private String productName;
@@ -34,11 +34,12 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
-    public static Product createProduct(CreateProductRequest request, Brand brand, String productCode) {
+    public static Product createProduct(CreateProductRequestVo request, Brand brand, String productUuid) {
         return Product.builder()
                 .productName(request.getProductName())
-                .productCode(productCode)
+                .productUuid(productUuid)
                 .price(request.getPrice())
+                .detailContent(request.getDetailContent())
                 .brand(brand)
                 .build();
     }

@@ -1,4 +1,4 @@
-package org.example.sivillage.product.vo;
+package org.example.sivillage.product.dto.out;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,28 +7,32 @@ import org.example.sivillage.product.domain.ProductOption;
 
 @Getter
 @Builder
-public class GetProductDetailsResponse {
-    private String productCode;
+public class GetProductDetailsResponseDto {
+    private String productUuid;
     private String productName;
     private Integer price;
-    private String brandName;
+    private String brandEngName;
+    private String brandKorName;
     private String color;
     private String size;
     private String capacity;
     private Integer stock;
-    private Long likesCount;
+    private Integer likesCount;
+    private boolean isLiked;
 
-    public static GetProductDetailsResponse toDto(Product product, ProductOption productOption, Long likesCount) {
-        return GetProductDetailsResponse.builder()
-                .productCode(product.getProductCode())
+    public static GetProductDetailsResponseDto toDto(Product product, ProductOption productOption, Integer likesCount, boolean isLiked) {
+        return GetProductDetailsResponseDto.builder()
+                .productUuid(product.getProductUuid())
                 .productName(product.getProductName())
                 .price(product.getPrice())
-                .brandName(product.getBrand().getBrandName())
+                .brandEngName(product.getBrand().getBrandEngName())
+                .brandKorName(product.getBrand().getBrandKorName())
                 .color(productOption.getColor().name())
                 .size(productOption.getSize().name())
                 .capacity(productOption.getCapacity())
                 .stock(productOption.getStock())
                 .likesCount(likesCount)
+                .isLiked(isLiked)
                 .build();
     }
 }

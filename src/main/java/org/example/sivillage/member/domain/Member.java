@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.auth.vo.SignUpRequest;
+import org.example.sivillage.member.domain.memberenum.Role;
 
 @Entity
 @Getter

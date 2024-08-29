@@ -3,8 +3,10 @@ package org.example.sivillage.member.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.sivillage.global.common.BaseEntity;
+import org.example.sivillage.member.domain.memberenum.ScalpTone;
+import org.example.sivillage.member.domain.memberenum.SkinTone;
+import org.example.sivillage.member.domain.memberenum.SkinType;
 import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
-import org.example.sivillage.member.dto.out.BeautyInfoResponseDto;
 
 
 @Entity
@@ -50,7 +52,7 @@ public class BeautyInfo extends BaseEntity {
                 .skinType(dto.getSkinType())
                 .skinTone(dto.getSkinTone())
                 .scalpTone(dto.getScalpTone())
-                .beautyKeyword(dto.convertStringBeautyKeyword(dto.getBeautyKeyword()))
+                .beautyKeyword(dto.getBeautyKeyword())
                 .memberUuid(memberUuid)
                 .build();
     }
@@ -59,10 +61,8 @@ public class BeautyInfo extends BaseEntity {
         this.skinType = dto.getSkinType();
         this.skinTone = dto.getSkinTone();
         this.scalpTone = dto.getScalpTone();
-        this.beautyKeyword = dto.convertStringBeautyKeyword(dto.getBeautyKeyword());
+        this.beautyKeyword = dto.getBeautyKeyword();
     }
-
-
 
 
 }
