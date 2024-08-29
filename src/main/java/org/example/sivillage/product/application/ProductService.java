@@ -9,15 +9,20 @@ import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductOption;
+import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
+import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
+import org.example.sivillage.product.dto.out.GetProductsUuidListResponseDto;
+import org.example.sivillage.product.dto.out.GetProductsUuidResponseDto;
 import org.example.sivillage.product.infrastructure.ProductLikeRepository;
 import org.example.sivillage.product.infrastructure.ProductOptionRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
-import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -57,6 +62,31 @@ public class ProductService {
         boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productUuid, memberUuid)
                 .orElse(false);
         return GetProductDetailsResponseDto.toDto(product, productOption, likesCount, isLiked);
+    }
+
+    @Transactional(readOnly = true)
+    public GetProductsUuidListResponseDto getProductsUuid() {
+        // TODO: 카테고리 id를 추가로 받아서 필터링하여 조회
+        // TODO: 상품 옵션에 따라 필터링하여 조회
+        // 일단 테스트 버전은 findAll로 다 가져오기
+        List<String> productUuids = productRepository.findAllProductUuids();
+
+        List<GetProductsUuidResponseDto> getProductsUuidResponseDtos = productUuids.stream()
+                .map(GetProductsUuidResponseDto::new)
+                .collect(Collectors.toList());
+
+        return new GetProductsUuidListResponseDto(getProductsUuidResponseDtos);
+    }
+
+    public GetProductBriefInfoResponseDto getProductBriefInfo(String productUuid, String memberUuid) {
+        Product product = productRepository.findByProductUuid(productUuid)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
+
+        // TODO: 비회원인 경우 isLiked 무조건 false로 반환하기
+        boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productUuid, memberUuid)
+                .orElse(false);
+
+        return GetProductBriefInfoResponseDto.toDto(product, isLiked);
     }
 
 //    @Transactional(readOnly = true)
