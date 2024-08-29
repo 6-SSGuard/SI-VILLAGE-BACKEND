@@ -6,6 +6,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.CustomUserDetails;
+import org.example.sivillage.brand.application.BrandService;
+import org.example.sivillage.brand.dto.out.GetBrandsListResponseDto;
+import org.example.sivillage.brand.vo.out.GetBrandsResponseVo;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.application.BeautyInfoService;
 import org.example.sivillage.member.application.BrandLikeService;
@@ -28,6 +31,7 @@ public class MemberController {
 
     private final BeautyInfoService beautyInfoService;
     private final BrandLikeService brandLikeService;
+    private final BrandService brandService;
     private final ProductLikeService productLikeService;
     private final ProductService productService;
     private final ModelMapper mapper;
@@ -63,6 +67,17 @@ public class MemberController {
         String memberUuid = customUserDetails.getMemberUuid();
         beautyInfoService.removeBeautyInfo(memberUuid);
         return new BaseResponse<>();
+    }
+
+    @Operation(summary = "브랜드 목록 조회")
+    @GetMapping("/")
+    public BaseResponse<GetBrandsResponseVo> getBrands(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        GetBrandsListResponseDto getBrandsList = brandService.getBrands(customUserDetails.getMemberUuid());
+
+        // Mapper를 사용하여 GetBrandslistResponseDto를 GetBrandsResponseVo로 매핑
+        GetBrandsResponseVo response = mapper.map(getBrandsList, GetBrandsResponseVo.class);
+        return new BaseResponse<>(response);
+        //**
     }
 
     @Operation(summary = "브랜드 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
