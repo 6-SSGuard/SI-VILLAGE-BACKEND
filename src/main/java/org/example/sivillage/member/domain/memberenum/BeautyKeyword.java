@@ -1,20 +1,20 @@
 package org.example.sivillage.member.domain.memberenum;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@JsonFormat(shape = JsonFormat.Shape.STRING)
-@RequiredArgsConstructor
+@Getter
+@AllArgsConstructor
 public enum BeautyKeyword {
 
-    WRINKLES("주름"),
-    LIFTING("리프팅"),
-    TROUBLE("트러블"),
-    MOISTURIZING("보습"),
-    OILY("지성"),
-    WHITENING("미백"),
-    SENSITIVE("민감"),
-    ETC("기타");
+    주름("주름"),
+    리프팅("리프팅"),
+    트러블("트러블"),
+    보습("보습"),
+    지성("지성"),
+    미백("미백"),
+    민감("민감"),
+    기타("기타");
 
     private final String description;
 

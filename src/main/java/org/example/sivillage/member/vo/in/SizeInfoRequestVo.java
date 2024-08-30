@@ -37,8 +37,8 @@ public class SizeInfoRequestVo {
                 .height(vo.getHeight())
                 .weight(vo.getWeight())
                 .topSize(vo.getTopSize().toString())
-                .bottomSize(vo.getBottomSize().toString())
-                .shoeSize(vo.getShoeSize().toString())
+                .bottomSize(vo.getBottomSize().getDescription())
+                .shoeSize(vo.getShoeSize().getDescription())
                 .build();
     }
 

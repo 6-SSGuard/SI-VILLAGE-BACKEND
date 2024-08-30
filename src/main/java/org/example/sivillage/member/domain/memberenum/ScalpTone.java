@@ -1,13 +1,15 @@
 package org.example.sivillage.member.domain.memberenum;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@RequiredArgsConstructor
+@Getter
+@AllArgsConstructor
 public enum ScalpTone {
 
-    DRY("건성"),
-    NEUTRAL("중성"),
-    OILY("지성");
+    건성("건성"),
+    중성("중성"),
+    지성("지성");
 
     private final String description;
 }
