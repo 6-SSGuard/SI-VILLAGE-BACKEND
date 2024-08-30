@@ -10,15 +10,15 @@ import org.example.sivillage.brand.application.BrandService;
 import org.example.sivillage.brand.dto.out.GetBrandsListResponseDto;
 import org.example.sivillage.brand.vo.out.GetBrandsResponseVo;
 import org.example.sivillage.global.common.response.BaseResponse;
-import org.example.sivillage.member.application.BeautyInfoService;
-import org.example.sivillage.member.application.SizeInfoService;
-import org.example.sivillage.member.application.BrandLikeService;
-import org.example.sivillage.member.application.ProductLikeService;
+import org.example.sivillage.member.application.*;
 import org.example.sivillage.member.dto.out.BeautyInfoResponseDto;
+import org.example.sivillage.member.dto.out.ShippingAddressResponseDto;
 import org.example.sivillage.member.dto.out.SizeInfoResponseDto;
 import org.example.sivillage.member.vo.in.BeautyInfoRequestVo;
+import org.example.sivillage.member.vo.in.ShippingAddressRequestVo;
 import org.example.sivillage.member.vo.out.BeautyInfoResponseVo;
 import org.example.sivillage.member.vo.in.SizeInfoRequestVo;
+import org.example.sivillage.member.vo.out.ShippingAddressResponseVo;
 import org.example.sivillage.member.vo.out.SizeInfoResponseVo;
 import org.example.sivillage.member.vo.out.GetProductsUuidResponseVo;
 import org.example.sivillage.product.application.ProductService;
@@ -31,6 +31,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "회원 관리 API", description = "회원 관련 API endpoints")
 @RestController
 @Slf4j
@@ -40,6 +42,7 @@ public class MemberController {
 
     private final BeautyInfoService beautyInfoService;
     private final SizeInfoService sizeInfoService;
+    private final ShippingAddressService shippingAddressService;
     private final BrandLikeService brandLikeService;
     private final BrandService brandService;
     private final ProductLikeService productLikeService;
@@ -49,16 +52,14 @@ public class MemberController {
     @Operation(summary = "뷰티 정보 등록", description = "뷰티정보를 등록합니다.")
     @PostMapping("/beauty-info")
     public BaseResponse<Void> addBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getMemberUuid();
-        beautyInfoService.addBeautyInfo(BeautyInfoRequestVo.toDto(vo),memberUuid); // vo -> dto
+        beautyInfoService.addBeautyInfo(BeautyInfoRequestVo.toDto(vo), customUserDetails.getUsername()); // vo -> dto
         return new BaseResponse<>();
     }
 
     @Operation(summary = "뷰티 정보 조회", description = "뷰티정보를 조회합니다.")
     @GetMapping("/beauty-info")
     public BaseResponse<BeautyInfoResponseVo> getBeautyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getMemberUuid();
-        BeautyInfoResponseDto dto = beautyInfoService.getBeautyInfo(memberUuid);
+        BeautyInfoResponseDto dto = beautyInfoService.getBeautyInfo(customUserDetails.getUsername());
         BeautyInfoResponseVo vo = mapper.map(dto, BeautyInfoResponseVo.class);
         return new BaseResponse<>(vo);
     }
@@ -66,32 +67,28 @@ public class MemberController {
     @Operation(summary = "뷰티 정보 수정", description = "뷰티정보를 수정합니다.")
     @PutMapping("/beauty-info")
     public BaseResponse<Void> changeBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getMemberUuid();
-        beautyInfoService.changeBeautyInfo(BeautyInfoRequestVo.toDto(vo),memberUuid);
+        beautyInfoService.changeBeautyInfo(BeautyInfoRequestVo.toDto(vo), customUserDetails.getUsername());
         return new BaseResponse<>();
     }
 
     @Operation(summary = "뷰티 정보 삭제", description = "뷰티 정보를 삭제합니다.")
     @DeleteMapping("/beauty-info")
     public BaseResponse<Void> deleteBeautyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getMemberUuid();
-        beautyInfoService.removeBeautyInfo(memberUuid);
+        beautyInfoService.removeBeautyInfo(customUserDetails.getUsername());
         return new BaseResponse<>();
     }
 
     @Operation(summary = "사이즈 정보 등록", description = "사이즈 정보를 등록합니다.")
     @PostMapping("/size-info")
     public BaseResponse<Void> addSizeInfo(@Valid @RequestBody SizeInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getMemberUuid();
-        sizeInfoService.addSizeInfo(SizeInfoRequestVo.toDto(vo),memberUuid); // vo -> dto
+        sizeInfoService.addSizeInfo(SizeInfoRequestVo.toDto(vo), customUserDetails.getMemberUuid()); // vo -> dto
         return new BaseResponse<>();
     }
 
     @Operation(summary = "사이즈 정보 조회", description = "사이즈 정보를 조회합니다.")
     @GetMapping("/size-info")
     public BaseResponse<SizeInfoResponseVo> getSizeInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getMemberUuid();
-        SizeInfoResponseDto dto = sizeInfoService.getSizeInfo(memberUuid);
+        SizeInfoResponseDto dto = sizeInfoService.getSizeInfo(customUserDetails.getMemberUuid());
         SizeInfoResponseVo vo = mapper.map(dto,SizeInfoResponseVo.class);
         return new BaseResponse<>(vo);
     }
@@ -99,8 +96,7 @@ public class MemberController {
     @Operation(summary = "사이즈 정보 수정", description = "사이즈 정보를 수정합니다.")
     @PutMapping("/size-info")
     public BaseResponse<Void> changeSizeInfo(@Valid @RequestBody SizeInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getMemberUuid();
-        sizeInfoService.changeSizeInfo(SizeInfoRequestVo.toDto(vo),memberUuid);
+        sizeInfoService.changeSizeInfo(SizeInfoRequestVo.toDto(vo),customUserDetails.getMemberUuid());
         return new BaseResponse<>();
 
     }
@@ -108,10 +104,40 @@ public class MemberController {
     @Operation(summary = "사이즈 정보 삭제", description = "사이즈 정보를 삭제합니다.")
     @DeleteMapping("/size-info")
     public BaseResponse<Void> deleteSizeInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getMemberUuid();
-        sizeInfoService.removeSizeInfo(memberUuid);
+        sizeInfoService.removeSizeInfo(customUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
+
+    @Operation(summary ="배송지 등록", description = "배송지를 등록합니다.")
+    @PostMapping("/shipping-addresses")
+    public BaseResponse<Void> addShippingAddress (@Valid @RequestBody ShippingAddressRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        shippingAddressService.addShippingAddress(ShippingAddressRequestVo.toDto(vo),customUserDetails.getMemberUuid()); // vo -> dto
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary ="배송지 목록 조회", description = "배송지 목록을 조회합니다.")
+    @GetMapping("/shipping-addresses")
+    public BaseResponse<List<ShippingAddressResponseVo>> getShippingAddresses(@AuthenticationPrincipal CustomUserDetails customUserDetails){
+       List<ShippingAddressResponseVo> vo = shippingAddressService.getShippingAddress(customUserDetails.getMemberUuid())
+               .stream()
+               .map(ShippingAddressResponseVo::toVo).toList();
+       return new BaseResponse<>(vo);
+    }
+
+    @Operation(summary ="배송지 수정", description ="배송지 정보를 수정합니다.")
+    @PutMapping("/shipping-addresses/{shippingAddressId}")
+    public BaseResponse<Void> changeShippingAddress(@PathVariable("shippingAddressId") Long shippingAddressId, @Valid @RequestBody ShippingAddressRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails){
+        shippingAddressService.changeShippingAddress(ShippingAddressRequestVo.toDto(vo), customUserDetails.getMemberUuid(), shippingAddressId);
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "배송지 삭제", description = "배송지 정보를 삭제합니다.")
+    @DeleteMapping("/shipping-addresses/{shippingAddressId}")
+    public BaseResponse<Void> removeShippingAddress(@PathVariable("shippingAddressId") Long shippingAddressId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        shippingAddressService.removeShippingAddress(customUserDetails.getMemberUuid(),shippingAddressId);
+        return new BaseResponse<>();
+    }
+
 
     @Operation(summary = "브랜드 목록 조회")
     @GetMapping("/")

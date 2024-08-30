@@ -5,14 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
-import org.example.sivillage.member.domain.BeautyInfo;
 import org.example.sivillage.member.domain.SizeInfo;
-import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
 import org.example.sivillage.member.dto.in.SizeInfoRequestDto;
 import org.example.sivillage.member.dto.out.SizeInfoResponseDto;
 import org.example.sivillage.member.infrastructure.SizeInfoRepository;
-import org.example.sivillage.productoption.domain.Size;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 

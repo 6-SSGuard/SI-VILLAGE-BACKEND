@@ -58,7 +58,6 @@ public class SizeInfo extends BaseEntity {
                 .bottomSize(dto.getBottomSize())
                 .shoeSize(dto.getShoeSize())
                 .memberUuid(memberUuid).build();
-
     }
 
     public void change(SizeInfoRequestDto dto) {

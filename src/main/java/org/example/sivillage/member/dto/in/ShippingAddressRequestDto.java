@@ -19,7 +19,10 @@ public class ShippingAddressRequestDto {
 
     private String address;
 
-    private String addressDetail;
+    private String detailedAddress;
+
+    private String postalCode;
 
     private boolean defaultAddress;
+
 }
