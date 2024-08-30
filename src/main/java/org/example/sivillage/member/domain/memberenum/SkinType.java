@@ -2,6 +2,7 @@ package org.example.sivillage.member.domain.memberenum;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
 @Getter
 @AllArgsConstructor
 public enum SkinType {

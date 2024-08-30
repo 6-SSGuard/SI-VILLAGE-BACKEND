@@ -1,5 +1,4 @@
 package org.example.sivillage.member.domain.memberenum;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

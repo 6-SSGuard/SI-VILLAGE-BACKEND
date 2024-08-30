@@ -1,10 +1,10 @@
 package org.example.sivillage.member.domain.memberenum;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
+
 public enum BeautyKeyword {
 
     주름("주름"),
@@ -17,5 +17,6 @@ public enum BeautyKeyword {
     기타("기타");
 
     private final String description;
+
 
 }
