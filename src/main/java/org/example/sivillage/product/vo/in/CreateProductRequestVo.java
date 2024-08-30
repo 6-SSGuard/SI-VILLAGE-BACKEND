@@ -7,6 +7,8 @@ import lombok.Getter;
 import org.example.sivillage.product.domain.Color;
 import org.example.sivillage.productoption.domain.Size;
 
+import java.util.List;
+
 @Getter
 public class CreateProductRequestVo {
     @Schema(description = "물품 이름", example = "샘플 물품")
@@ -40,4 +42,8 @@ public class CreateProductRequestVo {
     @Schema(description = "물품 상세 설명 html", example = "html 형태의 string")
     @NotBlank(message = "상세 설명은 필수 값입니다.")
     private String detailContent;
+
+    @Schema(description = "물품 이미지 URL 목록", example = "[\"url1\", \"url2\"]")
+    @NotNull(message = "물품 이미지 URL은 필수 값입니다.")
+    private List<String> productImageUrls;
 }

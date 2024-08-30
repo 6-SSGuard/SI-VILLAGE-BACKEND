@@ -14,14 +14,16 @@ public class GetProductBriefInfoResponseDto {
     private String productName;
     private Integer price;
     private boolean isLiked;
+    private String productThumbnailUrl;
 
-    public static GetProductBriefInfoResponseDto toDto(Product product, boolean isLiked) {
+    public static GetProductBriefInfoResponseDto toDto(Product product, boolean isLiked, String productThumbnailUrl) {
         return GetProductBriefInfoResponseDto.builder()
                 .productUuid(product.getProductUuid())
                 .brandEngName(product.getBrand().getBrandEngName())
                 .productName(product.getProductName())
                 .price(product.getPrice())
                 .isLiked(isLiked)
+                .productThumbnailUrl(productThumbnailUrl)
                 .build();
     }
 }
