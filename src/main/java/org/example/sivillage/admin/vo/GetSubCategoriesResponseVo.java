@@ -1,6 +1,7 @@
-package org.example.sivillage.admin.dto.out;
+package org.example.sivillage.admin.vo;
 
 import lombok.*;
+import org.example.sivillage.admin.dto.out.CategoryDto;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GetSubCategoriesResponseDto {
+public class GetSubCategoriesResponseVo {
     private List<CategoryDto> categories;
 }
+
