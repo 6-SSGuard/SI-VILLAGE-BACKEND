@@ -49,7 +49,6 @@ public class SizeInfo extends BaseEntity {
     }
 
 
-    @Builder
     public static SizeInfo toEntity (SizeInfoRequestDto dto, String memberUuid) {
         return SizeInfo.builder()
                 .height(dto.getHeight())

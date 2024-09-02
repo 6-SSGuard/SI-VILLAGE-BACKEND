@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.member.domain.memberenum.*;
-import org.example.sivillage.member.dto.in.BeautyInfoRequestDto;
 import org.example.sivillage.member.dto.in.SizeInfoRequestDto;
 
 @Getter

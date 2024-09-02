@@ -46,7 +46,6 @@ public class BeautyInfo extends BaseEntity {
         this.memberUuid = memberUuid;
     }
 
-    @Builder
     public static BeautyInfo toEntity (BeautyInfoRequestDto dto, String memberUuid) {
         return BeautyInfo.builder()
                 .skinType(dto.getSkinType())

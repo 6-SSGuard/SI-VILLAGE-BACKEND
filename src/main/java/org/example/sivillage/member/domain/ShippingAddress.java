@@ -63,7 +63,7 @@ public class ShippingAddress {
     public void deactivateAsDefault() {
         this.defaultAddress = false;
     }
-    @Builder
+
     public static ShippingAddress toEntity(ShippingAddressRequestDto dto, String memberUuid) {
         return ShippingAddress.builder()
                 .addressName(dto.getAddressName())

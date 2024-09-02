@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.member.domain.BeautyInfo;
 import org.example.sivillage.member.domain.ShippingAddress;
 
 @Getter
