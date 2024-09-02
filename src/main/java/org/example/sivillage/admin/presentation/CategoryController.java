@@ -22,7 +22,7 @@ public class CategoryController {
     private final ModelMapper mapper;
 
     @Operation(summary = "대 카테고리 생성")
-    @PostMapping("/top-category")
+    @PostMapping("/top-categories")
     public BaseResponse<Void> addTopCategory(
             @RequestBody TopCategoryRequestVo topCategoryRequestVo) {
 
@@ -47,7 +47,7 @@ public class CategoryController {
     }
 
     @Operation(summary = "중 카테고리 생성")
-    @PostMapping("/middle-category")
+    @PostMapping("/middle-categories")
     public BaseResponse<Void> addMiddleCategory(
             @RequestBody AddMiddleCategoryRequestVo addMiddleCategoryRequestVo) {
         AddMiddleCategoryRequestDto request = mapper.map(addMiddleCategoryRequestVo, AddMiddleCategoryRequestDto.class);
@@ -67,7 +67,7 @@ public class CategoryController {
         return new BaseResponse<>(response);
     }
 
-    @Operation(summary = "소 카테고리 생성")
+    @Operation(summary = "소 카테고리 리스트 생성")
     @PostMapping("/bottom-category")
     public BaseResponse<Void> addBottomCategory(
             @RequestBody AddBottomCategoryRequestVo addBottomCategoryRequestVo) {
@@ -78,12 +78,12 @@ public class CategoryController {
     }
 
     @Operation(summary = "소 카테고리 조회")
-    @GetMapping("/bottom-category/{bottomCategoryCode}")
-    public BaseResponse<BottomCategoryResponseVo> getBottomCategory(
-            @PathVariable String bottomCategoryCode) {
+    @GetMapping("/bottom-categories/{middleCategoryCode}")
+    public BaseResponse<GetBottomCategoriesResponseVo> getBottomCategories(
+            @PathVariable String middleCategoryCode) {
 
-        BottomCategoryResponseDto responseDto = categoryService.getBottomCategory(bottomCategoryCode);
-        BottomCategoryResponseVo response = mapper.map(responseDto, BottomCategoryResponseVo.class);
+        GetBottomCategoriesResponseDto responseDto = categoryService.getBottomCategory(middleCategoryCode);
+        GetBottomCategoriesResponseVo response = mapper.map(responseDto, GetBottomCategoriesResponseVo.class);
 
         return new BaseResponse<>(response);
     }

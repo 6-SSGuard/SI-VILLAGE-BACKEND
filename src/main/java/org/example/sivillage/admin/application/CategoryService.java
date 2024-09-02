@@ -70,11 +70,16 @@ public class CategoryService {
         bottomCategoryRepository.save(request.toEntity(middleCategory));
     }
 
-    public BottomCategoryResponseDto getBottomCategory(String bottomCategoryCode) {
-        BottomCategory bottomCategory = bottomCategoryRepository.findByCategoryCode(bottomCategoryCode)
+    public GetBottomCategoriesResponseDto getBottomCategory(String middleCategoryCode) {
+        MiddleCategory middleCategory = middleCategoryRepository.findByCategoryCode(middleCategoryCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
 
-        return BottomCategoryResponseDto.toDto(bottomCategory);
+        List<BottomCategoryDto> bottomCategories = bottomCategoryRepository.findByMiddleCategory(middleCategory)
+                .stream()
+                .map(BottomCategoryDto::toDto)
+                .collect(Collectors.toList());
+
+        return new GetBottomCategoriesResponseDto(bottomCategories);
     }
 
     public void addSubCategory(AddSubCategoryRequestDto request) {
