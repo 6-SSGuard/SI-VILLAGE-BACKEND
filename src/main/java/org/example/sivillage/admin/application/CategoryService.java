@@ -3,7 +3,6 @@ package org.example.sivillage.admin.application;
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.admin.domain.BottomCategory;
 import org.example.sivillage.admin.domain.MiddleCategory;
-import org.example.sivillage.admin.domain.SubCategory;
 import org.example.sivillage.admin.domain.TopCategory;
 import org.example.sivillage.admin.dto.in.AddBottomCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.AddMiddleCategoryRequestDto;
@@ -89,10 +88,16 @@ public class CategoryService {
         subCategoryRepository.save(request.toEntity(bottomCategory));
     }
 
-    public SubCategoryResponseDto getSubCategory(String subCategoryCode) {
-        SubCategory subCategory = subCategoryRepository.findByCategoryCode(subCategoryCode)
+    public GetSubCategoriesResponseDto getSubCategories(String bottomCategoryCode) {
+        BottomCategory bottomCategory = bottomCategoryRepository.findByCategoryCode(bottomCategoryCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
 
-        return SubCategoryResponseDto.toDto(subCategory);
+
+        List<SubCategoryDto> subCategories = subCategoryRepository.findByBottomCategory(bottomCategory)
+                .stream()
+                .map(SubCategoryDto::toDto)
+                .collect(Collectors.toList());
+
+        return new GetSubCategoriesResponseDto(subCategories);
     }
 }

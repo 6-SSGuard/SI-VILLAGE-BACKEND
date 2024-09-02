@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.sivillage.admin.dto.out.SubCategoryDto;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class SubCategoryResponseVo {
-    private String bottomCategoryCode;
-    private String subCategoryCode;
-    private String subCategoryName;
-    private String subCategoryDescription;
+    private List<SubCategoryDto> subCategories;
 }

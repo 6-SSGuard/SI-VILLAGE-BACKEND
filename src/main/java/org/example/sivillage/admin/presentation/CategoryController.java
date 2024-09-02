@@ -77,7 +77,7 @@ public class CategoryController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "소 카테고리 조회")
+    @Operation(summary = "소 카테고리 리스트 조회")
     @GetMapping("/bottom-categories/{middleCategoryCode}")
     public BaseResponse<GetBottomCategoriesResponseVo> getBottomCategories(
             @PathVariable String middleCategoryCode) {
@@ -98,12 +98,12 @@ public class CategoryController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "서브 카테고리 조회")
-    @GetMapping("/sub-category/{subCategoryCode}")
+    @Operation(summary = "서브 카테고리 리스트 조회")
+    @GetMapping("/sub-category/{bottomCategoryCode}")
     public BaseResponse<SubCategoryResponseVo> getSubCategory(
-            @PathVariable String subCategoryCode) {
+            @PathVariable String bottomCategoryCode) {
 
-        SubCategoryResponseDto responseDto = categoryService.getSubCategory(subCategoryCode);
+        GetSubCategoriesResponseDto responseDto = categoryService.getSubCategories(bottomCategoryCode);
         SubCategoryResponseVo response = mapper.map(responseDto, SubCategoryResponseVo.class);
 
         return new BaseResponse<>(response);
