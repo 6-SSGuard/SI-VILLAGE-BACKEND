@@ -12,7 +12,6 @@ import org.example.sivillage.brand.vo.out.GetBrandsResponseVo;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.application.*;
 import org.example.sivillage.member.dto.out.BeautyInfoResponseDto;
-import org.example.sivillage.member.dto.out.ShippingAddressResponseDto;
 import org.example.sivillage.member.dto.out.SizeInfoResponseDto;
 import org.example.sivillage.member.vo.in.BeautyInfoRequestVo;
 import org.example.sivillage.member.vo.in.ShippingAddressRequestVo;
@@ -108,12 +107,20 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary ="배송지 등록", description = "배송지를 등록합니다.")
+    @Operation(summary ="기본 배송지 등록", description = "기본 배송지를 등록합니다.")
+    @PostMapping("/default-shipping-addresses")
+    public BaseResponse<Void> addDefaultShippingAddress (@Valid @RequestBody ShippingAddressRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        shippingAddressService.addDefaultShippingAddress(ShippingAddressRequestVo.toDto(vo),customUserDetails.getMemberUuid()); // vo -> dto
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary ="추가 배송지 등록", description = "배송지를 등록합니다.")
     @PostMapping("/shipping-addresses")
     public BaseResponse<Void> addShippingAddress (@Valid @RequestBody ShippingAddressRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         shippingAddressService.addShippingAddress(ShippingAddressRequestVo.toDto(vo),customUserDetails.getMemberUuid()); // vo -> dto
         return new BaseResponse<>();
     }
+
 
     @Operation(summary ="배송지 목록 조회", description = "배송지 목록을 조회합니다.")
     @GetMapping("/shipping-addresses")
