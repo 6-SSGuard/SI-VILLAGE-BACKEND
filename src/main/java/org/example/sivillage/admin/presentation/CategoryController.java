@@ -5,10 +5,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.sivillage.admin.application.CategoryService;
 import org.example.sivillage.admin.dto.in.AddBottomCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.AddMiddleCategoryRequestDto;
+import org.example.sivillage.admin.dto.in.AddSubCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.TopCategoryRequestDto;
-import org.example.sivillage.admin.dto.out.BottomCategoryResponseDto;
-import org.example.sivillage.admin.dto.out.MiddleCategoryResponseDto;
-import org.example.sivillage.admin.dto.out.TopCategoryResponseDto;
+import org.example.sivillage.admin.dto.out.*;
 import org.example.sivillage.admin.vo.*;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.modelmapper.ModelMapper;
@@ -23,7 +22,7 @@ public class CategoryController {
     private final ModelMapper mapper;
 
     @Operation(summary = "대 카테고리 생성")
-    @PostMapping("/top-category")
+    @PostMapping("/top-categories")
     public BaseResponse<Void> addTopCategory(
             @RequestBody TopCategoryRequestVo topCategoryRequestVo) {
 
@@ -37,19 +36,18 @@ public class CategoryController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "대 카테고리 열람")
-    @GetMapping("/top-category/{topCategoryCode}")
-    public BaseResponse<TopCategoryResponseVo> getTopCategory(
-            @PathVariable String topCategoryCode) {
+    @Operation(summary = "대 카테고리 리스트 조회")
+    @GetMapping("/top-category")
+    public BaseResponse<GetTopCategoriesResponseVo> getTopCategory() {
 
-        TopCategoryResponseDto responseDto = categoryService.getTopCategory(topCategoryCode);
-        TopCategoryResponseVo response = mapper.map(responseDto, TopCategoryResponseVo.class);
+        GetTopCategoriesResponseDto responseDto = categoryService.getTopCategories();
+        GetTopCategoriesResponseVo response = mapper.map(responseDto, GetTopCategoriesResponseVo.class);
 
         return new BaseResponse<>(response);
     }
 
     @Operation(summary = "중 카테고리 생성")
-    @PostMapping("/middle-category")
+    @PostMapping("/middle-categories")
     public BaseResponse<Void> addMiddleCategory(
             @RequestBody AddMiddleCategoryRequestVo addMiddleCategoryRequestVo) {
         AddMiddleCategoryRequestDto request = mapper.map(addMiddleCategoryRequestVo, AddMiddleCategoryRequestDto.class);
@@ -58,18 +56,18 @@ public class CategoryController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "중 카테고리 조회")
-    @GetMapping("/middle-category/{middleCategoryCode}")
-    public BaseResponse<MiddleCategoryResponseVo> getMiddleCategory(
-            @PathVariable String middleCategoryCode) {
+    @Operation(summary = "중 카테고리 리스트 조회")
+    @GetMapping("/middle-category/{topCategoryCode}")
+    public BaseResponse<GetMiddleCategoriesResponseVo> getMiddleCategories(
+            @PathVariable String topCategoryCode) {
 
-        MiddleCategoryResponseDto responseDto = categoryService.getMiddleCategory(middleCategoryCode);
-        MiddleCategoryResponseVo response = mapper.map(responseDto, MiddleCategoryResponseVo.class);
+        GetMiddleCategoriesResponseDto responseDto = categoryService.getMiddleCategories(topCategoryCode);
+        GetMiddleCategoriesResponseVo response = mapper.map(responseDto, GetMiddleCategoriesResponseVo.class);
 
         return new BaseResponse<>(response);
     }
 
-    @Operation(summary = "소 카테고리 생성")
+    @Operation(summary = "소 카테고리 리스트 생성")
     @PostMapping("/bottom-category")
     public BaseResponse<Void> addBottomCategory(
             @RequestBody AddBottomCategoryRequestVo addBottomCategoryRequestVo) {
@@ -79,14 +77,36 @@ public class CategoryController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "소 카테고리 조회")
-    @GetMapping("/bottom-category/{bottomCategoryCode}")
-    public BaseResponse<BottomCategoryResponseVo> getBottomCategory(
-            @PathVariable String bottomCategoryCode) {
+    @Operation(summary = "소 카테고리 리스트 조회")
+    @GetMapping("/bottom-categories/{middleCategoryCode}")
+    public BaseResponse<GetBottomCategoriesResponseVo> getBottomCategories(
+            @PathVariable String middleCategoryCode) {
 
-        BottomCategoryResponseDto responseDto = categoryService.getBottomCategory(bottomCategoryCode);
-        BottomCategoryResponseVo response = mapper.map(responseDto, BottomCategoryResponseVo.class);
+        GetBottomCategoriesResponseDto responseDto = categoryService.getBottomCategory(middleCategoryCode);
+        GetBottomCategoriesResponseVo response = mapper.map(responseDto, GetBottomCategoriesResponseVo.class);
 
         return new BaseResponse<>(response);
     }
+
+    @Operation(summary = "서브 카테고리 생성")
+    @PostMapping("/sub-category")
+    public BaseResponse<Void> addSubCategory(
+            @RequestBody AddSubCategoryRequestVo addSubCategoryRequestVo) {
+        AddSubCategoryRequestDto request = mapper.map(addSubCategoryRequestVo, AddSubCategoryRequestDto.class);
+        categoryService.addSubCategory(request);
+
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "서브 카테고리 리스트 조회")
+    @GetMapping("/sub-category/{bottomCategoryCode}")
+    public BaseResponse<SubCategoryResponseVo> getSubCategory(
+            @PathVariable String bottomCategoryCode) {
+
+        GetSubCategoriesResponseDto responseDto = categoryService.getSubCategories(bottomCategoryCode);
+        SubCategoryResponseVo response = mapper.map(responseDto, SubCategoryResponseVo.class);
+
+        return new BaseResponse<>(response);
+    }
+
 }

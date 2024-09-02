@@ -6,17 +6,20 @@ import org.example.sivillage.admin.domain.MiddleCategory;
 import org.example.sivillage.admin.domain.TopCategory;
 import org.example.sivillage.admin.dto.in.AddBottomCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.AddMiddleCategoryRequestDto;
+import org.example.sivillage.admin.dto.in.AddSubCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.TopCategoryRequestDto;
-import org.example.sivillage.admin.dto.out.BottomCategoryResponseDto;
-import org.example.sivillage.admin.dto.out.MiddleCategoryResponseDto;
-import org.example.sivillage.admin.dto.out.TopCategoryResponseDto;
+import org.example.sivillage.admin.dto.out.*;
 import org.example.sivillage.admin.infrastructure.BottomCategoryRepository;
 import org.example.sivillage.admin.infrastructure.MiddleCategoryRepository;
+import org.example.sivillage.admin.infrastructure.SubCategoryRepository;
 import org.example.sivillage.admin.infrastructure.TopCategoryRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -24,17 +27,20 @@ public class CategoryService {
     private final TopCategoryRepository topCategoryRepository;
     private final MiddleCategoryRepository middleCategoryRepository;
     private final BottomCategoryRepository bottomCategoryRepository;
+    private final SubCategoryRepository subCategoryRepository;
     private final ModelMapper mapper;
 
     public void addTopCategory(TopCategoryRequestDto topCategoryRequestDto) {
         topCategoryRepository.save(topCategoryRequestDto.toEntity());
     }
 
-    public TopCategoryResponseDto getTopCategory(String topCategoryCode) {
-        TopCategory topCategory = topCategoryRepository.findByCategoryCode(topCategoryCode)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+    public GetTopCategoriesResponseDto getTopCategories() {
+        List<TopCategoryDto> topCategories = topCategoryRepository.findAll()
+                .stream()
+                .map(TopCategoryDto::toDto)
+                .collect(Collectors.toList());
 
-        return TopCategoryResponseDto.toDto(topCategory);
+        return new GetTopCategoriesResponseDto(topCategories);
     }
 
     public void addMiddleCategory(AddMiddleCategoryRequestDto request) {
@@ -44,11 +50,16 @@ public class CategoryService {
         middleCategoryRepository.save(request.toEntity(topCategory));
     }
 
-    public MiddleCategoryResponseDto getMiddleCategory(String middleCategoryCode) {
-        MiddleCategory middleCategory = middleCategoryRepository.findByCategoryCode(middleCategoryCode)
-               .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+    public GetMiddleCategoriesResponseDto getMiddleCategories(String topCategoryCode) {
+        TopCategory topCategory = topCategoryRepository.findByCategoryCode(topCategoryCode)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
 
-        return MiddleCategoryResponseDto.toDto(middleCategory);
+        List<MiddleCategoryDto> middleCategories = middleCategoryRepository.findByTopCategory(topCategory)
+                .stream()
+                .map(MiddleCategoryDto::toDto)
+                .collect(Collectors.toList());
+
+        return new GetMiddleCategoriesResponseDto(middleCategories);
     }
 
     public void addBottomCategory(AddBottomCategoryRequestDto request) {
@@ -58,10 +69,35 @@ public class CategoryService {
         bottomCategoryRepository.save(request.toEntity(middleCategory));
     }
 
-    public BottomCategoryResponseDto getBottomCategory(String bottomCategoryCode) {
+    public GetBottomCategoriesResponseDto getBottomCategory(String middleCategoryCode) {
+        MiddleCategory middleCategory = middleCategoryRepository.findByCategoryCode(middleCategoryCode)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+
+        List<BottomCategoryDto> bottomCategories = bottomCategoryRepository.findByMiddleCategory(middleCategory)
+                .stream()
+                .map(BottomCategoryDto::toDto)
+                .collect(Collectors.toList());
+
+        return new GetBottomCategoriesResponseDto(bottomCategories);
+    }
+
+    public void addSubCategory(AddSubCategoryRequestDto request) {
+        BottomCategory bottomCategory = bottomCategoryRepository.findByCategoryCode(request.getBottomCategoryCode())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+
+        subCategoryRepository.save(request.toEntity(bottomCategory));
+    }
+
+    public GetSubCategoriesResponseDto getSubCategories(String bottomCategoryCode) {
         BottomCategory bottomCategory = bottomCategoryRepository.findByCategoryCode(bottomCategoryCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
 
-        return BottomCategoryResponseDto.toDto(bottomCategory);
+
+        List<SubCategoryDto> subCategories = subCategoryRepository.findByBottomCategory(bottomCategory)
+                .stream()
+                .map(SubCategoryDto::toDto)
+                .collect(Collectors.toList());
+
+        return new GetSubCategoriesResponseDto(subCategories);
     }
 }
