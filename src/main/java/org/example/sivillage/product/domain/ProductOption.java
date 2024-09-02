@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
-import org.example.sivillage.productoption.domain.Size;
+import org.example.sivillage.productoption.Size;
 
 @Entity
 @Getter
