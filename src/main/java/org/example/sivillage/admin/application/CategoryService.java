@@ -3,15 +3,19 @@ package org.example.sivillage.admin.application;
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.admin.domain.BottomCategory;
 import org.example.sivillage.admin.domain.MiddleCategory;
+import org.example.sivillage.admin.domain.SubCategory;
 import org.example.sivillage.admin.domain.TopCategory;
 import org.example.sivillage.admin.dto.in.AddBottomCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.AddMiddleCategoryRequestDto;
+import org.example.sivillage.admin.dto.in.AddSubCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.TopCategoryRequestDto;
 import org.example.sivillage.admin.dto.out.BottomCategoryResponseDto;
 import org.example.sivillage.admin.dto.out.MiddleCategoryResponseDto;
+import org.example.sivillage.admin.dto.out.SubCategoryResponseDto;
 import org.example.sivillage.admin.dto.out.TopCategoryResponseDto;
 import org.example.sivillage.admin.infrastructure.BottomCategoryRepository;
 import org.example.sivillage.admin.infrastructure.MiddleCategoryRepository;
+import org.example.sivillage.admin.infrastructure.SubCategoryRepository;
 import org.example.sivillage.admin.infrastructure.TopCategoryRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
@@ -24,6 +28,7 @@ public class CategoryService {
     private final TopCategoryRepository topCategoryRepository;
     private final MiddleCategoryRepository middleCategoryRepository;
     private final BottomCategoryRepository bottomCategoryRepository;
+    private final SubCategoryRepository subCategoryRepository;
     private final ModelMapper mapper;
 
     public void addTopCategory(TopCategoryRequestDto topCategoryRequestDto) {
@@ -63,5 +68,19 @@ public class CategoryService {
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
 
         return BottomCategoryResponseDto.toDto(bottomCategory);
+    }
+
+    public void addSubCategory(AddSubCategoryRequestDto request) {
+        BottomCategory bottomCategory = bottomCategoryRepository.findByCategoryCode(request.getBottomCategoryCode())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+
+        subCategoryRepository.save(request.toEntity(bottomCategory));
+    }
+
+    public SubCategoryResponseDto getSubCategory(String subCategoryCode) {
+        SubCategory subCategory = subCategoryRepository.findByCategoryCode(subCategoryCode)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+
+        return SubCategoryResponseDto.toDto(subCategory);
     }
 }

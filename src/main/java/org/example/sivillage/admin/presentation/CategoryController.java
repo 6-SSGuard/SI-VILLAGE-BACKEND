@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.example.sivillage.admin.application.CategoryService;
 import org.example.sivillage.admin.dto.in.AddBottomCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.AddMiddleCategoryRequestDto;
+import org.example.sivillage.admin.dto.in.AddSubCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.TopCategoryRequestDto;
 import org.example.sivillage.admin.dto.out.BottomCategoryResponseDto;
 import org.example.sivillage.admin.dto.out.MiddleCategoryResponseDto;
+import org.example.sivillage.admin.dto.out.SubCategoryResponseDto;
 import org.example.sivillage.admin.dto.out.TopCategoryResponseDto;
 import org.example.sivillage.admin.vo.*;
 import org.example.sivillage.global.common.response.BaseResponse;
@@ -89,4 +91,26 @@ public class CategoryController {
 
         return new BaseResponse<>(response);
     }
+
+    @Operation(summary = "서브 카테고리 생성")
+    @PostMapping("/sub-category")
+    public BaseResponse<Void> addSubCategory(
+            @RequestBody AddSubCategoryRequestVo addSubCategoryRequestVo) {
+        AddSubCategoryRequestDto request = mapper.map(addSubCategoryRequestVo, AddSubCategoryRequestDto.class);
+        categoryService.addSubCategory(request);
+
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "서브 카테고리 조회")
+    @GetMapping("/sub-category/{subCategoryCode}")
+    public BaseResponse<SubCategoryResponseVo> getSubCategory(
+            @PathVariable String subCategoryCode) {
+
+        SubCategoryResponseDto responseDto = categoryService.getSubCategory(subCategoryCode);
+        SubCategoryResponseVo response = mapper.map(responseDto, SubCategoryResponseVo.class);
+
+        return new BaseResponse<>(response);
+    }
+
 }
