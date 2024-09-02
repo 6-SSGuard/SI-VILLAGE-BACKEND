@@ -23,9 +23,6 @@ public class Category {
     @Column(nullable = false, length = 100)
     private String categoryName;
 
-    @Column(nullable = false, length = 100)
-    private String categoryDescription;
-
     @Column(nullable = false, length = 100, unique = true)
     private String categoryCode;
 
@@ -43,7 +40,6 @@ public class Category {
     public static Category createRootCategory(AddCategoryRequestDto request) {
         return Category.builder()
                 .categoryName(request.getCategoryName())
-                .categoryDescription(request.getCategoryDescription())
                 .categoryCode(generateCategoryCode())
                 .depth(0)
                 .parent(null)
@@ -53,7 +49,6 @@ public class Category {
     public static Category createChildCategory(AddCategoryRequestDto request, Category parentCategory) {
         return Category.builder()
                 .categoryName(request.getCategoryName())
-                .categoryDescription(request.getCategoryDescription())
                 .categoryCode(generateCategoryCode())
                 .parent(parentCategory)
                 .depth(parentCategory.getDepth() + 1)
