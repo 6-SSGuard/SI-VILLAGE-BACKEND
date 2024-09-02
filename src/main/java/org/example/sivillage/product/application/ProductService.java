@@ -2,6 +2,8 @@ package org.example.sivillage.product.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.sivillage.admin.domain.Category;
+import org.example.sivillage.admin.infrastructure.CategoryRepository;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -37,12 +40,16 @@ public class ProductService {
     private final BrandRepository brandRepository;
     private final ProductLikeRepository productLikeRepository;
     private final ProductImageRepository productImageRepository;
+    private final CategoryRepository categoryRepository;
 
     public void addProduct(CreateProductRequestVo request) {
         Brand brand = brandRepository.findByBrandEngName(request.getBrandEngName())
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
 
-        Product product = createAndSaveProduct(request, brand);
+        Category category = categoryRepository.findByCategoryCode(request.getCategoryCode())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+
+        Product product = createAndSaveProduct(request, brand, category);
         saveProductImages(request.getProductImageUrls(), product);
         createAndSaveProductOption(request, product);
 
@@ -60,10 +67,10 @@ public class ProductService {
         productImageRepository.saveAll(productImageUrl);
     }
 
-    private Product createAndSaveProduct(CreateProductRequestVo request, Brand brand) {
+    private Product createAndSaveProduct(CreateProductRequestVo request, Brand brand, Category category) {
         String productUuid = UUID.randomUUID().toString();
 
-        Product product = Product.createProduct(request, brand, productUuid);
+        Product product = Product.createProduct(request, brand, productUuid, category);
         productRepository.save(product);
         return product;
     }
@@ -118,21 +125,31 @@ public class ProductService {
     }
 
     private String getProductThumbnailUrl(Product product) {
-        String productThumbnailUrl = productImageRepository.findByProduct(product)
+        return productImageRepository.findByProduct(product)
                 .stream()
                 .map(ProductImage::getProductImageUrl)
                 .findFirst()
                 .orElse(null);
-        return productThumbnailUrl;
     }
 
-//    @Transactional(readOnly = true)
-//    public GetProductSizeListResponse getProductSizeList(String productName) {
-//        Product product = productRepository.findByName(productName)
-//               .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
-//
-//
-//
-////        return GetProductSizeListResponse.toDto(product.getProductOptions());
-////    }
+    public String getSecondLevelCategoryName(String productUuid) {
+        Product product = productRepository.findByProductUuid(productUuid)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
+
+        // 해당 물품의 카테고리를 가져옴
+        Category category = product.getCategory();
+
+        // depth가 1인 카테고리 탐색
+        return findSecondLevelCategory(category)
+                .map(Category::getCategoryName)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+    }
+
+    private Optional<Category> findSecondLevelCategory(Category category) {
+        // 최상위 카테고리를 찾을 때까지 부모를 탐색
+        while (category != null && category.getDepth() != 1) {
+            category = category.getParent();
+        }
+        return Optional.ofNullable(category);
+    }
 }

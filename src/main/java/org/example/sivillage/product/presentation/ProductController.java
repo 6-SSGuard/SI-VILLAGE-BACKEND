@@ -10,10 +10,7 @@ import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.product.application.ProductService;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "물품 관리 API", description = "물품 관련 API endpoints")
 @RestController
@@ -34,20 +31,11 @@ public class ProductController {
         return new BaseResponse<>();
     }
 
-//    @Operation(summary = "좋아요 추가", description = "특정 상품에 대해 좋아요를 추가합니다.")
-//    @PostMapping("/like")
-//    public BaseResponse<Void> likeProduct(@RequestBody LikeProductRequestVo likeProductRequestVo) {
-//        LikeProductRequestDto request = mapper.map(likeProductRequestVo, LikeProductRequestDto.class);
-//        productLikeService.likeProduct(request);
-//        return new BaseResponse<>();
-//    }
-//
-//    @Operation(summary = "좋아요 취소", description = "특정 상품에 대해 좋아요를 취소합니다.")
-//    @DeleteMapping("/like")
-//    public BaseResponse<Void> unlikeProduct(@RequestBody UnLikeProductRequestVo unLikeProductRequestVo) {
-//        UnlikeProductRequestDto request = mapper.map(unLikeProductRequestVo, UnlikeProductRequestDto.class);
-//        productLikeService.unlikeProduct(request);
-//        return new BaseResponse<>();
-//    }
+    @Operation(summary = "특정 물품의 2차 카테고리 이름 반환", description = "test용")
+    @GetMapping("/{productUuid}/top-category-name")
+    public BaseResponse<String> getTopLevelCategoryName(@PathVariable String productUuid) {
+        String categoryName = productService.getSecondLevelCategoryName(productUuid);
+        return new BaseResponse<>(categoryName);
+    }
 
 }

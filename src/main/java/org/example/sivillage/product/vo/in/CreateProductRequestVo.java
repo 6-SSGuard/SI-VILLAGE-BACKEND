@@ -46,4 +46,8 @@ public class CreateProductRequestVo {
     @Schema(description = "물품 이미지 URL 목록", example = "[\"url1\", \"url2\"]")
     @NotNull(message = "물품 이미지 URL은 필수 값입니다.")
     private List<String> productImageUrls;
+
+    @Schema(description = "카테고리 코드")
+    @NotNull(message = "카테고리 코드는 필수 값입니다.")
+    private String categoryCode;
 }
