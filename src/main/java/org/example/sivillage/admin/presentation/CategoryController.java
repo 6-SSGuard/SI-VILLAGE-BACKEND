@@ -7,10 +7,7 @@ import org.example.sivillage.admin.dto.in.AddBottomCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.AddMiddleCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.AddSubCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.TopCategoryRequestDto;
-import org.example.sivillage.admin.dto.out.BottomCategoryResponseDto;
-import org.example.sivillage.admin.dto.out.MiddleCategoryResponseDto;
-import org.example.sivillage.admin.dto.out.SubCategoryResponseDto;
-import org.example.sivillage.admin.dto.out.TopCategoryResponseDto;
+import org.example.sivillage.admin.dto.out.*;
 import org.example.sivillage.admin.vo.*;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.modelmapper.ModelMapper;
@@ -39,13 +36,12 @@ public class CategoryController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "대 카테고리 열람")
-    @GetMapping("/top-category/{topCategoryCode}")
-    public BaseResponse<TopCategoryResponseVo> getTopCategory(
-            @PathVariable String topCategoryCode) {
+    @Operation(summary = "대 카테고리 리스트 열람")
+    @GetMapping("/top-category")
+    public BaseResponse<GetTopCategoriesResponseVo> getTopCategory() {
 
-        TopCategoryResponseDto responseDto = categoryService.getTopCategory(topCategoryCode);
-        TopCategoryResponseVo response = mapper.map(responseDto, TopCategoryResponseVo.class);
+        GetTopCategoriesResponseDto responseDto = categoryService.getTopCategories();
+        GetTopCategoriesResponseVo response = mapper.map(responseDto, GetTopCategoriesResponseVo.class);
 
         return new BaseResponse<>(response);
     }

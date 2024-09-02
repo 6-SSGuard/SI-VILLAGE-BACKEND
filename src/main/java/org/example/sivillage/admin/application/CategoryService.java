@@ -9,10 +9,7 @@ import org.example.sivillage.admin.dto.in.AddBottomCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.AddMiddleCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.AddSubCategoryRequestDto;
 import org.example.sivillage.admin.dto.in.TopCategoryRequestDto;
-import org.example.sivillage.admin.dto.out.BottomCategoryResponseDto;
-import org.example.sivillage.admin.dto.out.MiddleCategoryResponseDto;
-import org.example.sivillage.admin.dto.out.SubCategoryResponseDto;
-import org.example.sivillage.admin.dto.out.TopCategoryResponseDto;
+import org.example.sivillage.admin.dto.out.*;
 import org.example.sivillage.admin.infrastructure.BottomCategoryRepository;
 import org.example.sivillage.admin.infrastructure.MiddleCategoryRepository;
 import org.example.sivillage.admin.infrastructure.SubCategoryRepository;
@@ -21,6 +18,9 @@ import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -35,11 +35,13 @@ public class CategoryService {
         topCategoryRepository.save(topCategoryRequestDto.toEntity());
     }
 
-    public TopCategoryResponseDto getTopCategory(String topCategoryCode) {
-        TopCategory topCategory = topCategoryRepository.findByCategoryCode(topCategoryCode)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+    public GetTopCategoriesResponseDto getTopCategories() {
+        List<TopCategoryDto> topCategories = topCategoryRepository.findAll()
+                .stream()
+                .map(TopCategoryDto::toDto)
+                .collect(Collectors.toList());
 
-        return TopCategoryResponseDto.toDto(topCategory);
+        return new GetTopCategoriesResponseDto(topCategories);
     }
 
     public void addMiddleCategory(AddMiddleCategoryRequestDto request) {
