@@ -2,9 +2,10 @@ package org.example.sivillage.product.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.sivillage.admin.domain.Category;
 import org.example.sivillage.brand.domain.Brand;
-import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.example.sivillage.global.common.BaseEntity;
+import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 
 @Entity
 @Getter
@@ -34,13 +35,18 @@ public class Product extends BaseEntity {
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
-    public static Product createProduct(CreateProductRequestVo request, Brand brand, String productUuid) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    public static Product createProduct(CreateProductRequestVo request, Brand brand, String productUuid, Category category) {
         return Product.builder()
                 .productName(request.getProductName())
                 .productUuid(productUuid)
                 .price(request.getPrice())
                 .detailContent(request.getDetailContent())
                 .brand(brand)
+                .category(category)
                 .build();
     }
 }
