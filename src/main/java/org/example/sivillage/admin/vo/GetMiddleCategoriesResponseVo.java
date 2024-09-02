@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.sivillage.admin.dto.out.MiddleCategoryDto;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class MiddleCategoryResponseVo {
-    private String topCategoryCode;
-    private String middleCategoryCode;
-    private String middleCategoryName;
-    private String middleCategoryDescription;
+public class GetMiddleCategoriesResponseVo {
+    private List<MiddleCategoryDto> middleCategories;
 }
