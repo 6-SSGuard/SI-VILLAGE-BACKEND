@@ -22,22 +22,27 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class CategoryService {
+    public static final String ROOT_CATEGORY_CODE = "top";
     private final CategoryRepository categoryRepository;
 
+    public void addCategory(AddCategoryRequestDto request) {
 
-//    public void addCategory(AddCategoryRequestDto request) {
-//        Category category;
-//
-//        if (request.getParentCategoryCode().equals("top")) {
-//            category = Category.createRootCategory(request);
-//        }
-//        else {
-//            Category parentCategory = findCategoryByCategoryCode(request.getParentCategoryCode());
-//            category = Category.createChildCategory(request, parentCategory);
-//        }
-//
-//        categoryRepository.save(category);
-//    }
+        if (categoryRepository.existsByCategoryName(request.getCategoryName())) {
+            throw new BaseException(BaseResponseStatus.DUPLICATE_CATEGORY_NAME);
+        }
+
+        Category category;
+
+        if (request.getParentCategoryCode().equals(ROOT_CATEGORY_CODE)) {
+            category = Category.createRootCategory(request);
+        }
+        else {
+            Category parentCategory = findCategoryByCategoryCode(request.getParentCategoryCode());
+            category = Category.createChildCategory(request, parentCategory);
+        }
+
+        categoryRepository.save(category);
+    }
 
     public GetSubCategoriesResponseDto getSubCategories(String parentCategoryCode) {
         List<CategoryDto> categories;
@@ -97,7 +102,7 @@ public class CategoryService {
             String categoryName = node.get("categoryName").asText();
             AddCategoryRequestDto requestDto = createRequestDto(categoryName, parentCategory);
 
-            Category category = addCategory(requestDto, parentCategory);
+            Category category = addCategoryWithParentCategory(requestDto, parentCategory);
 
             if (node.has("subCategories")) {
                 for (JsonNode childNode : node.get("subCategories")) {
@@ -107,7 +112,7 @@ public class CategoryService {
         }
     }
 
-    public Category addCategory(AddCategoryRequestDto request, Category parentCategory) {
+    private Category addCategoryWithParentCategory(AddCategoryRequestDto request, Category parentCategory) {
         Category category;
 
         if (parentCategory == null || request.getParentCategoryCode() == null) {
