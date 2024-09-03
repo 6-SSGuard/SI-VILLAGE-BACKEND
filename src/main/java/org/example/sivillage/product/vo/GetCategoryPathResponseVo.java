@@ -1,0 +1,16 @@
+package org.example.sivillage.product.vo;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class GetCategoryPathResponseVo {
+    private List<String> categoryPath;
+}

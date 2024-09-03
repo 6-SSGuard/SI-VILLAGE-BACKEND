@@ -12,10 +12,7 @@ import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductImage;
 import org.example.sivillage.product.domain.ProductOption;
-import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
-import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
-import org.example.sivillage.product.dto.out.GetProductsUuidListResponseDto;
-import org.example.sivillage.product.dto.out.GetProductsUuidResponseDto;
+import org.example.sivillage.product.dto.out.*;
 import org.example.sivillage.product.infrastructure.ProductImageRepository;
 import org.example.sivillage.product.infrastructure.ProductLikeRepository;
 import org.example.sivillage.product.infrastructure.ProductOptionRepository;
@@ -24,9 +21,7 @@ import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -124,6 +119,37 @@ public class ProductService {
         return GetProductBriefInfoResponseDto.toDto(product, isLiked, productThumbnailUrl);
     }
 
+    public GetCategoryPathResponseDto getCategoryPath(String productUuid) {
+        Product product = productRepository.findByProductUuid(productUuid)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
+
+        Category category = product.getCategory();
+        List<String> categoryPath = new ArrayList<>();
+
+        while (category != null) {
+            categoryPath.add(category.getCategoryName());
+            category = category.getParent(); // 부모 카테고리로 이동
+        }
+
+        // 상위 카테고리부터 하위 카테고리 순으로 정렬
+        Collections.reverse(categoryPath);
+
+        return new GetCategoryPathResponseDto(categoryPath);
+    }
+
+//    public String getSecondLevelCategoryName(String productUuid) {
+//        Product product = productRepository.findByProductUuid(productUuid)
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
+//
+//        // 해당 물품의 카테고리를 가져옴
+//        Category category = product.getCategory();
+//
+//        // depth가 1인 카테고리 탐색
+//        return findSecondLevelCategory(category)
+//                .map(Category::getCategoryName)
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+//    }
+
     private String getProductThumbnailUrl(Product product) {
         return productImageRepository.findByProduct(product)
                 .stream()
@@ -132,24 +158,11 @@ public class ProductService {
                 .orElse(null);
     }
 
-    public String getSecondLevelCategoryName(String productUuid) {
-        Product product = productRepository.findByProductUuid(productUuid)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
-
-        // 해당 물품의 카테고리를 가져옴
-        Category category = product.getCategory();
-
-        // depth가 1인 카테고리 탐색
-        return findSecondLevelCategory(category)
-                .map(Category::getCategoryName)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
-    }
-
-    private Optional<Category> findSecondLevelCategory(Category category) {
-        // 최상위 카테고리를 찾을 때까지 부모를 탐색
-        while (category != null && category.getDepth() != 1) {
-            category = category.getParent();
-        }
-        return Optional.ofNullable(category);
-    }
+//    private Optional<Category> findSecondLevelCategory(Category category) {
+//        // 최상위 카테고리를 찾을 때까지 부모를 탐색
+//        while (category != null && category.getDepth() != 1) {
+//            category = category.getParent();
+//        }
+//        return Optional.ofNullable(category);
+//    }
 }
