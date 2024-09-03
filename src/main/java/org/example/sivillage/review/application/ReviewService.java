@@ -2,24 +2,24 @@ package org.example.sivillage.review.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.example.sivillage.BeautyInfo.domain.BeautyInfo;
 import org.example.sivillage.BeautyInfo.infrastructure.BeautyInfoRepository;
-import org.example.sivillage.global.common.response.BaseResponse;
-import org.example.sivillage.product.vo.GetCategoryPathResponseVo;
+import org.example.sivillage.product.application.ProductService;
+import org.example.sivillage.product.dto.out.GetCategoryPathResponseDto;
 import org.example.sivillage.review.domain.Review;
 import org.example.sivillage.review.domain.ReviewImage;
 import org.example.sivillage.review.dto.ReviewRequestDto;
 import org.example.sivillage.review.dto.ReviewResponseDto;
 import org.example.sivillage.review.infrastructure.ReviewImageRepository;
 import org.example.sivillage.review.infrastructure.ReviewRepository;
+import org.example.sivillage.sizeinfo.domain.SizeInfo;
 import org.example.sivillage.sizeinfo.infrastructure.SizeInfoRepository;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Transactional
 @RequiredArgsConstructor
@@ -28,6 +28,7 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final ReviewImageRepository reviewImageRepository;
+    private final ProductService productService;
     private final BeautyInfoRepository beautyInfoRepository;
     private final SizeInfoRepository sizeInfoRepository;
 
@@ -48,57 +49,56 @@ public class ReviewService {
                             .map(ReviewImage::getReviewImageUrl)
                             .toList();
                     return ReviewResponseDto.toDto(review, images);
-                }).toList();
-    }
+                }).toList(); }
 
     public void addReview(ReviewRequestDto dto, String authorEmail, String memberUuid, String productUuid) {
 
-        // 리뷰 저장
+        BeautyInfo beautyInfo = beautyInfoRepository.findByMemberUuid(memberUuid).orElse(null);
+        SizeInfo sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid).orElse(null);
+
+        // 리뷰 객체 생성 및 저장
         Review review = Review.toEntity(dto, authorEmail, memberUuid, productUuid);
         reviewRepository.save(review);
-        if (dto.getReviewImageUrl() != null) { // 리뷰 이미지는 리뷰이미지 테이블에 저장
+
+        // 이미지 저장
+        if (dto.getReviewImageUrl() != null) {
             dto.getReviewImageUrl().forEach(images -> {
                 ReviewImage image = ReviewImage.toEntity(images, review);
                 reviewImageRepository.save(image);
             });
         }
 
-        // 카테고리 별 개인정보 리뷰에 저장
-        String url = "http://localhost:8080/api/product/category-path/" + productUuid;
-        RestTemplate restTemplate = new RestTemplate();
-        ParameterizedTypeReference<BaseResponse<GetCategoryPathResponseVo>> typeRef =
-                new ParameterizedTypeReference<BaseResponse<GetCategoryPathResponseVo>>() {
-                };
+        // 정보가 있는 경우에만 처리
+        if (sizeInfo != null || beautyInfo != null) {
+            GetCategoryPathResponseDto categoryList = productService.getCategoryPath(productUuid);
+            System.out.println(categoryList.getCategoryPath().get(0));
+            Map<String, String> categoryToInfoMap = new HashMap<>();
 
-        // HTTP GET 요청 및 응답 처리
-        ResponseEntity<BaseResponse<GetCategoryPathResponseVo>> responseEntity =
-                restTemplate.exchange(url, HttpMethod.GET, null, typeRef);
+            if (beautyInfo != null) {
+                categoryToInfoMap.put("메이크업", String.valueOf(beautyInfo.getSkinTone()));
+                categoryToInfoMap.put("헤어케어", String.valueOf(beautyInfo.getScalpTone()));
+                categoryToInfoMap.put("뷰티", String.valueOf(beautyInfo.getSkinType()));
+            }
 
-        BaseResponse<GetCategoryPathResponseVo> response = responseEntity.getBody();
-        if (response != null && response.isSuccess()) {
-            GetCategoryPathResponseVo categoryList = response.getResult();
+            if (sizeInfo != null) {
+                categoryToInfoMap.put("신발", sizeInfo.getShoeSize());
+                categoryToInfoMap.put("기본", "키: " + sizeInfo.getHeight() +
+                        "cm, 몸무게: " + sizeInfo.getWeight() +
+                        "kg, 평소 사이즈: " + sizeInfo.getTopSize());
+            }
 
-            if (categoryList != null) {
-                // categoryPath 리스트를 가져오기
-                List<String> categoryPath = categoryList.getCategoryPath();
-
-                for (String category : categoryList.getCategoryPath()) {
-                    if ("메이크업".equals(category)) {
-                        review.toEntityMemberInfo(String.valueOf(beautyInfoRepository.findByMemberUuid(memberUuid).get().getSkinTone()));
-                    } else if ("헤어케어".equals(category)) {
-                        review.toEntityMemberInfo(String.valueOf(beautyInfoRepository.findByMemberUuid(memberUuid).get().getScalpTone()));
-                    } else if ("뷰티".equals(category)) {
-                        review.toEntityMemberInfo(String.valueOf(beautyInfoRepository.findByMemberUuid(memberUuid).get().getSkinType()));
-                    } else if ("신발".equals(category)) {
-                        review.toEntityMemberInfo(sizeInfoRepository.findByMemberUuid(memberUuid).get().getShoeSize());
-                    } else {
-                        review.toEntityMemberInfo(String.valueOf(sizeInfoRepository.findByMemberUuid(memberUuid).get().getTopSize()));
-                    }
+            // 카테고리 목록에 맞는 리뷰 작성자 정보 설정
+            for (String category : categoryList.getCategoryPath()) {
+                System.out.println(categoryList.getCategoryPath());
+                String memberInfo = categoryToInfoMap.get(category);
+                if (memberInfo != null) {
+                    review.toEntityMemberInfo(memberInfo);
                 }
             }
+            // 모든 정보가 설정된 후에 리뷰 저장
+            reviewRepository.save(review);
         }
     }
-
 
     // 회원 리뷰 조회
     public List<ReviewResponseDto> getMemberReview(String memberUuid){
