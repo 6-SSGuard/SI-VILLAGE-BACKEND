@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.member.domain.memberenum.Role;
+import org.example.sivillage.auth.domain.Role;
 
 @Getter
 @NoArgsConstructor
