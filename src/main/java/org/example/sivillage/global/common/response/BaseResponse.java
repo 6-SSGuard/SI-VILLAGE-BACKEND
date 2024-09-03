@@ -1,5 +1,6 @@
 package org.example.sivillage.global.common.response;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 
@@ -23,6 +24,10 @@ public record BaseResponse<T>(HttpStatusCode httpStatus, Boolean isSuccess, Stri
     // 요청 실패
     public BaseResponse(BaseResponseStatus status) {
         this(status.getHttpStatusCode(), false, status.getMessage(), null);
+    }
+
+    public T getResult() {
+        return result;
     }
 }
 // Response음ntity에 종속되는 문제가 있

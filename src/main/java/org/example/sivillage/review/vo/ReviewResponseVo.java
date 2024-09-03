@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.review.domain.ReviewImage;
 import org.example.sivillage.review.dto.ReviewResponseDto;
 
 import java.time.LocalDateTime;
@@ -25,6 +24,10 @@ public class ReviewResponseVo {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
     private LocalDateTime reviewDate;
+
+    private String purchaseOption; // 구매옵션
+
+    private String memberInformation; // 키,몸무게,평소사이즈
 
     private String reviewContent;
 

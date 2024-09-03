@@ -17,6 +17,7 @@ public enum BaseResponseStatus {
     NOT_FOUND_BEAUTY_INFO(HttpStatus.NOT_FOUND, false,"뷰티 정보가 등록되어 있지 않습니다. 뷰티 정보를 먼저 생성해주세요."),
     NOT_FOUND_SIZE_INFO(HttpStatus.NOT_FOUND,false,"사이즈 정보가 등록되어 있지 않습니다. 사이즈 정보를 먼저 생성해주세요"),
     NOT_FOUND_SHIPPING_ADDRESS(HttpStatus.NOT_FOUND,false,"배송지가 등록되어 있지 않습니다. 배송지를 먼저 등록해주세요."),
+
     NOT_FOUND_REVIEW(HttpStatus.NOT_FOUND,false,"리뷰가 등록되어 있지 않습니다."),
     JSON_PARSE_FAILED(HttpStatus.BAD_REQUEST, false, "JSON 파싱에 실패했습니다."),
     INVALID_FILE_FORMAT(HttpStatus.BAD_REQUEST, false, "파일 포맷이 잘못됐습니다."),
@@ -66,6 +67,7 @@ public enum BaseResponseStatus {
     DUPLICATE_BRAND_NAME(HttpStatus.CONFLICT, false,  "이미 존재하는 브랜드명입니다."),
     DUPLICATE_BEAUTY_INFO(HttpStatus.CONFLICT,false,"이미 존재하는 뷰티 정보입니다."),
     DUPLICATE_SIZE_INFO(HttpStatus.CONFLICT,false,"이미 존재하는 사이즈 정보입니다."),
+    DUPLICATE_REVIEW(HttpStatus.CONFLICT,false,"이미 리뷰가 등록되어 있습니다."),
     DUPLICATE_CATEGORY_NAME(HttpStatus.CONFLICT, false, "이미 존재하는 카테고리 이름입니다.");
 
     private final HttpStatusCode httpStatusCode;
