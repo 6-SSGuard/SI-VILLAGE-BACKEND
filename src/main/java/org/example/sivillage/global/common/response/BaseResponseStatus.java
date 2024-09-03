@@ -66,9 +66,7 @@ public enum BaseResponseStatus {
     DUPLICATE_BRAND_NAME(HttpStatus.CONFLICT, false,  "이미 존재하는 브랜드명입니다."),
     DUPLICATE_BEAUTY_INFO(HttpStatus.CONFLICT,false,"이미 존재하는 뷰티 정보입니다."),
     DUPLICATE_SIZE_INFO(HttpStatus.CONFLICT,false,"이미 존재하는 사이즈 정보입니다."),
-
-
-    ;
+    DUPLICATE_CATEGORY_NAME(HttpStatus.CONFLICT, false, "이미 존재하는 카테고리 이름입니다.");
 
     private final HttpStatusCode httpStatusCode;
     private final boolean isSuccess;
