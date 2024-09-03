@@ -12,10 +12,10 @@ import java.util.List;
 @NoArgsConstructor
 public class ReviewRequestDto {
 
-private String reviewContent;
+    private String reviewContent;
 
-private Double score;
+    private Double score;
 
-private List<String> reviewImageUrl;
+    private List<String> reviewImageUrl;
 
 }

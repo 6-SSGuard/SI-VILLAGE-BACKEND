@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import org.example.sivillage.global.common.BaseEntity;
 import org.example.sivillage.review.dto.ReviewRequestDto;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter
@@ -26,6 +24,12 @@ public class Review extends BaseEntity {
     @Column(nullable = false)
     private String authorEmail;
 
+    @Column(nullable = true)
+    private String purchaseOption; // 구매옵션
+
+    @Column(nullable = true)
+    private String memberInformation; // 키,몸무게,평소사이즈,신발사이즈,뷰티정보 등등
+
     @Column(nullable = false, length = 2000)
     private String reviewContent;
 
@@ -40,10 +44,12 @@ public class Review extends BaseEntity {
 
 
     @Builder
-    public Review(Long reviewId, Double score, String authorEmail, String reviewContent, Integer reviewLikeCount, String memberUuid,String productUuid) {
+    public Review(Long reviewId, Double score, String authorEmail, String purchaseOption, String memberInformation, String reviewContent, Integer reviewLikeCount, String memberUuid,String productUuid) {
         this.reviewId = reviewId;
         this.score = score;
         this.authorEmail = authorEmail;
+        this.purchaseOption = purchaseOption;
+        this.memberInformation = memberInformation;
         this.reviewContent = reviewContent;
         this.reviewLikeCount = reviewLikeCount;
         this.memberUuid = memberUuid;
@@ -54,11 +60,17 @@ public class Review extends BaseEntity {
         return Review.builder()
                 .score(dto.getScore())
                 .authorEmail(authorEmail)
+              //  .purchaseOption(purchaseOption)
                 .reviewContent(dto.getReviewContent())
                 .reviewLikeCount(0)
                 .memberUuid(memberUuid)
                 .productUuid(productUuid)
                 .build();
+    }
+
+
+    public void toEntityMemberInfo(String memberInformation){
+       this.memberInformation = memberInformation;
     }
 
     public void change(ReviewRequestDto dto){

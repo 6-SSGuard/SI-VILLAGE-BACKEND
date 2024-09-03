@@ -20,6 +20,18 @@ public class ReviewResponseDto {
 
     private String authorEmail;
 
+    private String purchaseOption; // 구매옵션
+
+    private String bodyInformation; // 키,몸무게,평소사이즈
+
+    private Integer shoeSize;
+
+    private String skinType;
+
+    private String scaleType;
+
+    private String skinTone;
+
     private LocalDateTime reviewDate;
 
     private String reviewContent;
@@ -28,7 +40,7 @@ public class ReviewResponseDto {
 
     private List<String> reviewImages;
 
-    public static ReviewResponseDto toDto(Review review, List<String> reviewImages){
+    public static ReviewResponseDto toDto(Review review, List<String> reviewImages) {
         return ReviewResponseDto.builder()
                 .reviewId(review.getReviewId())
                 .score(review.getScore())
