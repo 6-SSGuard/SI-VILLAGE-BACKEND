@@ -22,12 +22,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class CategoryService {
+    public static final String ROOT_CATEGORY_CODE = "top";
     private final CategoryRepository categoryRepository;
 
     public void addCategory(AddCategoryRequestDto request) {
+
+        if (categoryRepository.existsByCategoryName(request.getCategoryName())) {
+            throw new BaseException(BaseResponseStatus.DUPLICATE_CATEGORY_NAME);
+        }
+
         Category category;
 
-        if (request.getParentCategoryCode().equals("top")) {
+        if (request.getParentCategoryCode().equals(ROOT_CATEGORY_CODE)) {
             category = Category.createRootCategory(request);
         }
         else {
