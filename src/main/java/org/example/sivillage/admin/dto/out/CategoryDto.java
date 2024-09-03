@@ -11,7 +11,6 @@ import org.example.sivillage.admin.domain.Category;
 public class CategoryDto {
     private String categoryCode;
     private String categoryName;
-    private String categoryDescription;
     private int depth;
 
 
@@ -19,7 +18,6 @@ public class CategoryDto {
         return CategoryDto.builder()
                 .categoryCode(category.getCategoryCode())
                 .categoryName(category.getCategoryName())
-                .categoryDescription(category.getCategoryDescription())
                 .depth(category.getDepth())
                 .build();
     }

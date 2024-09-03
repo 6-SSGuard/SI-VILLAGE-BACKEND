@@ -1,5 +1,7 @@
 package org.example.sivillage.admin.application;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.admin.domain.Category;
 import org.example.sivillage.admin.dto.in.AddCategoryRequestDto;
@@ -9,20 +11,29 @@ import org.example.sivillage.admin.infrastructure.CategoryRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class CategoryService {
+    public static final String ROOT_CATEGORY_CODE = "top";
     private final CategoryRepository categoryRepository;
 
-
     public void addCategory(AddCategoryRequestDto request) {
+
+        if (categoryRepository.existsByCategoryName(request.getCategoryName())) {
+            throw new BaseException(BaseResponseStatus.DUPLICATE_CATEGORY_NAME);
+        }
+
         Category category;
 
-        if (request.getParentCategoryCode().equals("top")) {
+        if (request.getParentCategoryCode().equals(ROOT_CATEGORY_CODE)) {
             category = Category.createRootCategory(request);
         }
         else {
@@ -54,8 +65,75 @@ public class CategoryService {
         return new GetSubCategoriesResponseDto(categories);
     }
 
+    public void addCategoryFromFile(MultipartFile file) {
+        if (file.isEmpty() || !file.getOriginalFilename().endsWith(".json")) {
+            throw new BaseException(BaseResponseStatus.INVALID_FILE_FORMAT);
+        }
+
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
+
+            String jsonData = reader.lines().collect(Collectors.joining());
+            parseAndSaveCategory(jsonData);
+
+        } catch (Exception e) {
+            throw new BaseException(BaseResponseStatus.JSON_PARSE_FAILED);
+        }
+    }
+
+    private void parseAndSaveCategory(String jsonData) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            JsonNode rootNode = objectMapper.readTree(jsonData);
+            if (rootNode.isArray()) {
+                for (JsonNode node : rootNode) {
+                    saveCategoryTree(node, null);
+                }
+            } else {
+                saveCategoryTree(rootNode, null);
+            }
+        } catch (Exception e) {
+            throw new BaseException(BaseResponseStatus.JSON_PARSE_FAILED);
+        }
+    }
+
+    private void saveCategoryTree(JsonNode node, Category parentCategory) {
+        if (node.has("categoryName")) {
+            String categoryName = node.get("categoryName").asText();
+            AddCategoryRequestDto requestDto = createRequestDto(categoryName, parentCategory);
+
+            Category category = addCategoryWithParentCategory(requestDto, parentCategory);
+
+            if (node.has("subCategories")) {
+                for (JsonNode childNode : node.get("subCategories")) {
+                    saveCategoryTree(childNode, category);
+                }
+            }
+        }
+    }
+
+    private Category addCategoryWithParentCategory(AddCategoryRequestDto request, Category parentCategory) {
+        Category category;
+
+        if (parentCategory == null || request.getParentCategoryCode() == null) {
+            category = Category.createRootCategory(request);
+        } else {
+            category = Category.createChildCategory(request, parentCategory);
+        }
+
+        return categoryRepository.save(category);
+    }
+
+    private AddCategoryRequestDto createRequestDto(String categoryName, Category parentCategory) {
+        String parentCategoryCode = parentCategory != null ? parentCategory.getCategoryCode() : null;
+        return new AddCategoryRequestDto(categoryName, parentCategoryCode);
+    }
+
+
+
     private Category findCategoryByCategoryCode(String categoryCode) {
         return categoryRepository.findByCategoryCode(categoryCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
     }
+
 }
