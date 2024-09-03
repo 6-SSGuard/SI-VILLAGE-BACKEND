@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.review.domain.Review;
-import org.example.sivillage.review.domain.ReviewImage;
-
 import java.time.LocalDateTime;
 import java.util.List;
 

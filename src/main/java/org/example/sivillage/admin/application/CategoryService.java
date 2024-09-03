@@ -125,7 +125,6 @@ public class CategoryService {
     }
 
 
-
     private Category findCategoryByCategoryCode(String categoryCode) {
         return categoryRepository.findByCategoryCode(categoryCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));

@@ -2,7 +2,6 @@ package org.example.sivillage.review.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.review.domain.Review;
 import org.example.sivillage.review.domain.ReviewImage;
@@ -23,24 +22,11 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final ReviewImageRepository reviewImageRepository;
 
-    public void addReview(ReviewRequestDto dto, String authorEmail, String memberUuid, String productUuid) {
-        Review review = Review.toEntity(dto, authorEmail, memberUuid, productUuid);
-        reviewRepository.save(review);
-        if (dto.getReviewImageUrl() != null) { // 리뷰 이미지는 리뷰이미지 테이블에 저장
-            dto.getReviewImageUrl().forEach(url -> {
-                ReviewImage image = ReviewImage.toEntity(url, review);
-                reviewImageRepository.save(image);
-            });
-        }
-    }
-
-    // todo: productUuid 에서 카테고리 타입을 찾아서 그 타입에 맞는 사이즈, 뷰티 정보를 가져오기
-    public List<ReviewResponseDto> getReview(String productUuid) {
-        List<Review> reviews = reviewRepository.findByProductUuid(productUuid);
-
-        // 리뷰가 없는 경우 빈 리스트를 반환
+    // 리뷰 목록 가져오는 메소드
+    public List<ReviewResponseDto> getReviewList(List<Review> reviews) {
         if (reviews.isEmpty()) {
-            return Collections.emptyList();}
+            return Collections.emptyList();
+        }
         // 리뷰 있는 경우
         return reviews.stream()
                 .map(review -> {
@@ -55,16 +41,42 @@ public class ReviewService {
                 }).toList();
     }
 
-    public void changeReview(ReviewRequestDto dto, Long reviewId, String memberUuid) {
-        Review review = reviewRepository.findByReviewIdAndMemberUuid(reviewId, memberUuid).orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_REVIEW));
-        review.change(dto);
+    public void addReview(ReviewRequestDto dto, String authorEmail, String memberUuid, String productUuid) {
+        Review review = Review.toEntity(dto, authorEmail, memberUuid, productUuid);
         reviewRepository.save(review);
+        if (dto.getReviewImageUrl() != null) { // 리뷰 이미지는 리뷰이미지 테이블에 저장
+            dto.getReviewImageUrl().forEach(url -> {
+                ReviewImage image = ReviewImage.toEntity(url, review);
+                reviewImageRepository.save(image);
+            });
+        }
+    }
+
+    public List<ReviewResponseDto> getMemberReview(String memberUuid){
+        List<Review> reviews = reviewRepository.findByMemberUuid(memberUuid);
+        return getReviewList(reviews);
+    }
+
+    // todo: productUuid 에서 카테고리 타입을 찾아서 그 타입에 맞는 사이즈, 뷰티 정보를 가져오기
+    public List<ReviewResponseDto> getProductReview(String productUuid) {
+        List<Review> reviews = reviewRepository.findByProductUuid(productUuid);
+        return getReviewList(reviews);
+    }
+
+    public void changeReview(ReviewRequestDto dto, Long reviewId, String memberUuid) {
+        reviewRepository.findByReviewIdAndMemberUuid(reviewId, memberUuid)
+                .ifPresent(review -> {
+                    review.change(dto);
+                    reviewRepository.save(review);
+                });
     }
 
     public void removeReview(Long reviewId, String memberUuid){
-        Review review = reviewRepository.findByReviewIdAndMemberUuid(reviewId, memberUuid).orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_REVIEW));
-        reviewImageRepository.deleteAllByReview(review);
-        reviewRepository.delete(review);
+        reviewRepository.findByReviewIdAndMemberUuid(reviewId, memberUuid)
+                .ifPresent(review -> {
+                    reviewImageRepository.deleteAllByReview(review);
+                    reviewRepository.delete(review);
+                });
     }
 }
 

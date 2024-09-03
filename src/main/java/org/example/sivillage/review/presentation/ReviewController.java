@@ -31,16 +31,21 @@ public class ReviewController {
         return new BaseResponse<>();
     }
 
-    //todo: 회원 리뷰 조회 만들기
 
 
-
-
+    @Operation(summary = "회원 리뷰 조회", description = "회원 리뷰를 조회합니다.")
+    @GetMapping("")
+    public BaseResponse<List<ReviewResponseVo>> getMemberReview(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        List<ReviewResponseVo> vo = reviewService.getMemberReview(customUserDetails.getMemberUuid())
+                .stream()
+                .map(ReviewResponseVo::toVo).toList();
+        return new BaseResponse<>(vo);
+    }
 
     @Operation(summary = "상품 리뷰 조회", description = "상품 리뷰를 조회합니다.")
-    @GetMapping("")
+    @GetMapping("/product")
     public BaseResponse<List<ReviewResponseVo>> getReview(@RequestParam("productUuid") String productUuid) {
-        List<ReviewResponseVo> vo = reviewService.getReview(productUuid)
+        List<ReviewResponseVo> vo = reviewService.getProductReview(productUuid)
                 .stream()
                 .map(ReviewResponseVo::toVo).toList();
         return new BaseResponse<>(vo);
