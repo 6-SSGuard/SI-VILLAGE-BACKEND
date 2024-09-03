@@ -10,9 +10,11 @@ import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.member.vo.out.GetProductsUuidResponseVo;
 import org.example.sivillage.product.application.ProductService;
+import org.example.sivillage.product.dto.out.GetCategoryPathResponseDto;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.example.sivillage.product.dto.out.GetProductsUuidListResponseDto;
+import org.example.sivillage.product.vo.GetCategoryPathResponseVo;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;
 import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
@@ -71,11 +73,12 @@ public class ProductController {
         return new BaseResponse<>(response);
     }
 
-    @Operation(summary = "특정 물품의 2차 카테고리 이름 반환", description = "test용")
-    @GetMapping("/{productUuid}/top-category-name")
-    public BaseResponse<String> getTopLevelCategoryName(@PathVariable String productUuid) {
-        String categoryName = productService.getSecondLevelCategoryName(productUuid);
-        return new BaseResponse<>(categoryName);
+    @Operation(summary = "특정 물품의 전체 카테고리 리스트 반환", description = "test용")
+    @GetMapping("/category-path/{productUuid}")
+    public BaseResponse<GetCategoryPathResponseVo> getCategoryPath(@PathVariable String productUuid) {
+        GetCategoryPathResponseDto responseDto = productService.getCategoryPath(productUuid);
+        GetCategoryPathResponseVo response = mapper.map(responseDto, GetCategoryPathResponseVo.class);
+        return new BaseResponse<>(response);
     }
 
 }
