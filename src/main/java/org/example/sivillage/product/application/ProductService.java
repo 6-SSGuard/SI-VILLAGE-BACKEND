@@ -138,18 +138,18 @@ public class ProductService {
         return new GetCategoryPathResponseDto(String.join("/", categoryList));
     }
 
-//    public String getSecondLevelCategoryName(String productUuid) {
-//        Product product = productRepository.findByProductUuid(productUuid)
-//                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
-//
-//        // 해당 물품의 카테고리를 가져옴
-//        Category category = product.getCategory();
-//
-//        // depth가 1인 카테고리 탐색
-//        return findSecondLevelCategory(category)
-//                .map(Category::getCategoryName)
-//                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
-//    }
+    public String getSelectedLevelCategoryName(String productUuid, int depth) {
+        Product product = productRepository.findByProductUuid(productUuid)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
+
+        // 해당 물품의 카테고리를 가져옴
+        Category category = product.getCategory();
+
+        // depth가 1인 카테고리 탐색
+        return findSelectedLevelCategory(category, depth)
+                .map(Category::getCategoryName)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+    }
 
     private String getProductThumbnailUrl(Product product) {
         return productImageRepository.findByProduct(product)
@@ -159,11 +159,11 @@ public class ProductService {
                 .orElse(null);
     }
 
-//    private Optional<Category> findSecondLevelCategory(Category category) {
-//        // 최상위 카테고리를 찾을 때까지 부모를 탐색
-//        while (category != null && category.getDepth() != 1) {
-//            category = category.getParent();
-//        }
-//        return Optional.ofNullable(category);
-//    }
+    private Optional<Category> findSelectedLevelCategory(Category category, int depth) {
+        // 최상위 카테고리를 찾을 때까지 부모를 탐색
+        while (category != null && category.getDepth() != depth) {
+            category = category.getParent();
+        }
+        return Optional.ofNullable(category);
+    }
 }

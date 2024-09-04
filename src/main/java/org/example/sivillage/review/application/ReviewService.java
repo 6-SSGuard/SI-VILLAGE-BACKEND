@@ -28,36 +28,12 @@ public class ReviewService {
     private final SizeInfoRepository sizeInfoRepository;
     private final ProductService productService;
 
-
-    // 리뷰 목록 가져오는 메소드
-    public List<ReviewResponseDto> getReviewList(List<Review> reviews) {
-        if (reviews.isEmpty()) {
-            return Collections.emptyList();
-        }
-        // 리뷰 있는 경우
-        return reviews.stream()
-                .map(review -> {
-                    // 리뷰 이미지 조회
-                    List<ReviewImage> reviewImages = reviewImageRepository.findByReview(review);
-
-                    // 이미지 URL 목록으로 변환
-                    List<String> images = reviewImages.stream()
-                            .map(ReviewImage::getReviewImageUrl)
-                            .toList();
-                    return ReviewResponseDto.toDto(review, images);
-                }).toList();
-    }
-
-
     public void addReview(ReviewRequestDto dto, String authorEmail, String memberUuid, String productUuid) {
 
         BeautyInfo beautyInfo = beautyInfoRepository.findByMemberUuid(memberUuid).orElse(new BeautyInfo());
         SizeInfo sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid).orElse(new SizeInfo());
-
         String categoryPath = productService.getCategoryPath(productUuid).getCategoryPath();
-
         Review review = Review.toEntity(dto, authorEmail, memberUuid, productUuid);
-
         String info = "";
 
         if (categoryPath.contains("뷰티")) {
@@ -76,12 +52,8 @@ public class ReviewService {
 
         review.toEntityMemberInfo(info);
         reviewRepository.save(review);
+        saveReviewImage(dto,review);
 
-            // 리뷰 이미지 테이블에 따로 저장
-        if (dto.getReviewImageUrl() != null) {
-            dto.getReviewImageUrl().forEach(images -> { ReviewImage image = ReviewImage.toEntity(images, review);
-                    reviewImageRepository.save(image);});
-            }
     }
 
     // 회원 리뷰 조회
@@ -111,6 +83,35 @@ public class ReviewService {
                     reviewRepository.delete(review);
                 });
     }
+
+    // 리뷰 이미지 테이블에 저장 메소드
+    private void saveReviewImage (ReviewRequestDto dto, Review review){
+            if (dto.getReviewImageUrl() != null) {
+        dto.getReviewImageUrl().forEach(images -> { ReviewImage image = ReviewImage.toEntity(images, review);
+            reviewImageRepository.save(image);});
+    }
+
+    }
+
+    // 리뷰 목록 가져오는 메소드
+    private List<ReviewResponseDto> getReviewList(List<Review> reviews) {
+        if (reviews.isEmpty()) {
+            return Collections.emptyList();
+        }
+        // 리뷰 있는 경우
+        return reviews.stream()
+                .map(review -> {
+                    // 리뷰 이미지 조회
+                    List<ReviewImage> reviewImages = reviewImageRepository.findByReview(review);
+
+                    // 이미지 URL 목록으로 변환
+                    List<String> images = reviewImages.stream()
+                            .map(ReviewImage::getReviewImageUrl)
+                            .toList();
+                    return ReviewResponseDto.toDto(review, images);
+                }).toList();
+    }
+
 }
 
 
