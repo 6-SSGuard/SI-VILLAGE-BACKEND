@@ -20,17 +20,9 @@ public class ReviewResponseDto {
 
     private String authorEmail;
 
-    private String purchaseOption; // 구매옵션
+    private String purchaseOption;
 
-    private String bodyInformation; // 키,몸무게,평소사이즈
-
-    private Integer shoeSize;
-
-    private String skinType;
-
-    private String scaleType;
-
-    private String skinTone;
+    private String memberInformation;
 
     private LocalDateTime reviewDate;
 
@@ -45,6 +37,7 @@ public class ReviewResponseDto {
                 .reviewId(review.getReviewId())
                 .score(review.getScore())
                 .authorEmail(review.getAuthorEmail().substring(0, 4) + "*******") // 이메일 암호화 해서 dto 에 저장
+                .memberInformation(review.getMemberInformation())
                 .reviewDate(review.getCreatedDate())
                 .reviewContent(review.getReviewContent())
                 .reviewLikeCount(review.getReviewLikeCount())

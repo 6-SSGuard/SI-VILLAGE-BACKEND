@@ -73,13 +73,14 @@ public class ReviewService {
             if (sizeInfo.getTopSize() != null) {
                 info = "키: " + sizeInfo.getHeight() + "cm, 몸무게: " + sizeInfo.getWeight() + "kg, 평소 사이즈: " + sizeInfo.getTopSize();} else {
                 info = ""; } }
+
         review.toEntityMemberInfo(info);
         reviewRepository.save(review);
 
             // 리뷰 이미지 테이블에 따로 저장
         if (dto.getReviewImageUrl() != null) {
             dto.getReviewImageUrl().forEach(images -> { ReviewImage image = ReviewImage.toEntity(images, review);
-                    reviewImageRepository.save(image); });
+                    reviewImageRepository.save(image);});
             }
     }
 

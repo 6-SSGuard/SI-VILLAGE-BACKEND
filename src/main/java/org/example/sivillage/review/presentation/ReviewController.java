@@ -31,8 +31,6 @@ public class ReviewController {
         return new BaseResponse<>();
     }
 
-
-
     @Operation(summary = "회원 리뷰 조회", description = "회원 리뷰를 조회합니다.")
     @GetMapping("")
     public BaseResponse<List<ReviewResponseVo>> getMemberReview(@AuthenticationPrincipal CustomUserDetails customUserDetails) {

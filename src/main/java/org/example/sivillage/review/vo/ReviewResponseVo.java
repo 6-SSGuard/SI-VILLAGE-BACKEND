@@ -40,6 +40,7 @@ public class ReviewResponseVo {
                 .reviewId(dto.getReviewId())
                 .score(dto.getScore())
                 .authorEmail(dto.getAuthorEmail()) // 이메일 암호화 해서 dto 에 저장
+                .memberInformation(dto.getMemberInformation())
                 .reviewDate(dto.getReviewDate())
                 .reviewContent(dto.getReviewContent())
                 .reviewLikeCount(dto.getReviewLikeCount())
