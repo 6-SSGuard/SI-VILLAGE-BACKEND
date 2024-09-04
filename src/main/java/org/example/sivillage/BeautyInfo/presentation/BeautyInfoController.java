@@ -28,14 +28,14 @@ public class BeautyInfoController {
     @Operation(summary = "뷰티 정보 등록", description = "뷰티정보를 등록합니다.")
     @PostMapping()
     public BaseResponse<Void> addBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        beautyInfoService.addBeautyInfo(BeautyInfoRequestVo.toDto(vo), customUserDetails.getUsername()); // vo -> dto
+        beautyInfoService.addBeautyInfo(BeautyInfoRequestVo.toDto(vo), customUserDetails.getMemberUuid()); // vo -> dto
         return new BaseResponse<>();
     }
 
     @Operation(summary = "뷰티 정보 조회", description = "뷰티정보를 조회합니다.")
     @GetMapping()
     public BaseResponse<BeautyInfoResponseVo> getBeautyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        BeautyInfoResponseDto dto = beautyInfoService.getBeautyInfo(customUserDetails.getUsername());
+        BeautyInfoResponseDto dto = beautyInfoService.getBeautyInfo(customUserDetails.getMemberUuid());
         BeautyInfoResponseVo vo = mapper.map(dto, BeautyInfoResponseVo.class);
         return new BaseResponse<>(vo);
     }
@@ -43,14 +43,14 @@ public class BeautyInfoController {
     @Operation(summary = "뷰티 정보 수정", description = "뷰티정보를 수정합니다.")
     @PutMapping()
     public BaseResponse<Void> changeBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        beautyInfoService.changeBeautyInfo(BeautyInfoRequestVo.toDto(vo), customUserDetails.getUsername());
+        beautyInfoService.changeBeautyInfo(BeautyInfoRequestVo.toDto(vo), customUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
     @Operation(summary = "뷰티 정보 삭제", description = "뷰티 정보를 삭제합니다.")
     @DeleteMapping()
     public BaseResponse<Void> deleteBeautyInfo(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        beautyInfoService.removeBeautyInfo(customUserDetails.getUsername());
+        beautyInfoService.removeBeautyInfo(customUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 

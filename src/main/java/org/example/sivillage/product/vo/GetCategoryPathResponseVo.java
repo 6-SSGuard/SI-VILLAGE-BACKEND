@@ -12,5 +12,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetCategoryPathResponseVo {
-    private List<String> categoryPath;
+    private String categoryPath;
 }

@@ -7,7 +7,7 @@ import org.example.sivillage.sizeinfo.dto.in.SizeInfoRequestDto;
 
 @Entity
 @Getter // beauty 쪽으로 통합
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class SizeInfo extends BaseEntity {
 
     @Id

@@ -124,17 +124,18 @@ public class ProductService {
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
 
         Category category = product.getCategory();
-        List<String> categoryPath = new ArrayList<>();
+        List<String> categoryList = new ArrayList<>();
 
         while (category != null) {
-            categoryPath.add(category.getCategoryName());
+            categoryList.add(category.getCategoryName());
             category = category.getParent(); // 부모 카테고리로 이동
         }
+        // 리스트를 역순으로 정렬 (부모에서 자식 순서로 변경)
+        Collections.reverse(categoryList);
 
-        // 상위 카테고리부터 하위 카테고리 순으로 정렬
-        Collections.reverse(categoryPath);
+        // 리스트를 '/'로 구분된 문자열로 변환
 
-        return new GetCategoryPathResponseDto(categoryPath);
+        return new GetCategoryPathResponseDto(String.join("/", categoryList));
     }
 
 //    public String getSecondLevelCategoryName(String productUuid) {

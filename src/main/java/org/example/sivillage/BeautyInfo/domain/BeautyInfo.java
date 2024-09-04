@@ -11,7 +11,7 @@ import org.example.sivillage.BeautyInfo.dto.in.BeautyInfoRequestDto;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class BeautyInfo extends BaseEntity {
 
     @Id
