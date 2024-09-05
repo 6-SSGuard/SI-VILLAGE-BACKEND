@@ -17,15 +17,6 @@ public class ShippingAddressService {
 
     private final ShippingAddressRepository shippingAddressRepository;
 
-    // 기본 배송지 비활성화 로직
-    private void deactivateExistingDefaultAddress(String memberUuid) {
-        shippingAddressRepository.findByMemberUuidAndDefaultAddress(memberUuid, true)
-                .ifPresent(shippingAddress -> {
-                    shippingAddress.deactivateAsDefault();
-                    shippingAddressRepository.save(shippingAddress);
-                });
-    }
-
     public void addDefaultShippingAddress(ShippingAddressRequestDto dto, String memberUuid) {
         if (shippingAddressRepository.findAllByMemberUuid(memberUuid).isEmpty()) {
             shippingAddressRepository.save(ShippingAddress.toEntity(dto, memberUuid));
@@ -65,6 +56,14 @@ public class ShippingAddressService {
         shippingAddressRepository.delete(shippingAddress);
     }
 
+    // 기본 배송지 비활성화 로직
+    private void deactivateExistingDefaultAddress(String memberUuid) {
+        shippingAddressRepository.findByMemberUuidAndDefaultAddress(memberUuid, true)
+                .ifPresent(shippingAddress -> {
+                    shippingAddress.deactivateAsDefault();
+                    shippingAddressRepository.save(shippingAddress);
+                });
+    }
 
 }
 

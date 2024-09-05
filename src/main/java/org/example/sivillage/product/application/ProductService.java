@@ -124,31 +124,32 @@ public class ProductService {
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
 
         Category category = product.getCategory();
-        List<String> categoryPath = new ArrayList<>();
+        List<String> categoryList = new ArrayList<>();
 
         while (category != null) {
-            categoryPath.add(category.getCategoryName());
+            categoryList.add(category.getCategoryName());
             category = category.getParent(); // 부모 카테고리로 이동
         }
+        // 리스트를 역순으로 정렬 (부모에서 자식 순서로 변경)
+        Collections.reverse(categoryList);
 
-        // 상위 카테고리부터 하위 카테고리 순으로 정렬
-        Collections.reverse(categoryPath);
+        // 리스트를 '/'로 구분된 문자열로 변환
 
-        return new GetCategoryPathResponseDto(categoryPath);
+        return new GetCategoryPathResponseDto(String.join("/", categoryList));
     }
 
-//    public String getSecondLevelCategoryName(String productUuid) {
-//        Product product = productRepository.findByProductUuid(productUuid)
-//                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
-//
-//        // 해당 물품의 카테고리를 가져옴
-//        Category category = product.getCategory();
-//
-//        // depth가 1인 카테고리 탐색
-//        return findSecondLevelCategory(category)
-//                .map(Category::getCategoryName)
-//                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
-//    }
+    public String getSelectedLevelCategoryName(String productUuid, int depth) {
+        Product product = productRepository.findByProductUuid(productUuid)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
+
+        // 해당 물품의 카테고리를 가져옴
+        Category category = product.getCategory();
+
+        // depth가 1인 카테고리 탐색
+        return findSelectedLevelCategory(category, depth)
+                .map(Category::getCategoryName)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+    }
 
     private String getProductThumbnailUrl(Product product) {
         return productImageRepository.findByProduct(product)
@@ -158,11 +159,11 @@ public class ProductService {
                 .orElse(null);
     }
 
-//    private Optional<Category> findSecondLevelCategory(Category category) {
-//        // 최상위 카테고리를 찾을 때까지 부모를 탐색
-//        while (category != null && category.getDepth() != 1) {
-//            category = category.getParent();
-//        }
-//        return Optional.ofNullable(category);
-//    }
+    private Optional<Category> findSelectedLevelCategory(Category category, int depth) {
+        // 최상위 카테고리를 찾을 때까지 부모를 탐색
+        while (category != null && category.getDepth() != depth) {
+            category = category.getParent();
+        }
+        return Optional.ofNullable(category);
+    }
 }

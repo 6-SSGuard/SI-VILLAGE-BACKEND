@@ -11,7 +11,7 @@ import org.example.sivillage.BeautyInfo.dto.in.BeautyInfoRequestDto;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class BeautyInfo extends BaseEntity {
 
     @Id
@@ -46,7 +46,6 @@ public class BeautyInfo extends BaseEntity {
         this.memberUuid = memberUuid;
     }
 
-    @Builder
     public static BeautyInfo toEntity (BeautyInfoRequestDto dto, String memberUuid) {
         return BeautyInfo.builder()
                 .skinType(dto.getSkinType())

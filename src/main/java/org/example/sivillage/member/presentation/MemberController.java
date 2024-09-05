@@ -8,6 +8,7 @@ import org.example.sivillage.auth.domain.CustomUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.application.BrandLikeService;
 import org.example.sivillage.member.application.ProductLikeService;
+import org.example.sivillage.member.application.ReviewLikeService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,6 +24,7 @@ public class MemberController {
 
     private final BrandLikeService brandLikeService;
     private final ProductLikeService productLikeService;
+    private final ReviewLikeService reviewLikeService;
 
     @Operation(summary = "브랜드 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
     @PutMapping("/brand/like/{brandId}")
@@ -37,6 +39,14 @@ public class MemberController {
         productLikeService.toggleProductLike(productUuid, customUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
+
+    @Operation(summary = "리뷰 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
+    @PutMapping("/review/like/{reviewId}")
+    public BaseResponse<Void> toggleReviewLike(@PathVariable Long reviewId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        reviewLikeService.toggleReviewLike(reviewId, customUserDetails.getMemberUuid());
+        return new BaseResponse<>();
+    }
+
 }
 
 
