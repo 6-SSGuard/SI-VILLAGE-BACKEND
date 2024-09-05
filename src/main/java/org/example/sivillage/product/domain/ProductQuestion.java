@@ -2,6 +2,7 @@ package org.example.sivillage.product.domain;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import org.example.sivillage.global.common.BaseEntity;
 
@@ -31,6 +32,7 @@ public class ProductQuestion extends BaseEntity {
     @JoinColumn(name = "product_answer_id", nullable = false)
     private ProductQuestionAnswer productQuestionAnswer;
 
-
+    @Builder
+    public ProductQuestion()
 
 }
