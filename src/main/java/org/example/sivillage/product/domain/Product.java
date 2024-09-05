@@ -2,10 +2,9 @@ package org.example.sivillage.product.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.sivillage.admin.domain.Category;
-import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.global.common.BaseEntity;
-import org.example.sivillage.product.vo.in.CreateProductRequestVo;
+import org.example.sivillage.product.dto.in.CreateProductFromCsvRequestDto;
+import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 
 @Entity
 @Getter
@@ -20,7 +19,7 @@ public class Product extends BaseEntity {
     private Long productId;
 
     @Column(nullable = false, length = 50, unique = true)
-    private String productUuid;
+    private String productCode;
 
     @Column(nullable = false, length = 100)
     private String productName;
@@ -31,22 +30,28 @@ public class Product extends BaseEntity {
     @Column(nullable = false, length = 10000)
     private String detailContent;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brand_id", nullable = false)
-    private Brand brand;
+    private Long brandId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
+    private String categoryCode;
 
-    public static Product createProduct(CreateProductRequestVo request, Brand brand, String productUuid, Category category) {
+    public static Product createProduct(CreateProductRequestDto request, Long brandId, String productCode, String categoryCode) {
         return Product.builder()
                 .productName(request.getProductName())
-                .productUuid(productUuid)
+                .productCode(productCode)
                 .price(request.getPrice())
                 .detailContent(request.getDetailContent())
-                .brand(brand)
-                .category(category)
+                .brandId(brandId)
+                .categoryCode(categoryCode)
                 .build();
     }
+
+    public static Product createProductFromCsv(CreateProductFromCsvRequestDto request) {
+        return Product.builder()
+                .productName(request.getProductName())
+                .productCode(request.getProductCode())
+                .price(request.getPrice())
+                .detailContent(request.getDetailContent())
+                .build();
+    }
+
 }

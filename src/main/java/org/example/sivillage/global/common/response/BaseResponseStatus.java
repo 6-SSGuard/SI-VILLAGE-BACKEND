@@ -17,7 +17,7 @@ public enum BaseResponseStatus {
     NOT_FOUND_BEAUTY_INFO(HttpStatus.NOT_FOUND, false,"뷰티 정보가 등록되어 있지 않습니다. 뷰티 정보를 먼저 생성해주세요."),
     NOT_FOUND_SIZE_INFO(HttpStatus.NOT_FOUND,false,"사이즈 정보가 등록되어 있지 않습니다. 사이즈 정보를 먼저 생성해주세요"),
     NOT_FOUND_SHIPPING_ADDRESS(HttpStatus.NOT_FOUND,false,"배송지가 등록되어 있지 않습니다. 배송지를 먼저 등록해주세요."),
-    JSON_PARSE_FAILED(HttpStatus.BAD_REQUEST, false, "JSON 파싱에 실패했습니다."),
+    FILE_PARSE_FAILED(HttpStatus.BAD_REQUEST, false, "JSON 파싱에 실패했습니다."),
     INVALID_FILE_FORMAT(HttpStatus.BAD_REQUEST, false, "파일 포맷이 잘못됐습니다."),
 
     /*
