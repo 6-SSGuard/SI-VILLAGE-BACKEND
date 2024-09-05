@@ -1,14 +1,11 @@
 package org.example.sivillage.member.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @Builder
 public class ReviewLike {
@@ -19,7 +16,7 @@ public class ReviewLike {
     private Long reviewLikeId;
 
     @Column(nullable = false)
-    private String reviewId;
+    private Long reviewId;
 
     @Column(nullable = false)
     private String memberUuid;
@@ -27,4 +24,16 @@ public class ReviewLike {
     @Column(nullable = false)
     private boolean isLiked;
 
+
+    public static ReviewLike toEntity(Long reviewId, String memberUuid){
+        return ReviewLike.builder()
+                .reviewId(reviewId)
+                .memberUuid(memberUuid)
+                .isLiked(false)
+                .build();
+    }
+
+    public void toggleLike(boolean like){
+        this.isLiked = !this.isLiked;
+    }
 }

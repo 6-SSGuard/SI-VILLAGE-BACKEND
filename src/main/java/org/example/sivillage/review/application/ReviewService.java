@@ -84,15 +84,6 @@ public class ReviewService {
                 });
     }
 
-    // 리뷰 이미지 테이블에 저장 메소드
-    private void saveReviewImage (ReviewRequestDto dto, Review review){
-            if (dto.getReviewImageUrl() != null) {
-        dto.getReviewImageUrl().forEach(images -> { ReviewImage image = ReviewImage.toEntity(images, review);
-            reviewImageRepository.save(image);});
-    }
-
-    }
-
     // 리뷰 목록 가져오는 메소드
     private List<ReviewResponseDto> getReviewList(List<Review> reviews) {
         if (reviews.isEmpty()) {
@@ -110,6 +101,15 @@ public class ReviewService {
                             .toList();
                     return ReviewResponseDto.toDto(review, images);
                 }).toList();
+    }
+
+    // 리뷰 이미지 테이블에 저장 메소드
+    private void saveReviewImage (ReviewRequestDto dto, Review review){
+            if (dto.getReviewImageUrl() != null) {
+        dto.getReviewImageUrl().forEach(images -> { ReviewImage image = ReviewImage.toEntity(images, review);
+            reviewImageRepository.save(image);});
+    }
+
     }
 
 }

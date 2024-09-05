@@ -40,7 +40,7 @@ public class Review extends BaseEntity {
     private String productUuid;
 
     @Column(nullable = false)
-    private Integer reviewLikeCount;
+    private Integer reviewLikeCount = 0;
 
 
     @Builder
@@ -62,7 +62,6 @@ public class Review extends BaseEntity {
                 .authorEmail(authorEmail)
               //  .purchaseOption(purchaseOption)
                 .reviewContent(dto.getReviewContent())
-                .reviewLikeCount(0)
                 .memberUuid(memberUuid)
                 .productUuid(productUuid)
                 .build();
@@ -70,11 +69,23 @@ public class Review extends BaseEntity {
 
 
     public void toEntityMemberInfo(String memberInformation){
-       this.memberInformation = memberInformation;
+
+        this.memberInformation = memberInformation;
     }
 
     public void change(ReviewRequestDto dto){
         this.score = dto.getScore();
         this.reviewContent = dto.getReviewContent();
+    }
+
+    public  void incrementLikeCount() {
+        this.reviewLikeCount++;
+    }
+
+    // 좋아요 카운트 감소
+    public void decrementLikeCount() {
+        if (this.reviewLikeCount > 0) {
+            this.reviewLikeCount--;
+        }
     }
 }
