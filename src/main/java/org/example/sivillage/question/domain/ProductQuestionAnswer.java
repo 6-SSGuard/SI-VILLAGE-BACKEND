@@ -1,4 +1,4 @@
-package org.example.sivillage.product.domain;
+package org.example.sivillage.question.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -25,5 +25,9 @@ public class ProductQuestionAnswer extends BaseEntity {
 
     @Column(nullable = false)
     private String memberUuid;
+
+    @OneToOne
+    @JoinColumn(name = "product_question_id", nullable = false)
+    private ProductQuestion productQuestion;
 
 }

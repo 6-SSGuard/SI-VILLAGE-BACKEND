@@ -42,7 +42,7 @@ public class ReviewController {
 
     @Operation(summary = "상품 리뷰 조회", description = "상품 리뷰를 조회합니다.")
     @GetMapping("/product")
-    public BaseResponse<List<ReviewResponseVo>> getReview(@RequestParam("productUuid") String productUuid) {
+    public BaseResponse<List<ReviewResponseVo>> getReview(@PathVariable("productUuid") String productUuid) {
         List<ReviewResponseVo> vo = reviewService.getProductReview(productUuid)
                 .stream()
                 .map(ReviewResponseVo::toVo).toList();
