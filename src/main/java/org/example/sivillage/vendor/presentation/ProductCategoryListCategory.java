@@ -4,13 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.vendor.application.ProductCategoryListService;
 import org.example.sivillage.vendor.dto.in.ProductCategoryListRequestDto;
+import org.example.sivillage.vendor.dto.out.GetProductCategoryListResponseDto;
+import org.example.sivillage.vendor.vo.GetProductCategoryListResponseVo;
 import org.example.sivillage.vendor.vo.ProductCategoryListRequestVo;
-import org.example.sivillage.vendor.vo.ProductCategoryListResponseVo;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,18 +29,15 @@ public class ProductCategoryListCategory {
 
     @GetMapping("/product-category-list")
     //TODO: productCode가 null로 반환되는 문제 해결하기
-    public BaseResponse<List<ProductCategoryListResponseVo>> getProductCategoryListByCategories(
+    public BaseResponse<GetProductCategoryListResponseVo> getProductCategoryListByCategories(
             @RequestParam(value = "topCategoryCode", required = true) String topCategoryCode,
             @RequestParam(value = "middleCategoryCode", required = true) String middleCategoryCode,
             @RequestParam(value = "bottomCategoryCode", required = true) String bottomCategoryCode,
             @RequestParam(value = "subCategoryCode", required = false) String subCategoryCode) {
 
-        List<ProductCategoryListResponseVo> response = productCategoryListService.getProductCategoryListByCategories(
-                topCategoryCode, middleCategoryCode, bottomCategoryCode, subCategoryCode)
-                .stream()
-                .map(productCategoryList -> mapper.map(productCategoryList, ProductCategoryListResponseVo.class))
-                .collect(Collectors.toList());
+        GetProductCategoryListResponseDto responseDto = productCategoryListService.getProductCategoryListByCategories(
+                topCategoryCode, middleCategoryCode, bottomCategoryCode, subCategoryCode);
 
-        return new BaseResponse<>(response);
+        return new BaseResponse<>(mapper.map(responseDto, GetProductCategoryListResponseVo.class));
     }
 }
