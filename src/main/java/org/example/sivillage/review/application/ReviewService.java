@@ -28,12 +28,12 @@ public class ReviewService {
     private final SizeInfoRepository sizeInfoRepository;
     private final ProductService productService;
 
-    public void addReview(ReviewRequestDto dto, String authorEmail, String memberUuid, String productUuid) {
+    public void addReview(ReviewRequestDto dto, String authorEmail, String memberUuid, String productCode) {
 
         BeautyInfo beautyInfo = beautyInfoRepository.findByMemberUuid(memberUuid).orElse(new BeautyInfo());
         SizeInfo sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid).orElse(new SizeInfo());
-        String categoryPath = productService.getCategoryPath(productUuid).getCategoryPath();
-        Review review = Review.toEntity(dto, authorEmail, memberUuid, productUuid);
+        String categoryPath = productService.getCategoryPath(productCode).getCategoryPath();
+        Review review = Review.toEntity(dto, authorEmail, memberUuid, productCode);
         String info = "";
 
         if (categoryPath.contains("뷰티")) {
