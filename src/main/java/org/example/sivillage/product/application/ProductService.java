@@ -16,8 +16,7 @@ import org.example.sivillage.product.domain.ProductOption;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
-import org.example.sivillage.product.dto.out.GetProductsUuidListResponseDto;
-import org.example.sivillage.product.dto.out.GetProductsUuidResponseDto;
+import org.example.sivillage.product.dto.out.GetProductCodeListResponseDto;
 import org.example.sivillage.product.infrastructure.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -94,31 +93,27 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public GetProductsUuidListResponseDto getProductsUuid() {
+    public GetProductCodeListResponseDto getProductCodeList() {
         // TODO: 카테고리 id를 추가로 받아서 필터링하여 조회
         // TODO: 상품 옵션에 따라 필터링하여 조회
         // 일단 테스트 버전은 findAll로 다 가져오기
-        List<String> productUuids = productRepository.findAllProductCode();
+        List<String> productCodeList = productRepository.findAllProductCode();
 
-        List<GetProductsUuidResponseDto> getProductsUuidResponseDtos = productUuids.stream()
-                .map(GetProductsUuidResponseDto::new)
-                .collect(Collectors.toList());
-
-        return new GetProductsUuidListResponseDto(getProductsUuidResponseDtos);
+        return new GetProductCodeListResponseDto(productCodeList);
     }
 
-    public GetProductBriefInfoResponseDto getProductBriefInfo(String productUuid, String memberUuid) {
-        Product product = productRepository.findByProductCode(productUuid)
+    public GetProductBriefInfoResponseDto getProductBriefInfo(String productCode, String memberUuid) {
+        Product product = productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
 
         // TODO: 비회원인 경우 isLiked 무조건 false로 반환하기
-        boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productUuid, memberUuid)
+        boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productCode, memberUuid)
                 .orElse(false);
 
         // 기존 productImage 중 첫번째 이미지를 썸네일로 사용
         String productThumbnailUrl = getProductThumbnailUrl(product.getProductCode());
 
-        return GetProductBriefInfoResponseDto.toDto(product, isLiked, productThumbnailUrl);
+        return GetProductBriefInfoResponseDto.toDto(product, isLiked);
     }
 
     private String getProductThumbnailUrl(String productCode) {

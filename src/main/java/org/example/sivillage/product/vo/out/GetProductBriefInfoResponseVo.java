@@ -10,10 +10,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GetProductBriefInfoResponseVo {
-    private String productUuid;
+    private String productCode;
     private String brandEngName;
     private String productName;
     private Integer price;
     private boolean isLiked;
-    private String productThumbnailUrl;
 }

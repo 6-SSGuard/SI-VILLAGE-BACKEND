@@ -8,12 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.CustomUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.application.ProductLikeService;
-import org.example.sivillage.member.vo.out.GetProductsUuidResponseVo;
+import org.example.sivillage.member.vo.out.GetProductCodeListResponseVo;
 import org.example.sivillage.product.application.ProductService;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
-import org.example.sivillage.product.dto.out.GetProductsUuidListResponseDto;
+import org.example.sivillage.product.dto.out.GetProductCodeListResponseDto;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;
 import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
@@ -50,14 +50,13 @@ public class ProductController {
         return new BaseResponse<>(response);
     }
 
-    @Operation(summary = "상품 리스트에 대한 Uuid 조회", description = """
-            상품 리스트에 대한 Uuid들을 받아오고, 단일 상품 간략 정보 조회하는 api로 해당 Uuid값을 전달해서 요청하기
-            이미 프론트에서 받아온 정보는 캐싱처리
+    @Operation(summary = "상품 리스트에 대한 productCode 리스트 조회", description = """
+            상품 리스트에 대한 productCode들을 받아오고, 단일 상품 간략 정보 조회하는 api로 해당 productCode값을 전달해서 요청하면 됨.
             """)
     @GetMapping("/uuid")
-    public BaseResponse<GetProductsUuidResponseVo> getProductsUuid() {
-        GetProductsUuidListResponseDto responseDto = productService.getProductsUuid();
-        GetProductsUuidResponseVo response = mapper.map(responseDto, GetProductsUuidResponseVo.class);
+    public BaseResponse<GetProductCodeListResponseVo> getProductCodeList() {
+        GetProductCodeListResponseDto responseDto = productService.getProductCodeList();
+        GetProductCodeListResponseVo response = mapper.map(responseDto, GetProductCodeListResponseVo.class);
         return new BaseResponse<>(response);
     }
 
@@ -65,10 +64,10 @@ public class ProductController {
         '상품 리스트에 대한 Uuid 조회' api로 얻어낸 Uuid 정보를 전달하고, 이 api로 받아온 값을 상품 리스트 렌더링에 활용.
         이미 프론트에서 받아온 정보는 캐싱처리
         """)
-    @GetMapping("/brief/{productUuid}")
-    public BaseResponse<GetProductBriefInfoResponseVo> getProductBriefInfo(@PathVariable String productUuid, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    @GetMapping("/brief/{productCode}")
+    public BaseResponse<GetProductBriefInfoResponseVo> getProductBriefInfo(@PathVariable String productCode, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         String memberUuid = customUserDetails.getMemberUuid();
-        GetProductBriefInfoResponseDto responseDto = productService.getProductBriefInfo(productUuid, memberUuid);
+        GetProductBriefInfoResponseDto responseDto = productService.getProductBriefInfo(productCode, memberUuid);
         GetProductBriefInfoResponseVo response = mapper.map(responseDto, GetProductBriefInfoResponseVo.class);
         return new BaseResponse<>(response);
     }

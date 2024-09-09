@@ -1,4 +1,4 @@
-package org.example.sivillage.product.dto.out;
+package org.example.sivillage.member.vo.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class GetProductsUuidListResponseDto {
-    private List<GetProductsUuidResponseDto> productsUuidList;
+public class GetProductCodeListResponseVo {
+    private List<String> productCodeList;
 }
