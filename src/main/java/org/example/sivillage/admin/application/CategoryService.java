@@ -77,7 +77,7 @@ public class CategoryService {
             parseAndSaveCategory(jsonData);
 
         } catch (Exception e) {
-            throw new BaseException(BaseResponseStatus.JSON_PARSE_FAILED);
+            throw new BaseException(BaseResponseStatus.FILE_PARSE_FAILED);
         }
     }
 
@@ -93,7 +93,7 @@ public class CategoryService {
                 saveCategoryTree(rootNode, null);
             }
         } catch (Exception e) {
-            throw new BaseException(BaseResponseStatus.JSON_PARSE_FAILED);
+            throw new BaseException(BaseResponseStatus.FILE_PARSE_FAILED);
         }
     }
 

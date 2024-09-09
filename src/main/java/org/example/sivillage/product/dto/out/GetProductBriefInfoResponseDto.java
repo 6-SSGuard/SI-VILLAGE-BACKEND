@@ -1,6 +1,7 @@
 package org.example.sivillage.product.dto.out;
 
 import lombok.*;
+import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.product.domain.Product;
 
 @AllArgsConstructor
@@ -9,21 +10,19 @@ import org.example.sivillage.product.domain.Product;
 @Setter
 @Builder
 public class GetProductBriefInfoResponseDto {
-    private String productUuid;
+    private String productCode;
     private String brandEngName;
     private String productName;
     private Integer price;
     private boolean isLiked;
-    private String productThumbnailUrl;
 
-    public static GetProductBriefInfoResponseDto toDto(Product product, boolean isLiked, String productThumbnailUrl) {
+    public static GetProductBriefInfoResponseDto toDto(Product product, boolean isLiked, Brand brand) {
         return GetProductBriefInfoResponseDto.builder()
-                .productUuid(product.getProductUuid())
-                .brandEngName(product.getBrand().getBrandEngName())
+                .productCode(product.getProductCode())
                 .productName(product.getProductName())
                 .price(product.getPrice())
                 .isLiked(isLiked)
-                .productThumbnailUrl(productThumbnailUrl)
+                .brandEngName(brand.getBrandEngName())
                 .build();
     }
 }
