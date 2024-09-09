@@ -12,5 +12,5 @@ import java.util.List;
 @Getter
 @Setter
 public class GetProductCodeListResponseDto {
-    private List<String> productsCodeList;
+    private List<String> productCodeList;
 }

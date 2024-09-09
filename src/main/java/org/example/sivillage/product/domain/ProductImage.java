@@ -25,13 +25,13 @@ public class ProductImage {
     private String productCode;
 
     @Column(nullable = false)
-    private boolean isThumbnail;
+    private boolean thumbnail;
 
     public static ProductImage createProductImage(CreateProductRequestDto.ProductImageDto imageDto, String productCode) {
         return ProductImage.builder()
                 .productImageUrl(imageDto.getProductImageUrl())
                 .productCode(productCode)
-                .isThumbnail(imageDto.isThumbnail())
+                .thumbnail(imageDto.isThumbnail())
                 .build();
     }
 }
