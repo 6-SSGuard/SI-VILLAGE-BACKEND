@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/product")
 public class ProductController {
     private final ProductService productService;
-    private final ProductLikeService productLikeService;
     private final ModelMapper mapper;
 
     @Operation(summary = "상품 생성", description = """
