@@ -89,7 +89,10 @@ public class ProductService {
         boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productCode, memberUuid)
                 .orElse(false);
 
-        return GetProductDetailsResponseDto.toDto(product, productOption, likesCount, isLiked);
+        Brand brand = brandRepository.findByBrandId(product.getBrandId())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
+
+        return GetProductDetailsResponseDto.toDto(product, productOption, likesCount, isLiked, brand);
     }
 
     @Transactional(readOnly = true)
@@ -111,7 +114,10 @@ public class ProductService {
         boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productCode, memberUuid)
                 .orElse(false);
 
-        return GetProductBriefInfoResponseDto.toDto(product, isLiked);
+        Brand brand = brandRepository.findByBrandId(product.getBrandId())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
+
+        return GetProductBriefInfoResponseDto.toDto(product, isLiked, brand);
     }
 
     @Transactional(readOnly = true)

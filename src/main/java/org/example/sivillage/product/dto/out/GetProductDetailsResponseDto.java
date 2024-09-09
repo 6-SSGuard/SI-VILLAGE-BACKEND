@@ -2,6 +2,7 @@ package org.example.sivillage.product.dto.out;
 
 import lombok.Builder;
 import lombok.Getter;
+import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductOption;
 
@@ -21,7 +22,7 @@ public class GetProductDetailsResponseDto {
     private boolean isLiked;
 
     public static GetProductDetailsResponseDto toDto(Product product, ProductOption productOption, Integer likesCount,
-                                                     boolean isLiked) {
+                                                     boolean isLiked, Brand brand) {
         return GetProductDetailsResponseDto.builder()
                 .productUuid(product.getProductCode())
                 .productName(product.getProductName())
@@ -31,6 +32,8 @@ public class GetProductDetailsResponseDto {
                 .stock(productOption.getStock())
                 .likesCount(likesCount)
                 .isLiked(isLiked)
+                .brandEngName(brand.getBrandEngName())
+                .brandKorName(brand.getBrandKorName())
                 .build();
     }
 }
