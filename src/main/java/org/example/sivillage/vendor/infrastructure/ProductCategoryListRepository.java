@@ -8,13 +8,13 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProductCategoryListRepository extends JpaRepository<ProductCategoryList, Long>  {
-    @Query("SELECT p FROM ProductCategoryList p WHERE p.topCategoryCode = :topCategoryCode " +
-            "AND p.middleCategoryCode = :middleCategoryCode " +
-            "AND p.bottomCategoryCode = :bottomCategoryCode " +
-            "AND p.subCategoryCode = :subCategoryCode")
-    List<ProductCategoryList> findByCategories(
-            @Param("topCategoryCode") String topCategoryCode,
-            @Param("middleCategoryCode") String middleCategoryCode,
-            @Param("bottomCategoryCode") String bottomCategoryCode,
-            @Param("subCategoryCode") String subCategoryCode);
+    @Query("SELECT p.productCode FROM ProductCategoryList p WHERE " +
+            "(:topCategoryCode IS NULL OR p.topCategoryCode = :topCategoryCode) AND " +
+            "(:middleCategoryCode IS NULL OR p.middleCategoryCode = :middleCategoryCode) AND " +
+            "(:bottomCategoryCode IS NULL OR p.bottomCategoryCode = :bottomCategoryCode) AND " +
+            "(:subCategoryCode IS NULL OR p.subCategoryCode = :subCategoryCode)")
+    List<String> findAllProductCodeByCategories(@Param("topCategoryCode") String topCategoryCode,
+                                                @Param("middleCategoryCode") String middleCategoryCode,
+                                                @Param("bottomCategoryCode") String bottomCategoryCode,
+                                                @Param("subCategoryCode") String subCategoryCode);
 }

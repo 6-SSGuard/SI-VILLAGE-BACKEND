@@ -1,5 +1,6 @@
 package org.example.sivillage.vendor.presentation;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.vendor.application.ProductCategoryListService;
@@ -13,11 +14,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/vendor")
-public class ProductCategoryListCategory {
+public class ProductCategoryListController {
 
     private final ProductCategoryListService productCategoryListService;
     private final ModelMapper mapper;
 
+    @Operation(summary = "상품 카테고리 리스트 추가", description = """
+    subCategoryCode는 필수가 아니므로, 공백으로 넘겨줘도 됨.
+    """)
     @PostMapping("/product-category-list")
     public BaseResponse<Void> addProductByCategories(@RequestBody ProductCategoryListRequestVo productCategoryListRequestVo) {
 
@@ -27,8 +31,8 @@ public class ProductCategoryListCategory {
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "상품 카테고리 리스트 조회", description = "상품 카테고리 리스트를 조회합니다.")
     @GetMapping("/product-category-list")
-    //TODO: productCode가 null로 반환되는 문제 해결하기
     public BaseResponse<GetProductCategoryListResponseVo> getProductCategoryListByCategories(
             @RequestParam(value = "topCategoryCode", required = true) String topCategoryCode,
             @RequestParam(value = "middleCategoryCode", required = true) String middleCategoryCode,

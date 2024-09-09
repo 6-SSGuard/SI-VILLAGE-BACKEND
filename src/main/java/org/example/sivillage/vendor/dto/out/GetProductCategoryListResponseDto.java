@@ -10,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetProductCategoryListResponseDto {
-    private List<GetProductCategoryResponseDto> productCodes;
+    private List<String> productCodeList;
 
 }
