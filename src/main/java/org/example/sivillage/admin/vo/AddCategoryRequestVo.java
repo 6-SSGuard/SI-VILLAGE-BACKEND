@@ -11,6 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AddCategoryRequestVo {
     private String categoryName;
-    private String categoryDescription;
     private String parentCategoryName;
 }

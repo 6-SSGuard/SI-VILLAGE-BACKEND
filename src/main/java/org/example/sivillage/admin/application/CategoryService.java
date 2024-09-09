@@ -22,21 +22,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class CategoryService {
-    public static final String ROOT_CATEGORY_CODE = "top";
     private final CategoryRepository categoryRepository;
 
     public void addCategory(AddCategoryRequestDto request) {
 
-        if (Boolean.TRUE.equals(categoryRepository.existsByCategoryName(request.getCategoryName()))) {
-            throw new BaseException(BaseResponseStatus.DUPLICATE_CATEGORY_NAME);
-        }
-
         Category category;
 
         if (request.getParentCategoryName().isEmpty()) {
+            checkDuplicatedCategory(request.getCategoryName());
             category = Category.createRootCategory(request);
         }
         else {
+            checkDuplicatedCategory(request.getCategoryName());
             Category parentCategory = findCategoryByCategoryName(request.getParentCategoryName());
             category = Category.createChildCategory(request, parentCategory);
         }
@@ -44,10 +41,16 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
+    private void checkDuplicatedCategory(String categoryName) {
+        if (Boolean.TRUE.equals(categoryRepository.existsByCategoryName(categoryName))) {
+            throw new BaseException(BaseResponseStatus.DUPLICATE_CATEGORY_NAME);
+        }
+    }
+
     public GetSubCategoriesResponseDto getSubCategories(String parentCategoryName) {
         List<CategoryDto> categories;
 
-        if (parentCategoryName.isEmpty()) {
+        if (parentCategoryName == null) {
             // 최상위 카테고리를 가져옴
             categories = categoryRepository.findByParentIsNull()
                     .stream()
