@@ -38,11 +38,11 @@ public class CategoryController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "하위 카테고리 리스트 조회", description = "parentCategoryCode =\"top\"입력시 최상위 카테고리 리스트 조회")
-    @GetMapping("/{parentCategoryCode}")
+    @Operation(summary = "하위 카테고리 리스트 조회", description = "parentCategoryName =\"\"입력시 최상위 카테고리 리스트 조회")
+    @GetMapping("/{parentCategoryName}")
     public BaseResponse<GetSubCategoriesResponseVo> getSubCategories(
-            @PathVariable String parentCategoryCode) {
-        GetSubCategoriesResponseDto responseDto = categoryService.getSubCategories(parentCategoryCode);
+            @PathVariable String parentCategoryName) {
+        GetSubCategoriesResponseDto responseDto = categoryService.getSubCategories(parentCategoryName);
         GetSubCategoriesResponseVo response = mapper.map(responseDto, GetSubCategoriesResponseVo.class);
         return new BaseResponse<>(response);
     }

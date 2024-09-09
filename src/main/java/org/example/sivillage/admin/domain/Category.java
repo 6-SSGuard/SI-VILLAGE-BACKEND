@@ -6,8 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.admin.dto.in.AddCategoryRequestDto;
-
-import java.util.UUID;
+import org.example.sivillage.global.common.UuidGenerator;
 
 @Getter
 @NoArgsConstructor
@@ -40,7 +39,7 @@ public class Category {
     public static Category createRootCategory(AddCategoryRequestDto request) {
         return Category.builder()
                 .categoryName(request.getCategoryName())
-                .categoryCode(generateCategoryCode())
+                .categoryCode(UuidGenerator.generateCategoryCode())
                 .depth(0)
                 .parent(null)
                 .build();
@@ -49,13 +48,9 @@ public class Category {
     public static Category createChildCategory(AddCategoryRequestDto request, Category parentCategory) {
         return Category.builder()
                 .categoryName(request.getCategoryName())
-                .categoryCode(generateCategoryCode())
+                .categoryCode(UuidGenerator.generateCategoryCode())
                 .parent(parentCategory)
                 .depth(parentCategory.getDepth() + 1)
-               .build();
-    }
-
-    public static String generateCategoryCode() {
-        return UUID.randomUUID().toString().substring(0,8);
+                .build();
     }
 }

@@ -27,39 +27,39 @@ public class CategoryService {
 
     public void addCategory(AddCategoryRequestDto request) {
 
-        if (categoryRepository.existsByCategoryName(request.getCategoryName())) {
+        if (Boolean.TRUE.equals(categoryRepository.existsByCategoryName(request.getCategoryName()))) {
             throw new BaseException(BaseResponseStatus.DUPLICATE_CATEGORY_NAME);
         }
 
         Category category;
 
-        if (request.getParentCategoryCode().equals(ROOT_CATEGORY_CODE)) {
+        if (request.getParentCategoryName().isEmpty()) {
             category = Category.createRootCategory(request);
         }
         else {
-            Category parentCategory = findCategoryByCategoryCode(request.getParentCategoryCode());
+            Category parentCategory = findCategoryByCategoryName(request.getParentCategoryName());
             category = Category.createChildCategory(request, parentCategory);
         }
 
         categoryRepository.save(category);
     }
 
-    public GetSubCategoriesResponseDto getSubCategories(String parentCategoryCode) {
+    public GetSubCategoriesResponseDto getSubCategories(String parentCategoryName) {
         List<CategoryDto> categories;
 
-        if (parentCategoryCode.equals("top")) {
+        if (parentCategoryName.isEmpty()) {
             // 최상위 카테고리를 가져옴
             categories = categoryRepository.findByParentIsNull()
                     .stream()
                     .map(CategoryDto::toDto)
-                    .collect(Collectors.toList());
+                    .toList();
         } else {
             // 특정 부모 카테고리의 하위 카테고리를 가져옴
-            Category parentCategory = findCategoryByCategoryCode(parentCategoryCode);
+            Category parentCategory = findCategoryByCategoryName(parentCategoryName);
             categories = categoryRepository.findByParent(parentCategory)
                     .stream()
                     .map(CategoryDto::toDto)
-                    .collect(Collectors.toList());
+                    .toList();
         }
 
         return new GetSubCategoriesResponseDto(categories);
@@ -115,7 +115,7 @@ public class CategoryService {
     private Category addCategoryWithParentCategory(AddCategoryRequestDto request, Category parentCategory) {
         Category category;
 
-        if (parentCategory == null || request.getParentCategoryCode() == null) {
+        if (parentCategory == null) {
             category = Category.createRootCategory(request);
         } else {
             category = Category.createChildCategory(request, parentCategory);
@@ -130,8 +130,8 @@ public class CategoryService {
     }
 
 
-    private Category findCategoryByCategoryCode(String categoryCode) {
-        return categoryRepository.findByCategoryCode(categoryCode)
+    private Category findCategoryByCategoryName(String categoryName) {
+        return categoryRepository.findByCategoryName(categoryName)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
     }
 

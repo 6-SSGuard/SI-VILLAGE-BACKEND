@@ -12,5 +12,5 @@ import lombok.Setter;
 public class AddCategoryRequestVo {
     private String categoryName;
     private String categoryDescription;
-    private String parentCategoryCode;
+    private String parentCategoryName;
 }
