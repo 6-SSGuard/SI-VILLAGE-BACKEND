@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.BeautyInfo.domain.BeautyInfo;
 import org.example.sivillage.BeautyInfo.infrastructure.BeautyInfoRepository;
+import org.example.sivillage.review.domain.CategoryType;
 import org.example.sivillage.product.application.ProductService;
 import org.example.sivillage.review.domain.Review;
 import org.example.sivillage.review.domain.ReviewImage;
@@ -32,23 +33,10 @@ public class ReviewService {
 
         BeautyInfo beautyInfo = beautyInfoRepository.findByMemberUuid(memberUuid).orElse(new BeautyInfo());
         SizeInfo sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid).orElse(new SizeInfo());
-        String categoryPath = productService.getCategoryPath(productUuid).getCategoryPath();
         Review review = Review.toEntity(dto, authorEmail, memberUuid, productUuid);
-        String info = "";
 
-        if (categoryPath.contains("뷰티")) {
-            info = beautyInfo.getSkinType() != null ? String.valueOf(beautyInfo.getSkinType()) : ""; }
-        if (categoryPath.contains("메이크업")) {
-            info = beautyInfo.getSkinTone() != null ? String.valueOf(beautyInfo.getSkinTone()) : ""; }
-        if (categoryPath.contains("헤어케어")) {
-            info = beautyInfo.getScalpTone() != null ? String.valueOf(beautyInfo.getScalpTone()) : ""; }
-        if (categoryPath.contains("슈즈")) {
-            info = sizeInfo.getShoeSize() != null ? sizeInfo.getShoeSize() : ""; }
-
-        if (!categoryPath.contains("뷰티") && !categoryPath.contains("메이크업") && !categoryPath.contains("헤어케어") && !categoryPath.contains("슈즈")) {
-            if (sizeInfo.getTopSize() != null) {
-                info = "키: " + sizeInfo.getHeight() + "cm, 몸무게: " + sizeInfo.getWeight() + "kg, 평소 사이즈: " + sizeInfo.getTopSize();} else {
-                info = ""; } }
+        String info = CategoryType.fromCategoryPath(productService.getCategoryPath(productUuid).getCategoryPath())
+                        .getInfo(beautyInfo, sizeInfo);
 
         review.toEntityMemberInfo(info);
         reviewRepository.save(review);
@@ -86,17 +74,9 @@ public class ReviewService {
 
     // 리뷰 목록 가져오는 메소드
     private List<ReviewResponseDto> getReviewList(List<Review> reviews) {
-        if (reviews.isEmpty()) {
-            return Collections.emptyList();
-        }
-        // 리뷰 있는 경우
-        return reviews.stream()
+        return reviews.isEmpty() ? Collections.emptyList() : reviews.stream()
                 .map(review -> {
-                    // 리뷰 이미지 조회
-                    List<ReviewImage> reviewImages = reviewImageRepository.findByReview(review);
-
-                    // 이미지 URL 목록으로 변환
-                    List<String> images = reviewImages.stream()
+                    List<String> images = reviewImageRepository.findByReview(review).stream()
                             .map(ReviewImage::getReviewImageUrl)
                             .toList();
                     return ReviewResponseDto.toDto(review, images);
