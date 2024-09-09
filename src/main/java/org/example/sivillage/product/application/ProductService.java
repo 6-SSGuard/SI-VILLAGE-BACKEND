@@ -13,6 +13,7 @@ import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductImage;
 import org.example.sivillage.product.domain.ProductOption;
+import org.example.sivillage.product.dto.out.GetProductThumbnailUrlResponseDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
@@ -24,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -71,7 +71,7 @@ public class ProductService {
         productImageRepository.saveAll(
                 productImageUrls.stream()
                         .map(imageDto -> ProductImage.createProductImage(imageDto, productCode))
-                        .collect(Collectors.toList())
+                        .toList()
         );
     }
 
@@ -102,6 +102,7 @@ public class ProductService {
         return new GetProductCodeListResponseDto(productCodeList);
     }
 
+    @Transactional(readOnly = true)
     public GetProductBriefInfoResponseDto getProductBriefInfo(String productCode, String memberUuid) {
         Product product = productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
@@ -110,19 +111,17 @@ public class ProductService {
         boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productCode, memberUuid)
                 .orElse(false);
 
-        // 기존 productImage 중 첫번째 이미지를 썸네일로 사용
-        String productThumbnailUrl = getProductThumbnailUrl(product.getProductCode());
-
         return GetProductBriefInfoResponseDto.toDto(product, isLiked);
     }
 
-    private String getProductThumbnailUrl(String productCode) {
-        return productImageRepository.findByProductCode(productCode)
-                .stream()
-                .map(ProductImage::getProductImageUrl)
-                .findFirst()
-                .orElse(null);
+    @Transactional(readOnly = true)
+    public GetProductThumbnailUrlResponseDto getProductThumbnailUrl(String productCode) {
+        String thumbnailUrl = productImageRepository.findByProductCodeAndThumbnailTrue(productCode)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_IMAGE_NOT_FOUND)).getProductImageUrl();
+
+        return new GetProductThumbnailUrlResponseDto(thumbnailUrl);
     }
+
 
 //    public GetCategoryPathResponseDto getCategoryPath(String productUuid) {
 //        Product product = productRepository.findByProductUuid(productUuid)

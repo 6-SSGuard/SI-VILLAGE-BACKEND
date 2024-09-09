@@ -14,9 +14,11 @@ import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.example.sivillage.product.dto.out.GetProductCodeListResponseDto;
+import org.example.sivillage.product.dto.out.GetProductThumbnailUrlResponseDto;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;
 import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
+import org.example.sivillage.product.vo.out.GetProductThumbnailUrlResponseVo;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +71,16 @@ public class ProductController {
         String memberUuid = customUserDetails.getMemberUuid();
         GetProductBriefInfoResponseDto responseDto = productService.getProductBriefInfo(productCode, memberUuid);
         GetProductBriefInfoResponseVo response = mapper.map(responseDto, GetProductBriefInfoResponseVo.class);
+        return new BaseResponse<>(response);
+    }
+
+    @Operation(summary = "상품 썸네일 URL 조회", description = """
+        상품 썸네일 URL을 조회하는 API
+        """)
+    @GetMapping("/thumbnail/{productCode}")
+    public BaseResponse<GetProductThumbnailUrlResponseVo> getProductThumbnailUrl(@PathVariable String productCode) {
+        GetProductThumbnailUrlResponseDto responseDto = productService.getProductThumbnailUrl(productCode);
+        GetProductThumbnailUrlResponseVo response = mapper.map(responseDto, GetProductThumbnailUrlResponseVo.class);
         return new BaseResponse<>(response);
     }
 

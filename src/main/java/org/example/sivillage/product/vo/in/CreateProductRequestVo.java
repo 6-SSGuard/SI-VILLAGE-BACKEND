@@ -53,7 +53,7 @@ public class CreateProductRequestVo {
     @Builder
     public static class ProductImageDto {
         private String productImageUrl;
-        private boolean isThumbnail;
+        private boolean thumbnail;
     }
 
 }
