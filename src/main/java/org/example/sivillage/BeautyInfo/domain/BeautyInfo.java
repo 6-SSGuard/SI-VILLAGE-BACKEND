@@ -2,9 +2,6 @@ package org.example.sivillage.BeautyInfo.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.ScalpTone;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinTone;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinType;
 import org.example.sivillage.global.common.BaseEntity;
 
 
@@ -17,17 +14,14 @@ public class BeautyInfo extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private SkinType skinType;
+    private String skinType;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private SkinTone skinTone;
+    private String skinTone;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ScalpTone scalpTone;
+    private String scalpTone;
 
     @Column(nullable = false)
     private String beautyKeyword;
@@ -36,7 +30,7 @@ public class BeautyInfo extends BaseEntity {
     private String memberUuid;
 
     @Builder
-    public BeautyInfo(Long id, SkinType skinType, SkinTone skinTone, ScalpTone scalpTone, String beautyKeyword, String memberUuid) {
+    public BeautyInfo(Long id, String skinType, String skinTone, String scalpTone, String beautyKeyword, String memberUuid) {
         this.id = id;
         this.skinType = skinType;
         this.skinTone = skinTone;

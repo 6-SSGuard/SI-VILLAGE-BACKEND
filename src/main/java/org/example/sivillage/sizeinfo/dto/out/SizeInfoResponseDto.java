@@ -20,7 +20,7 @@ public class SizeInfoResponseDto {
 
     private String shoeSize;
 
-    public static SizeInfoResponseDto from (SizeInfo sizeInfo) {
+    public static SizeInfoResponseDto from(SizeInfo sizeInfo) {
         return SizeInfoResponseDto.builder()
                 .height(sizeInfo.getHeight())
                 .weight(sizeInfo.getWeight())
@@ -40,7 +40,7 @@ public class SizeInfoResponseDto {
                 .build();
     }
 
-    public SizeInfoResponseVo toResponseVo(){
+    public SizeInfoResponseVo toResponseVo() {
         return SizeInfoResponseVo.builder()
                 .height(height)
                 .weight(weight)
@@ -52,7 +52,7 @@ public class SizeInfoResponseDto {
 
 
     @Builder
-    public SizeInfoResponseDto(Integer height, Integer weight, String topSize, String bottomSize, String shoeSize){
+    public SizeInfoResponseDto(Integer height, Integer weight, String topSize, String bottomSize, String shoeSize) {
         this.height = height;
         this.weight = weight;
         this.topSize = topSize;

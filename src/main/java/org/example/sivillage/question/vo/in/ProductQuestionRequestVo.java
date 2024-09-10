@@ -4,16 +4,10 @@ package org.example.sivillage.question.vo.in;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.example.sivillage.question.dto.in.ProductQuestionRequestDto;
 
-@Builder
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class ProductQuestionRequestVo {
 
     @Schema(description = "문의 내용", example = "배송 관련 문의합니다.", required = true)
@@ -25,10 +19,11 @@ public class ProductQuestionRequestVo {
     @NotNull
     private boolean privateMessage;
 
-    public static ProductQuestionRequestDto toDto(ProductQuestionRequestVo vo){
+    public static ProductQuestionRequestDto toDto(ProductQuestionRequestVo productQuestionRequestVo, String authorEmail){
         return ProductQuestionRequestDto.builder()
-                .questionContent(vo.getQuestionContent())
-                .privateMessage(vo.isPrivateMessage())
+                .questionContent(productQuestionRequestVo.getQuestionContent())
+                .privateMessage(productQuestionRequestVo.isPrivateMessage())
+                .authorEmail(authorEmail)
                 .build();
     }
 

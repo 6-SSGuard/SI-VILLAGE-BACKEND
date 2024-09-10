@@ -1,14 +1,11 @@
 package org.example.sivillage.question.domain;
 
-
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.global.common.BaseEntity;
-import org.example.sivillage.question.dto.in.ProductQuestionRequestDto;
-
 
 @Entity
 @Getter

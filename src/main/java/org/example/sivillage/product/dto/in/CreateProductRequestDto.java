@@ -3,7 +3,6 @@ package org.example.sivillage.product.dto.in;
 import lombok.*;
 import org.example.sivillage.product.domain.Color;
 import org.example.sivillage.productoption.Size;
-import org.example.sivillage.sizeinfo.domain.sizeenum.ShoeSize;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class CreateProductRequestDto {
 
     private Size size;
 
-    private ShoeSize shoeSize;
+    private String shoeSize;
 
     private String brandEngName;
 

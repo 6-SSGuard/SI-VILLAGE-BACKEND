@@ -5,9 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.sizeinfo.dto.in.SizeInfoRequestDto;
-import org.example.sivillage.sizeinfo.domain.sizeenum.BottomSize;
-import org.example.sivillage.sizeinfo.domain.sizeenum.ShoeSize;
-import org.example.sivillage.sizeinfo.domain.sizeenum.TopSize;
 
 @Getter
 @NoArgsConstructor
@@ -23,25 +20,24 @@ public class SizeInfoRequestVo {
 
     @Schema(description = "상의 사이즈", example = "XS", required = true)
     @NotNull
-    private TopSize topSize;
+    private String topSize;
 
-    @Schema(description = "하의 사이즈", example = "SIZE_24", required = true)
+    @Schema(description = "하의 사이즈", example = "24", required = true)
     @NotNull
-    private BottomSize bottomSize;
+    private String bottomSize;
 
-    @Schema(description = "신발 사이즈", example = "SIZE_240", required = true)
+    @Schema(description = "신발 사이즈", example = "240", required = true)
     @NotNull
-    private ShoeSize shoeSize;
+    private String shoeSize;
 
-    public static SizeInfoRequestDto toDto (SizeInfoRequestVo vo) {
+    public static SizeInfoRequestDto toDto (SizeInfoRequestVo sizeInfoRequestVo) {
         return SizeInfoRequestDto.builder()
-                .height(vo.getHeight())
-                .weight(vo.getWeight())
-                .topSize(vo.getTopSize().toString())
-                .bottomSize(vo.getBottomSize().getDescription())
-                .shoeSize(vo.getShoeSize().getDescription())
+                .height(sizeInfoRequestVo.getHeight())
+                .weight(sizeInfoRequestVo.getWeight())
+                .topSize(sizeInfoRequestVo.getTopSize())
+                .bottomSize(sizeInfoRequestVo.getBottomSize())
+                .shoeSize(sizeInfoRequestVo.getShoeSize())
                 .build();
     }
-
 
 }

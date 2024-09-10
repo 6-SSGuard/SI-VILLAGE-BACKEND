@@ -3,9 +3,6 @@ package org.example.sivillage.BeautyInfo.dto.out;
 import lombok.Builder;
 import lombok.Getter;
 import org.example.sivillage.BeautyInfo.domain.BeautyInfo;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.ScalpTone;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinTone;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinType;
 import org.example.sivillage.BeautyInfo.vo.out.BeautyInfoResponseVo;
 
 import java.util.Arrays;
@@ -15,9 +12,9 @@ import java.util.stream.Collectors;
 @Getter
 public class BeautyInfoResponseDto {
 
-    private SkinType skinType;
-    private SkinTone skinTone;
-    private ScalpTone scalpTone;
+    private String skinType;
+    private String skinTone;
+    private String scalpTone;
     private List<String> beautyKeyword;
 
 
@@ -27,7 +24,7 @@ public class BeautyInfoResponseDto {
                 .collect(Collectors.toList());
     }
 
-    public static BeautyInfoResponseDto from (BeautyInfo beautyInfo) {
+    public static BeautyInfoResponseDto from(BeautyInfo beautyInfo) {
         return BeautyInfoResponseDto.builder()
                 .skinType(beautyInfo.getSkinType())
                 .skinTone(beautyInfo.getSkinTone())
@@ -36,7 +33,7 @@ public class BeautyInfoResponseDto {
                 .build();
     }
 
-    public static BeautyInfoResponseDto emptyResponse() {
+    public static BeautyInfoResponseDto defaultResponse() {
         return BeautyInfoResponseDto.builder()
                 .skinType(null)
                 .skinTone(null)
@@ -55,7 +52,7 @@ public class BeautyInfoResponseDto {
     }
 
     @Builder
-    public BeautyInfoResponseDto(SkinType skinType, SkinTone skinTone, ScalpTone scalpTone, List<String> beautyKeyword){
+    public BeautyInfoResponseDto(String skinType, String skinTone, String scalpTone, List <String> beautyKeyword){
         this.skinType = skinType;
         this.skinTone = skinTone;
         this.scalpTone = scalpTone;

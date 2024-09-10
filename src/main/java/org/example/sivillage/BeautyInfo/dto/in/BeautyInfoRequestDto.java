@@ -2,18 +2,15 @@ package org.example.sivillage.BeautyInfo.dto.in;
 import lombok.Builder;
 import lombok.Getter;
 import org.example.sivillage.BeautyInfo.domain.BeautyInfo;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinType;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.ScalpTone;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinTone;
 
 @Getter
 public class BeautyInfoRequestDto {
 
-    private SkinType skinType;
+    private String skinType;
 
-    private SkinTone skinTone;
+    private String skinTone;
 
-    private ScalpTone scalpTone;
+    private String scalpTone;
 
     private String beautyKeyword;
 
@@ -40,7 +37,7 @@ public class BeautyInfoRequestDto {
     }
 
     @Builder
-    public BeautyInfoRequestDto(SkinType skinType, SkinTone skinTone, ScalpTone scalpTone, String beautyKeyword) {
+    public BeautyInfoRequestDto(String skinType, String skinTone, String scalpTone, String beautyKeyword) {
         this.skinType = skinType;
         this.skinTone = skinTone;
         this.scalpTone = scalpTone;

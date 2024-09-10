@@ -1,9 +1,6 @@
 package org.example.sivillage.BeautyInfo.vo.out;
 
 import lombok.*;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.ScalpTone;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinTone;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinType;
 
 import java.util.List;
 
@@ -13,9 +10,9 @@ import java.util.List;
 @NoArgsConstructor
 public class BeautyInfoResponseVo {
 
-    private SkinType skinType;
-    private SkinTone skinTone;
-    private ScalpTone scalpTone;
+    private String skinType;
+    private String skinTone;
+    private String scalpTone;
     private List<String> beautyKeyword;
 
 }

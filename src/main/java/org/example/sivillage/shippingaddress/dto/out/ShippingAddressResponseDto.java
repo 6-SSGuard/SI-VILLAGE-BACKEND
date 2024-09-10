@@ -1,15 +1,11 @@
 package org.example.sivillage.shippingaddress.dto.out;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.example.sivillage.shippingaddress.domain.ShippingAddress;
+import org.example.sivillage.shippingaddress.vo.out.ShippingAddressResponseVo;
 
 @Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class ShippingAddressResponseDto {
     private Long shippingAddressId;
 
@@ -27,9 +23,9 @@ public class ShippingAddressResponseDto {
 
     private boolean defaultAddress;
 
-    public static ShippingAddressResponseDto toDto (ShippingAddress shippingAddress) {
+    public static ShippingAddressResponseDto from(ShippingAddress shippingAddress) {
         return ShippingAddressResponseDto.builder()
-                .shippingAddressId(shippingAddress.getShippingAddressId())
+                .shippingAddressId(shippingAddress.getId())
                 .addressName(shippingAddress.getAddressName())
                 .recipient(shippingAddress.getRecipient())
                 .phone(shippingAddress.getPhone())
@@ -39,4 +35,32 @@ public class ShippingAddressResponseDto {
                 .defaultAddress(shippingAddress.isDefaultAddress())
                 .build();
     }
+
+    public ShippingAddressResponseVo toResponseVo() {
+        return ShippingAddressResponseVo.builder()
+                .shippingAddressId(shippingAddressId)
+                .addressName(addressName)
+                .recipient(recipient)
+                .phone(phone)
+                .address(address)
+                .detailedAddress(detailedAddress)
+                .postalCode(postalCode)
+                .defaultAddress(defaultAddress)
+                .build();
+    }
+
+
+
+    @Builder
+    public ShippingAddressResponseDto(Long shippingAddressId, String addressName, String recipient, String phone, String address, String detailedAddress, String postalCode, boolean defaultAddress) {
+        this.shippingAddressId = shippingAddressId;
+        this.addressName = addressName;
+        this.recipient = recipient;
+        this.phone = phone;
+        this.address = address;
+        this.detailedAddress = detailedAddress;
+        this.postalCode = postalCode;
+        this.defaultAddress = defaultAddress;
+    }
+
 }

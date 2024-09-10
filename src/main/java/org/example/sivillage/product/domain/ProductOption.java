@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.productoption.Size;
-import org.example.sivillage.sizeinfo.domain.sizeenum.ShoeSize;
 
 @Entity
 @Getter
@@ -31,9 +30,8 @@ public class ProductOption {
     @Column(nullable = true)
     private Size size;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = true)
-    private ShoeSize shoeSize;
+    private String shoeSize;
 
     @Column(nullable = true)
     private String volume;
