@@ -4,10 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.example.sivillage.BeautyInfo.domain.beautyenum.BeautyKeyword;
 import org.example.sivillage.BeautyInfo.domain.beautyenum.ScalpTone;
 import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinTone;
@@ -17,10 +14,7 @@ import org.example.sivillage.BeautyInfo.dto.in.BeautyInfoRequestDto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Builder
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 public class BeautyInfoRequestVo {
 
     @Schema(description = "피부타입", example = "건성", required = true)

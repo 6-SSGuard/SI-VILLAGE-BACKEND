@@ -6,7 +6,6 @@ import org.example.sivillage.BeautyInfo.domain.beautyenum.ScalpTone;
 import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinTone;
 import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinType;
 import org.example.sivillage.global.common.BaseEntity;
-import org.example.sivillage.BeautyInfo.dto.in.BeautyInfoRequestDto;
 
 
 @Entity
@@ -16,8 +15,7 @@ public class BeautyInfo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "beauty_info_id")
-    private Long beautyInfoId;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -38,31 +36,14 @@ public class BeautyInfo extends BaseEntity {
     private String memberUuid;
 
     @Builder
-    public BeautyInfo(SkinType skinType, SkinTone skinTone, ScalpTone scalpTone, String beautyKeyword, String memberUuid) {
+    public BeautyInfo(Long id, SkinType skinType, SkinTone skinTone, ScalpTone scalpTone, String beautyKeyword, String memberUuid) {
+        this.id = id;
         this.skinType = skinType;
         this.skinTone = skinTone;
         this.scalpTone = scalpTone;
         this.beautyKeyword = beautyKeyword;
         this.memberUuid = memberUuid;
     }
-
-    public static BeautyInfo toEntity (BeautyInfoRequestDto dto, String memberUuid) {
-        return BeautyInfo.builder()
-                .skinType(dto.getSkinType())
-                .skinTone(dto.getSkinTone())
-                .scalpTone(dto.getScalpTone())
-                .beautyKeyword(dto.getBeautyKeyword())
-                .memberUuid(memberUuid)
-                .build();
-    }
-
-    public void change(BeautyInfoRequestDto dto) {
-        this.skinType = dto.getSkinType();
-        this.skinTone = dto.getSkinTone();
-        this.scalpTone = dto.getScalpTone();
-        this.beautyKeyword = dto.getBeautyKeyword();
-    }
-
 
 }
 

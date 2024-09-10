@@ -17,8 +17,7 @@ public class ProductQuestion extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_question_id")
-    private Long productQuestionId;
+    private Long Id;
 
     @Column(nullable = false)
     private String authorEmail;
@@ -36,23 +35,12 @@ public class ProductQuestion extends BaseEntity {
     private String productUuid;
 
     @Builder
-    public ProductQuestion(Long productQuestionId, String authorEmail, String questionContent, boolean privateMessage, String memberUuid, String productUuid){
+    public ProductQuestion(Long Id, String authorEmail, String questionContent, boolean privateMessage, String memberUuid, String productUuid) {
+        this.Id = Id;
         this.authorEmail = authorEmail;
         this.questionContent = questionContent;
         this.privateMessage = privateMessage;
         this.memberUuid = memberUuid;
         this.productUuid = productUuid;
     }
-
-    public static ProductQuestion toEntity(ProductQuestionRequestDto dto, String authorEmail, String productUuid, String memberUuid){
-        return ProductQuestion.builder()
-                .authorEmail(authorEmail)
-                .questionContent(dto.getQuestionContent())
-                .privateMessage(dto.isPrivateMessage())
-                .memberUuid(memberUuid)
-                .productUuid(productUuid)
-                .build();
-
-    }
-
 }

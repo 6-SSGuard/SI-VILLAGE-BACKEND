@@ -10,6 +10,8 @@ import org.example.sivillage.shippingaddress.dto.in.ShippingAddressRequestDto;
 @NoArgsConstructor
 public class ShippingAddressRequestVo {
 
+
+
     @Schema(description = "배송지명", example = "집", required = true)
     @NotNull
     private String addressName;

@@ -24,15 +24,15 @@ public class ProductQuestionResponseDto {
 
     private boolean privateMessage;
 
-    public static ProductQuestionResponseDto toDto(ProductQuestion productQuestion){
-        return ProductQuestionResponseDto.builder()
-                .productQuestionId(productQuestion.getProductQuestionId())
-                .authorEmail(productQuestion.getAuthorEmail().substring(0, 4) + "*******")
-                .productQuestionDate(productQuestion.getCreatedDate())
-                .questionContent(productQuestion.getQuestionContent())
-                .privateMessage(productQuestion.isPrivateMessage())
-                .build();
-
-    }
+//    public static ProductQuestionResponseDto toDto(ProductQuestion productQuestion){
+//        return ProductQuestionResponseDto.builder()
+//                .productQuestionId(productQuestion.getProductQuestionId())
+//                .authorEmail(productQuestion.getAuthorEmail().substring(0, 4) + "*******")
+//                .productQuestionDate(productQuestion.getCreatedDate())
+//                .questionContent(productQuestion.getQuestionContent())
+//                .privateMessage(productQuestion.isPrivateMessage())
+//                .build();
+//
+//    }
 
 }
