@@ -28,7 +28,7 @@ public class ReviewService {
     private final SizeInfoRepository sizeInfoRepository;
     private final ProductService productService;
 
-    public void addReview(ReviewRequestDto dto, String authorEmail, String memberUuid, String productUuid) {
+    public void addReview(ReviewRequestDto dto,  String authorEmail, String memberUuid, String productUuid) {
 
         BeautyInfo beautyInfo = beautyInfoRepository.findByMemberUuid(memberUuid).orElse(new BeautyInfo());
         SizeInfo sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid).orElse(new SizeInfo());

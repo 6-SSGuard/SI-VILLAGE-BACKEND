@@ -1,11 +1,9 @@
-package org.example.sivillage.product.vo;
+package org.example.sivillage.product.vo.out;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
