@@ -13,18 +13,13 @@ import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductImage;
 import org.example.sivillage.product.domain.ProductOption;
-import org.example.sivillage.product.dto.out.GetProductThumbnailUrlResponseDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
-import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
-import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
-import org.example.sivillage.product.dto.out.GetProductCodeListResponseDto;
+import org.example.sivillage.product.dto.out.*;
 import org.example.sivillage.product.infrastructure.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -129,23 +124,25 @@ public class ProductService {
     }
 
 
-//    public GetCategoryPathResponseDto getCategoryPath(String productUuid) {
-//        Product product = productRepository.findByProductUuid(productUuid)
-//                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
-//
-//        Category category = product.getCategory();
-//        List<String> categoryPath = new ArrayList<>();
-//
-//        while (category != null) {
-//            categoryPath.add(category.getCategoryName());
-//            category = category.getParent(); // 부모 카테고리로 이동
-//        }
-//
-//        // 상위 카테고리부터 하위 카테고리 순으로 정렬
-//        Collections.reverse(categoryPath);
-//
-//        return new GetCategoryPathResponseDto(categoryPath);
-//    }
+    public GetCategoryPathResponseDto getCategoryPath(String productUuid) {
+        Product product = productRepository.findByProductCode(productUuid)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
+
+        Category category = categoryRepository.findByCategoryCode(product.getCategoryCode())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+
+        List<String> categoryPath = new ArrayList<>();
+
+        while (category != null) {
+            categoryPath.add(category.getCategoryName());
+            category = category.getParent(); // 부모 카테고리로 이동
+        }
+
+        // 상위 카테고리부터 하위 카테고리 순으로 정렬
+        Collections.reverse(categoryPath);
+
+        return new GetCategoryPathResponseDto(String.join("/", categoryPath));
+    }
 
 //    public void addProductsFromCsv(MultipartFile file) {
 //        if (file.isEmpty() || !file.getOriginalFilename().endsWith(".csv")) {
