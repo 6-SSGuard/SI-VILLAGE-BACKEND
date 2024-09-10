@@ -3,7 +3,6 @@ package org.example.sivillage.product.application;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.admin.domain.Category;
-import org.example.sivillage.admin.infrastructure.CategoryProductRepository;
 import org.example.sivillage.admin.infrastructure.CategoryRepository;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
@@ -15,7 +14,10 @@ import org.example.sivillage.product.domain.ProductImage;
 import org.example.sivillage.product.domain.ProductOption;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.*;
-import org.example.sivillage.product.infrastructure.*;
+import org.example.sivillage.product.infrastructure.ProductImageRepository;
+import org.example.sivillage.product.infrastructure.ProductLikeRepository;
+import org.example.sivillage.product.infrastructure.ProductOptionRepository;
+import org.example.sivillage.product.infrastructure.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,8 +37,6 @@ public class ProductService {
     private final ProductLikeRepository productLikeRepository;
     private final ProductImageRepository productImageRepository;
     private final CategoryRepository categoryRepository;
-    private final CategoryProductRepository categoryProductRepository;
-    private final BrandProductRepository brandProductRepository;
 
 
     public void addProduct(CreateProductRequestDto request) {
