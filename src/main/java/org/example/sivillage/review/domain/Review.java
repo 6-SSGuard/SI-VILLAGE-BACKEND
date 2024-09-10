@@ -40,7 +40,7 @@ public class Review extends BaseEntity {
     private String productUuid;
 
     @Column(nullable = false)
-    private Integer reviewLikeCount = 0;
+    private Integer reviewLikeCount;
 
 
     @Builder
@@ -62,6 +62,7 @@ public class Review extends BaseEntity {
                 .authorEmail(authorEmail)
               //  .purchaseOption(purchaseOption)
                 .reviewContent(dto.getReviewContent())
+                .reviewLikeCount(0)
                 .memberUuid(memberUuid)
                 .productUuid(productUuid)
                 .build();
