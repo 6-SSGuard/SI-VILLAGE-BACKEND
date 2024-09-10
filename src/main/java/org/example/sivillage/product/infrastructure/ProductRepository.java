@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    Optional<Product> findByProductUuid(String productUuid);
+    Optional<Product> findByProductCode(String productCode);
 
-    @Query("SELECT p.productUuid FROM Product p")
-    List<String> findAllProductUuids();
+    @Query("SELECT p.productCode FROM Product p")
+    List<String> findAllProductCode();
 }

@@ -12,6 +12,7 @@ import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
 @AllArgsConstructor
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @Builder
+@Table(name = "brand", uniqueConstraints = {@UniqueConstraint(columnNames = {"brandEngName"})})
 public class Brand {
 
     @Id
