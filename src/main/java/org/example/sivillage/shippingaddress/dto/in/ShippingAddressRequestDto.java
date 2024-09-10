@@ -19,8 +19,7 @@ public class ShippingAddressRequestDto {
     private String postalCode;
 
     private boolean defaultAddress;
-
-
+    
     public ShippingAddress toEntity(ShippingAddressRequestDto shippingAddressRequestDto, String memberUuid) {
         return ShippingAddress.builder()
                 .addressName(shippingAddressRequestDto.getAddressName())
