@@ -11,12 +11,14 @@ import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductImage;
 import org.example.sivillage.product.domain.ProductOption;
+import org.example.sivillage.product.dto.in.CreateProductOptionRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.*;
 import org.example.sivillage.product.infrastructure.ProductImageRepository;
 import org.example.sivillage.product.infrastructure.ProductLikeRepository;
 import org.example.sivillage.product.infrastructure.ProductOptionRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
+import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +28,7 @@ import java.util.*;
 @RequiredArgsConstructor
 @Slf4j
 @Transactional
-public class ProductServiceImpl {
+public class ProductServiceImpl implements ProductService {
     private static final Random RANDOM = new Random();
 
     private final ProductRepository productRepository;
@@ -41,6 +43,22 @@ public class ProductServiceImpl {
     public void addProduct(CreateProductRequestDto createProductRequestDto) {
 
         productRepository.save(createProductRequestDto.toEntity());
+    }
+
+    @Override
+    public void addProductOption(CreateProductOptionRequestDto createProductOptionRequestDto) {
+
+        productOptionRepository.save(createProductOptionRequestDto.toEntity());
+    }
+
+    @Override
+    public void addProductImageList(List<CreateProductImageListRequestDto> createProductImageListRequestDto) {
+
+        List<ProductImage> productImageList = createProductImageListRequestDto.stream()
+                .map(CreateProductImageListRequestDto::toEntity)
+                .toList();
+
+        productImageRepository.saveAll(productImageList);
     }
 
     private Product createAndSaveProduct(CreateProductRequestDto request, Long brandId, String categoryCode) {
