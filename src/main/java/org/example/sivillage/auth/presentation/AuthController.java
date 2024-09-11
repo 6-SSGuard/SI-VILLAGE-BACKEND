@@ -13,7 +13,6 @@ import org.example.sivillage.auth.vo.in.RefreshTokenRequestVo;
 import org.example.sivillage.auth.vo.in.SignInRequestVo;
 import org.example.sivillage.auth.vo.in.SignUpRequestVo;
 import org.example.sivillage.auth.vo.out.JwtTokenResponseVo;
-import org.example.sivillage.global.common.jwt.JwtTokenProvider;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthService authService;
-    private final JwtTokenProvider jwtTokenProvider;
 
     /**
      * api/auth

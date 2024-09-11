@@ -23,10 +23,10 @@ public class JwtTokenResponseDto {
 
     public JwtTokenResponseVo toVo() {
         return JwtTokenResponseVo.builder()
-                .grantType(getGrantType())
-                .accessToken(getAccessToken())
-                .refreshToken(getRefreshToken())
-                .memberUuid(getMemberUuid())
+                .grantType(grantType)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .memberUuid(memberUuid)
                 .build();
     }
 }
