@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.auth.domain.CustomUserDetails;
+import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.application.BrandLikeService;
 import org.example.sivillage.member.application.ProductLikeService;
@@ -28,22 +28,22 @@ public class MemberController {
 
     @Operation(summary = "브랜드 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
     @PutMapping("/brand/like/{brandId}")
-    public BaseResponse<Void> toggleBrandLike(@PathVariable Long brandId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        brandLikeService.toggleBrandLike(brandId, customUserDetails.getMemberUuid());
+    public BaseResponse<Void> toggleBrandLike(@PathVariable Long brandId, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        brandLikeService.toggleBrandLike(brandId, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
     @Operation(summary = "상품 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
     @PutMapping("/product/like/{productUuid}")
-    public BaseResponse<Void> toggleProductLike(@PathVariable String productUuid, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        productLikeService.toggleProductLike(productUuid, customUserDetails.getMemberUuid());
+    public BaseResponse<Void> toggleProductLike(@PathVariable String productUuid, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        productLikeService.toggleProductLike(productUuid, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
     @Operation(summary = "리뷰 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
     @PutMapping("/review/like/{reviewId}")
-    public BaseResponse<Void> toggleReviewLike(@PathVariable Long reviewId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        reviewLikeService.toggleReviewLike(reviewId, customUserDetails.getMemberUuid());
+    public BaseResponse<Void> toggleReviewLike(@PathVariable Long reviewId, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        reviewLikeService.toggleReviewLike(reviewId, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
