@@ -1,4 +1,4 @@
-package org.example.sivillage.member.domain;
+package org.example.sivillage.review.domain;
 
 import jakarta.persistence.*;
 import lombok.*;

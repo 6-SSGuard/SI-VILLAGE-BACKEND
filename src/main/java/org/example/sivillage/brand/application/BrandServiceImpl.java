@@ -11,7 +11,7 @@ import org.example.sivillage.brand.infrastructure.BrandLikeRepository;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
-import org.example.sivillage.member.domain.BrandLike;
+import org.example.sivillage.brand.domain.BrandLike;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

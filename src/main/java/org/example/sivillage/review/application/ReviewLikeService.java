@@ -2,7 +2,7 @@ package org.example.sivillage.review.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.sivillage.member.domain.ReviewLike;
+import org.example.sivillage.review.domain.ReviewLike;
 import org.example.sivillage.review.domain.Review;
 import org.example.sivillage.review.infrastructure.ReviewLikeRepository;
 import org.example.sivillage.review.infrastructure.ReviewRepository;

@@ -1,6 +1,6 @@
 package org.example.sivillage.brand.infrastructure;
 
-import org.example.sivillage.member.domain.BrandLike;
+import org.example.sivillage.brand.domain.BrandLike;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
