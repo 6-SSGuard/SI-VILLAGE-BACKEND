@@ -11,6 +11,7 @@ import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
 import org.example.sivillage.brand.dto.out.GetBrandIdListResponseDto;
 import org.example.sivillage.brand.vo.in.AddBrandRequestVo;
 import org.example.sivillage.brand.vo.out.GetBrandIdListResponseVo;
+import org.example.sivillage.brand.vo.out.GetBrandInfoResponseVo;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -44,6 +45,14 @@ public class BrandController {
                 brandService.getBrandIdList(authUserDetails.getMemberUuid()).stream()
                         .map(GetBrandIdListResponseDto::toVo)
                         .toList()
+        );
+    }
+
+    @Operation(summary = "브랜드 정보 조회")
+    @GetMapping("/{brandId}")
+    public BaseResponse<GetBrandInfoResponseVo> getBrandInfo(@PathVariable Long brandId) {
+        return new BaseResponse<>(
+                brandService.getBrandInfo(brandId).toVo()
         );
     }
 }

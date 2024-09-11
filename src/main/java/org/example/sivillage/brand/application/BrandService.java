@@ -2,6 +2,7 @@ package org.example.sivillage.brand.application;
 
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
 import org.example.sivillage.brand.dto.out.GetBrandIdListResponseDto;
+import org.example.sivillage.brand.dto.out.GetBrandInfoResponseDto;
 
 import java.util.List;
 
@@ -30,8 +31,9 @@ public interface BrandService {
     List<GetBrandIdListResponseDto> getBrandIdList(String memberUuid);
 
     /**
-     * 3. getBrands
-     * @param memberUuid
-     * return GetBrandsListResponseDto
+     * 3. getBrandInfo
+     * @param brandId
+     * return GetBrandInfoResponseDto
      */
+    GetBrandInfoResponseDto getBrandInfo(Long brandId);
 }
