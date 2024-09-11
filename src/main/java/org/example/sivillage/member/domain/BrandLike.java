@@ -24,17 +24,17 @@ public class BrandLike {
     private String memberUuid;
 
     @Column(nullable = false)
-    private boolean isLiked;
+    private boolean like;
 
     public static BrandLike createLikedBrand(Long brandId, String memberUuid) {
         return BrandLike.builder()
                 .brandId(brandId)
                 .memberUuid(memberUuid)
-                .isLiked(false)
+                .like(false)
                 .build();
     }
 
     public void toggleLike() {
-        this.isLiked = !this.isLiked;
+        this.like = !this.like;
     }
 }

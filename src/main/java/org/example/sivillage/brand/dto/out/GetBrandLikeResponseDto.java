@@ -1,5 +1,6 @@
 package org.example.sivillage.brand.dto.out;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -7,5 +8,10 @@ import lombok.NoArgsConstructor;
 @Getter
 public class GetBrandLikeResponseDto {
 
-    private Boolean brandLike;
+    private Boolean like;
+
+    @Builder
+    public GetBrandLikeResponseDto(Boolean like) {
+        this.like = like;
+    }
 }

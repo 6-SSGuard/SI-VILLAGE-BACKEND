@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
 import org.example.sivillage.brand.dto.out.GetBrandIdListResponseDto;
+import org.example.sivillage.brand.dto.out.GetBrandLikeResponseDto;
 import org.example.sivillage.brand.dto.out.GetBrandNameResponseDto;
 import org.example.sivillage.brand.infrastructure.BrandLikeRepository;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
@@ -25,7 +26,8 @@ public class BrandServiceImpl implements BrandService {
      * BrandServiceImpl
      * 1. 브랜드 추가
      * 2. 브랜드 id 목록 조회
-     * 3. 브랜드 이름 조회
+     * 3. 브랜드 이름 조회 (브랜드 영어 명, 한국어 명)
+     * 4. 브랜드 좋아요 여부 조회
      */
 
     /**
@@ -50,25 +52,12 @@ public class BrandServiceImpl implements BrandService {
 
     /**
      * 2. 브랜드 id 목록 조회
-     * @param memberUuid
+     * @param memberUuid 회원 UUID
      * return GetBrandIdListResponseDto
      */
     @Override
     public List<GetBrandIdListResponseDto> getBrandIdList(String memberUuid) {
-//        return brandRepository.findAllByOrderByEngNameAsc()
-//                .stream()
-//                .map(brand -> {
-//                    // 좋아요 상태를 조회
-//                    boolean isLiked = brandLikeRepository.findIsLikedByBrandIdAndMemberUuid(brand.getBrandId(), memberUuid)
-//                            .orElse(false); // 없으면 false 반환
-//                    return GetBrandIdListResponseDto.builder()
-//                            .brandId(brand.getBrandId())
-//                            .brandEngName(brand.getBrandEngName())
-//                            .brandKorName(brand.getBrandKorName())
-//                            .isLiked(isLiked)
-//                            .build();
-//                })
-//                .toList();
+
         return brandRepository.findAllByOrderByEngNameAsc()
                 .stream()
                 .map(brand -> GetBrandIdListResponseDto.builder()
@@ -79,7 +68,7 @@ public class BrandServiceImpl implements BrandService {
 
     /**
      * 3. 브랜드 이름 조회(브랜드 영어 명, 한국어 명)
-     * @param brandId
+     * @param brandId 브랜드 ID
      * return GetBrandNameResponseDto
      */
     @Override
@@ -91,6 +80,22 @@ public class BrandServiceImpl implements BrandService {
         return GetBrandNameResponseDto.builder()
                 .brandEngName(brand.getBrandEngName())
                 .brandKorName(brand.getBrandKorName())
+                .build();
+    }
+
+    /**
+     * 4. 브랜드 좋아요 여부 조회
+     * @param brandId 브랜드 ID
+     * @param memberUuid 회원 UUID
+     * return GetBrandLikeResponseDto
+     */
+    @Override
+    public GetBrandLikeResponseDto getBrandLike(Long brandId, String memberUuid) {
+        boolean like = brandLikeRepository.findLikedByBrandIdAndMemberUuid(brandId, memberUuid)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_BRAND_LIKE));
+
+        return GetBrandLikeResponseDto.builder()
+                .like(like)
                 .build();
     }
 
