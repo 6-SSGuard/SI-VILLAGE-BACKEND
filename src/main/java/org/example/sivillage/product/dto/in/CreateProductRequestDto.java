@@ -1,47 +1,48 @@
 package org.example.sivillage.product.dto.in;
 
-import lombok.*;
-import org.example.sivillage.product.domain.Color;
-import org.example.sivillage.productoption.Size;
-import org.example.sivillage.sizeinfo.domain.sizeenum.ShoeSize;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.example.sivillage.global.common.UuidGenerator;
+import org.example.sivillage.product.domain.Product;
+import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 
-import java.util.List;
-
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
-@Builder
 public class CreateProductRequestDto {
+
     private String productName;
 
     private Integer price;
 
-    private Integer stock;
-
-    private Color color;
-
-    private String volume;
-
-    private Size size;
-
-    private ShoeSize shoeSize;
-
-    private String brandEngName;
+    private Long brandId;
 
     private String detailContent;
 
-    private List<ProductImageDto> productImageUrls;
-
-    private String categoryCode;
-
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-    @Setter
     @Builder
-    public static class ProductImageDto {
-        private String productImageUrl;
-        private boolean thumbnail;
+    public CreateProductRequestDto(String productName, Integer price, Long brandId, String detailContent) {
+        this.productName = productName;
+        this.price = price;
+        this.brandId = brandId;
+        this.detailContent = detailContent;
+    }
+
+    public static CreateProductRequestDto from(CreateProductRequestVo createProductRequestVo) {
+        return CreateProductRequestDto.builder()
+                .productName(createProductRequestVo.getProductName())
+                .price(createProductRequestVo.getPrice())
+                .brandId(createProductRequestVo.getBrandId())
+                .detailContent(createProductRequestVo.getDetailContent())
+                .build();
+    }
+
+    public Product toEntity() {
+        return Product.builder()
+                .productCode(UuidGenerator.generateProductCode())
+                .productName(productName)
+                .price(price)
+                .brandId(brandId)
+                .detailContent(detailContent)
+                .build();
     }
 }

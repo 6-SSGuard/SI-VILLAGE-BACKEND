@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.vo.out.GetProductCodeListResponseVo;
-import org.example.sivillage.product.application.ProductService;
+import org.example.sivillage.product.application.ProductServiceImpl;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
@@ -28,16 +28,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/product")
 public class ProductController {
-    private final ProductService productService;
+    private final ProductServiceImpl productServiceImpl;
     private final ModelMapper mapper;
 
-    @Operation(summary = "상품 생성", description = """
-
-    """)
+    @Operation(summary = "상품 생성")
     @PostMapping("/")
     public BaseResponse<Void> addProduct(@Valid @RequestBody CreateProductRequestVo createProductRequestVo) {
-        CreateProductRequestDto request = mapper.map(createProductRequestVo, CreateProductRequestDto.class);
-        productService.addProduct(request);
+        productServiceImpl.addProduct(CreateProductRequestDto.from(createProductRequestVo));
         return new BaseResponse<>();
     }
 
@@ -45,7 +42,7 @@ public class ProductController {
     @GetMapping("/details/{productUuid}")
     public BaseResponse<GetProductDetailsResponseVo> getProductDetail(@PathVariable String productUuid, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         String memberUuid = authUserDetails.getMemberUuid();
-        GetProductDetailsResponseDto responseDto = productService.getProductDetail(productUuid, memberUuid);
+        GetProductDetailsResponseDto responseDto = productServiceImpl.getProductDetail(productUuid, memberUuid);
         GetProductDetailsResponseVo response = mapper.map(responseDto, GetProductDetailsResponseVo.class);
         return new BaseResponse<>(response);
     }
@@ -55,7 +52,7 @@ public class ProductController {
             """)
     @GetMapping("/uuid")
     public BaseResponse<GetProductCodeListResponseVo> getProductCodeList() {
-        GetProductCodeListResponseDto responseDto = productService.getProductCodeList();
+        GetProductCodeListResponseDto responseDto = productServiceImpl.getProductCodeList();
         GetProductCodeListResponseVo response = mapper.map(responseDto, GetProductCodeListResponseVo.class);
         return new BaseResponse<>(response);
     }
@@ -67,7 +64,7 @@ public class ProductController {
     @GetMapping("/brief/{productCode}")
     public BaseResponse<GetProductBriefInfoResponseVo> getProductBriefInfo(@PathVariable String productCode, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         String memberUuid = authUserDetails.getMemberUuid();
-        GetProductBriefInfoResponseDto responseDto = productService.getProductBriefInfo(productCode, memberUuid);
+        GetProductBriefInfoResponseDto responseDto = productServiceImpl.getProductBriefInfo(productCode, memberUuid);
         GetProductBriefInfoResponseVo response = mapper.map(responseDto, GetProductBriefInfoResponseVo.class);
         return new BaseResponse<>(response);
     }
@@ -77,7 +74,7 @@ public class ProductController {
         """)
     @GetMapping("/thumbnail/{productCode}")
     public BaseResponse<GetProductThumbnailUrlResponseVo> getProductThumbnailUrl(@PathVariable String productCode) {
-        GetProductThumbnailUrlResponseDto responseDto = productService.getProductThumbnailUrl(productCode);
+        GetProductThumbnailUrlResponseDto responseDto = productServiceImpl.getProductThumbnailUrl(productCode);
         GetProductThumbnailUrlResponseVo response = mapper.map(responseDto, GetProductThumbnailUrlResponseVo.class);
         return new BaseResponse<>(response);
     }

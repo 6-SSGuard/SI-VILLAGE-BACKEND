@@ -32,8 +32,6 @@ public class Product extends BaseEntity {
 
     private Long brandId;
 
-    private String categoryCode;
-
     public static Product createProduct(CreateProductRequestDto request, Long brandId, String productCode, String categoryCode) {
         return Product.builder()
                 .productName(request.getProductName())
@@ -41,7 +39,6 @@ public class Product extends BaseEntity {
                 .price(request.getPrice())
                 .detailContent(request.getDetailContent())
                 .brandId(brandId)
-                .categoryCode(categoryCode)
                 .build();
     }
 
