@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
-import org.example.sivillage.brand.dto.out.GetBrandsListResponseDto;
-import org.example.sivillage.brand.dto.out.GetBrandsResponseDto;
+import org.example.sivillage.brand.dto.out.GetBrandIdListResponseDto;
 import org.example.sivillage.brand.infrastructure.BrandLikeRepository;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
@@ -13,7 +12,6 @@ import org.example.sivillage.global.error.BaseException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -31,22 +29,27 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public GetBrandsListResponseDto getBrands(String memberUuid) {
-        List<GetBrandsResponseDto> getBrandsResponseDto = brandRepository.findAllByOrderByEngNameAsc()
+    public List<GetBrandIdListResponseDto> getBrandIdList(String memberUuid) {
+//        return brandRepository.findAllByOrderByEngNameAsc()
+//                .stream()
+//                .map(brand -> {
+//                    // 좋아요 상태를 조회
+//                    boolean isLiked = brandLikeRepository.findIsLikedByBrandIdAndMemberUuid(brand.getBrandId(), memberUuid)
+//                            .orElse(false); // 없으면 false 반환
+//                    return GetBrandIdListResponseDto.builder()
+//                            .brandId(brand.getBrandId())
+//                            .brandEngName(brand.getBrandEngName())
+//                            .brandKorName(brand.getBrandKorName())
+//                            .isLiked(isLiked)
+//                            .build();
+//                })
+//                .toList();
+        return brandRepository.findAllByOrderByEngNameAsc()
                 .stream()
-                .map(brand -> {
-                    // 좋아요 상태를 조회
-                    boolean isLiked = brandLikeRepository.findIsLikedByBrandIdAndMemberUuid(brand.getBrandId(), memberUuid)
-                            .orElse(false); // 없으면 false 반환
-                    return GetBrandsResponseDto.builder()
-                            .brandId(brand.getBrandId())
-                            .brandEngName(brand.getBrandEngName())
-                            .brandKorName(brand.getBrandKorName())
-                            .isLiked(isLiked)
-                            .build();
-                })
-                .collect(Collectors.toList());
-        return new GetBrandsListResponseDto(getBrandsResponseDto);
+                .map(brand -> GetBrandIdListResponseDto.builder()
+                        .brandId(brand.getBrandId())
+                        .build())
+                .toList();
     }
 
     private void validateDuplicatedBrand(AddBrandRequestDto addBrandRequestDto) {
@@ -60,17 +63,17 @@ public class BrandServiceImpl implements BrandService {
 //        return Character.isAlphabetic(c) && c <= 'z'; // a~z 범위 체크
 //    }
 //
-//    private List<GetBrandsResponseDto> getBrandsByEngInitial(char initial) {
+//    private List<GetBrandIdListResponseDto> getBrandsByEngInitial(char initial) {
 //        return brandRepository.findByEngNameStartingWith(String.valueOf(initial))
 //                .stream()
-//                .map(GetBrandsResponseDto::toDto)
+//                .map(GetBrandIdListResponseDto::toDto)
 //                .collect(Collectors.toList());
 //    }
 //
-//    private List<GetBrandsResponseDto> getBrandsByKorInitial(char initial) {
+//    private List<GetBrandIdListResponseDto> getBrandsByKorInitial(char initial) {
 //        return brandRepository.findByKorNameStartingWith(String.valueOf(initial))
 //                .stream()
-//                .map(GetBrandsResponseDto::toDto)
+//                .map(GetBrandIdListResponseDto::toDto)
 //                .collect(Collectors.toList());
 //    }
 }

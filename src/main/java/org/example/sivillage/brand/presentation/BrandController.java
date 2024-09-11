@@ -6,15 +6,17 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
-import org.example.sivillage.brand.application.BrandServiceImpl;
+import org.example.sivillage.brand.application.BrandService;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
-import org.example.sivillage.brand.dto.out.GetBrandsListResponseDto;
+import org.example.sivillage.brand.dto.out.GetBrandIdListResponseDto;
 import org.example.sivillage.brand.vo.in.AddBrandRequestVo;
-import org.example.sivillage.brand.vo.out.GetBrandsResponseVo;
+import org.example.sivillage.brand.vo.out.GetBrandIdListResponseVo;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -22,25 +24,26 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "브랜드 관리 API", description = "브랜드 관련 API endpoints")
 @RequestMapping("/api/brand")
 public class BrandController {
-    private final BrandServiceImpl brandServiceImpl;
+    private final BrandService brandService;
     private final ModelMapper mapper;
 
     @Operation(summary = "브랜드 추가")
     @PostMapping("/")
     public BaseResponse<Void> addBrand(@Valid @RequestBody AddBrandRequestVo addBrandRequestVo) {
 
-        brandServiceImpl.addBrand(AddBrandRequestDto.from(addBrandRequestVo));
+        brandService.addBrand(AddBrandRequestDto.from(addBrandRequestVo));
 
         return new BaseResponse<>();
     }
 
     @Operation(summary = "브랜드 목록 조회")
     @GetMapping("/")
-    public BaseResponse<GetBrandsResponseVo> getBrands(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        GetBrandsListResponseDto getBrandsList = brandServiceImpl.getBrands(authUserDetails.getMemberUuid());
-        // Mapper를 사용하여 GetBrandslistResponseDto를 GetBrandsResponseVo로 매핑
-        GetBrandsResponseVo response = mapper.map(getBrandsList, GetBrandsResponseVo.class);
+    public BaseResponse<List<GetBrandIdListResponseVo>> getBrandIdList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
 
-        return new BaseResponse<>(response);
+        return new BaseResponse<>(
+                brandService.getBrandIdList(authUserDetails.getMemberUuid()).stream()
+                        .map(GetBrandIdListResponseDto::toVo)
+                        .toList()
+        );
     }
 }
