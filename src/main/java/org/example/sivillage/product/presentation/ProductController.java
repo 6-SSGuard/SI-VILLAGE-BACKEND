@@ -5,9 +5,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.auth.domain.CustomUserDetails;
+import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
-import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.member.vo.out.GetProductCodeListResponseVo;
 import org.example.sivillage.product.application.ProductService;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
@@ -44,8 +43,8 @@ public class ProductController {
 
     @Operation(summary = "상품 상세 정보 조회", description = "")
     @GetMapping("/details/{productUuid}")
-    public BaseResponse<GetProductDetailsResponseVo> getProductDetail(@PathVariable String productUuid, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getMemberUuid();
+    public BaseResponse<GetProductDetailsResponseVo> getProductDetail(@PathVariable String productUuid, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        String memberUuid = authUserDetails.getMemberUuid();
         GetProductDetailsResponseDto responseDto = productService.getProductDetail(productUuid, memberUuid);
         GetProductDetailsResponseVo response = mapper.map(responseDto, GetProductDetailsResponseVo.class);
         return new BaseResponse<>(response);
@@ -66,8 +65,8 @@ public class ProductController {
         이미 프론트에서 받아온 정보는 캐싱처리
         """)
     @GetMapping("/brief/{productCode}")
-    public BaseResponse<GetProductBriefInfoResponseVo> getProductBriefInfo(@PathVariable String productCode, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String memberUuid = customUserDetails.getMemberUuid();
+    public BaseResponse<GetProductBriefInfoResponseVo> getProductBriefInfo(@PathVariable String productCode, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        String memberUuid = authUserDetails.getMemberUuid();
         GetProductBriefInfoResponseDto responseDto = productService.getProductBriefInfo(productCode, memberUuid);
         GetProductBriefInfoResponseVo response = mapper.map(responseDto, GetProductBriefInfoResponseVo.class);
         return new BaseResponse<>(response);

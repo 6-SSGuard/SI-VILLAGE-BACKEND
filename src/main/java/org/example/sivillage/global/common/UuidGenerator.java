@@ -10,4 +10,8 @@ public class UuidGenerator {
     public static String generateCategoryCode() {
         return "CT-" + UUID.randomUUID().toString().substring(0,8);
     }
+
+    public static String generateMemberUuid() {
+        return UUID.randomUUID().toString();
+    }
 }

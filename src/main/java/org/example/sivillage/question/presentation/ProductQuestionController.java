@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.auth.domain.CustomUserDetails;
+import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.question.application.ProductQuestionServiceImpl;
 import org.example.sivillage.question.dto.out.ProductQuestionResponseDto;
@@ -28,8 +28,8 @@ public class ProductQuestionController {
     // todo: memberUuid 로 email 가져오는 api 만들기 (상품문의,리뷰등록시 사용하기 위해서)
     @Operation(summary = "상품문의 등록", description = "상품문의를 등록합니다.")
     @PostMapping("/{productUuid}")
-    public BaseResponse<Void> addProductQuestion(@PathVariable("productUuid") String productUuid, String authorEmail, @Valid @RequestBody ProductQuestionRequestVo productQuestionRequestVo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        productQuestionService.addProductQuestion(ProductQuestionRequestVo.toDto(productQuestionRequestVo, authorEmail), productUuid, customUserDetails.getMemberUuid());
+    public BaseResponse<Void> addProductQuestion(@PathVariable("productUuid") String productUuid, @Valid @RequestBody ProductQuestionRequestVo vo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        productQuestionService.addProductQuestion(ProductQuestionRequestVo.toDto(vo), authUserDetails.getUsername(),productUuid, authUserDetails.getUsername());
         return new BaseResponse<>();
     }
 
@@ -44,17 +44,17 @@ public class ProductQuestionController {
 
     @Operation(summary = "회원 상품문의 조회", description = "회원의 상품 문의를 조회합니다.")
     @GetMapping("")
-    public BaseResponse<List<ProductQuestionResponseVo>> getMemberUuidProductQuestion(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        List<ProductQuestionResponseDto> productQuestionResponseDtoList = productQuestionService.getMemberProductQuestion(customUserDetails.getMemberUuid());
-        return new BaseResponse<>(
-                productQuestionResponseDtoList.stream()
-                        .map(ProductQuestionResponseDto::toResponseVo).toList());
+    public BaseResponse<List<ProductQuestionResponseVo>> getMemberUuidProductQuestion(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        List<ProductQuestionResponseVo> vo = productQuestionService.getMemberProductQuestion(authUserDetails.getMemberUuid())
+                .stream()
+                .map(ProductQuestionResponseVo::toVo).toList();
+        return new BaseResponse<>(vo);
     }
 
     @Operation(summary = "회원 상품문의 삭제", description = "회원의 상품 문의를 삭제합니다.")
     @DeleteMapping("/{productQuestionId}")
-    public BaseResponse<List<ProductQuestionResponseVo>> removeProductQuestion(@PathVariable("productQuestionId") Long productQuestionId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        productQuestionService.removeProductQuestion(productQuestionId);
+    public BaseResponse<List<ProductQuestionResponseVo>> removeProductQuestion(@PathVariable("productQuestionId") Long productQuestionId,@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        productQuestionService.removeProductQuestion(productQuestionId, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 

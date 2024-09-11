@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.example.sivillage.auth.vo.SignUpRequest;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
-import org.example.sivillage.global.util.JwtToken;
-import org.example.sivillage.global.util.JwtTokenProvider;
+import org.example.sivillage.auth.dto.out.JwtTokenResponseDto;
+import org.example.sivillage.global.common.jwt.JwtTokenProvider;
 import org.example.sivillage.global.util.SecurityUtil;
 import org.example.sivillage.member.domain.Member;
 import org.example.sivillage.member.infrastructure.MemberRepository;
@@ -42,7 +42,7 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public JwtToken logIn(String email, String password) {
+    public JwtTokenResponseDto logIn(String email, String password) {
         // 1. email + password 기반으로 Authentication 객체 생성
         // 로그인 요청시에는 아직 미인증 상태이므로 authentication은 인증 여부를 확인하는 authenticated 값이 false 상태이다.
 
