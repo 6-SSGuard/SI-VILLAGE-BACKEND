@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
-import org.example.sivillage.review.application.ReviewService;
-import org.example.sivillage.review.vo.ReviewRequestVo;
-import org.example.sivillage.review.vo.ReviewResponseVo;
+import org.example.sivillage.review.application.ReviewServiceImpl;
+import org.example.sivillage.review.vo.in.ReviewRequestVo;
+import org.example.sivillage.review.vo.out.ReviewResponseVo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/api/reviews")
 public class ReviewController {
 
-    private final ReviewService reviewService;
+    private final ReviewServiceImpl reviewService;
 
     @Operation(summary = "리뷰 등록", description = "리뷰를 등록합니다.")
     @PostMapping("/{productUuid}")

@@ -12,8 +12,6 @@ public class ProductQuestionResponseDto {
 
     private Long productQuestionId;
 
-    private String authorEmail;
-
     private LocalDateTime productQuestionDate;
 
     private String questionContent;
@@ -23,7 +21,6 @@ public class ProductQuestionResponseDto {
     public static ProductQuestionResponseDto from(ProductQuestion productQuestion) {
         return ProductQuestionResponseDto.builder()
                 .productQuestionId(productQuestion.getId())
-                .authorEmail(productQuestion.getAuthorEmail().substring(0, 4) + "*******")
                 .productQuestionDate(productQuestion.getCreatedDate())
                 .questionContent(productQuestion.getQuestionContent())
                 .privateMessage(productQuestion.isPrivateMessage())
@@ -33,7 +30,6 @@ public class ProductQuestionResponseDto {
     public ProductQuestionResponseVo toResponseVo(){
         return ProductQuestionResponseVo.builder()
                 .productQuestionId(this.productQuestionId)
-                .authorEmail(this.authorEmail)
                 .productQuestionDate(this.productQuestionDate)
                 .questionContent(this.questionContent)
                 .privateMessage(this.privateMessage)
@@ -41,9 +37,8 @@ public class ProductQuestionResponseDto {
     }
 
     @Builder
-    public ProductQuestionResponseDto(Long productQuestionId, String authorEmail, LocalDateTime productQuestionDate, String questionContent, boolean privateMessage){
+    public ProductQuestionResponseDto(Long productQuestionId, LocalDateTime productQuestionDate, String questionContent, boolean privateMessage){
         this.productQuestionId = productQuestionId;
-        this.authorEmail = authorEmail;
         this.productQuestionDate = productQuestionDate;
         this.questionContent = questionContent;
         this.privateMessage = privateMessage;

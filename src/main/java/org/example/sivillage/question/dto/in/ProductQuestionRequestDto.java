@@ -7,8 +7,6 @@ import org.example.sivillage.question.domain.ProductQuestion;
 @Getter
 public class ProductQuestionRequestDto {
 
-    private String authorEmail;
-
     private String questionContent;
 
     private boolean privateMessage;
@@ -16,7 +14,6 @@ public class ProductQuestionRequestDto {
     public ProductQuestion toEntity(ProductQuestionRequestDto productQuestionRequestDto, String productUuid, String memberUuid) {
         return ProductQuestion.builder()
                 .productUuid(productUuid)
-                .authorEmail(productQuestionRequestDto.getAuthorEmail())
                 .questionContent(productQuestionRequestDto.getQuestionContent())
                 .privateMessage(productQuestionRequestDto.isPrivateMessage())
                 .memberUuid(memberUuid)
@@ -24,8 +21,7 @@ public class ProductQuestionRequestDto {
     }
 
     @Builder
-    public ProductQuestionRequestDto(String authorEmail, String questionContent, boolean privateMessage) {
-        this.authorEmail = authorEmail;
+    public ProductQuestionRequestDto(String questionContent, boolean privateMessage) {
         this.questionContent = questionContent;
         this.privateMessage = privateMessage;
     }

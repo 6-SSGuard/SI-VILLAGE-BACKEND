@@ -1,11 +1,11 @@
-package org.example.sivillage.review.vo;
+package org.example.sivillage.review.vo.out;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.review.dto.ReviewResponseDto;
+import org.example.sivillage.review.dto.out.ReviewResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.List;

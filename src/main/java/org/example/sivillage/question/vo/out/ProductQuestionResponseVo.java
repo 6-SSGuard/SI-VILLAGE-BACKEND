@@ -16,8 +16,6 @@ public class ProductQuestionResponseVo {
 
     private Long productQuestionId;
 
-    private String authorEmail;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
     private LocalDateTime productQuestionDate;
 

@@ -7,13 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.member.application.BrandLikeService;
+import org.example.sivillage.member.application.MemberService;
 import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.member.application.ReviewLikeService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "회원 관리 API", description = "회원 관련 API endpoints")
 @RestController
@@ -25,6 +23,7 @@ public class MemberController {
     private final BrandLikeService brandLikeService;
     private final ProductLikeService productLikeService;
     private final ReviewLikeService reviewLikeService;
+    private final MemberService memberService;
 
     @Operation(summary = "브랜드 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
     @PutMapping("/brand/like/{brandId}")
@@ -47,6 +46,12 @@ public class MemberController {
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "회원 이메일 조회", description = "회원 이메일 조회용(리뷰, 상품문의 사용예정)")
+    @GetMapping("")
+    public BaseResponse<String> getEmail(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        String email = memberService.getMemberEmail(authUserDetails.getMemberUuid());
+        return new BaseResponse<>(email);
+    }
 }
 
 

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.example.sivillage.sizeinfo.dto.in.SizeInfoRequestDto;
 
 @Getter
-@NoArgsConstructor
 public class SizeInfoRequestVo {
 
     @Schema(description = "키", example = "160", required = true)

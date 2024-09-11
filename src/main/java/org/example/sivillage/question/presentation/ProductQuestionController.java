@@ -28,8 +28,8 @@ public class ProductQuestionController {
     // todo: memberUuid 로 email 가져오는 api 만들기 (상품문의,리뷰등록시 사용하기 위해서)
     @Operation(summary = "상품문의 등록", description = "상품문의를 등록합니다.")
     @PostMapping("/{productUuid}")
-    public BaseResponse<Void> addProductQuestion(@PathVariable("productUuid") String productUuid, @Valid @RequestBody ProductQuestionRequestVo vo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        productQuestionService.addProductQuestion(ProductQuestionRequestVo.toDto(vo), authUserDetails.getUsername(),productUuid, authUserDetails.getUsername());
+    public BaseResponse<Void> addProductQuestion(@PathVariable("productUuid") String productUuid, @Valid @RequestBody ProductQuestionRequestVo productQuestionRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        productQuestionService.addProductQuestion(ProductQuestionRequestVo.toDto(productQuestionRequestVo), productUuid, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
@@ -45,16 +45,16 @@ public class ProductQuestionController {
     @Operation(summary = "회원 상품문의 조회", description = "회원의 상품 문의를 조회합니다.")
     @GetMapping("")
     public BaseResponse<List<ProductQuestionResponseVo>> getMemberUuidProductQuestion(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        List<ProductQuestionResponseVo> vo = productQuestionService.getMemberProductQuestion(authUserDetails.getMemberUuid())
+        List<ProductQuestionResponseVo> productQuestionResponseVoList = productQuestionService.getMemberProductQuestion(authUserDetails.getMemberUuid())
                 .stream()
-                .map(ProductQuestionResponseVo::toVo).toList();
-        return new BaseResponse<>(vo);
+                .map(ProductQuestionResponseDto::toResponseVo).toList();
+        return new BaseResponse<>(productQuestionResponseVoList);
     }
 
     @Operation(summary = "회원 상품문의 삭제", description = "회원의 상품 문의를 삭제합니다.")
     @DeleteMapping("/{productQuestionId}")
     public BaseResponse<List<ProductQuestionResponseVo>> removeProductQuestion(@PathVariable("productQuestionId") Long productQuestionId,@AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        productQuestionService.removeProductQuestion(productQuestionId, authUserDetails.getMemberUuid());
+        productQuestionService.removeProductQuestion(productQuestionId);
         return new BaseResponse<>();
     }
 

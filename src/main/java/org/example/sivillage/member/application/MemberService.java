@@ -68,4 +68,8 @@ public class MemberService {
         return memberRepository.findByEmail(email).
                 orElseThrow(() -> new BaseException(BaseResponseStatus.MEMBER_NOT_FOUND));
     }
+
+    public String getMemberEmail(String memberUuid){
+        return memberRepository.findByMemberUuid(memberUuid).get().getEmail();
+    }
 }

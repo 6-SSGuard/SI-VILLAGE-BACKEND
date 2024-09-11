@@ -53,6 +53,11 @@ public class ShippingAddress extends BaseEntity {
         this.memberUuid = memberUuid;
     }
 
+    @Builder
+    public ShippingAddress(Long id, boolean defaultAddress){
+        this.id = id;
+        this.defaultAddress = defaultAddress;
+    }
 }
 
 

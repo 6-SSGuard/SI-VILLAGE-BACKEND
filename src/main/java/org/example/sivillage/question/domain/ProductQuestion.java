@@ -17,9 +17,6 @@ public class ProductQuestion extends BaseEntity {
     private Long Id;
 
     @Column(nullable = false)
-    private String authorEmail;
-
-    @Column(nullable = false)
     private String questionContent;
 
     @Column(nullable = false)
@@ -32,9 +29,8 @@ public class ProductQuestion extends BaseEntity {
     private String productUuid;
 
     @Builder
-    public ProductQuestion(Long Id, String authorEmail, String questionContent, boolean privateMessage, String memberUuid, String productUuid) {
+    public ProductQuestion(Long Id, String questionContent, boolean privateMessage, String memberUuid, String productUuid) {
         this.Id = Id;
-        this.authorEmail = authorEmail;
         this.questionContent = questionContent;
         this.privateMessage = privateMessage;
         this.memberUuid = memberUuid;

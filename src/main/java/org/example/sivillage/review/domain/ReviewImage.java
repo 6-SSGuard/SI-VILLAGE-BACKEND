@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.global.common.BaseEntity;
 
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -28,10 +30,8 @@ public class ReviewImage extends BaseEntity {
         this.review = review;
     }
 
-    public static ReviewImage toEntity(String reviewImageUrl, Review review) {
-        return ReviewImage.builder()
-                .reviewImageUrl(reviewImageUrl)
-                .review(review)
-                .build();
+    @Builder
+    public ReviewImage(String reviewImage) {
+        this.reviewImageUrl = reviewImageUrl;
     }
 }

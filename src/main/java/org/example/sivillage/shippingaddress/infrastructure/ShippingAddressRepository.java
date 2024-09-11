@@ -11,6 +11,5 @@ public interface ShippingAddressRepository extends JpaRepository <ShippingAddres
     Optional<ShippingAddress> findByMemberUuidAndDefaultAddress(String memberUuid, boolean defaultAddress);
     Optional<ShippingAddress>findByMemberUuidAndId(String memberUuid, Long shippingAddressId);
     List<ShippingAddress> findAllByMemberUuid(String memberUuid);
-
-
-    }
+    Optional<ShippingAddress> findByIdAndMemberUuid(Long addressId, String memberUuid);
+}

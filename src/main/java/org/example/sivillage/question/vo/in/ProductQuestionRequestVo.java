@@ -19,11 +19,10 @@ public class ProductQuestionRequestVo {
     @NotNull
     private boolean privateMessage;
 
-    public static ProductQuestionRequestDto toDto(ProductQuestionRequestVo productQuestionRequestVo, String authorEmail){
+    public static ProductQuestionRequestDto toDto (ProductQuestionRequestVo productQuestionRequestVo){
         return ProductQuestionRequestDto.builder()
                 .questionContent(productQuestionRequestVo.getQuestionContent())
                 .privateMessage(productQuestionRequestVo.isPrivateMessage())
-                .authorEmail(authorEmail)
                 .build();
     }
 

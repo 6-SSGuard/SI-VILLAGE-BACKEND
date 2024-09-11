@@ -25,23 +25,22 @@ public class BeautyInfoController {
 
     @Operation(summary = "뷰티 정보 등록", description = "뷰티정보를 등록합니다.")
     @PostMapping()
-    public BaseResponse<Void> addBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        beautyInfoService.addBeautyInfo(BeautyInfoRequestVo.toDto(vo), authUserDetails.getMemberUuid()); // vo -> dto
+    public BaseResponse<Void> addBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo beautyInfoRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        beautyInfoService.addBeautyInfo(BeautyInfoRequestVo.toDto(beautyInfoRequestVo), authUserDetails.getMemberUuid()); // vo -> dto
         return new BaseResponse<>();
     }
 
     @Operation(summary = "뷰티 정보 조회", description = "뷰티정보를 조회합니다.")
     @GetMapping()
     public BaseResponse<BeautyInfoResponseVo> getBeautyInfo(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        BeautyInfoResponseDto dto = beautyInfoService.getBeautyInfo(authUserDetails.getMemberUuid());
-        BeautyInfoResponseVo vo = mapper.map(dto, BeautyInfoResponseVo.class);
-        return new BaseResponse<>(vo);
+        BeautyInfoResponseDto beautyInfoResponseDto  = beautyInfoService.getBeautyInfo(authUserDetails.getMemberUuid());
+        return new BaseResponse<>(beautyInfoResponseDto.toResponseVo());
     }
 
     @Operation(summary = "뷰티 정보 수정", description = "뷰티정보를 수정합니다.")
     @PutMapping()
-    public BaseResponse<Void> changeBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo vo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        beautyInfoService.changeBeautyInfo(BeautyInfoRequestVo.toDto(vo), authUserDetails.getMemberUuid());
+    public BaseResponse<Void> changeBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo beautyInfoRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        beautyInfoService.changeBeautyInfo(BeautyInfoRequestVo.toDto(beautyInfoRequestVo), authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
