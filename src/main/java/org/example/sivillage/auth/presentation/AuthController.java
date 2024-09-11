@@ -8,12 +8,12 @@ import org.example.sivillage.auth.application.AuthService;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.auth.dto.in.SignInRequestDto;
 import org.example.sivillage.auth.dto.in.SignUpRequestDto;
-import org.example.sivillage.auth.vo.RefreshTokenRequest;
+import org.example.sivillage.auth.vo.in.RefreshTokenRequestDto;
+import org.example.sivillage.auth.vo.in.RefreshTokenRequestVo;
 import org.example.sivillage.auth.vo.in.SignInRequestVo;
 import org.example.sivillage.auth.vo.in.SignUpRequestVo;
 import org.example.sivillage.auth.vo.out.JwtTokenResponseVo;
 import org.example.sivillage.global.common.jwt.JwtTokenProvider;
-import org.example.sivillage.auth.dto.out.JwtTokenResponseDto;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,15 +66,17 @@ public class AuthController {
 
     @Operation(summary = "Access Token 재발급", description = "Access Token 만료시 기존에 발급받은 Refresh Token을 이쪽으로 보내서 새로운 Access Token 받아가기")
     @PostMapping("/refresh")
-    public BaseResponse<JwtTokenResponseDto> refreshAccessToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
-        JwtTokenResponseDto token = jwtTokenProvider.refreshAccessToken(refreshTokenRequest.getRefreshToken());
-        return new BaseResponse<>(token);
+    public BaseResponse<JwtTokenResponseVo> refreshAccessToken(@RequestBody RefreshTokenRequestVo refreshTokenRequestVo) {
+
+        return new BaseResponse<>(
+                authService.refreshAccessToken(RefreshTokenRequestDto.from(refreshTokenRequestVo)).toVo()
+        );
     }
 
     @Operation(summary = "로그아웃", description = "현재 로그인 된 계정의 로그아웃")
     @PostMapping("/logout")
     public BaseResponse<Void> logout(@AuthenticationPrincipal AuthUserDetails authUserDetail) {
-        jwtTokenProvider.deleteRefreshToken(authUserDetail.getUsername());
+        authService.signOut(authUserDetail);
         return new BaseResponse<>();
     }
 }

@@ -10,7 +10,6 @@ import org.example.sivillage.brand.infrastructure.BrandLikeRepository;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +21,6 @@ import java.util.stream.Collectors;
 public class BrandService {
     private final BrandRepository brandRepository;
     private final BrandLikeRepository brandLikeRepository;
-    private final ModelMapper mapper;
 
     public void addBrand(AddBrandRequestDto request) {
         validateDuplicatedBrand(request);

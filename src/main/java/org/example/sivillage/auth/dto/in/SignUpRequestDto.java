@@ -24,7 +24,6 @@ public class SignUpRequestDto {
     private Role role;
 
     public Member toEntity(PasswordEncoder passwordEncoder) {
-
         return Member.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))

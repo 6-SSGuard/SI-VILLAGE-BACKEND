@@ -1,8 +1,10 @@
 package org.example.sivillage.auth.application;
 
+import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.auth.dto.in.SignInRequestDto;
 import org.example.sivillage.auth.dto.in.SignUpRequestDto;
 import org.example.sivillage.auth.dto.out.JwtTokenResponseDto;
+import org.example.sivillage.auth.vo.in.RefreshTokenRequestDto;
 
 public interface AuthService {
 
@@ -10,6 +12,7 @@ public interface AuthService {
      * AuthUserDetails service interface
      * 1. signUp
      * 2. signIn
+     * 3. refreshAccessToken
      * 3. signOut
      */
 
@@ -29,4 +32,17 @@ public interface AuthService {
      */
     JwtTokenResponseDto signIn(SignInRequestDto signInRequestDto);
 
+    /**
+     * 3. RefreshAccessToken
+     * @param refreshTokenRequestDto
+     * return JwtTokenResponseDto
+     */
+    JwtTokenResponseDto refreshAccessToken(RefreshTokenRequestDto refreshTokenRequestDto);
+
+    /**
+     * 4. Sign out
+     * @param authUserDetails
+     * return void
+     */
+    void signOut(AuthUserDetails authUserDetails);
 }
