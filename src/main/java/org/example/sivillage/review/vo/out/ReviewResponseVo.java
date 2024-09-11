@@ -16,36 +16,12 @@ import java.util.List;
 @AllArgsConstructor
 public class ReviewResponseVo {
 
-    private Long reviewId;
-
     private Double score;
 
-    private String authorEmail;
+    private String reviewContent;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
     private LocalDateTime reviewDate;
 
-    private String purchaseOption; // 구매옵션
-
-    private String memberInformation; // 키,몸무게,평소사이즈
-
-    private String reviewContent;
-
-    private Integer reviewLikeCount;
-
-    private List<String> reviewImages;
-
-    public static ReviewResponseVo toVo(ReviewResponseDto dto){
-        return ReviewResponseVo.builder()
-                .reviewId(dto.getReviewId())
-                .score(dto.getScore())
-                .authorEmail(dto.getAuthorEmail()) // 이메일 암호화 해서 dto 에 저장
-                .memberInformation(dto.getMemberInformation())
-                .reviewDate(dto.getReviewDate())
-                .reviewContent(dto.getReviewContent())
-                .reviewLikeCount(dto.getReviewLikeCount())
-                .reviewImages(dto.getReviewImages())
-                .build();
-    }
 
 }

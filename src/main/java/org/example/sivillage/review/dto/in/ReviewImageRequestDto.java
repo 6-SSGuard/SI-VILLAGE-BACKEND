@@ -10,7 +10,6 @@ public class ReviewImageRequestDto {
 
     private List<String> reviewImageUrl;
 
-
     @Builder
     public ReviewImageRequestDto(List<String> reviewImageUrl) {
         this.reviewImageUrl = reviewImageUrl;

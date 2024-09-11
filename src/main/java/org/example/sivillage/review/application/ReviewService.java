@@ -5,8 +5,8 @@ import org.example.sivillage.review.dto.out.ReviewResponseDto;
 import java.util.List;
 
 public interface ReviewService {
-    void addReview(ReviewRequestDto reviewRequestDto, String memberUuid);
-    List<ReviewResponseDto> getReview(String memberUuid);
-    void changeReview(ReviewResponseDto reviewResponseDto, String memberUuid);
-    void removeReview(Long id);
+    Long addReview(ReviewRequestDto reviewRequestDto, String memberUuid, String productUuid);
+    List<ReviewResponseDto> getReview(Long reviewId);
+    void changeReview(ReviewRequestDto reviewRequestDto, Long reviewId);
+    void removeReview(Long reviewId);
 }

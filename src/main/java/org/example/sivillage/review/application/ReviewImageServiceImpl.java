@@ -16,23 +16,19 @@ public class ReviewImageServiceImpl implements ReviewImageService{
 
     private final ReviewImageRepository reviewImageRepository;
 
-    @Override
-    public void addReviewImage(ReviewImageRequestDto reviewImageRequestDto, String memberUuid) {
-
+    public void addReviewImage(ReviewImageRequestDto reviewImageRequestDto, Long reviewId) {
 
     }
 
-    @Override
     public List<ReviewImageResponseDto> getReviewImage(Long reviewId) {
         return List.of();
     }
 
-    @Override
+
     public void changeReviewImage(ReviewImageResponseDto reviewImageResponseDto, Long reviewId) {
 
     }
 
-    @Override
     public void removeReviewImage(Long id) {
 
     }
