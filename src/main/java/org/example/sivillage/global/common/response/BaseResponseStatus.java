@@ -44,6 +44,8 @@ public enum BaseResponseStatus {
     INVALID_REQUEST_BODY(HttpStatus.BAD_REQUEST, false, "요청 본문이 유효하지 않습니다."),
 
     // 인증 관련
+    FAILED_TO_LOGIN(HttpStatus.INTERNAL_SERVER_ERROR, false, "로그인에 실패했습니다."),
+    FAILED_TO_REGISTRATION(HttpStatus.INTERNAL_SERVER_ERROR, false, "회원가입에 실패했습니다."),
     INVALID_REFRESH_TOKEN(HttpStatus.UNAUTHORIZED, false,  "리프레시 토큰이 유효하지 않습니다."),
     NOT_FOUND_REFRESH_TOKEN(HttpStatus.NOT_FOUND, false,  "리프레시 토큰을 찾지 못했습니다."),
     NOT_MATCHED_REFRESH_TOKEN(HttpStatus.UNAUTHORIZED, false,  "DB의 리프레시 토큰값과 일치하지 않습니다."),
@@ -54,7 +56,7 @@ public enum BaseResponseStatus {
     STUDENT_ID_DUPLICATION(HttpStatus.CONFLICT, false,  "이미 사용 중인 학번입니다."),
     ALREADY_FRIEND(HttpStatus.CONFLICT, false,  "이미 친구로 추가된 회원입니다."),
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, false,  "해당하는 회원을 찾을 수 없습니다."),
-    UNAUTHORIZED_TOKEN(HttpStatus.UNAUTHORIZED, false,  "권한 정보가 없는 토큰입니다."),
+    WRONG_JWT_TOKEN(HttpStatus.UNAUTHORIZED, false,  "다시 로그인 해주세요."),
     NO_SIGN_IN(HttpStatus.UNAUTHORIZED, false ,  "인증 오류"),
 
     // 권한 관련

@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.auth.domain.CustomUserDetails;
+import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.brand.application.BrandService;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
 import org.example.sivillage.brand.dto.out.GetBrandsListResponseDto;
@@ -36,8 +36,8 @@ public class BrandController {
 
     @Operation(summary = "브랜드 목록 조회")
     @GetMapping("/")
-    public BaseResponse<GetBrandsResponseVo> getBrands(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        GetBrandsListResponseDto getBrandsList = brandService.getBrands(customUserDetails.getMemberUuid());
+    public BaseResponse<GetBrandsResponseVo> getBrands(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        GetBrandsListResponseDto getBrandsList = brandService.getBrands(authUserDetails.getMemberUuid());
         // Mapper를 사용하여 GetBrandslistResponseDto를 GetBrandsResponseVo로 매핑
         GetBrandsResponseVo response = mapper.map(getBrandsList, GetBrandsResponseVo.class);
 
