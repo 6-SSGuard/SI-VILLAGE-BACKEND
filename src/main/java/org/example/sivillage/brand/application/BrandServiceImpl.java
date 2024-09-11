@@ -11,6 +11,7 @@ import org.example.sivillage.brand.infrastructure.BrandLikeRepository;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
+import org.example.sivillage.member.domain.BrandLike;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class BrandServiceImpl implements BrandService {
      * 2. 브랜드 id 목록 조회
      * 3. 브랜드 이름 조회 (브랜드 영어 명, 한국어 명)
      * 4. 브랜드 좋아요 여부 조회
+     * 5. 브랜드 좋아요 토글
      */
 
     /**
@@ -99,5 +101,20 @@ public class BrandServiceImpl implements BrandService {
                 .build();
     }
 
+    /**
+     * 5. 브랜드 좋아요 토글
+     * @param brandId 브랜드 ID
+     * @param memberUuid 회원 UUID
+     * return void
+     */
+    @Override
+    public void toggleBrandLike(Long brandId, String memberUuid) {
+        BrandLike brandLike = brandLikeRepository.findByBrandIdAndMemberUuid(brandId, memberUuid)
+                .orElse(BrandLike.createLikedBrand(brandId, memberUuid));
 
+        // 현재 상태를 토글 (좋아요 -> 싫어요, 싫어요 -> 좋아요)
+        brandLike.toggleLike();
+
+        brandLikeRepository.save(brandLike);
+    }
 }

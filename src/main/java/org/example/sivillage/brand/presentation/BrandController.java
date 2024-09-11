@@ -32,6 +32,7 @@ public class BrandController {
      * 2. getBrandIdList 브랜드 목록 조회
      * 3. getBrandName 브랜드 이름 조회
      * 4. getBrandLike 브랜드 좋아요 여부 조회
+     * 5. toggleBrandLike 브랜드 좋아요 토글
      */
 
 
@@ -90,5 +91,18 @@ public class BrandController {
         return new BaseResponse<>(
                 brandService.getBrandLike(brandId, authUserDetails.getMemberUuid()).toVo()
         );
+    }
+
+    /**
+     * 5. toggleBrandLike 브랜드 좋아요 토글
+     * @param brandId 브랜드 ID
+     * @param authUserDetails 인증된 사용자 정보
+     * return void
+     */
+    @Operation(summary = "브랜드 좋아요 토글")
+    @PutMapping("/{brandId}/like")
+    public BaseResponse<Void> toggleBrandLike(@PathVariable Long brandId, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        brandService.toggleBrandLike(brandId, authUserDetails.getMemberUuid());
+        return new BaseResponse<>();
     }
 }

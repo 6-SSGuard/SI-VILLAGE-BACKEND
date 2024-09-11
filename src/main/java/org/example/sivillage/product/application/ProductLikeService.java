@@ -1,4 +1,4 @@
-package org.example.sivillage.member.application;
+package org.example.sivillage.product.application;
 
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.member.domain.ProductLike;

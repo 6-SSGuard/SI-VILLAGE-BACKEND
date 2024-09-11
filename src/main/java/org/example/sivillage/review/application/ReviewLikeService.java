@@ -1,4 +1,4 @@
-package org.example.sivillage.member.application;
+package org.example.sivillage.review.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
