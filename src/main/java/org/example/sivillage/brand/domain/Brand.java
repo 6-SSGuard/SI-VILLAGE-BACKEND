@@ -25,7 +25,7 @@ public class Brand {
 
     @Column(nullable = false, unique = true)
     private String brandKorName;
-
+    
     public static Brand toEntity(AddBrandRequestDto request) {
         return Brand.builder()
                 .brandEngName(request.getBrandEngName())

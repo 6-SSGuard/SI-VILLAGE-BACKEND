@@ -249,7 +249,7 @@ public class JwtTokenProvider {
     }
 
     // Redis에 저장된 RefreshToken을 삭제
-    public void deleteRefreshToken(String email) {
-        redisTemplate.delete(email);
+    public void deleteRefreshToken(String memberUuid) {
+        redisTemplate.delete(memberUuid);
     }
 }

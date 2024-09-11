@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.auth.domain.Role;
-import org.example.sivillage.auth.vo.SignUpRequest;
 
 import java.util.Date;
 
@@ -48,16 +47,4 @@ public class Member {
         this.password = password;
         this.birth = birth;
     }
-
-    @Builder
-    public static Member createMember(SignUpRequest request, String memberUuid, String encodedPassword) {
-        return Member.builder()
-                .memberUuid(memberUuid)
-                .email(request.getEmail())
-                .password(encodedPassword)
-                .role(request.getRole())
-                .name(request.getName())
-                .build();
-    }
-
 }

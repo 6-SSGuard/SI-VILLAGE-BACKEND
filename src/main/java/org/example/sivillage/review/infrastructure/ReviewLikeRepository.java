@@ -1,6 +1,6 @@
 package org.example.sivillage.review.infrastructure;
 
-import org.example.sivillage.member.domain.ReviewLike;
+import org.example.sivillage.review.domain.ReviewLike;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

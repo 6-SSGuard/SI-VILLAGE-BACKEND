@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.auth.dto.in.SignInRequestDto;
 import org.example.sivillage.auth.dto.in.SignUpRequestDto;
+import org.example.sivillage.auth.vo.in.RefreshTokenRequestDto;
 import org.example.sivillage.global.common.jwt.JwtTokenProvider;
 import org.example.sivillage.auth.dto.out.JwtTokenResponseDto;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
@@ -35,6 +36,12 @@ public class AuthServiceImpl implements AuthService {
      * 3. 로그아웃
      */
 
+    /**
+     * 1. 회원가입
+     * Save user
+     * @param signUpRequestDto
+     * return void
+     */
     @Override
     @Transactional
     public void signUp(SignUpRequestDto signUpRequestDto) {
@@ -49,6 +56,12 @@ public class AuthServiceImpl implements AuthService {
 
     }
 
+    /**
+     * 2. 로그인
+     * Authenticate user
+     * @param signInRequestDto
+     * return signInResponseDto
+     */
     @Override
     @Transactional
     public JwtTokenResponseDto signIn(SignInRequestDto signInRequestDto) {
@@ -82,5 +95,25 @@ public class AuthServiceImpl implements AuthService {
                         authUserDetail.getAuthorities()
                 )
         );
+    }
+
+    /**
+     * 3. RefreshAccessToken
+     * @param refreshTokenRequestDto
+     * return JwtTokenResponseDto
+     */
+    @Override
+    public JwtTokenResponseDto refreshAccessToken(RefreshTokenRequestDto refreshTokenRequestDto) {
+        return jwtTokenProvider.refreshAccessToken(refreshTokenRequestDto.getRefreshToken());
+    }
+
+    /**
+     * 4. Sign out
+     * @param authUserDetails
+     * return void
+     */
+    @Override
+    public void signOut(AuthUserDetails authUserDetails) {
+        jwtTokenProvider.deleteRefreshToken(authUserDetails.getUsername());
     }
 }

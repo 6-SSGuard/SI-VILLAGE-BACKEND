@@ -8,7 +8,6 @@ import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
-import org.example.sivillage.member.application.ProductLikeService;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductImage;
 import org.example.sivillage.product.domain.ProductOption;
