@@ -23,41 +23,38 @@ import java.util.List;
 @RequestMapping("/api/shipping-addresses")
 public class ShippingAddressController {
 
-    //todo: 배송지 삭제 시 기본 배송지는 삭제 하지 못하게 수정
-    //todo: 기본 배송지 등록은 무조건 기본 배송지 true 로 설정
-
     private final ShippingAddressServiceImpl shippingAddressService;
 
-    @Operation(summary ="기본 배송지 등록", description = "기본 배송지를 등록합니다.")
+    @Operation(summary = "기본 배송지 등록", description = "기본 배송지를 등록합니다.")
     @PostMapping("/default")
-    public BaseResponse<Void> addShippingAddress (@Valid @RequestBody ShippingAddressRequestVo shippingAddressRequestVo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        shippingAddressService.addShippingAddress(ShippingAddressRequestVo.toDto(shippingAddressRequestVo),customUserDetails.getMemberUuid()); // vo -> dto
+    public BaseResponse<Void> addShippingAddress(@Valid @RequestBody ShippingAddressRequestVo shippingAddressRequestVo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        shippingAddressService.addShippingAddress(ShippingAddressRequestVo.toDto(shippingAddressRequestVo), customUserDetails.getMemberUuid()); // vo -> dto
         return new BaseResponse<>();
     }
 
-    @Operation(summary ="배송지 목록 조회", description = "배송지 목록을 조회합니다.")
+    @Operation(summary = "배송지 목록 조회", description = "배송지 목록을 조회합니다.")
     @GetMapping()
-    public BaseResponse<List<ShippingAddressResponseVo>> getShippingAddresses(@AuthenticationPrincipal CustomUserDetails customUserDetails){
+    public BaseResponse<List<ShippingAddressResponseVo>> getShippingAddresses(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         List<ShippingAddressResponseDto> shippingAddressResponseDtoList = shippingAddressService.getShippingAddress(customUserDetails.getMemberUuid());
         return new BaseResponse<>(
                 shippingAddressResponseDtoList.stream()
                         .map(ShippingAddressResponseDto::toResponseVo).toList());
     }
 
-//
-//    @Operation(summary ="배송지 수정", description ="배송지 정보를 수정합니다.")
-//    @PutMapping("/{shippingAddressId}")
-//    public BaseResponse<Void> changeShippingAddress(@PathVariable("shippingAddressId") Long shippingAddressId, @Valid @RequestBody ShippingAddressRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails){
-//        shippingAddressService.changeShippingAddress(ShippingAddressRequestVo.toDto(vo), customUserDetails.getMemberUuid(), shippingAddressId);
-//        return new BaseResponse<>();
-//    }
-//
-//    @Operation(summary = "배송지 삭제", description = "배송지 정보를 삭제합니다.")
-//    @DeleteMapping("/{shippingAddressId}")
-//    public BaseResponse<Void> removeShippingAddress(@PathVariable("shippingAddressId") Long shippingAddressId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-//        shippingAddressService.removeShippingAddress(customUserDetails.getMemberUuid(),shippingAddressId);
-//        return new BaseResponse<>();
-//    }
+
+    @Operation(summary = "배송지 수정", description = "배송지 정보를 수정합니다.")
+    @PutMapping("/{shippingAddressId}")
+    public BaseResponse<Void> changeShippingAddress(@PathVariable("shippingAddressId") Long shippingAddressId, @Valid @RequestBody ShippingAddressRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        shippingAddressService.changeShippingAddress(ShippingAddressRequestVo.toDto(vo),shippingAddressId,customUserDetails.getMemberUuid());
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "배송지 삭제", description = "배송지 정보를 삭제합니다.")
+    @DeleteMapping("/{shippingAddressId}")
+    public BaseResponse<Void> removeShippingAddress(@PathVariable("shippingAddressId") Long shippingAddressId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        shippingAddressService.removeShippingAddress(shippingAddressId,customUserDetails.getMemberUuid());
+        return new BaseResponse<>();
+    }
 
 
 }

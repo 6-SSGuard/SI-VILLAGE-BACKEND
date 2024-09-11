@@ -47,8 +47,9 @@ public class ShippingAddressRequestDto {
                 .build();
     }
 
-    public ShippingAddress updateDefaultAddress(){
+    public ShippingAddress deactivateDefaultAddress(ShippingAddress shippingAddress){
         return ShippingAddress.builder()
+                .id(shippingAddress.getId())
                 .defaultAddress(false)
                 .build();
     }

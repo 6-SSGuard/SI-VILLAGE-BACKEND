@@ -2,6 +2,7 @@ package org.example.sivillage.shippingaddress.vo.in;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import org.example.sivillage.shippingaddress.dto.in.ShippingAddressRequestDto;
 
@@ -47,4 +48,5 @@ public class ShippingAddressRequestVo {
                 .defaultAddress(shippingAddressRequestVo.isDefaultAddress())
                 .build();
     }
+
 }

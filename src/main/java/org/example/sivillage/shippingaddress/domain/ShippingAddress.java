@@ -53,16 +53,6 @@ public class ShippingAddress extends BaseEntity {
         this.memberUuid = memberUuid;
     }
 
-    // 기본 배송지 상태를 활성화하는 메소드
-    public void activateAsDefault() {
-        this.defaultAddress = true;
-    }
-
-    // 기본 배송지 상태를 비활성화하는 메소드
-    public void deactivateAsDefault() {
-        this.defaultAddress = false;
-    }
-
 }
 
 

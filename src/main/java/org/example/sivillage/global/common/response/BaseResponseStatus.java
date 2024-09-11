@@ -64,6 +64,7 @@ public enum BaseResponseStatus {
 
     // 중복 요청 관련
     DUPLICATE_PRODUCT(HttpStatus.CONFLICT, false,  "이미 존재하는 상품명입니다."),
+    DuPLICATE_ADDRESS(HttpStatus.CONFLICT, false, "이미 배송지가 등록되었습니다."),
     DUPLICATE_BRAND_NAME(HttpStatus.CONFLICT, false,  "이미 존재하는 브랜드명입니다."),
     DUPLICATE_BEAUTY_INFO(HttpStatus.CONFLICT,false,"이미 존재하는 뷰티 정보입니다."),
     DUPLICATE_SIZE_INFO(HttpStatus.CONFLICT,false,"이미 존재하는 사이즈 정보입니다."),

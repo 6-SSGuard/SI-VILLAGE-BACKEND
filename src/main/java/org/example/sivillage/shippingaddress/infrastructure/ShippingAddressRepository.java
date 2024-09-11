@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface ShippingAddressRepository extends JpaRepository <ShippingAddress, Long>{
     Optional<ShippingAddress>findByMemberUuid(String memberUuid);
     Optional<ShippingAddress> findByMemberUuidAndDefaultAddress(String memberUuid, boolean defaultAddress);
+    Optional<ShippingAddress>findByMemberUuidAndId(String memberUuid, Long shippingAddressId);
     List<ShippingAddress> findAllByMemberUuid(String memberUuid);
 
 
