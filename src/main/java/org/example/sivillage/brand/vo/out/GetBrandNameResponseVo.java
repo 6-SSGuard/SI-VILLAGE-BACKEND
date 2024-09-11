@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class GetBrandInfoResponseVo {
+public class GetBrandNameResponseVo {
 
     private String brandEngName;
     private String brandKorName;
 
     @Builder
-    public GetBrandInfoResponseVo(String brandEngName, String brandKorName) {
+    public GetBrandNameResponseVo(String brandEngName, String brandKorName) {
         this.brandEngName = brandEngName;
         this.brandKorName = brandKorName;
     }

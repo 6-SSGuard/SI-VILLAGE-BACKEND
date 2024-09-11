@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
 import org.example.sivillage.brand.dto.out.GetBrandIdListResponseDto;
-import org.example.sivillage.brand.dto.out.GetBrandInfoResponseDto;
+import org.example.sivillage.brand.dto.out.GetBrandNameResponseDto;
 import org.example.sivillage.brand.infrastructure.BrandLikeRepository;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
@@ -25,11 +25,11 @@ public class BrandServiceImpl implements BrandService {
      * BrandServiceImpl
      * 1. 브랜드 추가
      * 2. 브랜드 id 목록 조회
-     * 3. 브랜드 정보 조회
+     * 3. 브랜드 이름 조회
      */
 
     /**
-     * 브랜드 추가
+     * 1. 브랜드 추가
      * @param addBrandRequestDto
      * return void
      */
@@ -49,7 +49,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     /**
-     * 브랜드 id 목록 조회
+     * 2. 브랜드 id 목록 조회
      * @param memberUuid
      * return GetBrandIdListResponseDto
      */
@@ -78,17 +78,17 @@ public class BrandServiceImpl implements BrandService {
     }
 
     /**
-     * 브랜드 정보 조회(브랜드 영어 명, 한국어 명)
+     * 3. 브랜드 이름 조회(브랜드 영어 명, 한국어 명)
      * @param brandId
-     * return GetBrandInfoResponseDto
+     * return GetBrandNameResponseDto
      */
     @Override
-    public GetBrandInfoResponseDto getBrandInfo(Long brandId) {
+    public GetBrandNameResponseDto getBrandName(Long brandId) {
 
         Brand brand = brandRepository.findById(brandId)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
 
-        return GetBrandInfoResponseDto.builder()
+        return GetBrandNameResponseDto.builder()
                 .brandEngName(brand.getBrandEngName())
                 .brandKorName(brand.getBrandKorName())
                 .build();
