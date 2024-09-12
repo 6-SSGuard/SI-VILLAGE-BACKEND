@@ -60,6 +60,10 @@ public interface ProductService {
      */
     GetProductThumbnailUrlResponseDto getProductThumbnailUrl(String productCode);
 
-
+    /** 8. 상품 이미지 URL 리스트 조회
+     * @param productCode 상품 코드
+     * @return GetProductImageUrlListResponseDto
+     */
     List<GetProductImageUrlListResponseDto> getProductImageUrlList(String productCode);
+
 }

@@ -24,12 +24,12 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @Operation(summary = "리뷰 등록", description = "리뷰를 등록합니다.")
-    @PostMapping("/{productUuid}")
-    public BaseResponse<Void> addReview(@PathVariable("productUuid") String productUuid, @Valid @RequestBody ReviewRequestVo vo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        reviewService.addReview(ReviewRequestVo.toDto(vo), authUserDetails.getUsername(), authUserDetails.getMemberUuid(), productUuid); // vo -> dto
-        return new BaseResponse<>();
-    }
+//    @Operation(summary = "리뷰 등록", description = "리뷰를 등록합니다.")
+//    @PostMapping("/{productUuid}")
+//    public BaseResponse<Void> addReview(@PathVariable("productUuid") String productUuid, @Valid @RequestBody ReviewRequestVo vo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+//        reviewService.addReview(ReviewRequestVo.toDto(vo), authUserDetails.getUsername(), authUserDetails.getMemberUuid(), productUuid); // vo -> dto
+//        return new BaseResponse<>();
+//    }
 
     @Operation(summary = "회원 리뷰 조회", description = "회원 리뷰를 조회합니다.")
     @GetMapping("")

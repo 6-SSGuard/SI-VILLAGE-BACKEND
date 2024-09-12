@@ -2,6 +2,7 @@ package org.example.sivillage.product.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.sivillage.admin.domain.Category;
 import org.example.sivillage.admin.infrastructure.CategoryRepository;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
@@ -17,9 +18,13 @@ import org.example.sivillage.product.infrastructure.ProductImageRepository;
 import org.example.sivillage.product.infrastructure.ProductOptionRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
+import org.example.sivillage.vendor.domain.ProductCategoryList;
+import org.example.sivillage.vendor.infrastructure.ProductCategoryListRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -36,6 +41,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductImageRepository productImageRepository;
     private final CategoryRepository categoryRepository;
     private final BrandProductRepository brandProductRepository;
+    private final ProductCategoryListRepository productCategoryListRepository;
 
     /**
      * 1. 상품 등록
@@ -162,6 +168,8 @@ public class ProductServiceImpl implements ProductService {
 //
 //        Category category = categoryRepository.findByCategoryCode(product.getCategoryCode())
 //                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+//
+//        ProductCategoryList productCategoryList = productCategoryListRepository
 //
 //        List<String> categoryPath = new ArrayList<>();
 //

@@ -20,7 +20,7 @@ public class CreateProductRequestDto {
     private Color color;
 
     @Builder
-    public CreateProductRequestDto(String productName, Integer price, Long brandId, String detailContent, Color color, Long brandId) {
+    public CreateProductRequestDto(String productName, Integer price, Long brandId, String detailContent, Color color) {
         this.productName = productName;
         this.price = price;
         this.brandId = brandId;

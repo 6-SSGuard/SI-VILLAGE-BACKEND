@@ -2,21 +2,19 @@ package org.example.sivillage.review.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.sivillage.BeautyInfo.domain.BeautyInfo;
 import org.example.sivillage.BeautyInfo.infrastructure.BeautyInfoRepository;
-import org.example.sivillage.product.application.ProductServiceImpl;
-import org.example.sivillage.review.domain.CategoryType;
+import org.example.sivillage.product.application.ProductService;
 import org.example.sivillage.review.domain.Review;
 import org.example.sivillage.review.domain.ReviewImage;
 import org.example.sivillage.review.dto.ReviewRequestDto;
 import org.example.sivillage.review.dto.ReviewResponseDto;
 import org.example.sivillage.review.infrastructure.ReviewImageRepository;
 import org.example.sivillage.review.infrastructure.ReviewRepository;
-import org.example.sivillage.sizeinfo.domain.SizeInfo;
 import org.example.sivillage.sizeinfo.infrastructure.SizeInfoRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 @Transactional
 @RequiredArgsConstructor
@@ -27,22 +25,22 @@ public class ReviewService {
     private final ReviewImageRepository reviewImageRepository;
     private final BeautyInfoRepository beautyInfoRepository;
     private final SizeInfoRepository sizeInfoRepository;
-    private final ProductServiceImpl productServiceImpl;
-
-    public void addReview(ReviewRequestDto dto,  String authorEmail, String memberUuid, String productUuid) {
-
-        BeautyInfo beautyInfo = beautyInfoRepository.findByMemberUuid(memberUuid).orElse(new BeautyInfo());
-        SizeInfo sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid).orElse(new SizeInfo());
-        Review review = Review.toEntity(dto, authorEmail, memberUuid, productUuid);
-
-        String info = CategoryType.fromCategoryPath(productServiceImpl.getCategoryPath(productUuid).getCategoryPath())
-                        .getInfo(beautyInfo, sizeInfo);
-
-        review.toEntityMemberInfo(info);
-        reviewRepository.save(review);
-        saveReviewImage(dto,review);
-
-    }
+    private final ProductService productService;
+//
+//    public void addReview(ReviewRequestDto dto,  String authorEmail, String memberUuid, String productUuid) {
+//
+//        BeautyInfo beautyInfo = beautyInfoRepository.findByMemberUuid(memberUuid).orElse(new BeautyInfo());
+//        SizeInfo sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid).orElse(new SizeInfo());
+//        Review review = Review.toEntity(dto, authorEmail, memberUuid, productUuid);
+//
+//        String info = CategoryType.fromCategoryPath(productService.getCategoryPath(productUuid).getCategoryPath())
+//                        .getInfo(beautyInfo, sizeInfo);
+//
+//        review.toEntityMemberInfo(info);
+//        reviewRepository.save(review);
+//        saveReviewImage(dto,review);
+//
+//    }
 
     // 회원 리뷰 조회
     public List<ReviewResponseDto> getMemberReview(String memberUuid){
