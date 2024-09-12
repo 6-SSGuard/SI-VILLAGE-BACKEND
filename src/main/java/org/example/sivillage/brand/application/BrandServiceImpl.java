@@ -3,15 +3,15 @@ package org.example.sivillage.brand.application;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.brand.domain.Brand;
+import org.example.sivillage.brand.domain.BrandLike;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
-import org.example.sivillage.brand.dto.out.GetBrandIdListResponseDto;
 import org.example.sivillage.brand.dto.out.GetBrandLikeResponseDto;
 import org.example.sivillage.brand.dto.out.GetBrandNameResponseDto;
 import org.example.sivillage.brand.infrastructure.BrandLikeRepository;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
+import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.global.error.BaseException;
-import org.example.sivillage.brand.domain.BrandLike;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,13 +58,11 @@ public class BrandServiceImpl implements BrandService {
      * return GetBrandIdListResponseDto
      */
     @Override
-    public List<GetBrandIdListResponseDto> getBrandIdList(String memberUuid) {
+    public List<IdListResponseDto> getBrandIdList(String memberUuid) {
 
-        return brandRepository.findAllByOrderByEngNameAsc()
+        return brandRepository.findAllBrandIdsByOrderByEngNameAsc()
                 .stream()
-                .map(brand -> GetBrandIdListResponseDto.builder()
-                        .brandId(brand.getBrandId())
-                        .build())
+                .map(IdListResponseDto::from)
                 .toList();
     }
 

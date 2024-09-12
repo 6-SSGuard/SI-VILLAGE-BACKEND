@@ -16,9 +16,16 @@ public class IdListResponseDto {
         this.id = id;
     }
 
-    public static IdListResponseDto from(IdListResponseVo idListResponseVo) {
+    public static IdListResponseDto from(Long id) {
         return IdListResponseDto.builder()
-                .id(idListResponseVo.getId())
+                .id(id)
+                .build();
+    }
+
+
+    public IdListResponseVo toVo() {
+        return IdListResponseVo.builder()
+                .id(this.id)
                 .build();
     }
 }
