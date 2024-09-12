@@ -1,4 +1,5 @@
 package org.example.sivillage.sizeinfo.domain.sizeenum;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
