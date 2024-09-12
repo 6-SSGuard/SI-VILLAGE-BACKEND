@@ -2,38 +2,51 @@ package org.example.sivillage.product.dto.out;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.example.sivillage.brand.domain.Brand;
+import org.example.sivillage.product.domain.Color;
 import org.example.sivillage.product.domain.Product;
-import org.example.sivillage.product.domain.ProductOption;
+import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
 
 @Getter
-@Builder
+@NoArgsConstructor
 public class GetProductDetailsResponseDto {
-    private String productUuid;
+    private String productCode;
     private String productName;
     private Integer price;
     private String brandEngName;
-    private String brandKorName;
-    private String color;
-    private String size;
-    private String volume;
-    private Integer stock;
-    private Integer likesCount;
-    private boolean isLiked;
+    private Color color;
+    private String detailContent;
 
-    public static GetProductDetailsResponseDto toDto(Product product, ProductOption productOption, Integer likesCount,
-                                                     boolean isLiked, Brand brand) {
+    @Builder
+    public GetProductDetailsResponseDto(String productCode, String productName, Integer price, String brandEngName, Color color, String detailContent) {
+        this.productCode = productCode;
+        this.productName = productName;
+        this.price = price;
+        this.brandEngName = brandEngName;
+        this.color = color;
+        this.detailContent = detailContent;
+    }
+
+    public static GetProductDetailsResponseDto of(Product product, Brand brand) {
         return GetProductDetailsResponseDto.builder()
-                .productUuid(product.getProductCode())
+                .productCode(product.getProductCode())
                 .productName(product.getProductName())
                 .price(product.getPrice())
-                .color(productOption.getColor().name())
-                .size(productOption.getSize().name())
-                .stock(productOption.getStock())
-                .likesCount(likesCount)
-                .isLiked(isLiked)
                 .brandEngName(brand.getBrandEngName())
-                .brandKorName(brand.getBrandKorName())
+                .color(product.getColor())
+                .detailContent(product.getDetailContent())
+                .build();
+    }
+
+    public GetProductDetailsResponseVo toVo() {
+        return GetProductDetailsResponseVo.builder()
+                .productCode(productCode)
+                .productName(productName)
+                .price(price)
+                .brandEngName(brandEngName)
+                .color(color)
+                .detailContent(detailContent)
                 .build();
     }
 }

@@ -49,8 +49,7 @@ public interface ProductService {
 
     /** 6. 상품 상세 정보 조회
      * @param productCode 상품 코드
-     * @param memberUuid 회원 UUID
      * @return GetProductDetailsResponseDto
      */
-    GetProductDetailsResponseDto getProductDetail(String productCode, String memberUuid);
+    GetProductDetailsResponseDto getProductDetail(String productCode);
 }

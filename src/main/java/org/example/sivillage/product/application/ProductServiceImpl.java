@@ -34,12 +34,23 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductOptionRepository productOptionRepository;
-    private final ProductLikeService productLikeService;
     private final BrandRepository brandRepository;
-    private final ProductLikeRepository productLikeRepository;
     private final ProductImageRepository productImageRepository;
     private final CategoryRepository categoryRepository;
     private final BrandProductRepository brandProductRepository;
+
+    /**
+     * 1. 상품 등록
+     * 2. 상품 옵션 등록
+     * 3. 상품 이미지 등록
+     * 4. 상품 간략 정보 조회
+     * 5. 상품 옵션 정보 조회
+     * 6. 상품 상세 정보 조회
+     * 7. 상품 썸네일 URL 조회
+     * 8. 상품 이미지 리스트 URL 조회
+     * 9. 상품 좋아요 조회
+     * 10. 상품 좋아요 토글(수정)
+     */
 
     /**
      * 1. 상품 등록
@@ -105,25 +116,27 @@ public class ProductServiceImpl implements ProductService {
                 .toList();
     }
 
+    /**
+     * 6. 상품 상세 정보 조회
+     * @param productCode 상품 코드
+     * @return GetProductDetailsResponseDto
+     */
     @Transactional(readOnly = true)
-    public GetProductDetailsResponseDto getProductDetail(String productCode, String memberUuid) {
+    public GetProductDetailsResponseDto getProductDetail(String productCode) {
         Product product = productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
-
-        ProductOption productOption = productOptionRepository.findByProductCode(productCode)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_OPTION_NOT_FOUND));
-
-        Integer likesCount = productLikeService.countLikesForProduct(productCode);
-
-        boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productCode, memberUuid)
-                .orElse(false);
 
         Brand brand = brandRepository.findByBrandId(product.getBrandId())
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
 
-        return GetProductDetailsResponseDto.toDto(product, productOption, likesCount, isLiked, brand);
+        return GetProductDetailsResponseDto.of(product, brand);
     }
 
+    /**
+     * 7. 상품 썸네일 URL 조회
+     * @param productCode 상품 코드
+     * @return GetProductThumbnailUrlResponseDto
+     */
     @Transactional(readOnly = true)
     public GetProductThumbnailUrlResponseDto getProductThumbnailUrl(String productCode) {
         String thumbnailUrl = productImageRepository.findByProductCodeAndThumbnailTrue(productCode)

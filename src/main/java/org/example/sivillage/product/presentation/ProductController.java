@@ -5,9 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
-import org.example.sivillage.member.vo.out.GetProductCodeListResponseVo;
 import org.example.sivillage.product.application.ProductService;
 import org.example.sivillage.product.dto.in.CreateProductOptionRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
@@ -21,7 +19,6 @@ import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
 import org.example.sivillage.product.vo.out.GetProductOptionListResponseVo;
 import org.example.sivillage.product.vo.out.GetProductThumbnailUrlResponseVo;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -93,12 +90,12 @@ public class ProductController {
     }
 
     @Operation(summary = "상품 상세 정보 조회", description = "")
-    @GetMapping("/details/{productUuid}")
-    public BaseResponse<GetProductDetailsResponseVo> getProductDetail(@PathVariable String productUuid, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        String memberUuid = authUserDetails.getMemberUuid();
-        GetProductDetailsResponseDto responseDto = productService.getProductDetail(productUuid, memberUuid);
-        GetProductDetailsResponseVo response = mapper.map(responseDto, GetProductDetailsResponseVo.class);
-        return new BaseResponse<>(response);
+    @GetMapping("/details/{productCode}")
+    public BaseResponse<GetProductDetailsResponseVo> getProductDetail(@PathVariable String productCode) {
+
+        return new BaseResponse<>(
+                productService.getProductDetail(productCode).toVo()
+        );
     }
 
     @Operation(summary = "상품 썸네일 URL 조회", description = """
