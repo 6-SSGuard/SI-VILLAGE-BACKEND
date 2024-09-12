@@ -2,10 +2,7 @@ package org.example.sivillage.product.application;
 
 import org.example.sivillage.product.dto.in.CreateProductOptionRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
-import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
-import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
-import org.example.sivillage.product.dto.out.GetProductOptionListResponseDto;
-import org.example.sivillage.product.dto.out.GetProductThumbnailUrlResponseDto;
+import org.example.sivillage.product.dto.out.*;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
 
 import java.util.List;
@@ -18,6 +15,9 @@ public interface ProductService {
      * 3. 상품 이미지 등록
      * 4. 상품 간략 정보 조회
      * 5. 상품 옵션 정보 조회
+     * 6. 상품 상세 정보 조회
+     * 7. 상품 썸네일 URL 조회
+     * 8. 상품 이미지 URL 리스트 조회
      */
 
 
@@ -59,4 +59,7 @@ public interface ProductService {
      * @return GetProductThumbnailUrlResponseDto
      */
     GetProductThumbnailUrlResponseDto getProductThumbnailUrl(String productCode);
+
+
+    List<GetProductImageUrlListResponseDto> getProductImageUrlList(String productCode);
 }

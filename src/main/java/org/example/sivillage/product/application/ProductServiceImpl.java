@@ -2,26 +2,24 @@ package org.example.sivillage.product.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.admin.domain.Category;
 import org.example.sivillage.admin.infrastructure.CategoryRepository;
 import org.example.sivillage.brand.domain.Brand;
-import org.example.sivillage.brand.domain.BrandProduct;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductImage;
-import org.example.sivillage.product.domain.ProductOption;
 import org.example.sivillage.product.dto.in.CreateProductOptionRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.*;
-import org.example.sivillage.product.infrastructure.*;
+import org.example.sivillage.product.infrastructure.BrandProductRepository;
+import org.example.sivillage.product.infrastructure.ProductImageRepository;
+import org.example.sivillage.product.infrastructure.ProductOptionRepository;
+import org.example.sivillage.product.infrastructure.ProductRepository;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -93,6 +91,7 @@ public class ProductServiceImpl implements ProductService {
      * @return GetProductBriefInfoResponseDto
      */
     @Transactional(readOnly = true)
+    @Override
     public GetProductBriefInfoResponseDto getProductBriefInfo(String productCode) {
         Product product = productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
@@ -109,6 +108,7 @@ public class ProductServiceImpl implements ProductService {
      * @return GetProductOptionListResponseDto
      */
     @Transactional(readOnly = true)
+    @Override
     public List<GetProductOptionListResponseDto> getProductOptionList(String productCode) {
         return productOptionRepository.findByProductCode(productCode)
                 .stream()
@@ -122,6 +122,7 @@ public class ProductServiceImpl implements ProductService {
      * @return GetProductDetailsResponseDto
      */
     @Transactional(readOnly = true)
+    @Override
     public GetProductDetailsResponseDto getProductDetail(String productCode) {
         Product product = productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
@@ -138,6 +139,7 @@ public class ProductServiceImpl implements ProductService {
      * @return GetProductThumbnailUrlResponseDto
      */
     @Transactional(readOnly = true)
+    @Override
     public GetProductThumbnailUrlResponseDto getProductThumbnailUrl(String productCode) {
         String thumbnailUrl = productImageRepository.findByProductCodeAndThumbnailTrue(productCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_IMAGE_NOT_FOUND)).getProductImageUrl();
@@ -145,26 +147,34 @@ public class ProductServiceImpl implements ProductService {
         return GetProductThumbnailUrlResponseDto.from(thumbnailUrl);
     }
 
-
-    public GetCategoryPathResponseDto getCategoryPath(String productUuid) {
-        Product product = productRepository.findByProductCode(productUuid)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
-
-        Category category = categoryRepository.findByCategoryCode(product.getCategoryCode())
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
-
-        List<String> categoryPath = new ArrayList<>();
-
-        while (category != null) {
-            categoryPath.add(category.getCategoryName());
-            category = category.getParent(); // 부모 카테고리로 이동
-        }
-
-        // 상위 카테고리부터 하위 카테고리 순으로 정렬
-        Collections.reverse(categoryPath);
-
-        return new GetCategoryPathResponseDto(String.join("/", categoryPath));
+    @Transactional(readOnly = true)
+    @Override
+    public List<GetProductImageUrlListResponseDto> getProductImageUrlList(String productCode) {
+        return productImageRepository.findProductImageUrlsByProductCode(productCode)
+                .stream()
+                .map(GetProductImageUrlListResponseDto::from)
+                .toList();
     }
+
+//    public GetCategoryPathResponseDto getCategoryPath(String productUuid) {
+//        Product product = productRepository.findByProductCode(productUuid)
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
+//
+//        Category category = categoryRepository.findByCategoryCode(product.getCategoryCode())
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
+//
+//        List<String> categoryPath = new ArrayList<>();
+//
+//        while (category != null) {
+//            categoryPath.add(category.getCategoryName());
+//            category = category.getParent(); // 부모 카테고리로 이동
+//        }
+//
+//        // 상위 카테고리부터 하위 카테고리 순으로 정렬
+//        Collections.reverse(categoryPath);
+//
+//        return new GetCategoryPathResponseDto(String.join("/", categoryPath));
+//    }
 
 //    public void addProductsFromCsv(MultipartFile file) {
 //        if (file.isEmpty() || !file.getOriginalFilename().endsWith(".csv")) {

@@ -9,15 +9,13 @@ import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.product.application.ProductService;
 import org.example.sivillage.product.dto.in.CreateProductOptionRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
-import org.example.sivillage.product.dto.out.*;
+import org.example.sivillage.product.dto.out.GetProductImageUrlListResponseDto;
+import org.example.sivillage.product.dto.out.GetProductOptionListResponseDto;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestVo;
 import org.example.sivillage.product.vo.in.CreateProductOptionRequestVo;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
-import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;
-import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
-import org.example.sivillage.product.vo.out.GetProductOptionListResponseVo;
-import org.example.sivillage.product.vo.out.GetProductThumbnailUrlResponseVo;
+import org.example.sivillage.product.vo.out.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +36,9 @@ public class ProductController {
      * 3. 상품 이미지 등록
      * 4. 상품 간략 정보 조회
      * 5. 상품 옵션 정보 조회
+     * 6. 상품 상세 정보 조회
+     * 7. 상품 썸네일 URL 조회
+     * 8. 상품 이미지 URL 리스트 조회
      */
 
     @Operation(summary = "상품 등록")
@@ -108,6 +109,22 @@ public class ProductController {
                 productService.getProductThumbnailUrl(productCode).toVo()
         );
     }
+
+    @Operation(summary = "상품 이미지 URL 리스트 조회", description = """
+        상품 이미지 URL 리스트를 조회하는 API
+        """)
+    @GetMapping("/details/images/{productCode}")
+    public BaseResponse<List<GetProductImageUrlListResponseVo>> getProductImageUrlList(@PathVariable String productCode) {
+
+        return new BaseResponse<>(
+                productService.getProductImageUrlList(productCode).stream()
+                        .map(GetProductImageUrlListResponseDto::toVo)
+                        .toList()
+        );
+    }
+
+
+    
 
 //    @PostMapping(value = "/from-csv", consumes = "multipart/form-data")
 //    public BaseResponse<Void> addProductsFromCsv(@RequestParam("file") MultipartFile file) {
