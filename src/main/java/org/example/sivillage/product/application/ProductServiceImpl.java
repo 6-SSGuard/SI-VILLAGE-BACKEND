@@ -88,6 +88,19 @@ public class ProductServiceImpl implements ProductService {
         return GetProductBriefInfoResponseDto.of(product, brand);
     }
 
+    /**
+     * 5. 상품 옵션 정보 조회
+     * @param productCode 상품 코드
+     * @return GetProductOptionListResponseDto
+     */
+    @Transactional(readOnly = true)
+    public List<GetProductOptionListResponseDto> getProductOptionList(String productCode) {
+        return productOptionRepository.findByProductCode(productCode)
+                .stream()
+                .map(GetProductOptionListResponseDto::from)
+                .toList();
+    }
+
     @Transactional(readOnly = true)
     public GetProductDetailsResponseDto getProductDetail(String productCode, String memberUuid) {
         Product product = productRepository.findByProductCode(productCode)

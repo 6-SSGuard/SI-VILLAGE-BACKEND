@@ -11,16 +11,14 @@ import org.example.sivillage.member.vo.out.GetProductCodeListResponseVo;
 import org.example.sivillage.product.application.ProductService;
 import org.example.sivillage.product.dto.in.CreateProductOptionRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
-import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
-import org.example.sivillage.product.dto.out.GetProductCodeListResponseDto;
-import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
-import org.example.sivillage.product.dto.out.GetProductThumbnailUrlResponseDto;
+import org.example.sivillage.product.dto.out.*;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestVo;
 import org.example.sivillage.product.vo.in.CreateProductOptionRequestVo;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;
 import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
+import org.example.sivillage.product.vo.out.GetProductOptionListResponseVo;
 import org.example.sivillage.product.vo.out.GetProductThumbnailUrlResponseVo;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -37,7 +35,15 @@ public class ProductController {
     private final ProductService productService;
     private final ModelMapper mapper;
 
-    @Operation(summary = "상품 생성")
+    /**
+     * 1. 상품 등록
+     * 2. 상품 옵션 등록
+     * 3. 상품 이미지 등록
+     * 4. 상품 간략 정보 조회
+     * 5. 상품 옵션 정보 조회
+     */
+
+    @Operation(summary = "상품 등록")
     @PostMapping("/")
     public BaseResponse<Void> addProduct(@Valid @RequestBody CreateProductRequestVo createProductRequestVo) {
 
@@ -45,7 +51,7 @@ public class ProductController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "상품 옵션 생성")
+    @Operation(summary = "상품 옵션 등록")
     @PostMapping("/option")
     public BaseResponse<Void> addProductOption(@Valid @RequestBody CreateProductOptionRequestVo createProductOptionRequestVo) {
 
@@ -53,7 +59,7 @@ public class ProductController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "상품 이미지 리스트 생성")
+    @Operation(summary = "상품 이미지 리스트 등록")
     @PostMapping("/image")
     public BaseResponse<Void> addProductImageList(@RequestBody List<CreateProductImageListRequestVo> createProductImageListRequestVo) {
 
@@ -72,6 +78,17 @@ public class ProductController {
 
         return new BaseResponse<>(
                 productService.getProductBriefInfo(productCode).toVo()
+        );
+    }
+
+    @Operation(summary = "상품에 등록된 옵션 정보 리스트 조회")
+    @GetMapping("/option/{productCode}")
+    public BaseResponse<List<GetProductOptionListResponseVo>> getProductOptionList(@PathVariable String productCode) {
+
+        return new BaseResponse<>(
+                productService.getProductOptionList(productCode).stream()
+                        .map(GetProductOptionListResponseDto::toVo)
+                        .toList()
         );
     }
 

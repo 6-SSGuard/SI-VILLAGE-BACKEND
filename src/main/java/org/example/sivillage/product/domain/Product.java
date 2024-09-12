@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.sivillage.global.common.BaseEntity;
 import org.example.sivillage.product.dto.in.CreateProductFromCsvRequestDto;
-import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 
 @Entity
 @Getter
@@ -27,20 +26,13 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private Integer price;
 
+    @Column(nullable = false)
+    private Color color;
+
     @Column(nullable = false, length = 10000)
     private String detailContent;
 
     private Long brandId;
-
-    public static Product createProduct(CreateProductRequestDto request, Long brandId, String productCode, String categoryCode) {
-        return Product.builder()
-                .productName(request.getProductName())
-                .productCode(productCode)
-                .price(request.getPrice())
-                .detailContent(request.getDetailContent())
-                .brandId(brandId)
-                .build();
-    }
 
     public static Product createProductFromCsv(CreateProductFromCsvRequestDto request) {
         return Product.builder()
