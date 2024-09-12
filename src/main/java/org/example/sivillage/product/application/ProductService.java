@@ -24,4 +24,6 @@ public interface ProductService {
      * @param createProductImageListRequestDto 상품 이미지 등록 요청 DTO
      */
     void addProductImageList(List<CreateProductImageListRequestDto> createProductImageListRequestDto);
+
+
 }

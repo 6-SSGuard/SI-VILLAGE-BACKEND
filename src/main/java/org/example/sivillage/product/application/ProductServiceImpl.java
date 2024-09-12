@@ -7,6 +7,7 @@ import org.example.sivillage.admin.infrastructure.CategoryRepository;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
+import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductImage;
@@ -39,18 +40,29 @@ public class ProductServiceImpl implements ProductService {
     private final ProductImageRepository productImageRepository;
     private final CategoryRepository categoryRepository;
 
-
+    /**
+     * 1. 상품 등록
+     * @param createProductRequestDto 상품 등록 요청 DTO
+     */
     public void addProduct(CreateProductRequestDto createProductRequestDto) {
 
         productRepository.save(createProductRequestDto.toEntity());
     }
 
+    /**
+     * 2. 상품 옵션 등록
+     * @param createProductOptionRequestDto 상품 옵션 등록 요청 DTO
+     */
     @Override
     public void addProductOption(CreateProductOptionRequestDto createProductOptionRequestDto) {
 
         productOptionRepository.save(createProductOptionRequestDto.toEntity());
     }
 
+    /**
+     * 3. 상품 이미지 등록
+     * @param createProductImageListRequestDto 상품 이미지 등록 요청 DTO
+     */
     @Override
     public void addProductImageList(List<CreateProductImageListRequestDto> createProductImageListRequestDto) {
 
@@ -60,24 +72,6 @@ public class ProductServiceImpl implements ProductService {
 
         productImageRepository.saveAll(productImageList);
     }
-
-    private Product createAndSaveProduct(CreateProductRequestDto request, Long brandId, String categoryCode) {
-        String productCode = UUID.randomUUID().toString();
-
-        Product product = Product.createProduct(request, brandId, productCode, categoryCode);
-        productRepository.save(product);
-        return product;
-    }
-
-    // 썸네일 이미지와 일반 이미지를 구분하여  저장
-    private void saveProductImages(List<CreateProductRequestDto.ProductImageDto> productImageUrls, String productCode) {
-        productImageRepository.saveAll(
-                productImageUrls.stream()
-                        .map(imageDto -> ProductImage.createProductImage(imageDto, productCode))
-                        .toList()
-        );
-    }
-
 
     @Transactional(readOnly = true)
     public GetProductDetailsResponseDto getProductDetail(String productCode, String memberUuid) {
@@ -98,15 +92,7 @@ public class ProductServiceImpl implements ProductService {
         return GetProductDetailsResponseDto.toDto(product, productOption, likesCount, isLiked, brand);
     }
 
-    @Transactional(readOnly = true)
-    public GetProductCodeListResponseDto getProductCodeList() {
-        // TODO: 카테고리 id를 추가로 받아서 필터링하여 조회
-        // TODO: 상품 옵션에 따라 필터링하여 조회
-        // 일단 테스트 버전은 findAll로 다 가져오기
-        List<String> productCodeList = productRepository.findAllProductCode();
 
-        return new GetProductCodeListResponseDto(productCodeList);
-    }
 
     @Transactional(readOnly = true)
     public GetProductBriefInfoResponseDto getProductBriefInfo(String productCode, String memberUuid) {
