@@ -1,6 +1,8 @@
 package org.example.sivillage.product.dto.out;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;

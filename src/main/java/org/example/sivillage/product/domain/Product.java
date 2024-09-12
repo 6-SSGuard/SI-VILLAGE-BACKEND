@@ -32,6 +32,7 @@ public class Product extends BaseEntity {
     @Column(nullable = false, length = 10000)
     private String detailContent;
 
+    @Column(nullable = false)
     private Long brandId;
 
     public static Product createProductFromCsv(CreateProductFromCsvRequestDto request) {
@@ -40,6 +41,7 @@ public class Product extends BaseEntity {
                 .productCode(request.getProductCode())
                 .price(request.getPrice())
                 .detailContent(request.getDetailContent())
+                .brandId(request.getBrandId())
                 .build();
     }
 

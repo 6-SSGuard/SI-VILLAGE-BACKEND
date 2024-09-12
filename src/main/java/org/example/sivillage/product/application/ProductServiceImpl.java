@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.admin.domain.Category;
 import org.example.sivillage.admin.infrastructure.CategoryRepository;
 import org.example.sivillage.brand.domain.Brand;
+import org.example.sivillage.brand.domain.BrandProduct;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
@@ -14,15 +15,15 @@ import org.example.sivillage.product.domain.ProductOption;
 import org.example.sivillage.product.dto.in.CreateProductOptionRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.*;
-import org.example.sivillage.product.infrastructure.ProductImageRepository;
-import org.example.sivillage.product.infrastructure.ProductLikeRepository;
-import org.example.sivillage.product.infrastructure.ProductOptionRepository;
-import org.example.sivillage.product.infrastructure.ProductRepository;
+import org.example.sivillage.product.infrastructure.*;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +39,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductLikeRepository productLikeRepository;
     private final ProductImageRepository productImageRepository;
     private final CategoryRepository categoryRepository;
+    private final BrandProductRepository brandProductRepository;
 
     /**
      * 1. 상품 등록
@@ -45,7 +47,9 @@ public class ProductServiceImpl implements ProductService {
      */
     public void addProduct(CreateProductRequestDto createProductRequestDto) {
 
-        productRepository.save(createProductRequestDto.toEntity());
+        Product product = productRepository.save(createProductRequestDto.toEntity());
+        brandProductRepository.save(createProductRequestDto.toEntity(
+                createProductRequestDto.getBrandId(), product.getProductCode()));
     }
 
     /**

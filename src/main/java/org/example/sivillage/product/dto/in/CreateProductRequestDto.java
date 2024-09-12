@@ -3,6 +3,7 @@ package org.example.sivillage.product.dto.in;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.sivillage.brand.domain.BrandProduct;
 import org.example.sivillage.global.common.UuidGenerator;
 import org.example.sivillage.product.domain.Color;
 import org.example.sivillage.product.domain.Product;
@@ -19,7 +20,7 @@ public class CreateProductRequestDto {
     private Color color;
 
     @Builder
-    public CreateProductRequestDto(String productName, Integer price, Long brandId, String detailContent, Color color) {
+    public CreateProductRequestDto(String productName, Integer price, Long brandId, String detailContent, Color color, Long brandId) {
         this.productName = productName;
         this.price = price;
         this.brandId = brandId;
@@ -37,14 +38,21 @@ public class CreateProductRequestDto {
                 .build();
     }
 
+    public BrandProduct toEntity(Long brandId, String productCode) {
+        return BrandProduct.builder()
+                .brandId(brandId)
+                .productCode(productCode)
+                .build();
+    }
+
     public Product toEntity() {
         return Product.builder()
                 .productCode(UuidGenerator.generateProductCode())
                 .color(color)
                 .productName(productName)
                 .price(price)
-                .brandId(brandId)
                 .detailContent(detailContent)
+                .brandId(brandId)
                 .build();
     }
 }
