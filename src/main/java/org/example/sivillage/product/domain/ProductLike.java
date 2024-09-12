@@ -24,18 +24,18 @@ public class ProductLike {
     private String memberUuid;
 
     @Column(nullable = false)
-    private boolean like;
+    private boolean liked;
 
     // 좋아요 생성 메서드
     public static ProductLike toEntity(String productCode, String memberUuid) {
         return ProductLike.builder()
                 .productCode(productCode)
                 .memberUuid(memberUuid)
-                .like(false)
+                .liked(false)
                 .build();
     }
 
     public void toggleLike() {
-        this.like = !this.like;
+        this.liked = !this.liked;
     }
 }

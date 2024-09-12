@@ -96,7 +96,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
 
-        Brand brand = brandRepository.findByBrandId(product.getBrandId())
+        Brand brand = brandRepository.findById(product.getBrandId())
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
 
         return GetProductBriefInfoResponseDto.of(product, brand);
@@ -127,7 +127,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
 
-        Brand brand = brandRepository.findByBrandId(product.getBrandId())
+        Brand brand = brandRepository.findById(product.getBrandId())
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
 
         return GetProductDetailsResponseDto.of(product, brand);
