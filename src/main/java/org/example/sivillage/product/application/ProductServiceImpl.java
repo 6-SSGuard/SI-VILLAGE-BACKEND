@@ -2,7 +2,6 @@ package org.example.sivillage.product.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.admin.domain.Category;
 import org.example.sivillage.admin.infrastructure.CategoryRepository;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
@@ -18,13 +17,10 @@ import org.example.sivillage.product.infrastructure.ProductImageRepository;
 import org.example.sivillage.product.infrastructure.ProductOptionRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
-import org.example.sivillage.vendor.domain.ProductCategoryList;
 import org.example.sivillage.vendor.infrastructure.ProductCategoryListRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -52,8 +48,6 @@ public class ProductServiceImpl implements ProductService {
      * 6. 상품 상세 정보 조회
      * 7. 상품 썸네일 URL 조회
      * 8. 상품 이미지 리스트 URL 조회
-     * 9. 상품 좋아요 조회
-     * 10. 상품 좋아요 토글(수정)
      */
 
     /**

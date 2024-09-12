@@ -7,12 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface ProductLikeRepository extends JpaRepository<ProductLike, Long> {
-//    boolean existsByProductAndMember(Product product, Member member);
-//    void deleteByProductAndMember(Product product, Member member);
-    Integer countByProductUuid(String uuid);
 
-    Optional<ProductLike> findByProductUuidAndMemberUuid(String productUuid, String memberUuid);
+    Integer countByProductCode(String productCode);
 
-    @Query("SELECT p.isLiked FROM ProductLike p WHERE p.productUuid = :productUuid AND p.memberUuid = :memberUuid")
+    Optional<ProductLike> findByProductCodeAndMemberUuid(String productCode, String memberUuid);
+
+    @Query("SELECT p.like FROM ProductLike p WHERE p.productCode = :productCode AND p.memberUuid = :memberUuid")
     Optional<Boolean> findIsLikedByProductUuidAndMemberUuid(String productUuid, String memberUuid);
 }
