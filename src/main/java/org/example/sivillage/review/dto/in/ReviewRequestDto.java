@@ -10,12 +10,14 @@ public class ReviewRequestDto {
 
     private String reviewContent;
 
-    public Review toEntity(ReviewRequestDto reviewRequestDto, String memberUuid, String productUuid) {
+    public Review toEntity(ReviewRequestDto reviewRequestDto,String authorEmail, String memberInformation, String memberUuid, String productCode) {
         return Review.builder()
                 .score(reviewRequestDto.getScore())
                 .reviewContent(reviewRequestDto.getReviewContent())
+                .authorEmail(authorEmail.substring(0, 4) + "*******")
+                .memberInformation(memberInformation)
                 .memberUuid(memberUuid)
-                .productUuid(productUuid)
+                .productCode(productCode)
                 .build();
     }
 
@@ -25,7 +27,7 @@ public class ReviewRequestDto {
                 .score(reviewRequestDto.getScore())
                 .reviewContent(review.getReviewContent())
                 .memberUuid(review.getMemberUuid())
-                .productUuid(review.getProductUuid())
+                .productCode(review.getProductCode())
                 .build();
     }
 

@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface ReviewLikeRepository extends JpaRepository<ReviewLike, Long> {
 
     Optional<ReviewLike> findByReviewIdAndMemberUuid(Long reviewId, String memberUuid);
+    Integer countByReviewId(Long reviewId);
 }

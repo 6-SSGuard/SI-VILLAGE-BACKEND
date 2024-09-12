@@ -8,6 +8,5 @@ import java.util.List;
 public interface ReviewImageService {
     void addReviewImage(ReviewImageRequestDto reviewImageRequestDto, Long reviewId);
     List<ReviewImageResponseDto> getReviewImage(Long reviewId);
-    void changeReviewImage(ReviewImageResponseDto reviewImageResponseDto, Long reviewId);
-    void removeReviewImage(Long id);
+    void removeReviewImage(Long reviewImageId);
 }

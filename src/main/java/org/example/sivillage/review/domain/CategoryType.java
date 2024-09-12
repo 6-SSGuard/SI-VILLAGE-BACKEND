@@ -6,6 +6,7 @@ import org.example.sivillage.sizeinfo.domain.SizeInfo;
 
 @Getter
 public enum CategoryType {
+
     MAKEUP("메이크업") {
         @Override
         public String getInfo(BeautyInfo beautyInfo, SizeInfo sizeInfo) {
@@ -37,6 +38,7 @@ public enum CategoryType {
                     ? "키: " + sizeInfo.getHeight() + "cm, 몸무게: " + sizeInfo.getWeight() + "kg, 평소 사이즈: " + sizeInfo.getTopSize()
                     : "";
         }
+
     };
 
     private final String keyword;
@@ -45,7 +47,7 @@ public enum CategoryType {
         this.keyword = keyword;
     }
 
-   public abstract String getInfo(BeautyInfo beautyInfo, SizeInfo sizeInfo);
+  public abstract String getInfo(BeautyInfo beautyInfo, SizeInfo sizeInfo);
 
     // 카테고리 경로에 따라 Enum을 반환하는 메소드
     public static CategoryType fromCategoryPath(String categoryPath) {

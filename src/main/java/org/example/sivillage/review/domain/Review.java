@@ -23,18 +23,26 @@ public class Review extends BaseEntity {
     private String reviewContent;
 
     @Column(nullable = false)
+    private String authorEmail;
+
+    @Column(nullable = false)
+    private String memberInformation;
+
+    @Column(nullable = false)
     private String memberUuid;
 
     @Column(nullable = false)
-    private String productUuid;
+    private String productCode;
 
     @Builder
-    public Review(Long id, Double score, String reviewContent , String memberUuid,String productUuid) {
+    public Review(Long id, Double score, String reviewContent,String authorEmail, String memberInformation, String memberUuid,String productCode) {
         this.id = id;
         this.score = score;
         this.reviewContent = reviewContent;
+        this.authorEmail = authorEmail;
+        this.memberInformation = memberInformation;
         this.memberUuid = memberUuid;
-        this.productUuid = productUuid;
+        this.productCode = productCode;
     }
 
 }

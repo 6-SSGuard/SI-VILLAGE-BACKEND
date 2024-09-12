@@ -11,9 +11,10 @@ public class IdListResponseDto<T> {
 
     private T id;
 
-    @Builder
-    public IdListResponseDto(T id) {
-        this.id = id;
+    public IdListResponseVo<T> toVo() {
+        return IdListResponseVo.<T>builder()
+                .id(this.id)
+                .build();
     }
 
     public static <T> IdListResponseDto<T> from(T id) {
@@ -22,9 +23,9 @@ public class IdListResponseDto<T> {
                 .build();
     }
 
-    public IdListResponseVo<T> toVo() {
-        return IdListResponseVo.<T>builder()
-                .id(this.id)
-                .build();
+    @Builder
+    public IdListResponseDto(T id) {
+        this.id = id;
     }
+
 }

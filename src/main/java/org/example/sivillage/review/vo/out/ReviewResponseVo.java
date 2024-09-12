@@ -20,6 +20,10 @@ public class ReviewResponseVo {
 
     private String reviewContent;
 
+    private String authorEmail;
+
+    private String memberInformation;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
     private LocalDateTime reviewDate;
 

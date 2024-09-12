@@ -17,4 +17,7 @@ public interface ProductCategoryListRepository extends JpaRepository<ProductCate
                                                 @Param("middleCategoryCode") String middleCategoryCode,
                                                 @Param("bottomCategoryCode") String bottomCategoryCode,
                                                 @Param("subCategoryCode") String subCategoryCode);
+
+
+
 }

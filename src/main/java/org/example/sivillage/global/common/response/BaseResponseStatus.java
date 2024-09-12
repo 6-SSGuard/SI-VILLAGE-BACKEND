@@ -24,6 +24,7 @@ public enum BaseResponseStatus {
      */
     QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND,false,"해당하는 상품문의를 찾을 수 없습니다."),
     REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND,false,"해당하는 리뷰를 찾을 수 없습니다."),
+    REVIEW_IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND,false,"해당하는 리뷰이미지를 찾을 수 없습니다."),
     POSTS_NOT_FOUND(HttpStatus.NOT_FOUND, false, "게시글 정보를 찾을 수 없습니다."),
     BRAND_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 브랜드 명을 찾을 수 없습니다."),
     PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 상품 정보를 찾을 수 없습니다."),

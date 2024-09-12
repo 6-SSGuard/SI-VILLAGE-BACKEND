@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.example.sivillage.brand.domain.BrandProduct;
 import org.example.sivillage.global.common.UuidGenerator;
 import org.example.sivillage.product.domain.Color;
+import org.example.sivillage.product.domain.Product;
+import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 
 
 @NoArgsConstructor
