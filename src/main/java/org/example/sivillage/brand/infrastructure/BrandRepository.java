@@ -24,8 +24,8 @@ public interface BrandRepository extends JpaRepository<Brand, Long> {
     List<Brand> findByKorNameStartingWith(@Param("prefix") String prefix);
 
     // 전체 브랜드를 brandEngName 기준으로 오름차순 정렬하여 반환
-    @Query("SELECT b FROM Brand b ORDER BY b.brandEngName ASC")
-    List<Brand> findAllByOrderByEngNameAsc();
+    @Query("SELECT b.brandId FROM Brand b ORDER BY b.brandEngName ASC")
+    List<Long> findAllBrandIdsByOrderByEngNameAsc();
 
     Optional<Brand> findByBrandId(Long brandId);
 }

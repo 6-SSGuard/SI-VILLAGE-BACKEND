@@ -1,33 +1,31 @@
 package org.example.sivillage.vendor.application;
 
-import lombok.RequiredArgsConstructor;
+import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.vendor.dto.in.ProductCategoryListRequestDto;
-import org.example.sivillage.vendor.dto.out.GetProductCategoryListResponseDto;
-import org.example.sivillage.vendor.infrastructure.ProductCategoryListRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-@Service
-public class ProductCategoryListService {
+public interface ProductCategoryListService {
 
-    private final ProductCategoryListRepository productCategoryListRepository;
+    /**
+     * 1. 상품 카테고리별 상품 추가
+     *
+     * @param productCategoryListRequestDto 상품 카테고리별 상품 추가 요청 DTO
+     */
+    void addProductByCategories(ProductCategoryListRequestDto productCategoryListRequestDto);
 
-    public void addProductByCategories(ProductCategoryListRequestDto productCategoryListRequestDto) {
-        productCategoryListRepository.save(productCategoryListRequestDto.toEntity());
-    }
-
-    public GetProductCategoryListResponseDto getProductCategoryListByCategories(
+    /**
+     * 2. 상품 카테고리별 상품 조회
+     *
+     * @param topCategoryCode    대분류 코드
+     * @param middleCategoryCode 중분류 코드
+     * @param bottomCategoryCode 소분류 코드
+     * @param subCategoryCode    세부분류 코드
+     * @return 상품 코드 목록
+     */
+    List<IdListResponseDto<String>> getProductCodeListByCategories(
             String topCategoryCode,
             String middleCategoryCode,
             String bottomCategoryCode,
-            String subCategoryCode) {
-
-        List<String> productCodeList = productCategoryListRepository
-                .findAllProductCodeByCategories(topCategoryCode, middleCategoryCode, bottomCategoryCode, subCategoryCode);
-
-        return new GetProductCategoryListResponseDto(productCodeList);
-    }
-
+            String subCategoryCode);
 }

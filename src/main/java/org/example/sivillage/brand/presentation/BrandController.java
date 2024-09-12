@@ -8,12 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.brand.application.BrandService;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
-import org.example.sivillage.brand.dto.out.GetBrandIdListResponseDto;
 import org.example.sivillage.brand.vo.in.AddBrandRequestVo;
-import org.example.sivillage.brand.vo.out.GetBrandIdListResponseVo;
 import org.example.sivillage.brand.vo.out.GetBrandLikeResponseVo;
 import org.example.sivillage.brand.vo.out.GetBrandNameResponseVo;
 import org.example.sivillage.global.common.response.BaseResponse;
+import org.example.sivillage.global.common.response.dto.IdListResponseDto;
+import org.example.sivillage.global.common.response.vo.IdListResponseVo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,11 +57,13 @@ public class BrandController {
      */
     @Operation(summary = "브랜드 목록 조회")
     @GetMapping("/")
-    public BaseResponse<List<GetBrandIdListResponseVo>> getBrandIdList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+    public BaseResponse<List<IdListResponseVo<Long>>> getBrandIdList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+
+        List<IdListResponseDto<Long>> idListResponseDto = brandService.getBrandIdList(authUserDetails.getMemberUuid());
 
         return new BaseResponse<>(
-                brandService.getBrandIdList(authUserDetails.getMemberUuid()).stream()
-                        .map(GetBrandIdListResponseDto::toVo)
+                idListResponseDto.stream()
+                        .map(IdListResponseDto::toVo)
                         .toList()
         );
     }

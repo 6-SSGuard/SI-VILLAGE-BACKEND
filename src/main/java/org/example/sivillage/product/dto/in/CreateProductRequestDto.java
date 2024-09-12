@@ -1,46 +1,57 @@
 package org.example.sivillage.product.dto.in;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.example.sivillage.brand.domain.BrandProduct;
+import org.example.sivillage.global.common.UuidGenerator;
 import org.example.sivillage.product.domain.Color;
-import org.example.sivillage.productoption.Size;
 
-import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
-@Builder
 public class CreateProductRequestDto {
+
     private String productName;
-
     private Integer price;
-
-    private Integer stock;
-
+    private Long brandId;
+    private String detailContent;
     private Color color;
 
-    private String volume;
-
-    private Size size;
-
-    private String shoeSize;
-
-    private String brandEngName;
-
-    private String detailContent;
-
-    private List<ProductImageDto> productImageUrls;
-
-    private String categoryCode;
-
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-    @Setter
     @Builder
-    public static class ProductImageDto {
-        private String productImageUrl;
-        private boolean thumbnail;
+    public CreateProductRequestDto(String productName, Integer price, Long brandId, String detailContent, Color color) {
+        this.productName = productName;
+        this.price = price;
+        this.brandId = brandId;
+        this.detailContent = detailContent;
+        this.color = color;
+    }
+
+    public static CreateProductRequestDto from(CreateProductRequestVo createProductRequestVo) {
+        return CreateProductRequestDto.builder()
+                .productName(createProductRequestVo.getProductName())
+                .color(createProductRequestVo.getColor())
+                .price(createProductRequestVo.getPrice())
+                .brandId(createProductRequestVo.getBrandId())
+                .detailContent(createProductRequestVo.getDetailContent())
+                .build();
+    }
+
+    public BrandProduct toEntity(Long brandId, String productCode) {
+        return BrandProduct.builder()
+                .brandId(brandId)
+                .productCode(productCode)
+                .build();
+    }
+
+    public Product toEntity() {
+        return Product.builder()
+                .productCode(UuidGenerator.generateProductCode())
+                .color(color)
+                .productName(productName)
+                .price(price)
+                .detailContent(detailContent)
+                .brandId(brandId)
+                .build();
     }
 }

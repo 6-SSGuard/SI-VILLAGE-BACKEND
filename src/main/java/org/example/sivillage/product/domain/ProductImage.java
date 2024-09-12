@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 
 @Entity
 @Getter
@@ -16,7 +15,7 @@ public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_image_id")
-    private Long productImageId;
+    private Long Id;
 
     @Column(nullable = false, length = 200)
     private String productImageUrl;
@@ -27,11 +26,11 @@ public class ProductImage {
     @Column(nullable = false)
     private boolean thumbnail;
 
-    public static ProductImage createProductImage(CreateProductRequestDto.ProductImageDto imageDto, String productCode) {
-        return ProductImage.builder()
-                .productImageUrl(imageDto.getProductImageUrl())
-                .productCode(productCode)
-                .thumbnail(imageDto.isThumbnail())
-                .build();
-    }
+//    public static ProductImage createProductImage(CreateProductRequestDto.ProductImageDto imageDto, String productCode) {
+//        return ProductImage.builder()
+//                .productImageUrl(imageDto.getProductImageUrl())
+//                .productCode(productCode)
+//                .thumbnail(imageDto.isThumbnail())
+//                .build();
+//    }
 }

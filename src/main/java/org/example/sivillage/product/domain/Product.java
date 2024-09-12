@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.sivillage.global.common.BaseEntity;
 import org.example.sivillage.product.dto.in.CreateProductFromCsvRequestDto;
-import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 
 @Entity
 @Getter
@@ -16,7 +15,7 @@ public class Product extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Long productId;
+    private Long id;
 
     @Column(nullable = false, length = 50, unique = true)
     private String productCode;
@@ -27,23 +26,14 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private Integer price;
 
+    @Column(nullable = false)
+    private Color color;
+
     @Column(nullable = false, length = 10000)
     private String detailContent;
 
+    @Column(nullable = false)
     private Long brandId;
-
-    private String categoryCode;
-
-    public static Product createProduct(CreateProductRequestDto request, Long brandId, String productCode, String categoryCode) {
-        return Product.builder()
-                .productName(request.getProductName())
-                .productCode(productCode)
-                .price(request.getPrice())
-                .detailContent(request.getDetailContent())
-                .brandId(brandId)
-                .categoryCode(categoryCode)
-                .build();
-    }
 
     public static Product createProductFromCsv(CreateProductFromCsvRequestDto request) {
         return Product.builder()
@@ -51,6 +41,7 @@ public class Product extends BaseEntity {
                 .productCode(request.getProductCode())
                 .price(request.getPrice())
                 .detailContent(request.getDetailContent())
+                .brandId(request.getBrandId())
                 .build();
     }
 
