@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
-public class IdListResponseVo {
+public class IdListResponseVo<T> {
 
-    private Long id;
+    private T id;
 
     @Builder
-    public IdListResponseVo(Long id) {
+    public IdListResponseVo(T id) {
         this.id = id;
     }
 }

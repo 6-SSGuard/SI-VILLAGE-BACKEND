@@ -58,7 +58,7 @@ public class BrandServiceImpl implements BrandService {
      * return GetBrandIdListResponseDto
      */
     @Override
-    public List<IdListResponseDto> getBrandIdList(String memberUuid) {
+    public List<IdListResponseDto<Long>> getBrandIdList(String memberUuid) {
 
         return brandRepository.findAllBrandIdsByOrderByEngNameAsc()
                 .stream()

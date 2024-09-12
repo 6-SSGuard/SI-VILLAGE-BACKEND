@@ -57,9 +57,9 @@ public class BrandController {
      */
     @Operation(summary = "브랜드 목록 조회")
     @GetMapping("/")
-    public BaseResponse<List<IdListResponseVo>> getBrandIdList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+    public BaseResponse<List<IdListResponseVo<Long>>> getBrandIdList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
 
-        List<IdListResponseDto> idListResponseDto = brandService.getBrandIdList(authUserDetails.getMemberUuid());
+        List<IdListResponseDto<Long>> idListResponseDto = brandService.getBrandIdList(authUserDetails.getMemberUuid());
 
         return new BaseResponse<>(
                 idListResponseDto.stream()

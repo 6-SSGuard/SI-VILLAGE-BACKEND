@@ -31,7 +31,7 @@ public interface BrandService {
      * @param memberUuid 회원 UUID
      * return GetBrandIdListResponseDto
      */
-    List<IdListResponseDto> getBrandIdList(String memberUuid);
+    List<IdListResponseDto<Long>> getBrandIdList(String memberUuid);
 
     /**
      * 3. getBrandInfo 브랜드 정보 조회
