@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.productoption.Size;
+import org.example.sivillage.sizeinfo.domain.sizeenum.ShoeSize;
 
 @Entity
 @Getter
@@ -31,7 +32,7 @@ public class ProductOption {
     private Size size;
 
     @Column(nullable = true)
-    private String shoeSize;
+    private ShoeSize shoeSize;
 
     @Column(nullable = true)
     private String volume;

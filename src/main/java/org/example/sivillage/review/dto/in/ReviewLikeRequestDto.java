@@ -16,9 +16,11 @@ public class ReviewLikeRequestDto {
         this.reviewLike = !this.reviewLike;
     }
 
-    public static ReviewLike toEntity(ReviewLikeRequestDto reviewLikeRequestDto){
+    public static ReviewLike toEntity(ReviewLikeRequestDto reviewLikeRequestDto, String memberUuid, Long reviewId){
         return ReviewLike.builder()
                 .reviewLike(reviewLikeRequestDto.isReviewLike())
+                .reviewId(reviewId)
+                .memberUuid(memberUuid)
                 .build();
     }
 

@@ -39,7 +39,7 @@ public class ReviewController {
 
 
     @Operation(summary = "상품의 리뷰id 조회", description = "상품의 리뷰 id 리스트를 반환")
-    @GetMapping("/{productCode}")
+    @GetMapping("/product/{productCode}")
     public BaseResponse<List<IdListResponseVo<Long>>> getProductReviewIds(@PathVariable("productCode") String productCode) {
         List<IdListResponseVo<Long>> idListResponseVoList = reviewService.getProductReviewIds(productCode)
                 .stream()
@@ -48,8 +48,9 @@ public class ReviewController {
         return new BaseResponse<>(idListResponseVoList);
     }
 
+    //todo:토큰에 있는 값으로 가져오는걸로 바꾸기 pathvariable 필요없음
     @Operation(summary = "회원의 리뷰id 조회", description = "회원의 리뷰 id 리스트를 반환")
-    @GetMapping("/{memberUuid}")
+    @GetMapping("/member/{memberUuid}")
     public BaseResponse<List<IdListResponseVo<Long>>> getMemberReviewIds(@PathVariable("memberUuid") String memberUuid) {
         List<IdListResponseVo<Long>> idListResponseVoList = reviewService.getMemberReviewIds(memberUuid)
                 .stream()
@@ -59,28 +60,28 @@ public class ReviewController {
     }
 
     @Operation(summary = "리뷰 등록", description = "리뷰를 등록합니다.")
-    @PostMapping("/{productCode}")
-    public BaseResponse<Long> addReview(@PathVariable("productCode") String productUuid, @Valid @RequestBody ReviewRequestVo reviewRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        Long reviewId = reviewService.addReview(ReviewRequestVo.toDto(reviewRequestVo),authUserDetails.getMemberUuid(),productUuid); // vo -> dto
+    @PostMapping("add/{productCode}")
+    public BaseResponse<Long> addReview(@PathVariable("productCode") String productCode, @Valid @RequestBody ReviewRequestVo reviewRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        Long reviewId = reviewService.addReview(ReviewRequestVo.toDto(reviewRequestVo),authUserDetails.getMemberUuid(),productCode); // vo -> dto
         return new BaseResponse<>(reviewId);
     }
 
     @Operation(summary = "리뷰 조회", description = "상품 리뷰를 조회합니다.")
-    @GetMapping("/{reviewId}")
+    @GetMapping("/review/{reviewId}")
     public BaseResponse<ReviewResponseVo> getReview (@PathVariable("reviewId") Long reviewId) {
         ReviewResponseDto reviewResponseDto = reviewService.getReview(reviewId);
         return new BaseResponse<>(reviewResponseDto.toResponseVo());
     }
 
     @Operation(summary = "리뷰 수정", description = "리뷰를 수정합니다.")
-    @PutMapping("/{reviewId}")
+    @PutMapping("change/{reviewId}")
     public BaseResponse<Void> changeReview(@PathVariable("reviewId") Long reviewId, @Valid @RequestBody ReviewRequestVo reviewRequestVo) {
         reviewService.changeReview(ReviewRequestVo.toDto(reviewRequestVo), reviewId);
         return new BaseResponse<>();
     }
 
     @Operation(summary = "리뷰 삭제", description = "리뷰를 삭제합니다.")
-    @DeleteMapping("/{reviewId}")
+    @DeleteMapping("delete/{reviewId}")
     public BaseResponse<Void> removeReview(@PathVariable("reviewId") Long reviewId) {
         reviewService.removeReview(reviewId);
         return new BaseResponse<>();
@@ -89,14 +90,14 @@ public class ReviewController {
 
     // 리뷰 이미지 관련 API
     @Operation(summary = "리뷰 이미지 등록", description = "리뷰 이미지를 등록합니다.")
-    @PostMapping("/{reviewId}")
+    @PostMapping("reviewImage/{reviewId}")
     public BaseResponse<Void> addReview(@PathVariable("reviewId") Long reviewId, @Valid @RequestBody ReviewImageRequestVo reviewImageRequestVo) {
         reviewImageService.addReviewImage(ReviewImageRequestVo.toDto(reviewImageRequestVo), reviewId); // vo -> dto
         return new BaseResponse<>();
     }
 
     @Operation(summary = "리뷰 이미지 목록 조회", description = "리뷰 이미지 목록을 조회합니다.")
-    @GetMapping("/reviewsImages/{reviewId}")
+    @GetMapping("get-reviewImage/reviewsImages/{reviewId}")
     public BaseResponse<List<ReviewImageResponseVo>> getReviewImages(@PathVariable("reviewId") Long reviewId) {
         List<ReviewImageResponseVo> reviewImageResponseVoList = reviewImageService.getReviewImage(reviewId)
                 .stream()
@@ -106,7 +107,7 @@ public class ReviewController {
     }
 
     @Operation(summary = "리뷰 이미지 삭제", description = "리뷰 이미지를 삭제합니다.")
-    @DeleteMapping("/reviewsImages/{reviewImageId}")
+    @DeleteMapping("image/reviewsImages/{reviewImageId}")
     public BaseResponse<Void> removeReviewImage(@PathVariable("reviewImageId") Long reviewImageId) {
         reviewImageService.removeReviewImage(reviewImageId);
         return new BaseResponse<>();
@@ -114,15 +115,16 @@ public class ReviewController {
 
 
     // 리뷰 좋아요 관련 API
+    //todo: 다른 리뷰 api는 다 잘 돌아감 이것만 고치면 될듯 지금 좋아요 눌렀는데 반대로 적용된거 같음 뭔가 이상함;; 뒤바뀌는 것도 안됨
     @Operation(summary = "리뷰 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
-    @PutMapping("/like/{reviewId}")
+    @PutMapping("like/like/{reviewId}")
     public BaseResponse<Void> toggleReviewLike(@PathVariable Long reviewId, @AuthenticationPrincipal AuthUserDetails authUserDetails, ReviewLikeRequestDto reviewLikeRequestDto) {
         reviewLikeService.toggleReviewLike(reviewLikeRequestDto, reviewId, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
     @Operation(summary = "리뷰의 좋아요 조회", description = "리뷰의 좋아요 수 조회")
-    @GetMapping("/likes/{reviewId}")
+    @GetMapping("likes/likes/{reviewId}")
     public BaseResponse<ReviewLikeCountResponseVo> getReviewLikeCount(@PathVariable("reviewId") Long reviewId){
         ReviewLikeCountResponseDto reviewLikeCountResponseDto = reviewLikeService.getReviewLikeCount(reviewId);
         return new BaseResponse<>(reviewLikeCountResponseDto.toResponseVo());

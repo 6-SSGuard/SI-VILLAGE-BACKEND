@@ -12,7 +12,7 @@ public class ReviewLikeRequestVo {
 
     public static ReviewLikeRequestDto toDto(ReviewLikeRequestVo reviewLikeRequestVo){
                 return ReviewLikeRequestDto.builder()
-                        .reviewlike(reviewLikeRequestVo.isReviewLike())
+                        .reviewLike(reviewLikeRequestVo.isReviewLike())
                         .build();
     }
 }

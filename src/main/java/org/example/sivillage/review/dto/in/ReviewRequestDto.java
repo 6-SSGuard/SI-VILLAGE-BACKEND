@@ -25,7 +25,9 @@ public class ReviewRequestDto {
         return Review.builder()
                 .id(review.getId())
                 .score(reviewRequestDto.getScore())
-                .reviewContent(review.getReviewContent())
+                .reviewContent(reviewRequestDto.getReviewContent())
+                .authorEmail(review.getAuthorEmail())
+                .memberInformation(review.getMemberInformation())
                 .memberUuid(review.getMemberUuid())
                 .productCode(review.getProductCode())
                 .build();

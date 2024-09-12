@@ -23,13 +23,13 @@ public class ReviewResponseDto {
     private String memberInformation;
 
 
-    public static ReviewResponseDto from(Review review, String authorEmail, String memberInformation) {
+    public static ReviewResponseDto from(Review review) {
         return ReviewResponseDto.builder()
                 .score(review.getScore())
                 .reviewDate(review.getCreatedDate())
                 .reviewContent(review.getReviewContent())
-                .authorEmail(authorEmail)
-                .memberInformation(memberInformation)
+                .authorEmail(review.getAuthorEmail())
+                .memberInformation(review.getMemberInformation())
                 .build();
     }
 

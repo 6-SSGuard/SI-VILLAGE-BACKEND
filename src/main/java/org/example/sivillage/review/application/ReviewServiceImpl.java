@@ -51,21 +51,23 @@ public class ReviewServiceImpl implements ReviewService {
     //단일 리뷰 조회
     public ReviewResponseDto getReview(Long reviewId) {
         Review review = reviewRepository.findById(reviewId).get();
-        String email = "naver";
-        String memberInfo = "info";
-        // 리뷰가 반드시 존재한다고 가정
-        return ReviewResponseDto.from(review,email,memberInfo);
+        return ReviewResponseDto.from(review);
     }
 
     // 리뷰 등록
-    public Long addReview(ReviewRequestDto reviewRequestDto, String memberUuid, String productUuid) {
+    public Long addReview(ReviewRequestDto reviewRequestDto, String memberUuid, String productCode) {
 
         BeautyInfo beautyInfo = beautyInfoRepository.findByMemberUuid(memberUuid).orElse(new BeautyInfo());
         SizeInfo sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid).orElse(new SizeInfo());
-        CategoryType categoryType = CategoryType.fromCategoryPath(categoryPathService.getCategoryPath(productUuid));
+        CategoryType categoryType = CategoryType.fromCategoryPath(categoryPathService.getCategoryPath(productCode));
         categoryType.getInfo(beautyInfo,sizeInfo);
 
-        Review review = reviewRepository.save(reviewRequestDto.toEntity(reviewRequestDto,categoryType.getInfo(beautyInfo,sizeInfo),memberRepository.findEmailByMemberUuid(memberUuid), memberUuid,productUuid));
+        Review review = reviewRepository.save(reviewRequestDto.toEntity(reviewRequestDto,
+                memberRepository.findEmailByMemberUuid(memberUuid),
+                categoryType.getInfo(beautyInfo,sizeInfo),
+                memberUuid,
+                productCode));
+
         return review.getId();
     }
 

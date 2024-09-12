@@ -10,19 +10,19 @@ public enum CategoryType {
     MAKEUP("메이크업") {
         @Override
         public String getInfo(BeautyInfo beautyInfo, SizeInfo sizeInfo) {
-            return beautyInfo.getSkinTone() != null ? String.valueOf(beautyInfo.getSkinTone()) : "";
+            return beautyInfo.getSkinTone() != null ? beautyInfo.getSkinTone() : "";
         }
     },
     HAIR_CARE("헤어케어") {
         @Override
         public String getInfo(BeautyInfo beautyInfo, SizeInfo sizeInfo) {
-            return beautyInfo.getScalpTone() != null ? String.valueOf(beautyInfo.getScalpTone()) : "";
+            return beautyInfo.getScalpTone() != null ? beautyInfo.getScalpTone(): "";
         }
     },
     BEAUTY("뷰티") {
         @Override
         public String getInfo(BeautyInfo beautyInfo, SizeInfo sizeInfo) {
-            return beautyInfo.getSkinType() != null ? String.valueOf(beautyInfo.getSkinType()) : "";
+            return beautyInfo.getSkinType() != null ? beautyInfo.getSkinType() : "";
         }
     },
     SHOES("슈즈") {
