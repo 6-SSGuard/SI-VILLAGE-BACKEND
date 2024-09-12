@@ -66,34 +66,21 @@ public class ProductController {
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "단일 상품에 대한 간략 정보 조회", description = "")
+    @GetMapping("/brief/{productCode}")
+    public BaseResponse<GetProductBriefInfoResponseVo> getProductBriefInfo(@PathVariable String productCode) {
+
+        return new BaseResponse<>(
+                productService.getProductBriefInfo(productCode).toVo()
+        );
+    }
+
     @Operation(summary = "상품 상세 정보 조회", description = "")
     @GetMapping("/details/{productUuid}")
     public BaseResponse<GetProductDetailsResponseVo> getProductDetail(@PathVariable String productUuid, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         String memberUuid = authUserDetails.getMemberUuid();
         GetProductDetailsResponseDto responseDto = productService.getProductDetail(productUuid, memberUuid);
         GetProductDetailsResponseVo response = mapper.map(responseDto, GetProductDetailsResponseVo.class);
-        return new BaseResponse<>(response);
-    }
-
-    @Operation(summary = "상품 리스트에 대한 productCode 리스트 조회", description = """
-            상품 리스트에 대한 productCode들을 받아오고, 단일 상품 간략 정보 조회하는 api로 해당 productCode값을 전달해서 요청하면 됨.
-            """)
-    @GetMapping("/uuid")
-    public BaseResponse<GetProductCodeListResponseVo> getProductCodeList() {
-        GetProductCodeListResponseDto responseDto = productService.getProductCodeList();
-        GetProductCodeListResponseVo response = mapper.map(responseDto, GetProductCodeListResponseVo.class);
-        return new BaseResponse<>(response);
-    }
-
-    @Operation(summary = "단일 상품에 대한 간략 정보 조회", description = """
-        '상품 리스트에 대한 Uuid 조회' api로 얻어낸 Uuid 정보를 전달하고, 이 api로 받아온 값을 상품 리스트 렌더링에 활용.
-        이미 프론트에서 받아온 정보는 캐싱처리
-        """)
-    @GetMapping("/brief/{productCode}")
-    public BaseResponse<GetProductBriefInfoResponseVo> getProductBriefInfo(@PathVariable String productCode, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        String memberUuid = authUserDetails.getMemberUuid();
-        GetProductBriefInfoResponseDto responseDto = productService.getProductBriefInfo(productCode, memberUuid);
-        GetProductBriefInfoResponseVo response = mapper.map(responseDto, GetProductBriefInfoResponseVo.class);
         return new BaseResponse<>(response);
     }
 

@@ -3,26 +3,40 @@ package org.example.sivillage.product.dto.out;
 import lombok.*;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.product.domain.Product;
+import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
 @Builder
 public class GetProductBriefInfoResponseDto {
     private String productCode;
     private String brandEngName;
     private String productName;
     private Integer price;
-    private boolean isLiked;
 
-    public static GetProductBriefInfoResponseDto toDto(Product product, boolean isLiked, Brand brand) {
+    @Builder
+    public GetProductBriefInfoResponseDto(String productCode, String brandEngName, String productName, Integer price) {
+        this.productCode = productCode;
+        this.brandEngName = brandEngName;
+        this.productName = productName;
+        this.price = price;
+    }
+
+    public static GetProductBriefInfoResponseDto of(Product product, Brand brand) {
         return GetProductBriefInfoResponseDto.builder()
                 .productCode(product.getProductCode())
+                .brandEngName(brand.getBrandEngName())
                 .productName(product.getProductName())
                 .price(product.getPrice())
-                .isLiked(isLiked)
-                .brandEngName(brand.getBrandEngName())
+                .build();
+    }
+
+    public GetProductBriefInfoResponseVo toVo() {
+        return GetProductBriefInfoResponseVo.builder()
+                .productCode(productCode)
+                .brandEngName(brandEngName)
+                .productName(productName)
+                .price(price)
                 .build();
     }
 }

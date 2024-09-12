@@ -2,6 +2,7 @@ package org.example.sivillage.product.application;
 
 import org.example.sivillage.product.dto.in.CreateProductOptionRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
+import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
 
 import java.util.List;
@@ -25,5 +26,9 @@ public interface ProductService {
      */
     void addProductImageList(List<CreateProductImageListRequestDto> createProductImageListRequestDto);
 
-
+    /** 4. 상품 간략 정보 조회
+     * @param productCode 상품 코드
+     * @return GetProductBriefInfoResponseDto
+     */
+    GetProductBriefInfoResponseDto getProductBriefInfo(String productCode);
 }

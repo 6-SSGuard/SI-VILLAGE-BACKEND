@@ -22,15 +22,10 @@ public class ProductCategoryListController {
     private final ModelMapper mapper;
 
     /**
-     * 1. 상품 카테고리별 상품 추가
-     * 2. 상품 카테고리별 상품 조회
+     * 1. 상품 카테고리 리스트 추가
+     * 2. 특정 카테고리의 상품 id 리스트 조회
      */
 
-
-    /**
-     * 1. 상품 카테고리별 상품 추가
-     * @param productCategoryListRequestVo 상품 카테고리별 상품 추가 요청 VO
-     */
     @Operation(summary = "상품 카테고리 리스트 추가", description = """
     subCategoryCode는 필수가 아니므로, 공백으로 넘겨줘도 됨.
     """)
@@ -43,15 +38,7 @@ public class ProductCategoryListController {
         return new BaseResponse<>();
     }
 
-    /**
-     * 2. 상품 카테고리별 상품 조회
-     * @param topCategoryCode    대분류 코드
-     * @param middleCategoryCode 중분류 코드
-     * @param bottomCategoryCode 소분류 코드
-     * @param subCategoryCode    세부 분류 코드
-     * @return 상품 코드 목록
-     */
-    @Operation(summary = "상품 카테고리 리스트 조회", description = "상품 카테고리 리스트를 조회합니다.")
+    @Operation(summary = "특정 카테고리의 상품 id 리스트 조회", description = "")
     @GetMapping("/product-category-list")
     public BaseResponse<List<IdListResponseVo<String>>> getProductCodeListByCategories(
             @RequestParam(value = "topCategoryCode", required = true) String topCategoryCode,

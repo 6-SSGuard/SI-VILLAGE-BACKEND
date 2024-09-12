@@ -7,7 +7,6 @@ import org.example.sivillage.admin.infrastructure.CategoryRepository;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
-import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.domain.ProductImage;
@@ -73,6 +72,22 @@ public class ProductServiceImpl implements ProductService {
         productImageRepository.saveAll(productImageList);
     }
 
+    /**
+     * 4. 상품 간략 정보 조회
+     * @param productCode 상품 코드
+     * @return GetProductBriefInfoResponseDto
+     */
+    @Transactional(readOnly = true)
+    public GetProductBriefInfoResponseDto getProductBriefInfo(String productCode) {
+        Product product = productRepository.findByProductCode(productCode)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
+
+        Brand brand = brandRepository.findByBrandId(product.getBrandId())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
+
+        return GetProductBriefInfoResponseDto.of(product, brand);
+    }
+
     @Transactional(readOnly = true)
     public GetProductDetailsResponseDto getProductDetail(String productCode, String memberUuid) {
         Product product = productRepository.findByProductCode(productCode)
@@ -90,23 +105,6 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
 
         return GetProductDetailsResponseDto.toDto(product, productOption, likesCount, isLiked, brand);
-    }
-
-
-
-    @Transactional(readOnly = true)
-    public GetProductBriefInfoResponseDto getProductBriefInfo(String productCode, String memberUuid) {
-        Product product = productRepository.findByProductCode(productCode)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
-
-        // TODO: 비회원인 경우 isLiked 무조건 false로 반환하기
-        boolean isLiked = productLikeRepository.findIsLikedByProductUuidAndMemberUuid(productCode, memberUuid)
-                .orElse(false);
-
-        Brand brand = brandRepository.findByBrandId(product.getBrandId())
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
-
-        return GetProductBriefInfoResponseDto.toDto(product, isLiked, brand);
     }
 
     @Transactional(readOnly = true)
