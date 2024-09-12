@@ -79,7 +79,7 @@ public class ProductController {
     }
 
     @Operation(summary = "상품에 등록된 옵션 정보 리스트 조회")
-    @GetMapping("/option/{productCode}")
+    @GetMapping("/details/option/{productCode}")
     public BaseResponse<List<GetProductOptionListResponseVo>> getProductOptionList(@PathVariable String productCode) {
 
         return new BaseResponse<>(
@@ -101,11 +101,12 @@ public class ProductController {
     @Operation(summary = "상품 썸네일 URL 조회", description = """
         상품 썸네일 URL을 조회하는 API
         """)
-    @GetMapping("/thumbnail/{productCode}")
+    @GetMapping("/brief/thumbnail/{productCode}")
     public BaseResponse<GetProductThumbnailUrlResponseVo> getProductThumbnailUrl(@PathVariable String productCode) {
-        GetProductThumbnailUrlResponseDto responseDto = productService.getProductThumbnailUrl(productCode);
-        GetProductThumbnailUrlResponseVo response = mapper.map(responseDto, GetProductThumbnailUrlResponseVo.class);
-        return new BaseResponse<>(response);
+
+        return new BaseResponse<>(
+                productService.getProductThumbnailUrl(productCode).toVo()
+        );
     }
 
 //    @PostMapping(value = "/from-csv", consumes = "multipart/form-data")

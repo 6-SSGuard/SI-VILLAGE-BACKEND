@@ -5,6 +5,7 @@ import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.example.sivillage.product.dto.out.GetProductOptionListResponseDto;
+import org.example.sivillage.product.dto.out.GetProductThumbnailUrlResponseDto;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
 
 import java.util.List;
@@ -52,4 +53,10 @@ public interface ProductService {
      * @return GetProductDetailsResponseDto
      */
     GetProductDetailsResponseDto getProductDetail(String productCode);
+
+    /** 7. 상품 썸네일 URL 조회
+     * @param productCode 상품 코드
+     * @return GetProductThumbnailUrlResponseDto
+     */
+    GetProductThumbnailUrlResponseDto getProductThumbnailUrl(String productCode);
 }

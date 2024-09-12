@@ -142,7 +142,7 @@ public class ProductServiceImpl implements ProductService {
         String thumbnailUrl = productImageRepository.findByProductCodeAndThumbnailTrue(productCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_IMAGE_NOT_FOUND)).getProductImageUrl();
 
-        return new GetProductThumbnailUrlResponseDto(thumbnailUrl);
+        return GetProductThumbnailUrlResponseDto.from(thumbnailUrl);
     }
 
 
