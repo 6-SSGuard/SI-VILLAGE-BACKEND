@@ -1,9 +1,9 @@
 package org.example.sivillage.brand.application;
 
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
-import org.example.sivillage.brand.dto.out.GetBrandIdListResponseDto;
 import org.example.sivillage.brand.dto.out.GetBrandLikeResponseDto;
 import org.example.sivillage.brand.dto.out.GetBrandNameResponseDto;
+import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public interface BrandService {
      * @param memberUuid 회원 UUID
      * return GetBrandIdListResponseDto
      */
-    List<GetBrandIdListResponseDto> getBrandIdList(String memberUuid);
+    List<IdListResponseDto> getBrandIdList(String memberUuid);
 
     /**
      * 3. getBrandInfo 브랜드 정보 조회
