@@ -1,5 +1,8 @@
 package org.example.sivillage.productoption;
 
+import lombok.Getter;
+
+@Getter
 public enum Size {  // size도 마찬가지로 클래스로 가져가자
     XXS, XS, S, M, L, XL, XXL, XXXL;
 }

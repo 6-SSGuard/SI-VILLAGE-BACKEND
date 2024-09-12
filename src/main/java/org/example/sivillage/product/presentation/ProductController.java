@@ -16,7 +16,6 @@ import org.example.sivillage.product.vo.in.CreateProductImageListRequestVo;
 import org.example.sivillage.product.vo.in.CreateProductOptionRequestVo;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.example.sivillage.product.vo.out.*;
-import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +27,6 @@ import java.util.List;
 @RequestMapping("/api/product")
 public class ProductController {
     private final ProductService productService;
-    private final ModelMapper mapper;
 
     /**
      * 1. 상품 등록

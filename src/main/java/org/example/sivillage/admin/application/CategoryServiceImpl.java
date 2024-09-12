@@ -45,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<GetSubCategoriesResponseDto> getSubCategories(String parentCategoryCode) {
 
-        if (parentCategoryCode.isEmpty()) {
+        if (parentCategoryCode == null) {
             // 최상위 카테고리를 가져옴
             return categoryRepository.findByParentIsNull()
                     .stream()

@@ -15,27 +15,27 @@ public class ProductLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_like_id")
-    private Long productLikeId;
+    private Long id;
 
     @Column(nullable = false)
-    private String productUuid;
+    private String productCode;
 
     @Column(nullable = false)
     private String memberUuid;
 
     @Column(nullable = false)
-    private boolean isLiked;
+    private boolean liked;
 
     // 좋아요 생성 메서드
-    public static ProductLike createProductLike(String productUuid, String memberUuid) {
+    public static ProductLike toEntity(String productCode, String memberUuid) {
         return ProductLike.builder()
-                .productUuid(productUuid)
+                .productCode(productCode)
                 .memberUuid(memberUuid)
-                .isLiked(false)
+                .liked(false)
                 .build();
     }
 
     public void toggleLike() {
-        this.isLiked = !this.isLiked;
+        this.liked = !this.liked;
     }
 }
