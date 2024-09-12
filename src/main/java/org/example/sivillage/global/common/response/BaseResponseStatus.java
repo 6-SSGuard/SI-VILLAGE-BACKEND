@@ -31,6 +31,7 @@ public enum BaseResponseStatus {
     BRAND_LIKE_NOT_FOUND(HttpStatus.NOT_FOUND,false, "해당하는 브랜드 좋아요 정보를 찾을 수 없습니다."),
     CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND,false, "해당하는 카테고리 정보를 찾을 수 없습니다."),
     PRODUCT_IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 상품 썸네일을 찾을 수 없습니다."),
+    NOT_FOUND_BRAND_LIKE(HttpStatus.NOT_FOUND, false, "해당하는 브랜드 좋아요 정보를 찾을 수 없습니다."),
 
     /*
      * 405 METHOD_NOT_ALLOWED: 허용되지 않은 Request Method 호출

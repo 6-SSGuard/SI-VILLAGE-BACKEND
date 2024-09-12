@@ -52,7 +52,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/category/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/category/**", "/api/vendor/", "/api/").hasAuthority("ADMIN")
                         .anyRequest().permitAll()
                 )
                 .authenticationProvider(authenticationProvider)

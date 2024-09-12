@@ -5,12 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class GetBrandsListResponseDto {
-    private List<GetBrandsResponseDto> brands;
+    private Long brandId;
+    private String brandEngName;
+    private String brandKorName;
+    private boolean isLiked;
 }

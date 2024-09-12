@@ -1,7 +1,7 @@
-package org.example.sivillage.member.application;
+package org.example.sivillage.product.application;
 
 import lombok.RequiredArgsConstructor;
-import org.example.sivillage.member.domain.ProductLike;
+import org.example.sivillage.product.domain.ProductLike;
 import org.example.sivillage.product.infrastructure.ProductLikeRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
 import org.springframework.stereotype.Service;

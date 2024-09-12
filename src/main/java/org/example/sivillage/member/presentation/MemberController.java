@@ -6,10 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
-import org.example.sivillage.member.application.BrandLikeService;
-import org.example.sivillage.member.application.MemberService;
-import org.example.sivillage.member.application.ProductLikeService;
-import org.example.sivillage.member.application.ReviewLikeService;
+import org.example.sivillage.product.application.ProductLikeService;
+import org.example.sivillage.review.application.ReviewLikeService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,17 +18,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/member")
 public class MemberController {
 
-    private final BrandLikeService brandLikeService;
     private final ProductLikeService productLikeService;
     private final ReviewLikeService reviewLikeService;
     private final MemberService memberService;
 
-    @Operation(summary = "브랜드 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
-    @PutMapping("/brand/like/{brandId}")
-    public BaseResponse<Void> toggleBrandLike(@PathVariable Long brandId, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        brandLikeService.toggleBrandLike(brandId, authUserDetails.getMemberUuid());
-        return new BaseResponse<>();
-    }
+
 
     @Operation(summary = "상품 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
     @PutMapping("/product/like/{productUuid}")
