@@ -50,7 +50,14 @@ public class ShippingAddressRequestDto {
     public ShippingAddress deactivateDefaultAddress(ShippingAddress shippingAddress){
         return ShippingAddress.builder()
                 .id(shippingAddress.getId())
+                .addressName(shippingAddress.getAddressName())
+                .recipient(shippingAddress.getRecipient())
+                .phone(shippingAddress.getPhone())
+                .address(shippingAddress.getAddress())
+                .detailedAddress(shippingAddress.getDetailedAddress())
+                .postalCode(shippingAddress.getPostalCode())
                 .defaultAddress(false)
+                .memberUuid(shippingAddress.getMemberUuid())
                 .build();
     }
 

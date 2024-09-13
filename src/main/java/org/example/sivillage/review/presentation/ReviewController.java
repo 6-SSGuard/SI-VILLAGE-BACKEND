@@ -12,7 +12,6 @@ import org.example.sivillage.global.common.response.vo.IdListResponseVo;
 import org.example.sivillage.review.application.ReviewImageServiceImpl;
 import org.example.sivillage.review.application.ReviewLikeServiceImpl;
 import org.example.sivillage.review.application.ReviewServiceImpl;
-import org.example.sivillage.review.dto.in.ReviewLikeRequestDto;
 import org.example.sivillage.review.dto.out.ReviewImageResponseDto;
 import org.example.sivillage.review.dto.out.ReviewLikeCountResponseDto;
 import org.example.sivillage.review.dto.out.ReviewResponseDto;
@@ -118,8 +117,8 @@ public class ReviewController {
     //todo: 다른 리뷰 api는 다 잘 돌아감 이것만 고치면 될듯 지금 좋아요 눌렀는데 반대로 적용된거 같음 뭔가 이상함;; 뒤바뀌는 것도 안됨
     @Operation(summary = "리뷰 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
     @PutMapping("like/like/{reviewId}")
-    public BaseResponse<Void> toggleReviewLike(@PathVariable Long reviewId, @AuthenticationPrincipal AuthUserDetails authUserDetails, ReviewLikeRequestDto reviewLikeRequestDto) {
-        reviewLikeService.toggleReviewLike(reviewLikeRequestDto, reviewId, authUserDetails.getMemberUuid());
+    public BaseResponse<Void> toggleReviewLike(@PathVariable Long reviewId, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        reviewLikeService.toggleReviewLike(reviewId, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 

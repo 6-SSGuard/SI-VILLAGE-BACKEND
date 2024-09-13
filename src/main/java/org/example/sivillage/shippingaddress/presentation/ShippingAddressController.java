@@ -44,7 +44,7 @@ public class ShippingAddressController {
     @Operation(summary = "배송지 수정", description = "배송지 정보를 수정합니다.")
     @PutMapping("/{shippingAddressId}")
     public BaseResponse<Void> changeShippingAddress(@PathVariable("shippingAddressId") Long shippingAddressId, @Valid @RequestBody ShippingAddressRequestVo vo, @AuthenticationPrincipal AuthUserDetails authUserDetails){
-        shippingAddressService.changeShippingAddress(ShippingAddressRequestVo.toDto(vo),shippingAddressId,authUserDetails.getMemberUuid());
+        shippingAddressService.changeShippingAddress(ShippingAddressRequestVo.toDto(vo),authUserDetails.getMemberUuid(),shippingAddressId);
         return new BaseResponse<>();
     }
 

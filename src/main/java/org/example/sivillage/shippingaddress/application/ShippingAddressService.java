@@ -8,7 +8,6 @@ import java.util.List;
 public interface ShippingAddressService {
     public void addShippingAddress(ShippingAddressRequestDto shippingAddressRequestDto, String memberUuid);
     public List<ShippingAddressResponseDto> getShippingAddress(String memberUuid);
-    public void changeShippingAddress(ShippingAddressRequestDto shippingAddressRequestDto, Long shippingAddressId, String memberUuid);
     public void removeShippingAddress(Long shippingAddressId, String memberUuid);
     
 }

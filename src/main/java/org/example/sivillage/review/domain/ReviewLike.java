@@ -25,6 +25,19 @@ public class ReviewLike {
     public ReviewLike(Long reviewId, String memberUuid, boolean reviewLike) {
         this.reviewId = reviewId;
         this.memberUuid = memberUuid;
-        this.reviewLike = false;
+        this.reviewLike = reviewLike;
     }
+
+    public void toggleLike() {
+        this.reviewLike = !this.reviewLike;
+    }
+
+    public static ReviewLike toEntity(String memberUuid, Long reviewId){
+        return ReviewLike.builder()
+                .reviewLike(true)
+                .reviewId(reviewId)
+                .memberUuid(memberUuid)
+                .build();
+    }
+
 }

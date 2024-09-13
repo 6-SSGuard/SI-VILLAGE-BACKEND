@@ -2,10 +2,11 @@ package org.example.sivillage.shippingaddress.vo.in;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.example.sivillage.shippingaddress.dto.in.ShippingAddressRequestDto;
 
+@NoArgsConstructor
 @Getter
 public class ShippingAddressRequestVo {
 

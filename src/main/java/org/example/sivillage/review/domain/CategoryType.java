@@ -7,6 +7,8 @@ import org.example.sivillage.sizeinfo.domain.SizeInfo;
 @Getter
 public enum CategoryType {
 
+    // 소 -> 대 카테고리 순으로 키워드 추가하기
+
     MAKEUP("메이크업") {
         @Override
         public String getInfo(BeautyInfo beautyInfo, SizeInfo sizeInfo) {
