@@ -15,7 +15,7 @@ public class ProductQuestionAnswer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long product_question_answer_id;
+    private Long id;
 
     @Column(nullable = false)
     private boolean isAnswered;

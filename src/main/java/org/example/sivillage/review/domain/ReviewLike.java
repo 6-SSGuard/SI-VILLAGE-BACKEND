@@ -6,14 +6,11 @@ import lombok.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-@AllArgsConstructor
-@Builder
 public class ReviewLike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "review_like_id")
-    private Long reviewLikeId;
+    private Long id;
 
     @Column(nullable = false)
     private Long reviewId;
@@ -22,18 +19,25 @@ public class ReviewLike {
     private String memberUuid;
 
     @Column(nullable = false)
-    private boolean isLiked;
+    private boolean reviewLike;
 
+    @Builder
+    public ReviewLike(Long reviewId, String memberUuid, boolean reviewLike) {
+        this.reviewId = reviewId;
+        this.memberUuid = memberUuid;
+        this.reviewLike = reviewLike;
+    }
 
-    public static ReviewLike toEntity(Long reviewId, String memberUuid){
+    public void toggleLike() {
+        this.reviewLike = !this.reviewLike;
+    }
+
+    public static ReviewLike toEntity(String memberUuid, Long reviewId){
         return ReviewLike.builder()
+                .reviewLike(false)
                 .reviewId(reviewId)
                 .memberUuid(memberUuid)
-                .isLiked(false)
                 .build();
     }
 
-    public void toggleLike(boolean like){
-        this.isLiked = !this.isLiked;
-    }
 }

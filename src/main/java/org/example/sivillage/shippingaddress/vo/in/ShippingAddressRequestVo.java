@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.shippingaddress.dto.in.ShippingAddressRequestDto;
 
-@Getter
 @NoArgsConstructor
+@Getter
 public class ShippingAddressRequestVo {
 
     @Schema(description = "배송지명", example = "집", required = true)
@@ -25,7 +25,6 @@ public class ShippingAddressRequestVo {
     @Schema(description = "주소", example = "스파로스", required = true)
     @NotNull
     private String address;
-    // 주소 검색 api 는 프론트에서 연결해서 값을 넘겨주면 그 값을 db에 저장하면 되는건가?
 
     @Schema(description = "상세주소", example = "4층", required = true)
     @NotNull
@@ -39,15 +38,16 @@ public class ShippingAddressRequestVo {
     @NotNull
     private boolean defaultAddress;
 
-    public static ShippingAddressRequestDto toDto (ShippingAddressRequestVo vo) {
+    public static ShippingAddressRequestDto toDto (ShippingAddressRequestVo shippingAddressRequestVo) {
         return ShippingAddressRequestDto.builder()
-                .addressName(vo.getAddressName())
-                .recipient(vo.getRecipient())
-                .phone(vo.getPhone())
-                .address(vo.getAddress())
-                .detailedAddress(vo.getDetailedAddress())
-                .postalCode(vo.getPostalCode())
-                .defaultAddress(vo.isDefaultAddress())
+                .addressName(shippingAddressRequestVo.getAddressName())
+                .recipient(shippingAddressRequestVo.getRecipient())
+                .phone(shippingAddressRequestVo.getPhone())
+                .address(shippingAddressRequestVo.getAddress())
+                .detailedAddress(shippingAddressRequestVo.getDetailedAddress())
+                .postalCode(shippingAddressRequestVo.getPostalCode())
+                .defaultAddress(shippingAddressRequestVo.isDefaultAddress())
                 .build();
     }
+
 }

@@ -31,7 +31,6 @@ public class ProductOption {
     @Column(nullable = true)
     private Size size;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = true)
     private ShoeSize shoeSize;
 

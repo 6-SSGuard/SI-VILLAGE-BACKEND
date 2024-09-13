@@ -1,25 +1,20 @@
 package org.example.sivillage.BeautyInfo.dto.out;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.example.sivillage.BeautyInfo.domain.BeautyInfo;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.ScalpTone;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinTone;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinType;
+import org.example.sivillage.BeautyInfo.vo.out.BeautyInfoResponseVo;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@Builder
-@AllArgsConstructor
 public class BeautyInfoResponseDto {
 
-    private SkinType skinType;
-    private SkinTone skinTone;
-    private ScalpTone scalpTone;
+    private String skinType;
+    private String skinTone;
+    private String scalpTone;
     private List<String> beautyKeyword;
 
 
@@ -29,7 +24,7 @@ public class BeautyInfoResponseDto {
                 .collect(Collectors.toList());
     }
 
-    public static BeautyInfoResponseDto toDto (BeautyInfo beautyInfo) {
+    public static BeautyInfoResponseDto from(BeautyInfo beautyInfo) {
         return BeautyInfoResponseDto.builder()
                 .skinType(beautyInfo.getSkinType())
                 .skinTone(beautyInfo.getSkinTone())
@@ -38,5 +33,30 @@ public class BeautyInfoResponseDto {
                 .build();
     }
 
+    public static BeautyInfoResponseDto defaultResponse() {
+        return BeautyInfoResponseDto.builder()
+                .skinType(null)
+                .skinTone(null)
+                .scalpTone(null)
+                .beautyKeyword(null)
+                .build();
+    }
+
+    public BeautyInfoResponseVo toResponseVo(){
+        return BeautyInfoResponseVo.builder()
+                .skinType(skinType)
+                .skinTone(skinTone)
+                .scalpTone(scalpTone)
+                .beautyKeyword(beautyKeyword)
+               .build();
+    }
+
+    @Builder
+    public BeautyInfoResponseDto(String skinType, String skinTone, String scalpTone, List <String> beautyKeyword){
+        this.skinType = skinType;
+        this.skinTone = skinTone;
+        this.scalpTone = scalpTone;
+        this.beautyKeyword = beautyKeyword;
+    }
 }
 

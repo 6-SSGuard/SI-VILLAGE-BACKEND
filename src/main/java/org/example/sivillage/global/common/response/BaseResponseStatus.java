@@ -23,6 +23,8 @@ public enum BaseResponseStatus {
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
      */
     QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND,false,"해당하는 상품문의를 찾을 수 없습니다."),
+    REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND,false,"해당하는 리뷰를 찾을 수 없습니다."),
+    REVIEW_IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND,false,"해당하는 리뷰이미지를 찾을 수 없습니다."),
     POSTS_NOT_FOUND(HttpStatus.NOT_FOUND, false, "게시글 정보를 찾을 수 없습니다."),
     BRAND_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 브랜드 명을 찾을 수 없습니다."),
     PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 상품 정보를 찾을 수 없습니다."),
@@ -67,6 +69,7 @@ public enum BaseResponseStatus {
 
     // 중복 요청 관련
     DUPLICATE_PRODUCT(HttpStatus.CONFLICT, false,  "이미 존재하는 상품명입니다."),
+    DuPLICATE_ADDRESS(HttpStatus.CONFLICT, false, "이미 배송지가 등록되었습니다."),
     DUPLICATE_BRAND_NAME(HttpStatus.CONFLICT, false,  "이미 존재하는 브랜드명입니다."),
     DUPLICATE_BEAUTY_INFO(HttpStatus.CONFLICT,false,"이미 존재하는 뷰티 정보입니다."),
     DUPLICATE_SIZE_INFO(HttpStatus.CONFLICT,false,"이미 존재하는 사이즈 정보입니다."),

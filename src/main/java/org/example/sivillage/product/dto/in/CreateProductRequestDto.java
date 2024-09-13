@@ -9,6 +9,7 @@ import org.example.sivillage.product.domain.Color;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 
+
 @NoArgsConstructor
 @Getter
 public class CreateProductRequestDto {

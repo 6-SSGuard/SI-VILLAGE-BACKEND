@@ -3,17 +3,15 @@ package org.example.sivillage.sizeinfo.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.sivillage.global.common.BaseEntity;
-import org.example.sivillage.sizeinfo.dto.in.SizeInfoRequestDto;
 
 @Entity
-@Getter // beauty 쪽으로 통합
+@Getter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class SizeInfo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "size_info_id")
-    private Long sizeInfoId;
+    private Long id;
 
     @Column(nullable = false)
     private Integer height;
@@ -33,9 +31,9 @@ public class SizeInfo extends BaseEntity {
     @Column(nullable = false)
     private String memberUuid;
 
-
     @Builder
-    public SizeInfo(Integer height, Integer weight, String topSize, String bottomSize, String shoeSize, String memberUuid) {
+    public SizeInfo(Long id, Integer height, Integer weight, String topSize, String bottomSize, String shoeSize, String memberUuid) {
+        this.id = id;
         this.height = height;
         this.weight = weight;
         this.topSize = topSize;
@@ -43,25 +41,4 @@ public class SizeInfo extends BaseEntity {
         this.shoeSize = shoeSize;
         this.memberUuid = memberUuid;
     }
-
-
-    public static SizeInfo toEntity (SizeInfoRequestDto dto, String memberUuid) {
-        return SizeInfo.builder()
-                .height(dto.getHeight())
-                .weight(dto.getWeight())
-                .topSize(dto.getTopSize())
-                .bottomSize(dto.getBottomSize())
-                .shoeSize(dto.getShoeSize())
-                .memberUuid(memberUuid).build();
-    }
-
-    public void change(SizeInfoRequestDto dto) {
-        this.height = dto.getHeight();
-        this.weight = dto.getWeight();
-        this.topSize = dto.getTopSize();
-        this.bottomSize = dto.getBottomSize();
-        this.shoeSize = dto.getShoeSize();
-    }
-
-
 }

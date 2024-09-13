@@ -9,5 +9,4 @@ import java.util.Optional;
 public interface ProductQuestionRepository extends JpaRepository<ProductQuestion, Long> {
     List<ProductQuestion> findByProductUuid(String productUuid);
     List<ProductQuestion> findByMemberUuid(String productUuid);
-    Optional<ProductQuestion> findByProductQuestionIdAndMemberUuid(Long questionId, String memberUuid);
 }

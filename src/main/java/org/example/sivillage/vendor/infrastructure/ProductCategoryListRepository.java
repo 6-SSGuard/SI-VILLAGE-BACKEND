@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductCategoryListRepository extends JpaRepository<ProductCategoryList, Long>  {
     @Query("SELECT p.productCode FROM ProductCategoryList p WHERE " +
@@ -17,4 +18,8 @@ public interface ProductCategoryListRepository extends JpaRepository<ProductCate
                                                 @Param("middleCategoryCode") String middleCategoryCode,
                                                 @Param("bottomCategoryCode") String bottomCategoryCode,
                                                 @Param("subCategoryCode") String subCategoryCode);
+
+
+    Optional<ProductCategoryList> findByProductCode(String productCode);
+
 }

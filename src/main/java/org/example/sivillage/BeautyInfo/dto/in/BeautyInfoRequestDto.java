@@ -1,26 +1,48 @@
 package org.example.sivillage.BeautyInfo.dto.in;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinType;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.ScalpTone;
-import org.example.sivillage.BeautyInfo.domain.beautyenum.SkinTone;
+import org.example.sivillage.BeautyInfo.domain.BeautyInfo;
 
 @Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class BeautyInfoRequestDto {
 
-    private SkinType skinType;
+    private String skinType;
 
-    private SkinTone skinTone;
+    private String skinTone;
 
-    private ScalpTone scalpTone;
+    private String scalpTone;
 
     private String beautyKeyword;
 
+
+    public BeautyInfo toEntity(BeautyInfoRequestDto beautyInfoRequestDto, String memberUuid) {
+        return BeautyInfo.builder()
+                .skinType(beautyInfoRequestDto.getSkinType())
+                .skinTone(beautyInfoRequestDto.getSkinTone())
+                .scalpTone(beautyInfoRequestDto.getScalpTone())
+                .beautyKeyword(beautyInfoRequestDto.getBeautyKeyword())
+                .memberUuid(memberUuid)
+                .build();
+    }
+
+    public BeautyInfo updateToEntity(BeautyInfoRequestDto beautyInfoRequestDto, BeautyInfo beautyInfo) {
+        return BeautyInfo.builder()
+                .id(beautyInfo.getId())
+                .skinType(beautyInfoRequestDto.getSkinType())
+                .skinTone(beautyInfoRequestDto.getSkinTone())
+                .scalpTone(beautyInfoRequestDto.getScalpTone())
+                .beautyKeyword(beautyInfoRequestDto.getBeautyKeyword())
+                .memberUuid(beautyInfo.getMemberUuid())
+                .build();
+    }
+
+    @Builder
+    public BeautyInfoRequestDto(String skinType, String skinTone, String scalpTone, String beautyKeyword) {
+        this.skinType = skinType;
+        this.skinTone = skinTone;
+        this.scalpTone = scalpTone;
+        this.beautyKeyword = beautyKeyword;
+    }
 
 }
 
