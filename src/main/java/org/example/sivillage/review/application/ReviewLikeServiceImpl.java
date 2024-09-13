@@ -18,11 +18,10 @@ public class ReviewLikeServiceImpl implements ReviewLikeService {
 
     public void toggleReviewLike(Long reviewId, String memberUuid) {
         ReviewLike reviewLike = reviewLikeRepository.findByReviewIdAndMemberUuid(reviewId, memberUuid)
-                .orElse(reviewLikeRepository.save(ReviewLike.toEntity(memberUuid, reviewId)));
+                .orElse(ReviewLike.toEntity(memberUuid, reviewId));
 
-        // 값이 있다면
-        reviewLike.toggleLike(); // 좋아요 해제
-         // 좋아요 해제
+        reviewLike.toggleLike();
+
         reviewLikeRepository.save(reviewLike);
     }
 

@@ -34,7 +34,7 @@ public class ReviewLike {
 
     public static ReviewLike toEntity(String memberUuid, Long reviewId){
         return ReviewLike.builder()
-                .reviewLike(true)
+                .reviewLike(false)
                 .reviewId(reviewId)
                 .memberUuid(memberUuid)
                 .build();

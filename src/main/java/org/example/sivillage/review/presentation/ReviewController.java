@@ -47,11 +47,10 @@ public class ReviewController {
         return new BaseResponse<>(idListResponseVoList);
     }
 
-    //todo:토큰에 있는 값으로 가져오는걸로 바꾸기 pathvariable 필요없음
     @Operation(summary = "회원의 리뷰id 조회", description = "회원의 리뷰 id 리스트를 반환")
     @GetMapping("/member/{memberUuid}")
-    public BaseResponse<List<IdListResponseVo<Long>>> getMemberReviewIds(@PathVariable("memberUuid") String memberUuid) {
-        List<IdListResponseVo<Long>> idListResponseVoList = reviewService.getMemberReviewIds(memberUuid)
+    public BaseResponse<List<IdListResponseVo<Long>>> getMemberReviewIds(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        List<IdListResponseVo<Long>> idListResponseVoList = reviewService.getMemberReviewIds(authUserDetails.getMemberUuid())
                 .stream()
                 .map(IdListResponseDto::toVo)
                 .toList();
@@ -112,9 +111,7 @@ public class ReviewController {
         return new BaseResponse<>();
     }
 
-
     // 리뷰 좋아요 관련 API
-    //todo: 다른 리뷰 api는 다 잘 돌아감 이것만 고치면 될듯 지금 좋아요 눌렀는데 반대로 적용된거 같음 뭔가 이상함;; 뒤바뀌는 것도 안됨
     @Operation(summary = "리뷰 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
     @PutMapping("like/like/{reviewId}")
     public BaseResponse<Void> toggleReviewLike(@PathVariable Long reviewId, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
