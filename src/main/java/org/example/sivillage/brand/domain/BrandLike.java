@@ -15,7 +15,7 @@ public class BrandLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "brand_like_id")
-    private Long brandLikeId;
+    private Long id;
 
     @Column(nullable = false)
     private Long brandId;
@@ -24,17 +24,17 @@ public class BrandLike {
     private String memberUuid;
 
     @Column(nullable = false)
-    private boolean like;
+    private boolean liked;
 
-    public static BrandLike createLikedBrand(Long brandId, String memberUuid) {
+    public static BrandLike toEntity(Long brandId, String memberUuid) {
         return BrandLike.builder()
                 .brandId(brandId)
                 .memberUuid(memberUuid)
-                .like(false)
+                .liked(false)
                 .build();
     }
 
     public void toggleLike() {
-        this.like = !this.like;
+        this.liked = !this.liked;
     }
 }

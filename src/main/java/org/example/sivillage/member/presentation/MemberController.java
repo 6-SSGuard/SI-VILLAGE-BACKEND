@@ -6,7 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
-import org.example.sivillage.product.application.ProductLikeService;
+import org.example.sivillage.product.application.ProductLikeServiceImpl;
+import org.example.sivillage.review.application.ReviewLikeService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +18,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/member")
 public class MemberController {
 
-    private final ProductLikeService productLikeService;
+    private final ProductLikeServiceImpl productLikeServiceImpl;
+    private final ReviewLikeService reviewLikeService;
 
     
     @Operation(summary = "상품 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
     @PutMapping("/product/like/{productUuid}")
     public BaseResponse<Void> toggleProductLike(@PathVariable String productUuid, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        productLikeService.toggleProductLike(productUuid, authUserDetails.getMemberUuid());
+        productLikeServiceImpl.toggleProductLike(productUuid, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 }

@@ -51,11 +51,11 @@ public class BrandController {
     }
 
     /**
-     * 2. getBrandIdList 브랜드 목록 조회
+     * 2. getBrandIdList 브랜드 id 리스트 조회
      * @param authUserDetails 인증된 사용자 정보
      * return GetBrandIdListResponseVo
      */
-    @Operation(summary = "브랜드 목록 조회")
+    @Operation(summary = "브랜드 id 리스트 조회")
     @GetMapping("/")
     public BaseResponse<List<IdListResponseVo<Long>>> getBrandIdList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
 

@@ -92,11 +92,11 @@ public class BrandServiceImpl implements BrandService {
      */
     @Override
     public GetBrandLikeResponseDto getBrandLike(Long brandId, String memberUuid) {
-        boolean like = brandLikeRepository.findLikedByBrandIdAndMemberUuid(brandId, memberUuid)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_BRAND_LIKE));
+        BrandLike brandLike = brandLikeRepository.findByBrandIdAndMemberUuid(brandId, memberUuid)
+                .orElse(BrandLike.toEntity(brandId, memberUuid));
 
         return GetBrandLikeResponseDto.builder()
-                .like(like)
+                .like(brandLike.isLiked())
                 .build();
     }
 
@@ -109,7 +109,7 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public void toggleBrandLike(Long brandId, String memberUuid) {
         BrandLike brandLike = brandLikeRepository.findByBrandIdAndMemberUuid(brandId, memberUuid)
-                .orElse(BrandLike.createLikedBrand(brandId, memberUuid));
+                .orElse(BrandLike.toEntity(brandId, memberUuid));
 
         // 현재 상태를 토글 (좋아요 -> 싫어요, 싫어요 -> 좋아요)
         brandLike.toggleLike();
