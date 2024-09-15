@@ -15,6 +15,6 @@ public class UuidGenerator {
     }
 
     public static String generateMemberUuid() {
-        return UUID.randomUUID().toString();
+        return UUID.randomUUID().toString().substring(0,8);
     }
 }
