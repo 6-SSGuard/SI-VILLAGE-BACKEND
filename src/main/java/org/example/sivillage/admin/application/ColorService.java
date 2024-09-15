@@ -4,6 +4,8 @@ import org.example.sivillage.admin.dto.in.AddColorRequestDto;
 import org.example.sivillage.admin.dto.in.ChangeColorRequestDto;
 import org.example.sivillage.admin.dto.out.GetColorResponseDto;
 
+import java.util.List;
+
 public interface ColorService {
 
     /**
@@ -38,4 +40,6 @@ public interface ColorService {
      * @return 색상 조회 응답 DTO
      */
     GetColorResponseDto getColor(Long id);
+
+    List<GetColorResponseDto> getColorList();
 }

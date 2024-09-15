@@ -143,6 +143,11 @@ public class ProductServiceImpl implements ProductService {
         return GetProductThumbnailUrlResponseDto.from(thumbnailUrl);
     }
 
+    /**
+     * 8. 상품 이미지 리스트 URL 조회
+     * @param productCode 상품 코드
+     * @return GetProductImageUrlListResponseDto
+     */
     @Transactional(readOnly = true)
     @Override
     public List<GetProductImageUrlListResponseDto> getProductImageUrlList(String productCode) {

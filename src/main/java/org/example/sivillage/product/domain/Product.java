@@ -27,7 +27,7 @@ public class Product extends BaseEntity {
     private Integer price;
 
     @Column(nullable = false)
-    private Color color;
+    private Long colorId;
 
     @Column(nullable = false, length = 10000)
     private String detailContent;

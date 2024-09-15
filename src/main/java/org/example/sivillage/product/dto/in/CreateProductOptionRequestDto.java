@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.product.domain.ProductOption;
 import org.example.sivillage.product.vo.in.CreateProductOptionRequestVo;
-import org.example.sivillage.productoption.Size;
-import org.example.sivillage.sizeinfo.domain.sizeenum.ShoeSize;
 
 @NoArgsConstructor
 @Getter
@@ -14,19 +12,16 @@ public class CreateProductOptionRequestDto {
 
     private String productCode;
 
-    private Size size;
-
-    private ShoeSize shoeSize;
+    private Long sizeId;
 
     private String volume;
 
     private Integer stock;
 
     @Builder
-    public CreateProductOptionRequestDto(String productCode, Size size, ShoeSize shoeSize, String volume, Integer stock) {
+    public CreateProductOptionRequestDto(String productCode, Long sizeId, String volume, Integer stock) {
         this.productCode = productCode;
-        this.size = size;
-        this.shoeSize = shoeSize;
+        this.sizeId = sizeId;
         this.volume = volume;
         this.stock = stock;
     }
@@ -34,8 +29,7 @@ public class CreateProductOptionRequestDto {
     public static CreateProductOptionRequestDto from(CreateProductOptionRequestVo createProductOptionRequestVo) {
         return CreateProductOptionRequestDto.builder()
                 .productCode(createProductOptionRequestVo.getProductCode())
-                .size(createProductOptionRequestVo.getSize())
-                .shoeSize(createProductOptionRequestVo.getShoeSize())
+                .sizeId(createProductOptionRequestVo.getSizeId())
                 .volume(createProductOptionRequestVo.getVolume())
                 .stock(createProductOptionRequestVo.getStock())
                 .build();
@@ -44,8 +38,7 @@ public class CreateProductOptionRequestDto {
     public ProductOption toEntity() {
         return ProductOption.builder()
                 .productCode(productCode)
-                .size(size)
-                .shoeSize(shoeSize)
+                .sizeId(sizeId)
                 .volume(volume)
                 .stock(stock)
                 .build();
