@@ -22,11 +22,18 @@ public class Size extends BaseEntity {
     private String sizeName;
 
     @Column(nullable = false, length = 50)
-    private String sizeTypeValue;
+    private String sizeType;
 
     @Builder
-    public Size(String sizeName, String sizeTypeValue) {
+    public Size(Long id, String sizeName, String sizeType) {
+        this.id = id;
         this.sizeName = sizeName;
-        this.sizeTypeValue = sizeTypeValue;
+        this.sizeType = sizeType;
+    }
+
+    @Builder
+    public Size(String sizeName, String sizeType) {
+        this.sizeName = sizeName;
+        this.sizeType = sizeType;
     }
 }

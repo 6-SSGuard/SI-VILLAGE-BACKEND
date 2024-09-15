@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.global.common.response.BaseResponse;
+import org.example.sivillage.global.common.BaseEntity;
 
 @Entity
 @Getter
@@ -12,7 +12,7 @@ import org.example.sivillage.global.common.response.BaseResponse;
 @Table(name = "color", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"colorName"})
 })
-public class Color extends BaseResponse {
+public class Color extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,13 @@ public class Color extends BaseResponse {
 
     @Builder
     public Color(String colorName, String colorCode) {
+        this.colorName = colorName;
+        this.colorCode = colorCode;
+    }
+
+    @Builder
+    public Color(Long id, String colorName, String colorCode) {
+        this.id = id;
         this.colorName = colorName;
         this.colorCode = colorCode;
     }
