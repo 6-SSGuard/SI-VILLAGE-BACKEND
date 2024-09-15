@@ -4,4 +4,5 @@ import org.example.sivillage.admin.domain.Size;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SizeRepository extends JpaRepository<Size, Long> {
+    boolean existsBySizeNameAndSizeType(String sizeName, String sizeType);
 }

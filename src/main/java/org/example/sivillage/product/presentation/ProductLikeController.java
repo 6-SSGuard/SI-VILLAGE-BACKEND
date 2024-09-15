@@ -1,5 +1,6 @@
 package org.example.sivillage.product.presentation;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.product.application.ProductLikeService;
@@ -16,6 +17,7 @@ public class ProductLikeController {
 
     private final ProductLikeService productLikeService;
 
+    @Operation(summary = "상품 좋아요 수 조회")
     @GetMapping("/{productCode}")
     public BaseResponse<GetLikeCountResponseVo> getLikeCount(@PathVariable String productCode) {
 

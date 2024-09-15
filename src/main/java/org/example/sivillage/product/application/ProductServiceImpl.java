@@ -2,7 +2,6 @@ package org.example.sivillage.product.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.admin.infrastructure.CategoryRepository;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
@@ -17,7 +16,6 @@ import org.example.sivillage.product.infrastructure.ProductImageRepository;
 import org.example.sivillage.product.infrastructure.ProductOptionRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
-import org.example.sivillage.vendor.infrastructure.ProductCategoryListRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,9 +33,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductOptionRepository productOptionRepository;
     private final BrandRepository brandRepository;
     private final ProductImageRepository productImageRepository;
-    private final CategoryRepository categoryRepository;
     private final BrandProductRepository brandProductRepository;
-    private final ProductCategoryListRepository productCategoryListRepository;
 
     /**
      * 1. 상품 등록

@@ -22,7 +22,6 @@ public interface ColorService {
 
     /**
      * 색상 수정
-     * @param id 색상 ID
      * @param changeColorRequestDto 색상 수정 요청 DTO
      */
     void changeColor(ChangeColorRequestDto changeColorRequestDto);
