@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.productoption.Size;
-import org.example.sivillage.sizeinfo.domain.sizeenum.ShoeSize;
 
 @Entity
 @Getter
@@ -23,16 +21,8 @@ public class ProductOption {
     @Column(nullable = false)
     private String productCode;
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = true)
-    private Color color;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = true)
-    private Size size;
-
-    @Column(nullable = true)
-    private ShoeSize shoeSize;
+    private Long sizeId;
 
     @Column(nullable = true)
     private String volume;

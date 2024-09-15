@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.brand.domain.Brand;
-import org.example.sivillage.product.domain.Color;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
 
@@ -15,16 +14,16 @@ public class GetProductDetailsResponseDto {
     private String productName;
     private Integer price;
     private String brandEngName;
-    private Color color;
+    private Long colorId;
     private String detailContent;
 
     @Builder
-    public GetProductDetailsResponseDto(String productCode, String productName, Integer price, String brandEngName, Color color, String detailContent) {
+    public GetProductDetailsResponseDto(String productCode, String productName, Integer price, String brandEngName, Long colorId, String detailContent) {
         this.productCode = productCode;
         this.productName = productName;
         this.price = price;
         this.brandEngName = brandEngName;
-        this.color = color;
+        this.colorId = colorId;
         this.detailContent = detailContent;
     }
 
@@ -34,7 +33,7 @@ public class GetProductDetailsResponseDto {
                 .productName(product.getProductName())
                 .price(product.getPrice())
                 .brandEngName(brand.getBrandEngName())
-                .color(product.getColor())
+                .colorId(product.getColorId())
                 .detailContent(product.getDetailContent())
                 .build();
     }
@@ -45,7 +44,7 @@ public class GetProductDetailsResponseDto {
                 .productName(productName)
                 .price(price)
                 .brandEngName(brandEngName)
-                .color(color)
+                .colorId(colorId)
                 .detailContent(detailContent)
                 .build();
     }

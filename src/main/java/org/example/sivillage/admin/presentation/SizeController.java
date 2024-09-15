@@ -6,11 +6,14 @@ import lombok.RequiredArgsConstructor;
 import org.example.sivillage.admin.application.SizeService;
 import org.example.sivillage.admin.dto.in.AddSizeRequestDto;
 import org.example.sivillage.admin.dto.in.ChangeSizeRequestDto;
+import org.example.sivillage.admin.dto.out.GetSizeResponseDto;
 import org.example.sivillage.admin.vo.in.AddSizeRequestVo;
 import org.example.sivillage.admin.vo.in.ChangeSizeRequestVo;
 import org.example.sivillage.admin.vo.out.GetSizeResponseVo;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -47,5 +50,15 @@ public class SizeController {
     public BaseResponse<Void> removeSize(@PathVariable Long id) {
         sizeService.removeSize(id);
         return new BaseResponse<>();
+    }
+
+    @Operation(summary = "사이즈 목록 조회 API", description = "사이즈 목록을 조회합니다.")
+    @GetMapping(value = "/type")
+    public BaseResponse<List<GetSizeResponseVo>> getSizeListByType(String type) {
+        return new BaseResponse<>(
+                sizeService.getSizeListByType(type).stream()
+                        .map(GetSizeResponseDto::toVo)
+                        .toList()
+        );
     }
 }

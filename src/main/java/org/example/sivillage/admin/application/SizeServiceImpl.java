@@ -10,6 +10,8 @@ import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class SizeServiceImpl implements SizeService {
@@ -40,5 +42,10 @@ public class SizeServiceImpl implements SizeService {
         sizeRepository.deleteById(id);
     }
 
-
+    @Override
+    public List<GetSizeResponseDto> getSizeListByType(String type) {
+        return sizeRepository.findBySizeType(type).stream()
+                .map(GetSizeResponseDto::from)
+                .toList();
+    }
 }

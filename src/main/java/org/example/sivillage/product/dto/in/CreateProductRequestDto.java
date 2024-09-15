@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.brand.domain.BrandProduct;
 import org.example.sivillage.global.common.UuidGenerator;
-import org.example.sivillage.product.domain.Color;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 
@@ -18,21 +17,21 @@ public class CreateProductRequestDto {
     private Integer price;
     private Long brandId;
     private String detailContent;
-    private Color color;
+    private Long colorId;
 
     @Builder
-    public CreateProductRequestDto(String productName, Integer price, Long brandId, String detailContent, Color color) {
+    public CreateProductRequestDto(String productName, Integer price, Long brandId, String detailContent, Long colorId) {
         this.productName = productName;
         this.price = price;
         this.brandId = brandId;
         this.detailContent = detailContent;
-        this.color = color;
+        this.colorId = colorId;
     }
 
     public static CreateProductRequestDto from(CreateProductRequestVo createProductRequestVo) {
         return CreateProductRequestDto.builder()
                 .productName(createProductRequestVo.getProductName())
-                .color(createProductRequestVo.getColor())
+                .colorId(createProductRequestVo.getColorId())
                 .price(createProductRequestVo.getPrice())
                 .brandId(createProductRequestVo.getBrandId())
                 .detailContent(createProductRequestVo.getDetailContent())
@@ -49,7 +48,7 @@ public class CreateProductRequestDto {
     public Product toEntity() {
         return Product.builder()
                 .productCode(UuidGenerator.generateProductCode())
-                .color(color)
+                .colorId(colorId)
                 .productName(productName)
                 .price(price)
                 .detailContent(detailContent)

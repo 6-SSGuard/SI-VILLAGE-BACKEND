@@ -3,7 +3,6 @@ package org.example.sivillage.product.vo.in;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.productoption.Size;
 import org.example.sivillage.sizeinfo.domain.sizeenum.ShoeSize;
 
 @NoArgsConstructor
@@ -12,7 +11,7 @@ public class CreateProductOptionRequestVo {
 
     private String productCode;
 
-    private Size size;
+    private Long sizeId;
 
     private ShoeSize shoeSize;
 
@@ -21,9 +20,9 @@ public class CreateProductOptionRequestVo {
     private Integer stock;
 
     @Builder
-    public CreateProductOptionRequestVo(String productCode, Size size, ShoeSize shoeSize, String volume, Integer stock) {
+    public CreateProductOptionRequestVo(String productCode, Long sizeId, ShoeSize shoeSize, String volume, Integer stock) {
         this.productCode = productCode;
-        this.size = size;
+        this.sizeId = sizeId;
         this.shoeSize = shoeSize;
         this.volume = volume;
         this.stock = stock;
