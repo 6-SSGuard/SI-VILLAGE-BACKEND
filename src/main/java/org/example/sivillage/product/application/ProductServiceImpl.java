@@ -358,7 +358,7 @@ public class ProductServiceImpl implements ProductService {
 //
 //        if (isClothing) {
 //            Size size = getRandomSize();
-//            ProductOption option = ProductOption.builder()
+//            ProductOptionList option = ProductOptionList.builder()
 //                    .productCode(productCode)
 //                    .color(randomColor)
 //                    .stock(getRandomStock())
@@ -368,7 +368,7 @@ public class ProductServiceImpl implements ProductService {
 //            productOptionRepository.save(option);
 //        } else if (isShoes) {
 //            ShoeSize shoeSize = getRandomShoeSize();
-//            ProductOption option = ProductOption.builder()
+//            ProductOptionList option = ProductOptionList.builder()
 //                    .productCode(productCode)
 //                    .color(randomColor)
 //                    .stock(getRandomStock())

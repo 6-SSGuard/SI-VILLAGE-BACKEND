@@ -3,7 +3,7 @@ package org.example.sivillage.product.dto.in;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.product.domain.ProductOption;
+import org.example.sivillage.vendor.domain.ProductOptionList;
 import org.example.sivillage.product.vo.in.CreateProductOptionRequestVo;
 
 @NoArgsConstructor
@@ -35,8 +35,8 @@ public class CreateProductOptionRequestDto {
                 .build();
     }
 
-    public ProductOption toEntity() {
-        return ProductOption.builder()
+    public ProductOptionList toEntity() {
+        return ProductOptionList.builder()
                 .productCode(productCode)
                 .sizeId(sizeId)
                 .volume(volume)

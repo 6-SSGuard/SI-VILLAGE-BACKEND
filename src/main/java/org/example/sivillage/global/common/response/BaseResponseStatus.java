@@ -35,6 +35,7 @@ public enum BaseResponseStatus {
     NOT_FOUND_BRAND_LIKE(HttpStatus.NOT_FOUND, false, "해당하는 브랜드 좋아요 정보를 찾을 수 없습니다."),
     NOT_FOUND_COLOR(HttpStatus.NOT_FOUND, false, "해당하는 색상 정보를 찾을 수 없습니다."),
     NOT_FOUND_SIZE(HttpStatus.NOT_FOUND, false, "해당하는 사이즈 정보를 찾을 수 없습니다."),
+    NOT_FOUND_PRODUCT(HttpStatus.NOT_FOUND, false, "해당하는 상품 정보를 찾을 수 없습니다."),
 
     /*
      * 405 METHOD_NOT_ALLOWED: 허용되지 않은 Request Method 호출

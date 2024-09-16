@@ -3,7 +3,7 @@ package org.example.sivillage.product.dto.out;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.product.domain.ProductOption;
+import org.example.sivillage.vendor.domain.ProductOptionList;
 import org.example.sivillage.product.vo.out.GetProductOptionListResponseVo;
 
 @NoArgsConstructor
@@ -23,12 +23,12 @@ public class GetProductOptionListResponseDto {
         this.stock = stock;
     }
 
-    public static GetProductOptionListResponseDto from(ProductOption productOption) {
+    public static GetProductOptionListResponseDto from(ProductOptionList productOptionList) {
         return GetProductOptionListResponseDto.builder()
-                .productOptionId(productOption.getId())
-                .sizeId(productOption.getSizeId())
-                .volume(productOption.getVolume())
-                .stock(productOption.getStock())
+                .productOptionId(productOptionList.getId())
+                .sizeId(productOptionList.getSizeId())
+                .volume(productOptionList.getVolume())
+                .stock(productOptionList.getStock())
                 .build();
     }
 
