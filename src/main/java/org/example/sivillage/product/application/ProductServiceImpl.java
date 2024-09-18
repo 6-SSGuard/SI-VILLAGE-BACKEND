@@ -7,19 +7,14 @@ import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.product.domain.Product;
-import org.example.sivillage.product.domain.ProductImage;
-import org.example.sivillage.product.dto.in.CreateProductOptionRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
-import org.example.sivillage.product.dto.out.*;
+import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
+import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.example.sivillage.product.infrastructure.BrandProductRepository;
-import org.example.sivillage.product.infrastructure.ProductImageRepository;
-import org.example.sivillage.product.infrastructure.ProductOptionRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
-import org.example.sivillage.product.vo.in.CreateProductImageListRequestDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Random;
 
 @Service
@@ -30,20 +25,13 @@ public class ProductServiceImpl implements ProductService {
     private static final Random RANDOM = new Random();
 
     private final ProductRepository productRepository;
-    private final ProductOptionRepository productOptionRepository;
     private final BrandRepository brandRepository;
-    private final ProductImageRepository productImageRepository;
     private final BrandProductRepository brandProductRepository;
 
     /**
      * 1. 상품 등록
-     * 2. 상품 옵션 등록
-     * 3. 상품 이미지 등록
      * 4. 상품 간략 정보 조회
-     * 5. 상품 옵션 정보 조회
      * 6. 상품 상세 정보 조회
-     * 7. 상품 썸네일 URL 조회
-     * 8. 상품 이미지 리스트 URL 조회
      */
 
     /**
@@ -57,29 +45,6 @@ public class ProductServiceImpl implements ProductService {
                 createProductRequestDto.getBrandId(), product.getProductCode()));
     }
 
-    /**
-     * 2. 상품 옵션 등록
-     * @param createProductOptionRequestDto 상품 옵션 등록 요청 DTO
-     */
-    @Override
-    public void addProductOption(CreateProductOptionRequestDto createProductOptionRequestDto) {
-
-        productOptionRepository.save(createProductOptionRequestDto.toEntity());
-    }
-
-    /**
-     * 3. 상품 이미지 등록
-     * @param createProductImageListRequestDto 상품 이미지 등록 요청 DTO
-     */
-    @Override
-    public void addProductImageList(List<CreateProductImageListRequestDto> createProductImageListRequestDto) {
-
-        List<ProductImage> productImageList = createProductImageListRequestDto.stream()
-                .map(CreateProductImageListRequestDto::toEntity)
-                .toList();
-
-        productImageRepository.saveAll(productImageList);
-    }
 
     /**
      * 4. 상품 간략 정보 조회
@@ -98,19 +63,7 @@ public class ProductServiceImpl implements ProductService {
         return GetProductBriefInfoResponseDto.of(product, brand);
     }
 
-    /**
-     * 5. 상품 옵션 정보 조회
-     * @param productCode 상품 코드
-     * @return GetProductOptionListResponseDto
-     */
-    @Transactional(readOnly = true)
-    @Override
-    public List<GetProductOptionListResponseDto> getProductOptionList(String productCode) {
-        return productOptionRepository.findByProductCode(productCode)
-                .stream()
-                .map(GetProductOptionListResponseDto::from)
-                .toList();
-    }
+
 
     /**
      * 6. 상품 상세 정보 조회
@@ -129,33 +82,7 @@ public class ProductServiceImpl implements ProductService {
         return GetProductDetailsResponseDto.of(product, brand);
     }
 
-    /**
-     * 7. 상품 썸네일 URL 조회
-     * @param productCode 상품 코드
-     * @return GetProductThumbnailUrlResponseDto
-     */
-    @Transactional(readOnly = true)
-    @Override
-    public GetProductThumbnailUrlResponseDto getProductThumbnailUrl(String productCode) {
-        String thumbnailUrl = productImageRepository.findByProductCodeAndThumbnailTrue(productCode)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_IMAGE_NOT_FOUND)).getProductImageUrl();
 
-        return GetProductThumbnailUrlResponseDto.from(thumbnailUrl);
-    }
-
-    /**
-     * 8. 상품 이미지 리스트 URL 조회
-     * @param productCode 상품 코드
-     * @return GetProductImageUrlListResponseDto
-     */
-    @Transactional(readOnly = true)
-    @Override
-    public List<GetProductImageUrlListResponseDto> getProductImageUrlList(String productCode) {
-        return productImageRepository.findProductImageUrlsByProductCode(productCode)
-                .stream()
-                .map(GetProductImageUrlListResponseDto::from)
-                .toList();
-    }
 
 //    public GetCategoryPathResponseDto getCategoryPath(String productUuid) {
 //        Product product = productRepository.findByProductCode(productUuid)

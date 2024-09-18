@@ -1,7 +1,7 @@
 package org.example.sivillage.review.domain;
 
 import lombok.Getter;
-import org.example.sivillage.BeautyInfo.domain.BeautyInfo;
+import org.example.sivillage.beautyInfo.domain.BeautyInfo;
 import org.example.sivillage.sizeinfo.domain.SizeInfo;
 
 @Getter

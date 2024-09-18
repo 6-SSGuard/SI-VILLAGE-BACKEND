@@ -2,8 +2,8 @@ package org.example.sivillage.review.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.sivillage.BeautyInfo.domain.BeautyInfo;
-import org.example.sivillage.BeautyInfo.infrastructure.BeautyInfoRepository;
+import org.example.sivillage.beautyInfo.domain.BeautyInfo;
+import org.example.sivillage.beautyInfo.infrastructure.BeautyInfoRepository;
 import org.example.sivillage.global.common.CategoryPathService;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.common.response.dto.IdListResponseDto;
