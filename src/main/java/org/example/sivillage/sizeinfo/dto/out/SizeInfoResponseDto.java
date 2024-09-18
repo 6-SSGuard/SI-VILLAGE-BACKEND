@@ -2,9 +2,7 @@ package org.example.sivillage.sizeinfo.dto.out;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.example.sivillage.BeautyInfo.dto.out.BeautyInfoResponseDto;
 import org.example.sivillage.sizeinfo.domain.SizeInfo;
-import org.example.sivillage.sizeinfo.dto.in.SizeInfoRequestDto;
 import org.example.sivillage.sizeinfo.vo.out.SizeInfoResponseVo;
 
 @Getter
