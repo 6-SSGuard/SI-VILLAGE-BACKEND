@@ -19,13 +19,13 @@ public class ProductQuestionServiceImpl {
 
     private final ProductQuestionRepository productQuestionRepository;
 
-    public void addProductQuestion(ProductQuestionRequestDto productQuestionRequestDto, String productUuid, String memberUuid) {
-        productQuestionRepository.save(productQuestionRequestDto.toEntity(productQuestionRequestDto, productUuid, memberUuid));
+    public void addProductQuestion(ProductQuestionRequestDto productQuestionRequestDto, String productCode, String memberUuid) {
+        productQuestionRepository.save(productQuestionRequestDto.toEntity(productQuestionRequestDto, productCode, memberUuid));
     }
 
     // 상품 문의 목록 조회
     public List<ProductQuestionResponseDto> getProductQuestion(String productUuid) {
-        return productQuestionRepository.findByProductUuid(productUuid)
+        return productQuestionRepository.findByProductCode(productUuid)
                 .stream()
                 .map(ProductQuestionResponseDto::from).toList();
     }
