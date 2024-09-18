@@ -1,9 +1,9 @@
 package org.example.sivillage.brand.application;
 
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
-import org.example.sivillage.brand.dto.out.GetBrandLikeResponseDto;
 import org.example.sivillage.brand.dto.out.GetBrandNameResponseDto;
 import org.example.sivillage.global.common.response.dto.IdListResponseDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,5 +31,6 @@ public interface BrandService {
      */
     GetBrandNameResponseDto getBrandName(Long brandId);
 
+    void addBrandFromCsv(MultipartFile file);
 
 }

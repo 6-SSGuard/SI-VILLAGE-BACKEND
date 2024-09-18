@@ -2,24 +2,30 @@ package org.example.sivillage.brand.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.example.sivillage.brand.domain.Brand;
-import org.example.sivillage.brand.domain.BrandLike;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
-import org.example.sivillage.brand.dto.out.GetBrandLikeResponseDto;
 import org.example.sivillage.brand.dto.out.GetBrandNameResponseDto;
 import org.example.sivillage.brand.infrastructure.BrandLikeRepository;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.common.response.dto.IdListResponseDto;
-import org.example.sivillage.global.common.response.vo.IdListResponseVo;
 import org.example.sivillage.global.error.BaseException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 public class BrandServiceImpl implements BrandService {
     private final BrandRepository brandRepository;
     private final BrandLikeRepository brandLikeRepository;
@@ -58,6 +64,7 @@ public class BrandServiceImpl implements BrandService {
      * @param memberUuid 회원 UUID
      * return GetBrandIdListResponseDto
      */
+    @Transactional(readOnly = true)
     @Override
     public List<IdListResponseDto<Long>> getBrandIdList(String memberUuid) {
 
@@ -72,6 +79,7 @@ public class BrandServiceImpl implements BrandService {
      * @param brandId 브랜드 ID
      * return GetBrandNameResponseDto
      */
+    @Transactional(readOnly = true)
     @Override
     public GetBrandNameResponseDto getBrandName(Long brandId) {
 
@@ -82,6 +90,33 @@ public class BrandServiceImpl implements BrandService {
                 .brandEngName(brand.getBrandEngName())
                 .brandKorName(brand.getBrandKorName())
                 .build();
+    }
+
+    @Override
+    public void addBrandFromCsv(MultipartFile file) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8));
+             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader())) {
+
+            List<CSVRecord> records = csvParser.getRecords();
+            for (CSVRecord record : records) {
+                String brandEngName = record.get("brand_eng_name"); // CSV 컬럼 이름 사용
+                String brandKorName = record.get("brand_kor_name");
+
+                // 중복 체크
+                if (brandRepository.existsByBrandEngName(brandEngName) || brandRepository.existsByBrandKorName(brandKorName)) {
+                    continue; // 이미 존재하는 브랜드일 경우 건너뜀
+                }
+
+                // 브랜드 엔티티 생성 및 저장
+                Brand brand = Brand.builder()
+                        .brandEngName(brandEngName)
+                        .brandKorName(brandKorName)
+                        .build();
+                brandRepository.save(brand);
+            }
+        } catch (Exception e) {
+            throw new BaseException(BaseResponseStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
