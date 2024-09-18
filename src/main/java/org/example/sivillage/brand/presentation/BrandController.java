@@ -15,6 +15,7 @@ import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.global.common.response.vo.IdListResponseVo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -78,5 +79,17 @@ public class BrandController {
         return new BaseResponse<>(
                 brandService.getBrandName(brandId).toVo()
         );
+    }
+
+    /**
+     * 4. addBrandFromCsv CSV 파일로 브랜드 추가
+     * @param file CSV 파일
+     * return void
+     */
+    @Operation(summary = "CSV 파일로 브랜드 추가")
+    @PostMapping(value = "/csv", consumes = "multipart/form-data")
+    public BaseResponse<Void> addBrandFromCsv(@RequestParam("file") MultipartFile file) {
+        brandService.addBrandFromCsv(file);
+        return new BaseResponse<>();
     }
 }
