@@ -32,8 +32,8 @@ public class EventProductServiceImpl implements EventProductService{
         EventProduct eventProduct = eventProductRepository.save(EventProductRequestDto.toEntity(eventProductRequestDto,eventId));
     }
 
-    public void removeEventProduct(String productCode) {
-    eventProductRepository.findByProductCode(productCode)
+    public void removeEventProduct(EventProductRequestDto eventProductRequest) {
+    eventProductRepository.findByProductCode(eventProductRequest.getProductCode())
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PRODUCT));
     }
 }

@@ -139,10 +139,11 @@ public class EventController {
         eventProductService.addEventProduct(eventId, eventProductRequestVo.toDto(eventProductRequestVo));
         return new BaseResponse<>();
     }
-//
-//    @Operation(summary = "상품 이벤트 삭제", description = "이벤트에서 상품을 삭제합니다.")
-//    @DeleteMapping("/{eventId}/products/{productCode}")
-//    public BaseResponse<Void> removeEventProduct(@PathVariable("eventId") Long eventId, @PathVariable("productCode") String productCode) {
-//
-//    }
+
+    @Operation(summary = "상품 이벤트 삭제", description = "이벤트에서 상품을 삭제합니다.")
+    @DeleteMapping("/products")
+    public BaseResponse<Void> removeEventProduct(@RequestBody EventProductRequestVo eventProductRequestVo) {
+        eventProductService.removeEventProduct(eventProductRequestVo.toDto(eventProductRequestVo));
+        return new BaseResponse<>();
+    }
 }
