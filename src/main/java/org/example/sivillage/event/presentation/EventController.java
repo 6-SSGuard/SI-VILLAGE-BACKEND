@@ -135,7 +135,7 @@ public class EventController {
 
     @Operation(summary = "상품 이벤트 등록", description = "이벤트에 상품을 등록합니다.")
     @PostMapping("/{eventId}/products")
-    public BaseResponse<Void> addEventProduct(@PathVariable("eventId") Long eventId, EventProductRequestVo eventProductRequestVo) {
+    public BaseResponse<Void> addEventProduct(@PathVariable("eventId") Long eventId, @RequestBody EventProductRequestVo eventProductRequestVo) {
         eventProductService.addEventProduct(eventId, eventProductRequestVo.toDto(eventProductRequestVo));
         return new BaseResponse<>();
     }
