@@ -6,12 +6,13 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.example.sivillage.brand.domain.Brand;
+import org.example.sivillage.brand.domain.BrandLike;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
 import org.example.sivillage.brand.dto.out.GetBrandNameResponseDto;
+import org.example.sivillage.brand.dto.out.GetBrandsListResponseDto;
 import org.example.sivillage.brand.infrastructure.BrandLikeRepository;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
-import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.global.error.BaseException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,11 +67,17 @@ public class BrandServiceImpl implements BrandService {
      */
     @Transactional(readOnly = true)
     @Override
-    public List<IdListResponseDto<Long>> getBrandIdList(String memberUuid) {
+    public List<GetBrandsListResponseDto> getBrandList(String memberUuid) {
 
-        return brandRepository.findAllBrandIdsByOrderByEngNameAsc()
-                .stream()
-                .map(IdListResponseDto::from)
+        List<Brand> brands = brandRepository.findAllByOrderByBrandEngNameAsc();
+
+        return brands.stream()
+                .map(brand -> {
+                    // memberUuid를 이용해 사용자가 좋아요한 Brand 정보를 가져옴
+                    BrandLike brandLike = brandLikeRepository.findByBrandIdAndMemberUuid(brand.getId(), memberUuid)
+                            .orElse(BrandLike.toEntity(brand.getId(), memberUuid)); // 없으면 기본값으로 false 설정
+                    return GetBrandsListResponseDto.of(brand, brandLike);
+                })
                 .toList();
     }
 
@@ -99,9 +106,10 @@ public class BrandServiceImpl implements BrandService {
 
             List<CSVRecord> records = csvParser.getRecords();
             for (CSVRecord record : records) {
-                String brandEngName = record.get("brand_eng_name"); // CSV 컬럼 이름 사용
-                String brandKorName = record.get("brand_kor_name");
-
+                String brandEngName = record.get("brand_name"); // CSV 컬럼 이름 사용
+                String brandKorName = record.get("brand_name_ko");
+                String brandIndexLetter = record.get("brand_index_letter");
+                String brandIndexLetterKor = record.get("brand_index_letter_ko");
                 // 중복 체크
                 if (brandRepository.existsByBrandEngName(brandEngName) || brandRepository.existsByBrandKorName(brandKorName)) {
                     continue; // 이미 존재하는 브랜드일 경우 건너뜀
@@ -111,6 +119,8 @@ public class BrandServiceImpl implements BrandService {
                 Brand brand = Brand.builder()
                         .brandEngName(brandEngName)
                         .brandKorName(brandKorName)
+                        .brandIndexLetter(brandIndexLetter)
+                        .brandIndexLetterKor(brandIndexLetterKor)
                         .build();
                 brandRepository.save(brand);
             }

@@ -11,17 +11,23 @@ import org.example.sivillage.brand.vo.in.AddBrandRequestVo;
 public class AddBrandRequestDto {
     private String brandEngName;
     private String brandKorName;
+    private String brandIndexLetter;
+    private String brandIndexLetterKor;
 
     @Builder
-    public AddBrandRequestDto(String brandEngName, String brandKorName) {
+    public AddBrandRequestDto(String brandEngName, String brandKorName, String brandIndexLetter, String brandIndexLetterKor) {
         this.brandEngName = brandEngName;
         this.brandKorName = brandKorName;
+        this.brandIndexLetter = brandIndexLetter;
+        this.brandIndexLetterKor = brandIndexLetterKor;
     }
 
     public Brand toEntity() {
         return Brand.builder()
                 .brandEngName(brandEngName)
                 .brandKorName(brandKorName)
+                .brandIndexLetter(brandIndexLetter)
+                .brandIndexLetterKor(brandIndexLetterKor)
                 .build();
     }
 
@@ -29,6 +35,8 @@ public class AddBrandRequestDto {
         return AddBrandRequestDto.builder()
                 .brandEngName(addBrandRequestVo.getBrandEngName())
                 .brandKorName(addBrandRequestVo.getBrandKorName())
+                .brandIndexLetter(addBrandRequestVo.getBrandIndexLetter())
+                .brandIndexLetterKor(addBrandRequestVo.getBrandIndexLetterKor())
                 .build();
     }
 }
