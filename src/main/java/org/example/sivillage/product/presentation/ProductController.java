@@ -9,6 +9,7 @@ import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.product.application.ProductService;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
+import org.example.sivillage.product.vo.out.CreateProductResponseVo;
 import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;
 import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +23,12 @@ public class ProductController {
     private final ProductService productService;
 
     @Operation(summary = "상품 등록")
-    @PostMapping("/")
-    public BaseResponse<Void> addProduct(@Valid @RequestBody CreateProductRequestVo createProductRequestVo) {
+    @PostMapping
+    public BaseResponse<CreateProductResponseVo> addProduct(@Valid @RequestBody CreateProductRequestVo createProductRequestVo) {
 
-        productService.addProduct(CreateProductRequestDto.from(createProductRequestVo));
-        return new BaseResponse<>();
+        return new BaseResponse<>(
+                productService.addProduct(CreateProductRequestDto.from(createProductRequestVo)).toVo()
+        );
     }
 
     @Operation(summary = "단일 상품에 대한 간략 정보 조회", description = "")

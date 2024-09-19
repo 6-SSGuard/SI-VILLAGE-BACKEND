@@ -8,6 +8,7 @@ import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
+import org.example.sivillage.product.dto.out.CreateProductResponseDto;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.example.sivillage.product.infrastructure.BrandProductRepository;
@@ -38,11 +39,13 @@ public class ProductServiceImpl implements ProductService {
      * 1. 상품 등록
      * @param createProductRequestDto 상품 등록 요청 DTO
      */
-    public void addProduct(CreateProductRequestDto createProductRequestDto) {
+    public CreateProductResponseDto addProduct(CreateProductRequestDto createProductRequestDto) {
 
         Product product = productRepository.save(createProductRequestDto.toEntity());
         brandProductRepository.save(createProductRequestDto.toEntity(
                 createProductRequestDto.getBrandId(), product.getProductCode()));
+        log.debug("상품 등록 완료: {}", product.getProductCode());
+        return CreateProductResponseDto.from(product.getProductCode());
     }
 
 
