@@ -1,11 +1,10 @@
 package org.example.sivillage.sizeinfo.vo.out;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
-@Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class SizeInfoResponseVo {
 

@@ -4,14 +4,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.admin.application.CategoryService;
-import org.example.sivillage.admin.dto.in.AddCategoryRequestDto;
 import org.example.sivillage.admin.dto.out.GetSubCategoriesResponseDto;
-import org.example.sivillage.admin.vo.AddCategoryRequestVo;
-import org.example.sivillage.admin.vo.GetSubCategoriesResponseVo;
+import org.example.sivillage.admin.vo.in.AddCategoryRequestVo;
+import org.example.sivillage.admin.vo.out.GetSubCategoriesResponseVo;
 import org.example.sivillage.global.common.response.BaseResponse;
-import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,14 +20,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class CategoryController {
 
     private final CategoryService categoryService;
-    private final ModelMapper mapper;
 
-    @Operation(summary = "카테고리 생성", description = "parentCategoryCode =\"top\"입력시 최상위 카테고리 생성")
+    @Operation(summary = "카테고리 생성", description = "parentCategoryCode =\"\"입력시 최상위 카테고리 생성")
     @PostMapping("/")
     public BaseResponse<Void> addCategory(
             @RequestBody AddCategoryRequestVo addCategoryRequestVo) {
-        AddCategoryRequestDto request = mapper.map(addCategoryRequestVo, AddCategoryRequestDto.class);
-        categoryService.addCategory(request);
+
+        categoryService.addCategory(addCategoryRequestVo.toDto());
         return new BaseResponse<>();
     }
 
@@ -39,11 +38,14 @@ public class CategoryController {
     }
 
     @Operation(summary = "하위 카테고리 리스트 조회", description = "parentCategoryCode =\"top\"입력시 최상위 카테고리 리스트 조회")
-    @GetMapping("/{parentCategoryCode}")
-    public BaseResponse<GetSubCategoriesResponseVo> getSubCategories(
-            @PathVariable String parentCategoryCode) {
-        GetSubCategoriesResponseDto responseDto = categoryService.getSubCategories(parentCategoryCode);
-        GetSubCategoriesResponseVo response = mapper.map(responseDto, GetSubCategoriesResponseVo.class);
-        return new BaseResponse<>(response);
+    @GetMapping("/sub-categories")
+    public BaseResponse<List<GetSubCategoriesResponseVo>> getSubCategories(
+            @RequestParam(value = "parentCategoryCode", required = false) String parentCategoryCode) {
+        return new BaseResponse<>(
+                categoryService.getSubCategories(parentCategoryCode)
+                .stream()
+                .map(GetSubCategoriesResponseDto::toVo)
+                .toList()
+        );
     }
 }

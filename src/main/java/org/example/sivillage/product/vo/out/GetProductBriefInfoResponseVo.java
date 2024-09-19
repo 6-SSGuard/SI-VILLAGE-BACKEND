@@ -1,19 +1,20 @@
 package org.example.sivillage.product.vo.out;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
 public class GetProductBriefInfoResponseVo {
-    private String productUuid;
+    private String productCode;
     private String brandEngName;
     private String productName;
     private Integer price;
-    private boolean isLiked;
-    private String productThumbnailUrl;
+
+    @Builder
+    public GetProductBriefInfoResponseVo(String productCode, String brandEngName, String productName, Integer price) {
+        this.productCode = productCode;
+        this.brandEngName = brandEngName;
+        this.productName = productName;
+        this.price = price;
+    }
 }

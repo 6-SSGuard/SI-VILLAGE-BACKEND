@@ -1,29 +1,44 @@
 package org.example.sivillage.product.dto.out;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.product.domain.Product;
+import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter
 @Builder
 public class GetProductBriefInfoResponseDto {
-    private String productUuid;
+    private String productCode;
     private String brandEngName;
     private String productName;
     private Integer price;
-    private boolean isLiked;
-    private String productThumbnailUrl;
 
-    public static GetProductBriefInfoResponseDto toDto(Product product, boolean isLiked, String productThumbnailUrl) {
+    @Builder
+    public GetProductBriefInfoResponseDto(String productCode, String brandEngName, String productName, Integer price) {
+        this.productCode = productCode;
+        this.brandEngName = brandEngName;
+        this.productName = productName;
+        this.price = price;
+    }
+
+    public static GetProductBriefInfoResponseDto of(Product product, Brand brand) {
         return GetProductBriefInfoResponseDto.builder()
-                .productUuid(product.getProductUuid())
-                .brandEngName(product.getBrand().getBrandEngName())
+                .productCode(product.getProductCode())
+                .brandEngName(brand.getBrandEngName())
                 .productName(product.getProductName())
                 .price(product.getPrice())
-                .isLiked(isLiked)
-                .productThumbnailUrl(productThumbnailUrl)
+                .build();
+    }
+
+    public GetProductBriefInfoResponseVo toVo() {
+        return GetProductBriefInfoResponseVo.builder()
+                .productCode(productCode)
+                .brandEngName(brandEngName)
+                .productName(productName)
+                .price(price)
                 .build();
     }
 }

@@ -4,17 +4,16 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.shippingaddress.dto.in.ShippingAddressRequestDto;
+import org.example.sivillage.global.common.BaseEntity;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ShippingAddress {
+public class ShippingAddress extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "shipping_address_id")
-    private Long shippingAddressId;
+    private Long id;
 
     @Column(nullable = false)
     private String addressName;
@@ -42,7 +41,8 @@ public class ShippingAddress {
 
 
     @Builder
-    public ShippingAddress(String addressName, String recipient, String phone, String address, String detailedAddress, String postalCode, boolean defaultAddress, String memberUuid) {
+    public ShippingAddress(Long id, String addressName, String recipient, String phone, String address, String detailedAddress, String postalCode, boolean defaultAddress, String memberUuid) {
+        this.id = id;
         this.addressName = addressName;
         this.recipient = recipient;
         this.phone = phone;
@@ -53,39 +53,11 @@ public class ShippingAddress {
         this.memberUuid = memberUuid;
     }
 
-    // 기본 배송지 상태를 활성화하는 메소드
-    public void activateAsDefault() {
-        this.defaultAddress = true;
+    @Builder
+    public ShippingAddress(Long id, boolean defaultAddress){
+        this.id = id;
+        this.defaultAddress = defaultAddress;
     }
-
-    // 기본 배송지 상태를 비활성화하는 메소드
-    public void deactivateAsDefault() {
-        this.defaultAddress = false;
-    }
-
-    public static ShippingAddress toEntity(ShippingAddressRequestDto dto, String memberUuid) {
-        return ShippingAddress.builder()
-                .addressName(dto.getAddressName())
-                .recipient(dto.getRecipient())
-                .phone(dto.getPhone())
-                .address(dto.getAddress())
-                .detailedAddress(dto.getDetailedAddress())
-                .postalCode(dto.getPostalCode())
-                .defaultAddress(dto.isDefaultAddress())
-                .memberUuid(memberUuid)
-                .build();
-    }
-
-
-    public void change(ShippingAddressRequestDto dto){
-        this.addressName = dto.getAddressName();
-        this.recipient = dto.getRecipient();
-        this.phone = dto.getPhone();
-        this.address = dto.getAddress();
-        this.detailedAddress = dto.getDetailedAddress();
-        this.defaultAddress = dto.isDefaultAddress();
-    }
-
 }
 
 

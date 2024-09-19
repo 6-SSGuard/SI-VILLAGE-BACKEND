@@ -2,10 +2,8 @@ package org.example.sivillage.product.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.sivillage.admin.domain.Category;
-import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.global.common.BaseEntity;
-import org.example.sivillage.product.vo.in.CreateProductRequestVo;
+import org.example.sivillage.product.dto.in.CreateProductFromCsvRequestDto;
 
 @Entity
 @Getter
@@ -17,10 +15,10 @@ public class Product extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Long productId;
+    private Long id;
 
     @Column(nullable = false, length = 50, unique = true)
-    private String productUuid;
+    private String productCode;
 
     @Column(nullable = false, length = 100)
     private String productName;
@@ -28,25 +26,25 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private Integer price;
 
+    @Column(nullable = false)
+    private Long colorId;
+
     @Column(nullable = false, length = 10000)
     private String detailContent;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brand_id", nullable = false)
-    private Brand brand;
+    @Column(nullable = false)
+    private Long brandId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
-
-    public static Product createProduct(CreateProductRequestVo request, Brand brand, String productUuid, Category category) {
+    public static Product createProductFromCsv(CreateProductFromCsvRequestDto request) {
         return Product.builder()
                 .productName(request.getProductName())
-                .productUuid(productUuid)
+                .productCode(request.getProductCode())
                 .price(request.getPrice())
                 .detailContent(request.getDetailContent())
-                .brand(brand)
-                .category(category)
+                .brandId(request.getBrandId())
                 .build();
     }
+
+
+
 }

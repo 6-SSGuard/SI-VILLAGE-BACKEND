@@ -2,42 +2,50 @@ package org.example.sivillage.product.dto.out;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.product.domain.Product;
-import org.example.sivillage.product.domain.ProductOption;
-
-import java.util.List;
+import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
 
 @Getter
-@Builder
+@NoArgsConstructor
 public class GetProductDetailsResponseDto {
-    private String productUuid;
+    private String productCode;
     private String productName;
     private Integer price;
     private String brandEngName;
-    private String brandKorName;
-    private String color;
-    private String size;
-    private String capacity;
-    private Integer stock;
-    private Integer likesCount;
-    private boolean isLiked;
-    private List<String> productImageUrls;
+    private Long colorId;
+    private String detailContent;
 
-    public static GetProductDetailsResponseDto toDto(Product product, ProductOption productOption, Integer likesCount,
-                                                     boolean isLiked, List<String> productImageUrls) {
+    @Builder
+    public GetProductDetailsResponseDto(String productCode, String productName, Integer price, String brandEngName, Long colorId, String detailContent) {
+        this.productCode = productCode;
+        this.productName = productName;
+        this.price = price;
+        this.brandEngName = brandEngName;
+        this.colorId = colorId;
+        this.detailContent = detailContent;
+    }
+
+    public static GetProductDetailsResponseDto of(Product product, Brand brand) {
         return GetProductDetailsResponseDto.builder()
-                .productUuid(product.getProductUuid())
+                .productCode(product.getProductCode())
                 .productName(product.getProductName())
                 .price(product.getPrice())
-                .brandEngName(product.getBrand().getBrandEngName())
-                .brandKorName(product.getBrand().getBrandKorName())
-                .color(productOption.getColor().name())
-                .size(productOption.getSize().name())
-                .capacity(productOption.getCapacity())
-                .stock(productOption.getStock())
-                .likesCount(likesCount)
-                .isLiked(isLiked)
-                .productImageUrls(productImageUrls)
+                .brandEngName(brand.getBrandEngName())
+                .colorId(product.getColorId())
+                .detailContent(product.getDetailContent())
+                .build();
+    }
+
+    public GetProductDetailsResponseVo toVo() {
+        return GetProductDetailsResponseVo.builder()
+                .productCode(productCode)
+                .productName(productName)
+                .price(price)
+                .brandEngName(brandEngName)
+                .colorId(colorId)
+                .detailContent(detailContent)
                 .build();
     }
 }

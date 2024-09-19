@@ -5,11 +5,21 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.auth.domain.CustomUserDetails;
+import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
-import org.example.sivillage.review.application.ReviewService;
-import org.example.sivillage.review.vo.ReviewRequestVo;
-import org.example.sivillage.review.vo.ReviewResponseVo;
+import org.example.sivillage.global.common.response.dto.IdListResponseDto;
+import org.example.sivillage.global.common.response.vo.IdListResponseVo;
+import org.example.sivillage.review.application.ReviewImageServiceImpl;
+import org.example.sivillage.review.application.ReviewLikeServiceImpl;
+import org.example.sivillage.review.application.ReviewServiceImpl;
+import org.example.sivillage.review.dto.out.ReviewImageResponseDto;
+import org.example.sivillage.review.dto.out.ReviewLikeCountResponseDto;
+import org.example.sivillage.review.dto.out.ReviewResponseDto;
+import org.example.sivillage.review.vo.in.ReviewImageRequestVo;
+import org.example.sivillage.review.vo.in.ReviewRequestVo;
+import org.example.sivillage.review.vo.out.ReviewImageResponseVo;
+import org.example.sivillage.review.vo.out.ReviewLikeCountResponseVo;
+import org.example.sivillage.review.vo.out.ReviewResponseVo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,44 +32,97 @@ import java.util.List;
 @RequestMapping("/api/reviews")
 public class ReviewController {
 
-    private final ReviewService reviewService;
+    private final ReviewServiceImpl reviewService;
+    private final ReviewImageServiceImpl reviewImageService;
+    private final ReviewLikeServiceImpl reviewLikeService;
+
+
+    @Operation(summary = "상품의 리뷰id 조회", description = "상품의 리뷰 id 리스트를 반환")
+    @GetMapping("/product/{productCode}")
+    public BaseResponse<List<IdListResponseVo<Long>>> getProductReviewIds(@PathVariable("productCode") String productCode) {
+        List<IdListResponseVo<Long>> idListResponseVoList = reviewService.getProductReviewIds(productCode)
+                .stream()
+                .map(IdListResponseDto::toVo)
+                .toList();
+        return new BaseResponse<>(idListResponseVoList);
+    }
+
+    @Operation(summary = "회원의 리뷰id 조회", description = "회원의 리뷰 id 리스트를 반환")
+    @GetMapping("/member/{memberUuid}")
+    public BaseResponse<List<IdListResponseVo<Long>>> getMemberReviewIds(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        List<IdListResponseVo<Long>> idListResponseVoList = reviewService.getMemberReviewIds(authUserDetails.getMemberUuid())
+                .stream()
+                .map(IdListResponseDto::toVo)
+                .toList();
+        return new BaseResponse<>(idListResponseVoList);
+    }
 
     @Operation(summary = "리뷰 등록", description = "리뷰를 등록합니다.")
-    @PostMapping("/{productUuid}")
-    public BaseResponse<Void> addReview(@PathVariable("productUuid") String productUuid, @Valid @RequestBody ReviewRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        reviewService.addReview(ReviewRequestVo.toDto(vo), customUserDetails.getUsername(), customUserDetails.getMemberUuid(), productUuid); // vo -> dto
-        return new BaseResponse<>();
+    @PostMapping("add/{productCode}")
+    public BaseResponse<Long> addReview(@PathVariable("productCode") String productCode, @Valid @RequestBody ReviewRequestVo reviewRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        Long reviewId = reviewService.addReview(ReviewRequestVo.toDto(reviewRequestVo),authUserDetails.getMemberUuid(),productCode); // vo -> dto
+        return new BaseResponse<>(reviewId);
     }
 
-    @Operation(summary = "회원 리뷰 조회", description = "회원 리뷰를 조회합니다.")
-    @GetMapping("")
-    public BaseResponse<List<ReviewResponseVo>> getMemberReview(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        List<ReviewResponseVo> vo = reviewService.getMemberReview(customUserDetails.getMemberUuid())
-                .stream()
-                .map(ReviewResponseVo::toVo).toList();
-        return new BaseResponse<>(vo);
-    }
-
-    @Operation(summary = "상품 리뷰 조회", description = "상품 리뷰를 조회합니다.")
-    @GetMapping("/product")
-    public BaseResponse<List<ReviewResponseVo>> getReview(@RequestParam("productUuid") String productUuid) {
-        List<ReviewResponseVo> vo = reviewService.getProductReview(productUuid)
-                .stream()
-                .map(ReviewResponseVo::toVo).toList();
-        return new BaseResponse<>(vo);
+    @Operation(summary = "리뷰 조회", description = "상품 리뷰를 조회합니다.")
+    @GetMapping("/review/{reviewId}")
+    public BaseResponse<ReviewResponseVo> getReview (@PathVariable("reviewId") Long reviewId) {
+        ReviewResponseDto reviewResponseDto = reviewService.getReview(reviewId);
+        return new BaseResponse<>(reviewResponseDto.toResponseVo());
     }
 
     @Operation(summary = "리뷰 수정", description = "리뷰를 수정합니다.")
-    @PutMapping("/{reviewId}")
-    public BaseResponse<Void> changeReview(@PathVariable("reviewId") Long reviewId, @Valid @RequestBody ReviewRequestVo vo, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        reviewService.changeReview(ReviewRequestVo.toDto(vo), reviewId, customUserDetails.getMemberUuid());
+    @PutMapping("change/{reviewId}")
+    public BaseResponse<Void> changeReview(@PathVariable("reviewId") Long reviewId, @Valid @RequestBody ReviewRequestVo reviewRequestVo) {
+        reviewService.changeReview(ReviewRequestVo.toDto(reviewRequestVo), reviewId);
         return new BaseResponse<>();
     }
 
     @Operation(summary = "리뷰 삭제", description = "리뷰를 삭제합니다.")
-    @DeleteMapping("/{reviewId}")
-    public BaseResponse<Void> removeReview(@PathVariable("reviewId") Long reviewId, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        reviewService.removeReview(reviewId, customUserDetails.getMemberUuid());
+    @DeleteMapping("delete/{reviewId}")
+    public BaseResponse<Void> removeReview(@PathVariable("reviewId") Long reviewId) {
+        reviewService.removeReview(reviewId);
         return new BaseResponse<>();
+    }
+
+
+    // 리뷰 이미지 관련 API
+    @Operation(summary = "리뷰 이미지 등록", description = "리뷰 이미지를 등록합니다.")
+    @PostMapping("reviewImage/{reviewId}")
+    public BaseResponse<Void> addReview(@PathVariable("reviewId") Long reviewId, @Valid @RequestBody ReviewImageRequestVo reviewImageRequestVo) {
+        reviewImageService.addReviewImage(ReviewImageRequestVo.toDto(reviewImageRequestVo), reviewId); // vo -> dto
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "리뷰 이미지 목록 조회", description = "리뷰 이미지 목록을 조회합니다.")
+    @GetMapping("get-reviewImage/reviewsImages/{reviewId}")
+    public BaseResponse<List<ReviewImageResponseVo>> getReviewImages(@PathVariable("reviewId") Long reviewId) {
+        List<ReviewImageResponseVo> reviewImageResponseVoList = reviewImageService.getReviewImage(reviewId)
+                .stream()
+                .map(ReviewImageResponseDto::toResponseVo)
+                .toList();
+        return new BaseResponse<>(reviewImageResponseVoList);
+    }
+
+    @Operation(summary = "리뷰 이미지 삭제", description = "리뷰 이미지를 삭제합니다.")
+    @DeleteMapping("image/reviewsImages/{reviewImageId}")
+    public BaseResponse<Void> removeReviewImage(@PathVariable("reviewImageId") Long reviewImageId) {
+        reviewImageService.removeReviewImage(reviewImageId);
+        return new BaseResponse<>();
+    }
+
+    // 리뷰 좋아요 관련 API
+    @Operation(summary = "리뷰 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
+    @PutMapping("like/like/{reviewId}")
+    public BaseResponse<Void> toggleReviewLike(@PathVariable Long reviewId, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        reviewLikeService.toggleReviewLike(reviewId, authUserDetails.getMemberUuid());
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "리뷰의 좋아요 조회", description = "리뷰의 좋아요 수 조회")
+    @GetMapping("likes/likes/{reviewId}")
+    public BaseResponse<ReviewLikeCountResponseVo> getReviewLikeCount(@PathVariable("reviewId") Long reviewId){
+        ReviewLikeCountResponseDto reviewLikeCountResponseDto = reviewLikeService.getReviewLikeCount(reviewId);
+        return new BaseResponse<>(reviewLikeCountResponseDto.toResponseVo());
     }
 }

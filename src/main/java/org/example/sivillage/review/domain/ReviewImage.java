@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.global.common.BaseEntity;
+import org.example.sivillage.review.dto.in.ReviewImageRequestDto;
+
 
 @Entity
 @Getter
@@ -17,21 +19,14 @@ public class ReviewImage extends BaseEntity {
 
     private String reviewImageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "review_id", nullable = false)
-    private Review review;
+    @Column(nullable = false)
+    private Long reviewId;
 
     @Builder
-    public ReviewImage(Long id, String reviewImageUrl, Review review) {
+    public ReviewImage(Long id, String reviewImageUrl, Long reviewId) {
         this.id = id;
         this.reviewImageUrl = reviewImageUrl;
-        this.review = review;
+        this.reviewId = reviewId;
     }
 
-    public static ReviewImage toEntity(String reviewImageUrl, Review review) {
-        return ReviewImage.builder()
-                .reviewImageUrl(reviewImageUrl)
-                .review(review)
-                .build();
-    }
 }

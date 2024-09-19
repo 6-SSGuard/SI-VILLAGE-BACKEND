@@ -28,18 +28,6 @@ public class ShippingAddressResponseVo {
 
     private boolean defaultAddress;
 
-    public static ShippingAddressResponseVo toVo(ShippingAddressResponseDto dto) {
-        return ShippingAddressResponseVo.builder()
-                .shippingAddressId(dto.getShippingAddressId())
-                .addressName(dto.getAddressName())
-                .recipient(dto.getRecipient())
-                .phone(dto.getPhone())
-                .address(dto.getAddress())
-                .detailedAddress(dto.getDetailedAddress())
-                .postalCode(dto.getPostalCode())
-                .defaultAddress(dto.isDefaultAddress())
-                .build();
-    }
 
     }
 
