@@ -7,13 +7,16 @@ import org.example.sivillage.question.domain.ProductQuestion;
 @Getter
 public class ProductQuestionRequestDto {
 
+    private String questionTitle;
+
     private String questionContent;
 
     private boolean privateMessage;
 
-    public ProductQuestion toEntity(ProductQuestionRequestDto productQuestionRequestDto, String productUuid, String memberUuid) {
+    public ProductQuestion toEntity(ProductQuestionRequestDto productQuestionRequestDto, String productCode, String memberUuid) {
         return ProductQuestion.builder()
-                .productUuid(productUuid)
+                .productCode(productCode)
+                .questionTitle(productQuestionRequestDto.getQuestionTitle())
                 .questionContent(productQuestionRequestDto.getQuestionContent())
                 .privateMessage(productQuestionRequestDto.isPrivateMessage())
                 .memberUuid(memberUuid)
@@ -21,7 +24,8 @@ public class ProductQuestionRequestDto {
     }
 
     @Builder
-    public ProductQuestionRequestDto(String questionContent, boolean privateMessage) {
+    public ProductQuestionRequestDto(String questionTitle, String questionContent, boolean privateMessage) {
+        this.questionTitle = questionTitle;
         this.questionContent = questionContent;
         this.privateMessage = privateMessage;
     }

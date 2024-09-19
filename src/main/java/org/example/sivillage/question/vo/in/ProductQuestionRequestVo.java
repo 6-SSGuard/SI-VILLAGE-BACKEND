@@ -15,12 +15,19 @@ public class ProductQuestionRequestVo {
     @Size(max = 1000, message = "문의 내용은 최대 1000자까지 입력할 수 있습니다.")
     private String questionContent;
 
+    @Schema(description = "문의 제목", example = " 배송관련 문의 드립니다.", required = true)
+    @NotNull
+    @Size(max = 100)
+    private String questionTitle;;
+
+
     @Schema(description = "비밀글 여부", example = "true")
     @NotNull
     private boolean privateMessage;
 
     public static ProductQuestionRequestDto toDto (ProductQuestionRequestVo productQuestionRequestVo){
         return ProductQuestionRequestDto.builder()
+                .questionTitle(productQuestionRequestVo.getQuestionTitle())
                 .questionContent(productQuestionRequestVo.getQuestionContent())
                 .privateMessage(productQuestionRequestVo.isPrivateMessage())
                 .build();

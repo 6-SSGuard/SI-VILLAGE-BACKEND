@@ -19,6 +19,8 @@ public class ProductQuestionResponseVo {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
     private LocalDateTime productQuestionDate;
 
+    private String questionTitle;
+
     private String questionContent;
 
     private boolean privateMessage;

@@ -8,7 +8,6 @@ import org.example.sivillage.review.infrastructure.ReviewLikeRepository;
 import org.springframework.stereotype.Service;
 
 
-
 @Service
 @RequiredArgsConstructor
 @Transactional

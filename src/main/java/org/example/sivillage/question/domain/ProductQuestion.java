@@ -14,7 +14,10 @@ public class ProductQuestion extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
+
+    @Column(nullable = false)
+    private String questionTitle;
 
     @Column(nullable = false)
     private String questionContent;
@@ -23,17 +26,29 @@ public class ProductQuestion extends BaseEntity {
     private boolean privateMessage;
 
     @Column(nullable = false)
+    private boolean answerStatus = false;
+
+    @Column(nullable = false)
     private String memberUuid;
 
     @Column(nullable = false)
-    private String productUuid;
+    private String productCode;
+
+    @OneToOne(mappedBy = "productQuestion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ProductQuestionAnswer productQuestionAnswer;
+
 
     @Builder
-    public ProductQuestion(Long Id, String questionContent, boolean privateMessage, String memberUuid, String productUuid) {
-        this.Id = Id;
+    public ProductQuestion(Long id, String questionTitle, String questionContent, boolean privateMessage, boolean answerStatus, String memberUuid, String productCode) {
+        this.id = id;
+        this.questionTitle = questionTitle;
         this.questionContent = questionContent;
         this.privateMessage = privateMessage;
+        this.answerStatus = answerStatus;
         this.memberUuid = memberUuid;
-        this.productUuid = productUuid;
+        this.productCode = productCode;
     }
+
 }
+
+
