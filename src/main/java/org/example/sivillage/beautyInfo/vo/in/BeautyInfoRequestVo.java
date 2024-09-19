@@ -34,7 +34,6 @@ public class BeautyInfoRequestVo {
         return String.join(", ", beautyKeyword);
     }
 
-
     public static BeautyInfoRequestDto toDto (BeautyInfoRequestVo beautyInfoRequestVo) {
         return BeautyInfoRequestDto.builder()
                 .skinType(beautyInfoRequestVo.getSkinType())
