@@ -10,4 +10,6 @@ public interface ProductQuestionAnswerService {
     ProductQuestionAnswerResponseDto getProductQuestionAnswer(Long productQuestionId); //상품 문의 id 로 답변 내용 가져오기
 
     List<ProductQuestionAnswerResponseDto> getVendorProductQuestionAnswer(String memberUuid); // 자신이 작성한 상품 문의 내용 리스트 보기
+
+    void changeProductQuestionAnswer(ProductQuestionAnswerRequestDto productQuestionAnswerRequestDto, Long productQuestionAnswerId);
 }

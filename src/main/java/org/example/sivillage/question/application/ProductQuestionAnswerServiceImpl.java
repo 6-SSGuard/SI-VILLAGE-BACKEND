@@ -38,4 +38,11 @@ public class ProductQuestionAnswerServiceImpl implements ProductQuestionAnswerSe
                .map(ProductQuestionAnswerResponseDto::from).toList();
     }
 
+    public void changeProductQuestionAnswer(ProductQuestionAnswerRequestDto productQuestionAnswerRequestDto, Long productQuestionAnswerId){
+        ProductQuestionAnswer productQuestionAnswer = productQuestionAnswerRepository.findById(productQuestionAnswerId)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.QUESTION_NOT_FOUND));
+        productQuestionAnswerRepository.save(productQuestionAnswerRequestDto.updateToEntity(productQuestionAnswerRequestDto,productQuestionAnswer)); // ��변여부 false 로 변경
+
+    }
+
 }

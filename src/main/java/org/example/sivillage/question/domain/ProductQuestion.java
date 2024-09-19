@@ -49,7 +49,6 @@ public class ProductQuestion extends BaseEntity {
         this.productCode = productCode;
     }
 
-
 }
 
 

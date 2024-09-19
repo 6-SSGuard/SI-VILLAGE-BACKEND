@@ -32,6 +32,15 @@ public class ProductQuestionAnswerRequestDto {
                 .build();
     }
 
+    public ProductQuestionAnswer updateToEntity(ProductQuestionAnswerRequestDto productQuestionAnswerRequestDto, ProductQuestionAnswer productQuestionAnswer) {
+        return ProductQuestionAnswer.builder()
+                .id(productQuestionAnswer.getId())
+                .answerContent(productQuestionAnswerRequestDto.getQuestionAnswerContent())
+                .memberUuid(productQuestionAnswer.getMemberUuid())
+                .productQuestion(productQuestionAnswer.getProductQuestion())
+                .build();
+    }
+
     @Builder
     public ProductQuestionAnswerRequestDto(String questionAnswerContent, String memberUuid) {
         this.questionAnswerContent = questionAnswerContent;
