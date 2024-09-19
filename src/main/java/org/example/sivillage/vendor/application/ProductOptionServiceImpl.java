@@ -1,6 +1,8 @@
 package org.example.sivillage.vendor.application;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.example.sivillage.vendor.domain.ProductOptionList;
 import org.example.sivillage.vendor.dto.in.CreateProductOptionRequestDto;
 import org.example.sivillage.vendor.dto.out.GetProductOptionListResponseDto;
 import org.example.sivillage.vendor.infrastructure.ProductOptionRepository;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProductOptionServiceImpl implements ProductOptionService {
 
     private final ProductOptionRepository productOptionRepository;
@@ -20,9 +23,27 @@ public class ProductOptionServiceImpl implements ProductOptionService {
      * 2. 상품 옵션 등록
      * @param createProductOptionRequestDto 상품 옵션 등록 요청 DTO
      */
-    public void addProductOption(CreateProductOptionRequestDto createProductOptionRequestDto) {
+    public void addProductOptionList(List<CreateProductOptionRequestDto> createProductOptionRequestDto) {
+        // dangerStock 값 확인
+        for (CreateProductOptionRequestDto dto : createProductOptionRequestDto) {
+            if (dto.getDangerStock() < 0) {
+                log.error("dangerStock 값이 0보다 작습니다. dto: {}", dto);
+                throw new IllegalArgumentException("dangerStock 값이 0보다 작습니다.");
+            }
+        }
 
-        productOptionRepository.save(createProductOptionRequestDto.toEntity());
+
+        for (CreateProductOptionRequestDto dto : createProductOptionRequestDto) {
+            if (dto.getDangerStock() < 0) {
+                log.error("dangerStock 값이 0보다 작습니다. dto: {}", dto);
+                throw new IllegalArgumentException("dangerStock 값이 0보다 작습니다.");
+            }
+        }
+        List<ProductOptionList> productOptionList = createProductOptionRequestDto.stream()
+                .map(CreateProductOptionRequestDto::toEntity)
+                .toList();
+
+        productOptionRepository.saveAll(productOptionList);
     }
 
     /**

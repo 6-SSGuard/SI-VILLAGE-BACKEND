@@ -37,7 +37,7 @@ public class CategoryController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "하위 카테고리 리스트 조회", description = "parentCategoryCode =\"\"입력시 최상위 카테고리 리스트 조회")
+    @Operation(summary = "하위 카테고리 리스트 조회", description = "parentCategoryCode =\"top\"입력시 최상위 카테고리 리스트 조회")
     @GetMapping("/sub-categories")
     public BaseResponse<List<GetSubCategoriesResponseVo>> getSubCategories(
             @RequestParam(value = "parentCategoryCode", required = false) String parentCategoryCode) {

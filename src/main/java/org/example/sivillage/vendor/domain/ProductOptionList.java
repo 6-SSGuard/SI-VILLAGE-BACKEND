@@ -28,7 +28,7 @@ public class ProductOptionList {
     @Column(nullable = false)
     private Integer stock;
 
-    private Boolean soldOut = false;
+    private Boolean soldOut;
 
     @Column(nullable = false)
     private Integer dangerStock;

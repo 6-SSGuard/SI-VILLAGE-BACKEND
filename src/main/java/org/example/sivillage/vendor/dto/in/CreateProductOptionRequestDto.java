@@ -18,12 +18,18 @@ public class CreateProductOptionRequestDto {
 
     private Integer stock;
 
+    private Boolean soldOut;
+
+    private Integer dangerStock;
+
     @Builder
-    public CreateProductOptionRequestDto(String productCode, Long sizeId, String volume, Integer stock) {
+    public CreateProductOptionRequestDto(String productCode, Long sizeId, String volume, Integer stock, Boolean soldOut, Integer dangerStock) {
         this.productCode = productCode;
         this.sizeId = sizeId;
         this.volume = volume;
         this.stock = stock;
+        this.soldOut = soldOut;
+        this.dangerStock = dangerStock;
     }
 
     public static CreateProductOptionRequestDto from(CreateProductOptionRequestVo createProductOptionRequestVo) {
@@ -32,6 +38,8 @@ public class CreateProductOptionRequestDto {
                 .sizeId(createProductOptionRequestVo.getSizeId())
                 .volume(createProductOptionRequestVo.getVolume())
                 .stock(createProductOptionRequestVo.getStock())
+                .soldOut(createProductOptionRequestVo.getSoldOut())
+                .dangerStock(createProductOptionRequestVo.getDangerStock())
                 .build();
     }
 
@@ -41,6 +49,8 @@ public class CreateProductOptionRequestDto {
                 .sizeId(sizeId)
                 .volume(volume)
                 .stock(stock)
+                .soldOut(soldOut)
+                .dangerStock(dangerStock)
                 .build();
     }
 }

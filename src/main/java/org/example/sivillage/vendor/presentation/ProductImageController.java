@@ -15,12 +15,13 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/vendor/product/image")
 public class ProductImageController {
 
     private final ProductImageService productImageService;
 
     @Operation(summary = "상품 이미지 리스트 등록")
-    @PostMapping("/image")
+    @PostMapping
     public BaseResponse<Void> addProductImageList(@RequestBody List<CreateProductImageListRequestVo> createProductImageListRequestVo) {
 
         List<CreateProductImageListRequestDto> createProductImageListRequestDtoList =
