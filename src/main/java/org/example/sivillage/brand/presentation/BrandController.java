@@ -55,7 +55,7 @@ public class BrandController {
      * @param authUserDetails 인증된 사용자 정보
      * return GetBrandIdListResponseVo
      */
-    @Operation(summary = "브랜드 id 리스트 조회")
+    @Operation(summary = "브랜드 id 리스트 조회", tags = {"브랜드 관리 API"})
     @GetMapping("/")
     public BaseResponse<List<IdListResponseVo<Long>>> getBrandIdList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
 
@@ -73,7 +73,7 @@ public class BrandController {
      * @param brandId 브랜드 ID
      * return GetBrandNameResponseVo
      */
-    @Operation(summary = "브랜드 정보 조회")
+    @Operation(summary = "브랜드 정보 조회", tags = {"브랜드 관리 API"})
     @GetMapping("/{brandId}")
     public BaseResponse<GetBrandNameResponseVo> getBrandName(@PathVariable Long brandId) {
         return new BaseResponse<>(

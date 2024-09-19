@@ -9,7 +9,6 @@ import org.example.sivillage.product.dto.in.CreateProductFromCsvRequestDto;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-@AllArgsConstructor
 public class Product extends BaseEntity {
 
     @Id
@@ -35,6 +34,27 @@ public class Product extends BaseEntity {
     @Column(nullable = false)
     private Long brandId;
 
+    @Builder
+    public Product(Long id, String productCode, String productName, Integer price, Long colorId, String detailContent, Long brandId) {
+        this.id = id;
+        this.productCode = productCode;
+        this.productName = productName;
+        this.price = price;
+        this.colorId = colorId;
+        this.detailContent = detailContent;
+        this.brandId = brandId;
+    }
+
+    @Builder
+    public Product(String productCode, String productName, Integer price, Long colorId, String detailContent, Long brandId) {
+        this.productCode = productCode;
+        this.productName = productName;
+        this.price = price;
+        this.colorId = colorId;
+        this.detailContent = detailContent;
+        this.brandId = brandId;
+    }
+
     public static Product createProductFromCsv(CreateProductFromCsvRequestDto request) {
         return Product.builder()
                 .productName(request.getProductName())
@@ -44,7 +64,4 @@ public class Product extends BaseEntity {
                 .brandId(request.getBrandId())
                 .build();
     }
-
-
-
 }

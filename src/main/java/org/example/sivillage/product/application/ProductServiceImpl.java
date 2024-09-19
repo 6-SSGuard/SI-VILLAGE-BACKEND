@@ -7,6 +7,7 @@ import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.product.domain.Product;
+import org.example.sivillage.product.dto.in.ChangeProductRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.CreateProductResponseDto;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
@@ -85,6 +86,20 @@ public class ProductServiceImpl implements ProductService {
         return GetProductDetailsResponseDto.of(product, brand);
     }
 
+    @Override
+    public void changeProduct(ChangeProductRequestDto changeProductRequestDto) {
+        Long productId = productRepository.findByProductCode(changeProductRequestDto.getProductCode())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND)).getId();
+
+        Brand brand = brandRepository.findById(changeProductRequestDto.getBrandId())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND));
+
+        Product product = productRepository.save(changeProductRequestDto.changeProduct(productId));
+
+        brandProductRepository.save(changeProductRequestDto.changeBrandProduct(
+                brand, product.getProductCode()));
+
+    }
 
 
 //    public GetCategoryPathResponseDto getCategoryPath(String productUuid) {
