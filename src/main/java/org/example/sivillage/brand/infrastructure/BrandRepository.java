@@ -16,4 +16,8 @@ public interface BrandRepository extends JpaRepository<Brand, Long> {
     List<Long> findAllBrandIdsByOrderByEngNameAsc();
 
     Optional<Brand> findById(Long id);
+
+    boolean existsByBrandEngName(String brandEngName);
+
+    boolean existsByBrandKorName(String brandKorName);
 }
