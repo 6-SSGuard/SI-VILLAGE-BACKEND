@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.sivillage.global.common.BaseEntity;
 import org.example.sivillage.product.dto.in.CreateProductFromCsvRequestDto;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
+@DynamicUpdate
 public class Product extends BaseEntity {
 
     @Id
