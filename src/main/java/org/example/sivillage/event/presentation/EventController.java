@@ -7,11 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.event.application.EventImageServiceImpl;
+import org.example.sivillage.event.application.EventProductServiceImpl;
 import org.example.sivillage.event.application.EventServiceImpl;
 import org.example.sivillage.event.dto.in.EventImageRequestDto;
 import org.example.sivillage.event.dto.out.EventImageResponseDto;
 import org.example.sivillage.event.dto.out.EventResponseDto;
 import org.example.sivillage.event.vo.in.EventImageRequestVo;
+import org.example.sivillage.event.vo.in.EventProductRequestVo;
 import org.example.sivillage.event.vo.in.EventRequestVo;
 import org.example.sivillage.event.vo.out.EventImageResponseVo;
 import org.example.sivillage.event.vo.out.EventResponseVo;
@@ -32,6 +34,7 @@ public class EventController {
 
     private final EventServiceImpl eventService;
     private final EventImageServiceImpl eventImageService;
+    private final EventProductServiceImpl eventProductService;
 
     @Operation(summary = "카테고리별 이벤트id 조회", description = "카테고리별 이벤트 id 리스트를 반환")
     @GetMapping("/category/{categoryCode}")
@@ -86,8 +89,8 @@ public class EventController {
     @PostMapping("/{eventId}/images")
     public BaseResponse<List<String>> addEventImages(@PathVariable("eventId") Long eventId, @Valid @RequestBody List<EventImageRequestVo> eventImageRequestVo) {
         List<EventImageRequestDto> eventImageRequestDtoList = eventImageRequestVo.stream()
-                        .map(EventImageRequestVo::toDto)
-                                .toList();
+                .map(EventImageRequestVo::toDto)
+                .toList();
 
         eventImageService.addEventImage(eventImageRequestDtoList, eventId);
         return new BaseResponse<>();
@@ -99,7 +102,7 @@ public class EventController {
         List<EventImageResponseVo> eventImageResponseVoList = eventImageService.getEventImage(eventId)
                 .stream()
                 .map(EventImageResponseDto::toResponseVo)
-                        .toList();
+                .toList();
         return new BaseResponse<>(eventImageResponseVoList);
     }
 
@@ -110,6 +113,7 @@ public class EventController {
         return new BaseResponse<>(eventImageResponseDto.toResponseVo());
 
     }
+
     @Operation(summary = "이벤트 이미지 삭제", description = "이벤트 이미지를 삭제합니다.")
     @DeleteMapping("/{eventImageId}/images")
     public BaseResponse<Void> removeEventImage(@PathVariable("eventImageId") Long eventImageId) {
@@ -117,4 +121,28 @@ public class EventController {
         return new BaseResponse<>();
     }
 
+    // 상품 이벤트 등록 관련 API
+
+    @Operation(summary = "이벤트 해당 상품코드 조회", description = "이벤트에 해당하는 상품코드를 조회합니다.")
+    @GetMapping("/{eventId}/products")
+    public BaseResponse<List<IdListResponseVo<String>>> getEventProductCodes(@PathVariable("eventId") Long eventId) {
+        List<IdListResponseVo<String>> idListResponseVoList = eventProductService.getEventProductCode(eventId)
+                .stream()
+                .map(IdListResponseDto::toVo)
+                .toList();
+        return new BaseResponse<>(idListResponseVoList);
+    }
+
+    @Operation(summary = "상품 이벤트 등록", description = "이벤트에 상품을 등록합니다.")
+    @PostMapping("/{eventId}/products")
+    public BaseResponse<Void> addEventProduct(@PathVariable("eventId") Long eventId, EventProductRequestVo eventProductRequestVo) {
+        eventProductService.addEventProduct(eventId, eventProductRequestVo.toDto(eventProductRequestVo));
+        return new BaseResponse<>();
+    }
+//
+//    @Operation(summary = "상품 이벤트 삭제", description = "이벤트에서 상품을 삭제합니다.")
+//    @DeleteMapping("/{eventId}/products/{productCode}")
+//    public BaseResponse<Void> removeEventProduct(@PathVariable("eventId") Long eventId, @PathVariable("productCode") String productCode) {
+//
+//    }
 }
