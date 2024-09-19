@@ -8,11 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.brand.application.BrandService;
 import org.example.sivillage.brand.dto.in.AddBrandRequestDto;
+import org.example.sivillage.brand.dto.out.GetBrandsListResponseDto;
 import org.example.sivillage.brand.vo.in.AddBrandRequestVo;
 import org.example.sivillage.brand.vo.out.GetBrandNameResponseVo;
+import org.example.sivillage.brand.vo.out.GetBrandsListResponseVo;
 import org.example.sivillage.global.common.response.BaseResponse;
-import org.example.sivillage.global.common.response.dto.IdListResponseDto;
-import org.example.sivillage.global.common.response.vo.IdListResponseVo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,19 +51,19 @@ public class BrandController {
     }
 
     /**
-     * 2. getBrandIdList 브랜드 id 리스트 조회
+     * 2. getBrandIdList 브랜드 리스트 조회
      * @param authUserDetails 인증된 사용자 정보
      * return GetBrandIdListResponseVo
      */
-    @Operation(summary = "브랜드 id 리스트 조회", tags = {"브랜드 관리 API"})
+    @Operation(summary = "브랜드 리스트 조회")
     @GetMapping("/")
-    public BaseResponse<List<IdListResponseVo<Long>>> getBrandIdList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+    public BaseResponse<List<GetBrandsListResponseVo>> getBrandIdList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
 
-        List<IdListResponseDto<Long>> idListResponseDto = brandService.getBrandIdList(authUserDetails.getMemberUuid());
+        List<GetBrandsListResponseDto> getBrandsListResponseDtoList = brandService.getBrandList(authUserDetails.getMemberUuid());
 
         return new BaseResponse<>(
-                idListResponseDto.stream()
-                        .map(IdListResponseDto::toVo)
+                getBrandsListResponseDtoList.stream()
+                        .map(GetBrandsListResponseDto::toVo)
                         .toList()
         );
     }
@@ -73,7 +73,7 @@ public class BrandController {
      * @param brandId 브랜드 ID
      * return GetBrandNameResponseVo
      */
-    @Operation(summary = "브랜드 정보 조회", tags = {"브랜드 관리 API"})
+    @Operation(summary = "브랜드 정보 조회")
     @GetMapping("/{brandId}")
     public BaseResponse<GetBrandNameResponseVo> getBrandName(@PathVariable Long brandId) {
         return new BaseResponse<>(
