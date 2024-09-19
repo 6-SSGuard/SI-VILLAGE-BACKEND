@@ -19,41 +19,30 @@ public class ProductByVendor extends BaseEntity {
     private String productCode;
 
     @Column(nullable = false)
-    private String productName;
-
-    @Column(nullable = false)
     private String vendorName;
 
-    private Boolean mainView = false;
-    private Boolean newProduct = true;
-    private Boolean display = false;
+    private Boolean mainView;
+    private Boolean newProduct;
+    private Boolean display;
     private Integer maxOrderCount;
 
     @Column(nullable = false)
     private Integer minOrderCount = 1;
 
     private Double discountRate;
-    private Double purchasePrice;
-    private Double sellingPrice;
-    private Double productLikeRate = 0.0;
 
     @Builder
     public ProductByVendor(
             String productCode,
-            String productName,
             String vendorName,
             Boolean mainView,
             Boolean newProduct,
             Boolean display,
             Integer maxOrderCount,
             Integer minOrderCount,
-            Double discountRate,
-            Double purchasePrice,
-            Double sellingPrice,
-            Double productLikeRate
+            Double discountRate
     ) {
         this.productCode = productCode;
-        this.productName = productName;
         this.vendorName = vendorName;
         this.mainView = mainView;
         this.newProduct = newProduct;
@@ -61,8 +50,5 @@ public class ProductByVendor extends BaseEntity {
         this.maxOrderCount = maxOrderCount;
         this.minOrderCount = minOrderCount;
         this.discountRate = discountRate;
-        this.purchasePrice = purchasePrice;
-        this.sellingPrice = sellingPrice;
-        this.productLikeRate = productLikeRate;
     }
 }
