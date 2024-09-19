@@ -24,4 +24,10 @@ public class Brand {
 
     @Column(nullable = false, unique = true)
     private String brandKorName;
+
+    @Column(nullable = false)
+    private String brandIndexLetter;
+
+    @Column(nullable = false)
+    private String brandIndexLetterKor;
 }
