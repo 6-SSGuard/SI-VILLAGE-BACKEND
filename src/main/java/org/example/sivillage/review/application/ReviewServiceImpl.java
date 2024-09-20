@@ -80,7 +80,7 @@ public class ReviewServiceImpl implements ReviewService {
     public void removeReview(Long reviewId) {
         Review review = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.REVIEW_NOT_FOUND));
-        reviewRepository.delete(review);
+        reviewRepository.deleteById(reviewId);
     }
 }
 
