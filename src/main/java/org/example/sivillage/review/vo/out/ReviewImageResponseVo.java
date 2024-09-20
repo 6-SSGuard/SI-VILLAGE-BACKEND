@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReviewImageResponseVo {
+public class    ReviewImageResponseVo {
 
     private Long reviewImageId;
     private String reviewImageUrl;

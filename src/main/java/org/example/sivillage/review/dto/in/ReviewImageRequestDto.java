@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 public class ReviewImageRequestDto {
 
-    private List<String> reviewImageUrl;
+    private String reviewImageUrl;
 
     public static ReviewImage toEntity(String reviewImageUrl, Long reviewId) {
         return ReviewImage.builder()
@@ -19,8 +19,9 @@ public class ReviewImageRequestDto {
     }
 
     @Builder
-    public ReviewImageRequestDto(List<String> reviewImageUrl) {
+    public ReviewImageRequestDto(String reviewImageUrl) {
         this.reviewImageUrl = reviewImageUrl;
+
     }
 
 }

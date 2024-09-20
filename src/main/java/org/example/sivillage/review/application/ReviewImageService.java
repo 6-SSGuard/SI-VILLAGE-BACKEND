@@ -6,7 +6,7 @@ import org.example.sivillage.review.dto.out.ReviewImageResponseDto;
 import java.util.List;
 
 public interface ReviewImageService {
-    void addReviewImage(ReviewImageRequestDto reviewImageRequestDto, Long reviewId);
+    public void addReviewImage(List<ReviewImageRequestDto> reviewImageRequestDto, Long reviewId);
     List<ReviewImageResponseDto> getReviewImage(Long reviewId);
     void removeReviewImage(Long reviewImageId);
 }

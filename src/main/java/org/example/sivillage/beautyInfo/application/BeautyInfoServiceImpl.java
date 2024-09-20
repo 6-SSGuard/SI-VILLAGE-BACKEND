@@ -3,9 +3,9 @@ package org.example.sivillage.beautyInfo.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.example.sivillage.beautyInfo.domain.BeautyInfo;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
-import org.example.sivillage.beautyInfo.domain.BeautyInfo;
 import org.example.sivillage.beautyInfo.dto.in.BeautyInfoRequestDto;
 import org.example.sivillage.beautyInfo.dto.out.BeautyInfoResponseDto;
 import org.example.sivillage.beautyInfo.infrastructure.BeautyInfoRepository;

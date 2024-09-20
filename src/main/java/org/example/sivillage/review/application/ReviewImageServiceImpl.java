@@ -18,11 +18,11 @@ public class ReviewImageServiceImpl implements ReviewImageService{
     private final ReviewImageRepository reviewImageRepository;
 
     // 등록
-    public void addReviewImage(ReviewImageRequestDto reviewImageRequestDto, Long reviewId) {
-        for (String imageUrl : reviewImageRequestDto.getReviewImageUrl()) {
-            ReviewImage reviewImage = ReviewImageRequestDto.toEntity(imageUrl, reviewId);
-            reviewImageRepository.save(reviewImage);
-        }
+    public void addReviewImage(List<ReviewImageRequestDto> reviewImageRequestDto, Long reviewId) {
+        List<ReviewImage> reviewImages = reviewImageRequestDto.stream()
+                .map(dto -> ReviewImageRequestDto.toEntity(dto.getReviewImageUrl(), reviewId))
+                .toList();
+        reviewImageRepository.saveAll(reviewImages);
     }
 
     // 조회
