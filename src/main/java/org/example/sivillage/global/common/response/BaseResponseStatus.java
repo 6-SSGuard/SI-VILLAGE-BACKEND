@@ -22,6 +22,7 @@ public enum BaseResponseStatus {
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
      */
+    NOT_FOUND_CART(HttpStatus.NOT_FOUND, false, "장바구니 상품을 찾을 수 없습니다."),
     EVENT_IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 이벤트 이미지를 찾을 수 없습니다."),
     EVENT_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 이벤트를 찾을 수 없습니다."),
     QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND,false,"해당하는 상품문의를 찾을 수 없습니다."),
@@ -32,7 +33,11 @@ public enum BaseResponseStatus {
     PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 상품 정보를 찾을 수 없습니다."),
     PRODUCT_OPTION_NOT_FOUND(HttpStatus.NOT_FOUND, false, "제품의 옵션 정보를 찾을 수 없습니다."),
     BRAND_LIKE_NOT_FOUND(HttpStatus.NOT_FOUND,false, "해당하는 브랜드 좋아요 정보를 찾을 수 없습니다."),
-    CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND,false, "해당하는 카테고리 정보를 찾을 수 없습니다."),
+    TOP_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND,false, "해당하는 top 카테고리 정보를 찾을 수 없습니다."),
+    MIDDLE_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND,false, "해당하는 middle 카테고리 정보를 찾을 수 없습니다."),
+    BOTTOM_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND,false, "해당하는 bottom 카테고리 정보를 찾을 수 없습니다."),
+    SUB_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND,false, "해당하는 sub 카테고리 정보를 찾을 수 없습니다."),
+    CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND,false, "카테고리 정보를 찾을 수 없습니다."),
     PRODUCT_IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 상품 썸네일을 찾을 수 없습니다."),
     NOT_FOUND_BRAND_LIKE(HttpStatus.NOT_FOUND, false, "해당하는 브랜드 좋아요 정보를 찾을 수 없습니다."),
     NOT_FOUND_COLOR(HttpStatus.NOT_FOUND, false, "해당하는 색상 정보를 찾을 수 없습니다."),
@@ -73,6 +78,7 @@ public enum BaseResponseStatus {
     UNAUTHORIZED_TASK(HttpStatus.UNAUTHORIZED, false,  "허용되지 않은 권한입니다."),
 
     // 중복 요청 관련
+    DUPLICATE_CART(HttpStatus.CONFLICT,false,"이미 쇼핑백에 담겨 있는 상품입니다. 쇼핑백 수량을 추가 하시겠습니까?"),
     DUPLICATE_PRODUCT(HttpStatus.CONFLICT, false,  "이미 존재하는 상품명입니다."),
     DuPLICATE_ADDRESS(HttpStatus.CONFLICT, false, "이미 배송지가 등록되었습니다."),
     DUPLICATE_BRAND_NAME(HttpStatus.CONFLICT, false,  "이미 존재하는 브랜드명입니다."),

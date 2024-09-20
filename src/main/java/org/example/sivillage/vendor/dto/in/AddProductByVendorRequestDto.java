@@ -65,4 +65,18 @@ public class AddProductByVendorRequestDto {
                 .discountRate(addProductByVendorVo.getDiscountRate())
                 .build();
     }
+
+    public ProductByVendor updateEntity(Long id) {
+        return ProductByVendor.builder()
+                .id(id)
+                .productCode(productCode)
+                .vendorName(vendorName)
+                .mainView(mainView)
+                .newProduct(newProduct)
+                .display(display)
+                .maxOrderCount(maxOrderCount)
+                .minOrderCount(minOrderCount)
+                .discountRate(discountRate)
+                .build();
+    }
 }

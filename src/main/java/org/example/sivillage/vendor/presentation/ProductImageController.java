@@ -35,6 +35,19 @@ public class ProductImageController {
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "상품 이미지 리스트 수정")
+    @PutMapping
+    public BaseResponse<Void> updateProductImageList(@RequestBody List<CreateProductImageListRequestVo> createProductImageListRequestVo) {
+
+        List<CreateProductImageListRequestDto> createProductImageListRequestDtoList =
+                createProductImageListRequestVo.stream()
+                        .map(CreateProductImageListRequestDto::from)
+                        .toList();
+
+        productImageService.updateProductImageList(createProductImageListRequestDtoList);
+        return new BaseResponse<>();
+    }
+
     @Operation(summary = "상품 썸네일 URL 조회", description = """
         상품 썸네일 URL을 조회하는 API
         """)

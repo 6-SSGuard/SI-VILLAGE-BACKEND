@@ -123,7 +123,6 @@ public class CategoryServiceImpl implements CategoryService {
         return new AddCategoryRequestDto(categoryName, parentCategoryCode);
     }
 
-
     private Category findCategoryByCategoryCode(String categoryCode) {
         return categoryRepository.findByCategoryCode(categoryCode)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));

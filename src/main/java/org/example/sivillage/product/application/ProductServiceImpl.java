@@ -2,10 +2,14 @@ package org.example.sivillage.product.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
+import org.example.sivillage.admin.infrastructure.CategoryRepository;
 import org.example.sivillage.brand.domain.Brand;
 import org.example.sivillage.brand.infrastructure.BrandRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
+import org.example.sivillage.product.domain.BrandProduct;
 import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.dto.in.ChangeProductRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
@@ -14,21 +18,37 @@ import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.example.sivillage.product.infrastructure.BrandProductRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
+import org.example.sivillage.vendor.domain.ProductByVendor;
+import org.example.sivillage.vendor.domain.ProductCategoryList;
+import org.example.sivillage.vendor.domain.ProductImage;
+import org.example.sivillage.vendor.domain.ProductOptionList;
+import org.example.sivillage.vendor.infrastructure.ProductByVendorRepository;
+import org.example.sivillage.vendor.infrastructure.ProductCategoryListRepository;
+import org.example.sivillage.vendor.infrastructure.ProductImageRepository;
+import org.example.sivillage.vendor.infrastructure.ProductOptionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Random;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 @Transactional
 public class ProductServiceImpl implements ProductService {
-    private static final Random RANDOM = new Random();
 
     private final ProductRepository productRepository;
     private final BrandRepository brandRepository;
     private final BrandProductRepository brandProductRepository;
+    private final CategoryRepository categoryRepository;
+    private final ProductCategoryListRepository productCategoryListRepository;
+    private final ProductImageRepository productImageRepository;
+    private final ProductOptionRepository productOptionListRepository;
+    private final ProductByVendorRepository productByVendorRepository;
 
     /**
      * 1. 상품 등록
@@ -101,272 +121,136 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Override
+    public void addProductByCsv(MultipartFile file) {
 
-//    public GetCategoryPathResponseDto getCategoryPath(String productUuid) {
-//        Product product = productRepository.findByProductCode(productUuid)
-//                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
-//
-//        Category category = categoryRepository.findByCategoryCode(product.getCategoryCode())
-//                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
-//
-//        ProductCategoryList productCategoryList = productCategoryListRepository
-//
-//        List<String> categoryPath = new ArrayList<>();
-//
-//        while (category != null) {
-//            categoryPath.add(category.getCategoryName());
-//            category = category.getParent(); // 부모 카테고리로 이동
-//        }
-//
-//        // 상위 카테고리부터 하위 카테고리 순으로 정렬
-//        Collections.reverse(categoryPath);
-//
-//        return new GetCategoryPathResponseDto(String.join("/", categoryPath));
-//    }
+        if (file.isEmpty() || !file.getOriginalFilename().endsWith(".csv")) {
+            throw new BaseException(BaseResponseStatus.INVALID_FILE_FORMAT);
+        }
 
-//    public void addProductsFromCsv(MultipartFile file) {
-//        if (file.isEmpty() || !file.getOriginalFilename().endsWith(".csv")) {
-//            throw new BaseException(BaseResponseStatus.INVALID_FILE_FORMAT);
-//        }
-//
-//        try (BufferedReader reader = new BufferedReader(
-//                new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
-//
-//            Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(reader);
-//            records.forEach(this::parseRecordToProductRequest);
-//
-//        } catch (IOException e) {
-//            log.error("파일을 읽는 중 오류 발생: {}", e.getMessage(), e);
-//            throw new BaseException(BaseResponseStatus.FILE_PARSE_FAILED);
-//        } catch (Exception e) {
-//            log.error("CSV 파싱 중 오류 발생: {}", e.getMessage(), e);
-//            throw new BaseException(BaseResponseStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-//
-////    public String getSecondLevelCategoryName(String productUuid) {
-////        Product product = productRepository.findByProductUuid(productUuid)
-////                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
-////
-////        // 해당 물품의 카테고리를 가져옴
-////        Category category = product.getCategoryCode();
-////
-////        // depth가 1인 카테고리 탐색
-////        return findSecondLevelCategory(category)
-////                .map(Category::getCategoryName)
-////                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND));
-////    }
-//
-//    private String getProductThumbnailUrl(String productCode) {
-//        return productImageRepository.findByProductCode(productCode)
-//                .stream()
-//                .map(ProductImage::getProductImageUrl)
-//                .findFirst()
-//                .orElse(null);
-//    }
-//
-//    private Optional<Category> findSecondLevelCategory(Category category) {
-//        // 최상위 카테고리를 찾을 때까지 부모를 탐색
-//        while (category != null && category.getDepth() != 1) {
-//            category = category.getParent();
-//        }
-//        return Optional.ofNullable(category);
-//    }
-//
-//    private void parseRecordToProductRequest(CSVRecord record) {
-//        try {
-//            // 카테고리 이름 추출
-//            String categoryName = extractCategoryName(record);
-//            Category category = findOrCreateCategory(categoryName);
-//
-//            // 브랜드 ID 처리
-//            Long brandId = findOrCreateBrand(record.get("brand"));
-//
-//            // 상품 코드 생성
-//            String productCode = UuidGenerator.createProductCode();
-//
-//            // 상품 정보 처리
-//            handleProduct(record, category, brandId, productCode);
-//
-//            // 상품 옵션 처리 (의류/신발 등)
-//            handleProductOptions(record, productCode);
-//
-//        } catch (Exception e) {
-//            log.error("레코드 처리 중 오류 발생: {}", e.getMessage(), e);
-//            throw new BaseException(BaseResponseStatus.FILE_PARSE_FAILED);
-//        }
-//    }
-//
-//
-//
-//    // 카테고리 이름 추출
-//    private String extractCategoryName(CSVRecord record) {
-//        String topCategoryName = record.get("top_category_name");
-//        String middleCategoryName = record.get("middle_category_name");
-//        String bottomCategoryName = record.get("bottom_category_name");
-//        String subCategoryName = record.get("sub_category_name");
-//
-//        return (subCategoryName == null || subCategoryName.isEmpty()) ? bottomCategoryName : subCategoryName;
-//    }
-//
-//    // 카테고리 조회 및 없을 시 생성
-//    private Category findOrCreateCategory(String categoryName) {
-//        return categoryCache.computeIfAbsent(categoryName, name -> categoryRepository.findByCategoryName(name)
-//                .orElseThrow(() -> new BaseException(BaseResponseStatus.CATEGORY_NOT_FOUND)));
-//    }
-//
-//    // 브랜드 조회 및 없을 시 생성
-//    private Long findOrCreateBrand(String brandEngName) {
-//        return brandCache.computeIfAbsent(brandEngName, name -> {
-//            Brand brand = brandRepository.findByBrandEngName(name)
-//                    .orElseGet(() -> brandRepository.save(
-//                            Brand.builder()
-//                                    .brandEngName(name)
-//                                    .brandKorName("테스트")
-//                                    .build()
-//                    ));
-//            return brand.getBrandId();
-//        });
-//    }
-//
-//    // 상품 정보 처리
-//    private void handleProduct(CSVRecord record, Category category, Long brandId, String productCode) {
-//        // 가격 파싱
-//        String priceString = record.get("price");
-//        Integer price = parsePrice(priceString);
-//
-//        // 상세 설명 및 이미지 처리
-//        String detailContent = record.get("image_src");
-//        List<String> productImageUrls = Collections.singletonList(detailContent);
-//
-//        // BrandProduct 저장
-//        BrandProduct brandProduct = BrandProduct.builder()
-//                .brandId(brandId)
-//                .productCode(productCode)
-//                .build();
-//        brandProductRepository.save(brandProduct);
-//
-//        // CategoryProduct 저장
-//        CategoryProduct categoryProduct = CategoryProduct.builder()
-//                .categoryCode(category.getCategoryCode())
-//                .productCode(productCode)
-//                .build();
-//        categoryProductRepository.save(categoryProduct);
-//
-//        // ProductImage 저장
-//        productImageUrls.forEach(url -> {
-//            ProductImage productImage = ProductImage.builder()
-//                    .productCode(productCode)
-//                    .productImageUrl(url)
-//                    .build();
-//            productImageRepository.save(productImage);
-//        });
-//
-//        // Product 저장
-//        CreateProductFromCsvRequestDto createProductDto = CreateProductFromCsvRequestDto.builder()
-//                .productName(record.get("name"))
-//                .productCode(productCode)
-//                .detailContent(detailContent)
-//                .price(price)
-//                .build();
-//        Product product = Product.createProductFromCsv(createProductDto);
-//        productRepository.save(product);
-//    }
-//
-//    // 상품 가격 파싱
-//    private Integer parsePrice(String priceString) {
-//        if (priceString == null || priceString.trim().isEmpty()) {
-//            log.error("가격 필드가 비어있습니다.");
-//            return 0;
-//        }
-//
-//        try {
-//            return Integer.parseInt(priceString.replace(",", ""));
-//        } catch (NumberFormatException e) {
-//            log.error("가격 필드가 잘못되었습니다: {}", priceString);
-//            return 0;
-//        }
-//    }
-//
-//
-//    // 의류 및 신발 옵션 처리
-//    private void handleProductOptions(CSVRecord record, String productCode) {
-//        String topCategoryName = record.get("top_category_name");
-//        String middleCategoryName = record.get("middle_category_name");
-//        String bottomCategoryName = record.get("bottom_category_name");
-//
-//        boolean isClothing = isClothingCategory(topCategoryName, middleCategoryName, bottomCategoryName);
-//        boolean isShoes = isShoesCategory(topCategoryName, middleCategoryName);
-//
-//        Color randomColor = getRandomColor();
-//        String volume = record.get("volume");
-//
-//        if (isClothing) {
-//            Size size = getRandomSize();
-//            ProductOptionList option = ProductOptionList.builder()
-//                    .productCode(productCode)
-//                    .color(randomColor)
-//                    .stock(getRandomStock())
-//                    .size(size)
-//                    .volume(volume)
-//                    .build();
-//            productOptionRepository.save(option);
-//        } else if (isShoes) {
-//            ShoeSize shoeSize = getRandomShoeSize();
-//            ProductOptionList option = ProductOptionList.builder()
-//                    .productCode(productCode)
-//                    .color(randomColor)
-//                    .stock(getRandomStock())
-//                    .shoeSize(shoeSize)
-//                    .volume(volume)
-//                    .build();
-//            productOptionRepository.save(option);
-//        }
-//    }
-//
-//    // 랜덤 색상 및 사이즈 반환
-//    private Color getRandomColor() {
-//        Color[] colors = Color.values();
-//        return colors[RANDOM.nextInt(colors.length)];
-//    }
-//    private Size getRandomSize() {
-//        Size[] sizes = Size.values();
-//        return sizes[RANDOM.nextInt(sizes.length)];
-//    }
-//    private ShoeSize getRandomShoeSize() {
-//        ShoeSize[] shoeSizes = ShoeSize.values();
-//        return shoeSizes[RANDOM.nextInt(shoeSizes.length)];
-//    }
-//
-//    private List<Size> getRandomSizes() {
-//        Size[] sizes = Size.values();
-//        return Stream.of(sizes)
-//                .filter(size -> RANDOM.nextBoolean())
-//                .collect(Collectors.toList());
-//    }
-//
-//    private List<ShoeSize> getRandomShoeSizes() {
-//        ShoeSize[] sizes = ShoeSize.values();
-//        return Stream.of(sizes)
-//                .filter(size -> RANDOM.nextBoolean())
-//                .collect(Collectors.toList());
-//    }
-//
-//    private int getRandomStock() {
-//        return RANDOM.nextInt(100) + 1; // 랜덤 재고 수량
-//    }
-//
-//    private boolean isClothingCategory(String topCategoryName, String middleCategoryName, String bottomCategoryName) {
-//        return (topCategoryName.equals("남성의류") || topCategoryName.equals("여성의류")) ||
-//                (middleCategoryName.equals("여성 골프웨어") || middleCategoryName.equals("남성 골프웨어")) ||
-//                List.of("남성의류", "여성의류", "한복/파티복/코스튬", "상/하의 세트", "니트/가디건/조끼", "티셔츠",
-//                        "우주복/바디슈트/점프슈트", "아우터", "맨투맨/후디", "데님팬츠", "팬츠", "셔츠",
-//                        "스포츠웨어/수영복", "원피스/스커트/점프슈트", "블라우스/셔츠",
-//                        "실내복/잠옷/언더웨어", "원피스/스커트").contains(bottomCategoryName);
-//    }
-//
-//    private boolean isShoesCategory(String topCategoryName, String bottomCategoryName) {
-//        return topCategoryName.equals("슈즈") &&
-//                List.of("러닝화", "신발", "거실화", "골프화").contains(bottomCategoryName);
-//    }
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
+
+            Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(reader);
+            records.forEach(this::parseProductCsvRecord);
+
+        } catch (IOException e) {
+            log.error("파일을 읽는 중 오류 발생: {}", e.getMessage(), e);
+            throw new BaseException(BaseResponseStatus.FILE_PARSE_FAILED);
+        } catch (Exception e) {
+            log.error("CSV 파싱 중 오류 발생: {}", e.getMessage(), e);
+            throw new BaseException(BaseResponseStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    private void parseProductCsvRecord(CSVRecord record) {
+        try {
+            String productName = record.get("productName");
+            Integer price = Integer.parseInt(record.get("price"));
+            Long colorId = Long.parseLong(record.get("colorId"));
+            String productCode = record.get("productCode");
+            String detailContent = record.get("detailContent");
+
+            String topCategoryCode = categoryRepository.findFirstByCategoryNameOrderByIdAsc(record.get("topCategoryName"))
+                    .orElseThrow(() -> new BaseException(BaseResponseStatus.TOP_CATEGORY_NOT_FOUND)).getCategoryCode();
+
+
+            String middleCategoryCode = categoryRepository.findFirstByCategoryNameOrderByIdAsc(record.get("middleCategoryName"))
+                        .orElseThrow(() -> new BaseException(BaseResponseStatus.MIDDLE_CATEGORY_NOT_FOUND)).getCategoryCode();
+
+            String bottomCategoryCode = categoryRepository.findFirstByCategoryNameOrderByIdAsc(record.get("bottomCategoryName"))
+                    .orElseThrow(() -> new BaseException(BaseResponseStatus.BOTTOM_CATEGORY_NOT_FOUND)).getCategoryCode();
+
+            String subCategoryCode = "";
+            if (!record.get("subCategoryName").equals("N/A")) {
+                subCategoryCode = categoryRepository.findFirstByCategoryNameOrderByIdAsc(record.get("subCategoryName"))
+                        .orElseThrow(() -> new BaseException(BaseResponseStatus.SUB_CATEGORY_NOT_FOUND)).getCategoryCode();
+            }
+
+            String imageUrl = record.get("imageUrl");
+            String brandName = record.get("brandName");
+            String volume = record.get("volume");
+
+            boolean newProduct = false;
+            if (!record.get("newProduct").equals("N/A")) {
+                newProduct = true;
+            }
+
+            double discountRate = 0.0;
+            if (!record.get("discountRate").equals("N/A")) {
+                discountRate = Double.parseDouble(record.get("discountRate"));
+            }
+
+
+            // 브랜드 ID 처리
+            Long brandId = brandRepository.findByBrandEngName(brandName)
+                    .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND))
+                    .getId();
+
+            Product product = Product.builder()
+                    .productName(productName)
+                    .price(price)
+                    .colorId(colorId)
+                    .productCode(productCode)
+                    .detailContent(detailContent)
+                    .brandId(brandId)
+                    .build();
+
+            productRepository.save(product);
+
+            BrandProduct brandProduct = BrandProduct.builder()
+                    .brandId(brandId)
+                    .productCode(productCode)
+                    .build();
+
+            brandProductRepository.save(brandProduct);
+
+            ProductCategoryList productCategoryList = ProductCategoryList.builder()
+                    .productCode(productCode)
+                    .topCategoryCode(topCategoryCode)
+                    .middleCategoryCode(middleCategoryCode)
+                    .bottomCategoryCode(bottomCategoryCode)
+                    .subCategoryCode(subCategoryCode)
+                    .build();
+
+            productCategoryListRepository.save(productCategoryList);
+
+            ProductImage productImage = ProductImage.builder()
+                    .productCode(productCode)
+                    .productImageUrl(imageUrl)
+                    .thumbnail(true)
+                    .build();
+
+            productImageRepository.save(productImage);
+
+            ProductOptionList productOptionList = ProductOptionList.builder()
+                    .productCode(productCode)
+                    .volume(volume)
+                    .stock(100)
+                    .dangerStock(10)
+                    .soldOut(false)
+                    .build();
+
+            productOptionListRepository.save(productOptionList);
+
+            ProductByVendor productByVendor = ProductByVendor.builder()
+                    .productCode(productCode)
+                    .vendorName("민지훈")
+                    .mainView(false)
+                    .newProduct(newProduct)
+                    .display(true)
+                    .maxOrderCount(10)
+                    .minOrderCount(1)
+                    .discountRate(discountRate)
+                    .build();
+
+            productByVendorRepository.save(productByVendor);
+
+        } catch (Exception e) {
+            log.error("레코드 처리 중 오류 발생: {}", e.getMessage(), e);
+            log.error("레코드 처리 중 오류 발생, 문제의 레코드: {}", record.toString(), e);
+            throw new BaseException(BaseResponseStatus.FILE_PARSE_FAILED);
+        }
+    }
 }

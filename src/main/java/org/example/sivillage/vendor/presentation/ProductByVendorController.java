@@ -31,6 +31,15 @@ public class ProductByVendorController {
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "벤더의 상품 수정", description = "상품을 수정합니다.")
+    @PutMapping
+    public BaseResponse<Void> changeProductByVendor(
+            @RequestBody AddProductByVendorRequestVo addProductByVendorRequestVo) {
+
+        productByVendorService.changeProductByVendor(AddProductByVendorRequestDto.from(addProductByVendorRequestVo));
+        return new BaseResponse<>();
+    }
+
     @Operation(summary = "벤더 상품 삭제", description = "상품을 삭제합니다.")
     @DeleteMapping("/{productByVendorId}")
     public BaseResponse<Void> deleteProductByVendor(
@@ -52,7 +61,9 @@ public class ProductByVendorController {
         );
     }
 
-    @Operation(summary = "벤더의 상품 조회", description = "상품을 조회합니다.")
+    @Operation(summary = "벤더의 상품 조회", description = """
+    벤더의 이름, 메인화면 노출 여부, 신상품 여부, 상품 노출 여부, 최대 주문 수량, 최소 주문 수량, 할인율을 조회합니다.
+    """)
     @GetMapping("/{productCode}")
     public BaseResponse<GetProductByVendorResponseVo> getProductByVendor(
             @PathVariable String productCode) {

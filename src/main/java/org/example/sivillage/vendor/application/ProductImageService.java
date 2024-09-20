@@ -13,6 +13,8 @@ public interface ProductImageService {
      */
     void addProductImageList(List<CreateProductImageListRequestDto> createProductImageListRequestDto);
 
+    void updateProductImageList(List<CreateProductImageListRequestDto> createProductImageListRequestDto);
+
     /** 7. 상품 썸네일 URL 조회
      * @param productCode 상품 코드
      * @return GetProductThumbnailUrlResponseDto
