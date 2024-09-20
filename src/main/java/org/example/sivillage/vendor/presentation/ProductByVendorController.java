@@ -1,6 +1,7 @@
 package org.example.sivillage.vendor.presentation;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.vendor.application.ProductByVendorService;
@@ -15,11 +16,12 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/vendor/product")
+@Tag(name = "벤더의 상품 관리 API")
 public class ProductByVendorController {
 
     private final ProductByVendorService productByVendorService;
 
-    @Operation(summary = "벤더의 상품 등록", description = "상품을 등록합니다.", tags = {"Vendor Service"})
+    @Operation(summary = "벤더의 상품 등록", description = "상품을 등록합니다.")
     @PostMapping
     public BaseResponse<Void> addProductByVendor(
             @RequestBody AddProductByVendorRequestVo addProductByVendorRequestVo
@@ -29,7 +31,7 @@ public class ProductByVendorController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "벤더 상품 삭제", description = "상품을 삭제합니다.", tags = {"Vendor Service"})
+    @Operation(summary = "벤더 상품 삭제", description = "상품을 삭제합니다.")
     @DeleteMapping("/{productByVendorId}")
     public BaseResponse<Void> deleteProductByVendor(
             @PathVariable Long productByVendorId) {
@@ -38,7 +40,7 @@ public class ProductByVendorController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "벤더의 상품 리스트 조회", description = "상품을 조회합니다.", tags = {"Vendor Service"})
+    @Operation(summary = "벤더의 상품 리스트 조회", description = "상품을 조회합니다.")
     @GetMapping("/by-vendor/{vendorName}")
     public BaseResponse<List<GetProductByVendorResponseVo>> getProductByVendorList(
             @PathVariable String vendorName) {
@@ -50,7 +52,7 @@ public class ProductByVendorController {
         );
     }
 
-    @Operation(summary = "벤더의 상품 조회", description = "상품을 조회합니다.", tags = {"Vendor Service"})
+    @Operation(summary = "벤더의 상품 조회", description = "상품을 조회합니다.")
     @GetMapping("/{productCode}")
     public BaseResponse<GetProductByVendorResponseVo> getProductByVendor(
             @PathVariable String productCode) {

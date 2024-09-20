@@ -41,7 +41,7 @@ public class ProductQuestionController {
                         .map(ProductQuestionResponseDto::toResponseVo).toList());
     }
 
-    @Operation(summary = "회원 상품문의 조회", description = "회원의 상품 문의를 조회합니다.")
+    @Operation(summary = "회원 상품문의 조회", description = "회원의 상품 문의를 조회합니다.", tags = "마이페이지-나의 활동 정보")
     @GetMapping("")
     public BaseResponse<List<ProductQuestionResponseVo>> getMemberUuidProductQuestion(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         List<ProductQuestionResponseVo> productQuestionResponseVoList = productQuestionService.getMemberProductQuestion(authUserDetails.getMemberUuid())

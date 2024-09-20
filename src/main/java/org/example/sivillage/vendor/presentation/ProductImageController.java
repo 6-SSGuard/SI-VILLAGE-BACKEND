@@ -1,6 +1,7 @@
 package org.example.sivillage.vendor.presentation;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.product.vo.in.CreateProductImageListRequestVo;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/vendor/product/image")
+@Tag(name = "벤더의 상품 관리 API")
 public class ProductImageController {
 
     private final ProductImageService productImageService;
