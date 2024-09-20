@@ -48,7 +48,7 @@ public class ReviewController {
         return new BaseResponse<>(idListResponseVoList);
     }
 
-    @Operation(summary = "회원의 리뷰id 조회", description = "회원의 리뷰 id 리스트를 반환")
+    @Operation(summary = "회원의 리뷰id 조회", description = "회원의 리뷰 id 리스트를 반환", tags = "마이페이지-나의 활동 정보")
     @GetMapping("/{memberUuid}")
     public BaseResponse<List<IdListResponseVo<Long>>> getMemberReviewIds(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         List<IdListResponseVo<Long>> idListResponseVoList = reviewService.getMemberReviewIds(authUserDetails.getMemberUuid())

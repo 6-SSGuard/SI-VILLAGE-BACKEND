@@ -23,28 +23,28 @@ public class BeautyInfoController {
 
     private final BeautyInfoService beautyInfoService;
 
-    @Operation(summary = "뷰티 정보 등록", description = "뷰티정보를 등록합니다.")
+    @Operation(summary = "뷰티 정보 등록", description = "뷰티정보를 등록합니다.", tags = "마이페이지-나의 정보 관리")
     @PostMapping()
     public BaseResponse<Void> addBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo beautyInfoRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         beautyInfoService.addBeautyInfo(BeautyInfoRequestVo.toDto(beautyInfoRequestVo), authUserDetails.getMemberUuid()); // vo -> dto
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "뷰티 정보 조회", description = "뷰티정보를 조회합니다.")
+    @Operation(summary = "뷰티 정보 조회", description = "뷰티정보를 조회합니다.", tags = "마이페이지-나의 정보 관리")
     @GetMapping()
     public BaseResponse<BeautyInfoResponseVo> getBeautyInfo(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         BeautyInfoResponseDto beautyInfoResponseDto  = beautyInfoService.getBeautyInfo(authUserDetails.getMemberUuid());
         return new BaseResponse<>(beautyInfoResponseDto.toResponseVo());
     }
 
-    @Operation(summary = "뷰티 정보 수정", description = "뷰티정보를 수정합니다.")
+    @Operation(summary = "뷰티 정보 수정", description = "뷰티정보를 수정합니다.", tags = "마이페이지-나의 정보 관리")
     @PutMapping()
     public BaseResponse<Void> changeBeautyInfo(@Valid @RequestBody BeautyInfoRequestVo beautyInfoRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         beautyInfoService.changeBeautyInfo(BeautyInfoRequestVo.toDto(beautyInfoRequestVo), authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "뷰티 정보 삭제", description = "뷰티 정보를 삭제합니다.")
+    @Operation(summary = "뷰티 정보 삭제", description = "뷰티 정보를 삭제합니다.", tags = "마이페이지-나의 정보 관리")
     @DeleteMapping()
     public BaseResponse<Void> deleteBeautyInfo(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         beautyInfoService.removeBeautyInfo(authUserDetails.getMemberUuid());
