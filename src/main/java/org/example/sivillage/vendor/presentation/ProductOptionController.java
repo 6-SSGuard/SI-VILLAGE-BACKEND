@@ -49,7 +49,9 @@ public class ProductOptionController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "상품에 등록된 옵션 정보 리스트 조회")
+    @Operation(summary = "상품에 등록된 옵션 정보 리스트 조회", description = """
+    사이즈, 용량, 재고를 조회합니다.
+    """)
     @GetMapping("/details/{productCode}")
     public BaseResponse<List<GetProductOptionListResponseVo>> getProductOptionList(@PathVariable String productCode) {
 

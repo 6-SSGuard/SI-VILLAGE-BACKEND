@@ -18,9 +18,11 @@ import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
 import org.example.sivillage.product.infrastructure.BrandProductRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
+import org.example.sivillage.vendor.domain.ProductByVendor;
 import org.example.sivillage.vendor.domain.ProductCategoryList;
 import org.example.sivillage.vendor.domain.ProductImage;
 import org.example.sivillage.vendor.domain.ProductOptionList;
+import org.example.sivillage.vendor.infrastructure.ProductByVendorRepository;
 import org.example.sivillage.vendor.infrastructure.ProductCategoryListRepository;
 import org.example.sivillage.vendor.infrastructure.ProductImageRepository;
 import org.example.sivillage.vendor.infrastructure.ProductOptionRepository;
@@ -46,6 +48,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductCategoryListRepository productCategoryListRepository;
     private final ProductImageRepository productImageRepository;
     private final ProductOptionRepository productOptionListRepository;
+    private final ProductByVendorRepository productByVendorRepository;
 
     /**
      * 1. 상품 등록
@@ -147,6 +150,7 @@ public class ProductServiceImpl implements ProductService {
             Integer price = Integer.parseInt(record.get("price"));
             Long colorId = Long.parseLong(record.get("colorId"));
             String productCode = record.get("productCode");
+            String detailContent = record.get("detailContent");
 
             String topCategoryCode = categoryRepository.findFirstByCategoryNameOrderByIdAsc(record.get("topCategoryName"))
                     .orElseThrow(() -> new BaseException(BaseResponseStatus.TOP_CATEGORY_NOT_FOUND)).getCategoryCode();
@@ -159,10 +163,7 @@ public class ProductServiceImpl implements ProductService {
                     .orElseThrow(() -> new BaseException(BaseResponseStatus.BOTTOM_CATEGORY_NOT_FOUND)).getCategoryCode();
 
             String subCategoryCode = "";
-            if (record.get("subCategoryName").isEmpty() || record.get("subCategoryName").equals("null")) {
-                subCategoryCode = "";
-            }
-            else {
+            if (!record.get("subCategoryName").equals("N/A")) {
                 subCategoryCode = categoryRepository.findFirstByCategoryNameOrderByIdAsc(record.get("subCategoryName"))
                         .orElseThrow(() -> new BaseException(BaseResponseStatus.SUB_CATEGORY_NOT_FOUND)).getCategoryCode();
             }
@@ -170,6 +171,16 @@ public class ProductServiceImpl implements ProductService {
             String imageUrl = record.get("imageUrl");
             String brandName = record.get("brandName");
             String volume = record.get("volume");
+
+            boolean newProduct = false;
+            if (!record.get("newProduct").equals("N/A")) {
+                newProduct = true;
+            }
+
+            double discountRate = 0.0;
+            if (!record.get("discountRate").equals("N/A")) {
+                discountRate = Double.parseDouble(record.get("discountRate"));
+            }
 
 
             // 브랜드 ID 처리
@@ -182,7 +193,7 @@ public class ProductServiceImpl implements ProductService {
                     .price(price)
                     .colorId(colorId)
                     .productCode(productCode)
-                    .detailContent(imageUrl)
+                    .detailContent(detailContent)
                     .brandId(brandId)
                     .build();
 
@@ -208,6 +219,7 @@ public class ProductServiceImpl implements ProductService {
             ProductImage productImage = ProductImage.builder()
                     .productCode(productCode)
                     .productImageUrl(imageUrl)
+                    .thumbnail(true)
                     .build();
 
             productImageRepository.save(productImage);
@@ -221,6 +233,19 @@ public class ProductServiceImpl implements ProductService {
                     .build();
 
             productOptionListRepository.save(productOptionList);
+
+            ProductByVendor productByVendor = ProductByVendor.builder()
+                    .productCode(productCode)
+                    .vendorName("민지훈")
+                    .mainView(false)
+                    .newProduct(newProduct)
+                    .display(true)
+                    .maxOrderCount(10)
+                    .minOrderCount(1)
+                    .discountRate(discountRate)
+                    .build();
+
+            productByVendorRepository.save(productByVendor);
 
         } catch (Exception e) {
             log.error("레코드 처리 중 오류 발생: {}", e.getMessage(), e);
