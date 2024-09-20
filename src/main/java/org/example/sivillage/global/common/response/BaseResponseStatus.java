@@ -22,6 +22,8 @@ public enum BaseResponseStatus {
     /*
      * 404 NOT_FOUND: 리소스를 찾을 수 없음
      */
+    EVENT_IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 이벤트 이미지를 찾을 수 없습니다."),
+    EVENT_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 이벤트를 찾을 수 없습니다."),
     QUESTION_NOT_FOUND(HttpStatus.NOT_FOUND,false,"해당하는 상품문의를 찾을 수 없습니다."),
     REVIEW_NOT_FOUND(HttpStatus.NOT_FOUND,false,"해당하는 리뷰를 찾을 수 없습니다."),
     REVIEW_IMAGE_NOT_FOUND(HttpStatus.NOT_FOUND,false,"해당하는 리뷰이미지를 찾을 수 없습니다."),
