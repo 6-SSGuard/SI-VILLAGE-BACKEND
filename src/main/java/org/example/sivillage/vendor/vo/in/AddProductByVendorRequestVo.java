@@ -2,12 +2,13 @@ package org.example.sivillage.vendor.vo.in;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class AddProductByVendorRequestVo {
 
     private String productCode;
-    private String productName;
     private String vendorName;
     private Boolean mainView;
     private Boolean newProduct;
@@ -15,25 +16,19 @@ public class AddProductByVendorRequestVo {
     private Integer maxOrderCount;
     private Integer minOrderCount;
     private Double discountRate;
-    private Double purchasePrice;
-    private Double sellingPrice;
 
     @Builder
     public AddProductByVendorRequestVo(
             String productCode,
-            String productName,
             String vendorName,
             Boolean mainView,
             Boolean newProduct,
             Boolean display,
             Integer maxOrderCount,
             Integer minOrderCount,
-            Double discountRate,
-            Double purchasePrice,
-            Double sellingPrice
+            Double discountRate
     ) {
         this.productCode = productCode;
-        this.productName = productName;
         this.vendorName = vendorName;
         this.mainView = mainView;
         this.newProduct = newProduct;
@@ -41,7 +36,5 @@ public class AddProductByVendorRequestVo {
         this.maxOrderCount = maxOrderCount;
         this.minOrderCount = minOrderCount;
         this.discountRate = discountRate;
-        this.purchasePrice = purchasePrice;
-        this.sellingPrice = sellingPrice;
     }
 }

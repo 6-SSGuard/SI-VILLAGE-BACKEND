@@ -1,5 +1,6 @@
 package org.example.sivillage.product.application;
 
+import org.example.sivillage.product.dto.in.ChangeProductRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.CreateProductResponseDto;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
@@ -30,5 +31,7 @@ public interface ProductService {
      * @return GetProductDetailsResponseDto
      */
     GetProductDetailsResponseDto getProductDetail(String productCode);
+
+    void changeProduct(ChangeProductRequestDto changeProductRequestDto);
 
 }
