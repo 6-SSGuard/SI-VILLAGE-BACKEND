@@ -143,6 +143,7 @@ public class JwtTokenProvider {
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .memberUuid(authentication.getName())
+                .name(authentication.getName())
                 .build();
     }
 
