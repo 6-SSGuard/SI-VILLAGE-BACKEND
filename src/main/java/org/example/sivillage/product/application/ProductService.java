@@ -5,6 +5,7 @@ import org.example.sivillage.product.dto.in.CreateProductRequestDto;
 import org.example.sivillage.product.dto.out.CreateProductResponseDto;
 import org.example.sivillage.product.dto.out.GetProductBriefInfoResponseDto;
 import org.example.sivillage.product.dto.out.GetProductDetailsResponseDto;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface ProductService {
 
@@ -33,5 +34,7 @@ public interface ProductService {
     GetProductDetailsResponseDto getProductDetail(String productCode);
 
     void changeProduct(ChangeProductRequestDto changeProductRequestDto);
+
+    void addProductByCsv(MultipartFile file);
 
 }

@@ -17,4 +17,5 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     Boolean existsByCategoryName(String categoryName);
 
+    Optional<Category> findFirstByCategoryNameOrderByIdAsc(String categoryName);
 }

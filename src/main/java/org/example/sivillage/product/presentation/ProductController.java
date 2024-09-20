@@ -2,7 +2,6 @@ package org.example.sivillage.product.presentation;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.global.common.response.BaseResponse;
@@ -15,6 +14,7 @@ import org.example.sivillage.product.vo.out.CreateProductResponseVo;
 import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;
 import org.example.sivillage.product.vo.out.GetProductDetailsResponseVo;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Tag(name = "상품 관리 API", description = "상품 관련 API endpoints")
 @RestController
@@ -26,7 +26,7 @@ public class ProductController {
 
     @Operation(summary = "상품 등록")
     @PostMapping
-    public BaseResponse<CreateProductResponseVo> addProduct(@Valid @RequestBody CreateProductRequestVo createProductRequestVo) {
+    public BaseResponse<CreateProductResponseVo> addProduct(@RequestBody CreateProductRequestVo createProductRequestVo) {
 
         return new BaseResponse<>(
                 productService.addProduct(CreateProductRequestDto.from(createProductRequestVo)).toVo()
@@ -58,18 +58,11 @@ public class ProductController {
         return new BaseResponse<>();
     }
 
-
-//    @PostMapping(value = "/from-csv", consumes = "multipart/form-data")
-//    public BaseResponse<Void> addProductsFromCsv(@RequestParam("file") MultipartFile file) {
-//        productService.addProductsFromCsv(file);
-//        return new BaseResponse<>();
-//    }
-//    @Operation(summary = "특정 물품의 전체 카테고리 리스트 반환", description = "test용")
-//    @GetMapping("/category-path/{productUuid}")
-//    public BaseResponse<GetCategoryPathResponseVo> getCategoryPath(@PathVariable String productUuid) {
-//        GetCategoryPathResponseDto responseDto = productService.getCategoryPath(productUuid);
-//        GetCategoryPathResponseVo response = mapper.map(responseDto, GetCategoryPathResponseVo.class);
-//        return new BaseResponse<>(response);
-//    }
+    @Operation(summary = "CSV 파일로 상품 등록", description = "")
+    @PostMapping(value ="/csv", consumes = "multipart/form-data")
+    public BaseResponse<Void> addProductByCsv(@RequestParam("file") MultipartFile file) {
+        productService.addProductByCsv(file);
+        return new BaseResponse<>();
+    }
 
 }
