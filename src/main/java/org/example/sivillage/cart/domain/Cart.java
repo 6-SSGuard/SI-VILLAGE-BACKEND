@@ -2,6 +2,7 @@ package org.example.sivillage.cart.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.global.common.BaseEntity;
@@ -23,5 +24,26 @@ public class Cart extends BaseEntity {
     private String productCode;
 
     @Column(nullable = false)
-    private
+    private String productOption;
+
+    @Column(nullable = false)
+    private Integer amount;
+
+    @Column(nullable = false)
+    private boolean selected;
+
+    public void changeSelected() {
+        this.selected = !this.selected;
+    }
+
+    @Builder
+    public Cart(Long id, String memberUuid, String productCode, String productOption, Integer amount, boolean selected) {
+        this.id = id;
+        this.memberUuid = memberUuid;
+        this.productCode = productCode;
+        this.productOption = productOption;
+        this.amount = amount;
+        this.selected = selected;
+    }
+
 }

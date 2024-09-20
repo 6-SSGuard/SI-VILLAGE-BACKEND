@@ -16,7 +16,7 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 @Service
-public class EventServiceImpl implements EventService{
+public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
 
@@ -41,20 +41,20 @@ public class EventServiceImpl implements EventService{
 
     public Long addEvent(EventRequestDto eventRequestDto, String memberUuid) {
         Event event = eventRepository.save(EventRequestDto.toEntity(eventRequestDto, memberUuid));
-    return event.getId();
+        return event.getId();
 
     }
 
     public void changeEvent(EventRequestDto eventRequestDto, Long eventId) {
 
-    Event event = eventRepository.findById(eventId)
-            .orElseThrow(() -> new BaseException(BaseResponseStatus.EVENT_NOT_FOUND));
-    eventRepository.save(eventRequestDto.updateToEntity(eventRequestDto,event));
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.EVENT_NOT_FOUND));
+        eventRepository.save(eventRequestDto.updateToEntity(eventRequestDto, event));
     }
 
     public void removeEvent(Long eventId) {
-    Event event = eventRepository.findById(eventId)
-            .orElseThrow(()-> new BaseException(BaseResponseStatus.EVENT_NOT_FOUND));
-    eventRepository.deleteById(eventId);
+        eventRepository.findById(eventId)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.EVENT_NOT_FOUND));
+        eventRepository.deleteById(eventId);
     }
 }
