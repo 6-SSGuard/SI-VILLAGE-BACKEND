@@ -6,8 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.vendor.application.ProductOptionService;
 import org.example.sivillage.vendor.dto.in.CreateProductOptionRequestDto;
+import org.example.sivillage.vendor.dto.in.UpdateProductOptionRequestDto;
 import org.example.sivillage.vendor.dto.out.GetProductOptionListResponseDto;
 import org.example.sivillage.vendor.vo.in.CreateProductOptionRequestVo;
+import org.example.sivillage.vendor.vo.in.UpdateProductOptionRequestVo;
 import org.example.sivillage.vendor.vo.out.GetProductOptionListResponseVo;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +33,19 @@ public class ProductOptionController {
                         .toList();
 
         productOptionService.addProductOptionList(createProductOptionRequestDtoList);
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "상품 옵션 수정")
+    @PutMapping
+    public BaseResponse<Void> updateProductOptionList(@RequestBody List<UpdateProductOptionRequestVo> updateProductOptionRequestVo) {
+
+        List<UpdateProductOptionRequestDto> updateProductOptionRequestDtoList =
+                updateProductOptionRequestVo.stream()
+                        .map(UpdateProductOptionRequestDto::from)
+                        .toList();
+
+        productOptionService.updateProductOptionList(updateProductOptionRequestDtoList);
         return new BaseResponse<>();
     }
 

@@ -1,7 +1,6 @@
 package org.example.sivillage.vendor.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Builder
 public class ProductImage {
     @Id
@@ -26,11 +24,18 @@ public class ProductImage {
     @Column(nullable = false)
     private boolean thumbnail;
 
-//    public static ProductImage createProductImage(CreateProductRequestDto.ProductImageDto imageDto, String productCode) {
-//        return ProductImage.builder()
-//                .productImageUrl(imageDto.getProductImageUrl())
-//                .productCode(productCode)
-//                .thumbnail(imageDto.isThumbnail())
-//                .build();
-//    }
+    @Builder
+    public ProductImage(Long id, String productImageUrl, String productCode, boolean thumbnail) {
+        this.id = id;
+        this.productImageUrl = productImageUrl;
+        this.productCode = productCode;
+        this.thumbnail = thumbnail;
+    }
+
+    @Builder
+    public ProductImage(String productImageUrl, String productCode, boolean thumbnail) {
+        this.productImageUrl = productImageUrl;
+        this.productCode = productCode;
+        this.thumbnail = thumbnail;
+    }
 }
