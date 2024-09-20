@@ -14,4 +14,6 @@ public interface ProductImageRepository extends JpaRepository<ProductImage, Long
 
     @Query("SELECT pi.productImageUrl FROM ProductImage pi WHERE pi.productCode = :productCode")
     List<String> findProductImageUrlsByProductCode(@Param("productCode") String productCode);
+
+    ProductImage findByProductCode(String productCode);
 }

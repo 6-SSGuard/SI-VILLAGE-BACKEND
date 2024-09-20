@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.vendor.domain.ProductOptionList;
 import org.example.sivillage.vendor.dto.in.CreateProductOptionRequestDto;
+import org.example.sivillage.vendor.dto.in.UpdateProductOptionRequestDto;
 import org.example.sivillage.vendor.dto.out.GetProductOptionListResponseDto;
 import org.example.sivillage.vendor.infrastructure.ProductOptionRepository;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,24 @@ public class ProductOptionServiceImpl implements ProductOptionService {
         }
         List<ProductOptionList> productOptionList = createProductOptionRequestDto.stream()
                 .map(CreateProductOptionRequestDto::toEntity)
+                .toList();
+
+        productOptionRepository.saveAll(productOptionList);
+    }
+
+    @Override
+    public void updateProductOptionList(List<UpdateProductOptionRequestDto> updateProductOptionRequestDto) {
+        for (UpdateProductOptionRequestDto dto : updateProductOptionRequestDto) {
+            if (dto.getDangerStock() < 0) {
+                log.error("dangerStock 값이 0보다 작습니다. dto: {}", dto);
+                throw new IllegalArgumentException("dangerStock 값이 0보다 작습니다.");
+            }
+        }
+
+        List<ProductOptionList> productOptionList = updateProductOptionRequestDto.stream()
+                .map(dto -> {
+                    return dto.updateEntity(dto.getId());
+                })
                 .toList();
 
         productOptionRepository.saveAll(productOptionList);

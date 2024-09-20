@@ -23,6 +23,14 @@ public class ProductByVendorServiceImpl implements ProductByVendorService {
     }
 
     @Override
+    public void changeProductByVendor(AddProductByVendorRequestDto addProductByVendorRequestDto) {
+        ProductByVendor productByVendor = productByVendorRepository.findByProductCode(addProductByVendorRequestDto.getProductCode())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PRODUCT));
+
+        productByVendorRepository.save(addProductByVendorRequestDto.updateEntity(productByVendor.getId()));
+    }
+
+    @Override
     public void deleteProductByVendor(Long productByVendorId) {
         productByVendorRepository.deleteById(productByVendorId);
     }

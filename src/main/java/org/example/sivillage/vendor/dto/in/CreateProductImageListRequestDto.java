@@ -38,4 +38,13 @@ public class CreateProductImageListRequestDto {
                 .thumbnail(createProductImageListRequestVo.isThumbnail())
                 .build();
     }
+
+    public ProductImage updateEntity(Long id) {
+        return ProductImage.builder()
+                .id(id)
+                .productCode(productCode)
+                .productImageUrl(imageUrl)
+                .thumbnail(thumbnail)
+                .build();
+    }
 }
