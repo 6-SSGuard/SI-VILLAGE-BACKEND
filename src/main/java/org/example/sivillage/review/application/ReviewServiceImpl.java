@@ -2,6 +2,9 @@ package org.example.sivillage.review.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.example.sivillage.beautyInfo.domain.BeautyInfo;
 import org.example.sivillage.beautyInfo.infrastructure.BeautyInfoRepository;
 import org.example.sivillage.global.common.CategoryPathService;
@@ -17,7 +20,11 @@ import org.example.sivillage.review.infrastructure.ReviewRepository;
 import org.example.sivillage.sizeinfo.domain.SizeInfo;
 import org.example.sivillage.sizeinfo.infrastructure.SizeInfoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Transactional
@@ -82,6 +89,39 @@ public class ReviewServiceImpl implements ReviewService {
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.REVIEW_NOT_FOUND));
         reviewRepository.deleteById(reviewId);
     }
+
+    // csv 파일로 리뷰 데이터 추가
+    public void addReviewFromCsv(MultipartFile file) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8));
+             CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader())) {
+
+            List<CSVRecord> records = csvParser.getRecords();
+            for (CSVRecord record : records) {
+                Double score = Double.valueOf(record.get("score")); // CSV 컬럼 이름 사용
+                String reviewContent = record.get("reviewContent");
+                String authorEmail = record.get("authorEmail");
+                String memberInformation = record.get("memberInformation");
+                String memberUuid = record.get("memberUuid");
+                String productCode = record.get("productCode");
+
+                // 브랜드 엔티티 생성 및 저장
+                Review review = Review.builder()
+                        .score(score)
+                        .reviewContent(reviewContent)
+                        .authorEmail(authorEmail)
+                        .memberInformation(memberInformation)
+                        .memberUuid(memberUuid)
+                        .productCode(productCode)
+                        .build();
+
+                reviewRepository.save(review);
+            }
+        } catch (Exception e) {
+            throw new BaseException(BaseResponseStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }
 
 

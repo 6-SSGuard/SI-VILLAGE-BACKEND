@@ -23,6 +23,7 @@ import org.example.sivillage.review.vo.out.ReviewLikeCountResponseVo;
 import org.example.sivillage.review.vo.out.ReviewResponseVo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class ReviewController {
 
 
     @Operation(summary = "상품의 리뷰id 조회", description = "상품의 리뷰 id 리스트를 반환")
-    @GetMapping("/{productCode}")
+    @GetMapping("/{productCode}/product")
     public BaseResponse<List<IdListResponseVo<Long>>> getProductReviewIds(@PathVariable("productCode") String productCode) {
         List<IdListResponseVo<Long>> idListResponseVoList = reviewService.getProductReviewIds(productCode)
                 .stream()
@@ -49,7 +50,7 @@ public class ReviewController {
     }
 
     @Operation(summary = "회원의 리뷰id 조회", description = "회원의 리뷰 id 리스트를 반환", tags = "마이페이지-나의 활동 정보")
-    @GetMapping("/{memberUuid}")
+    @GetMapping("/{memberUuid}/member")
     public BaseResponse<List<IdListResponseVo<Long>>> getMemberReviewIds(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         List<IdListResponseVo<Long>> idListResponseVoList = reviewService.getMemberReviewIds(authUserDetails.getMemberUuid())
                 .stream()
@@ -86,6 +87,13 @@ public class ReviewController {
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "CSV 파일로 리뷰 추가")
+    @PostMapping(value = "/csv", consumes = "multipart/form-data")
+    public BaseResponse<Void> addReviewCSV(@RequestParam("file") MultipartFile file) {
+        reviewService.addReviewFromCsv(file);
+        return new BaseResponse<>();
+    }
+
 
     // 리뷰 이미지 관련 API
     @Operation(summary = "리뷰 이미지 등록", description = "리뷰 이미지를 등록합니다.")
@@ -116,6 +124,13 @@ public class ReviewController {
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "CSV 파일로 리뷰 이미지 추가")
+    @PostMapping(value = "/csv/Image", consumes = "multipart/form-data")
+    public BaseResponse<Void> addReviewImageCSV(@RequestParam("file") MultipartFile file) {
+        reviewImageService.addReviewImageFromCsv(file);
+        return new BaseResponse<>();
+    }
+
     // 리뷰 좋아요 관련 API
     @Operation(summary = "리뷰 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
     @PutMapping("/{reviewId}/like")
@@ -130,4 +145,7 @@ public class ReviewController {
         ReviewLikeCountResponseDto reviewLikeCountResponseDto = reviewLikeService.getReviewLikeCount(reviewId);
         return new BaseResponse<>(reviewLikeCountResponseDto.toResponseVo());
     }
+
+
+
 }

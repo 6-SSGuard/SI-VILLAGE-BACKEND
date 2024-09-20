@@ -7,8 +7,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.cart.application.CartServiceImpl;
+import org.example.sivillage.cart.dto.out.CartAmountResponseDto;
 import org.example.sivillage.cart.dto.out.CartResponseDto;
 import org.example.sivillage.cart.vo.in.CartRequestVo;
+import org.example.sivillage.cart.vo.out.CartAmountResponseVo;
 import org.example.sivillage.cart.vo.out.CartResponseVo;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.global.common.response.dto.IdListResponseDto;
@@ -42,6 +44,13 @@ public class CartController {
         return new BaseResponse<>(cartResponseDto.toResponseVo());
     }
 
+    @Operation(summary = "장바구니 수량 조회", description = "회원의 장바구니 수량을 조회합니다.")
+    @GetMapping("/count")
+    public BaseResponse<CartAmountResponseVo> getMemberCartAmount(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        CartAmountResponseDto cartAmountResponseDto = cartService.getCartAmount(authUserDetails.getMemberUuid());
+        return new BaseResponse<>(cartAmountResponseDto.toResponseVo());
+    }
+
     @Operation(summary = "장바구니 추가", description = "장바구니에 상품을 추가합니다.")
     @PostMapping("")
     public BaseResponse<Void> addCart(@RequestBody CartRequestVo cartRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
@@ -49,6 +58,13 @@ public class CartController {
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "중복된 상품 장바구니 추가", description = "중복된 상품을 장바구니에 저장합니다.")
+    @DeleteMapping("/all")
+    public BaseResponse<Void> addDuplicateCart(@RequestBody CartRequestVo cartRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        cartService.addDuplicateCart(CartRequestVo.toDto(cartRequestVo), authUserDetails.getMemberUuid());
+        return new BaseResponse<>();
+    }
+    
     @Operation(summary = "장바구니 수정", description = "장바구니에 해당 상품 옵션을 수정합니다.")
     @PutMapping("/{cartId}")
     public BaseResponse<Void> changeCart(@PathVariable Long cartId, @RequestBody CartRequestVo cartRequestVo) {

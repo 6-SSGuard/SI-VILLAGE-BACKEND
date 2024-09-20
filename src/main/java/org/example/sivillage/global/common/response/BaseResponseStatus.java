@@ -78,6 +78,7 @@ public enum BaseResponseStatus {
     UNAUTHORIZED_TASK(HttpStatus.UNAUTHORIZED, false,  "허용되지 않은 권한입니다."),
 
     // 중복 요청 관련
+    DUPLICATE_CART(HttpStatus.CONFLICT,false,"이미 쇼핑백에 담겨 있는 상품입니다. 쇼핑백 수량을 추가 하시겠습니까?"),
     DUPLICATE_PRODUCT(HttpStatus.CONFLICT, false,  "이미 존재하는 상품명입니다."),
     DuPLICATE_ADDRESS(HttpStatus.CONFLICT, false, "이미 배송지가 등록되었습니다."),
     DUPLICATE_BRAND_NAME(HttpStatus.CONFLICT, false,  "이미 존재하는 브랜드명입니다."),
