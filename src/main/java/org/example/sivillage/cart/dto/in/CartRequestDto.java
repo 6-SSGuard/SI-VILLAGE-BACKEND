@@ -24,6 +24,17 @@ public class CartRequestDto {
                 .build();
     }
 
+    public Cart updateAmount(CartRequestDto cartRequestDto, Cart cart){
+        return Cart.builder()
+                .id(cart.getId())
+                .memberUuid(cart.getMemberUuid())
+                .productCode(cart.getProductCode())
+                .productOption(cart.getProductOption())
+                .amount(cart.getAmount() + cartRequestDto.getAmount())
+                .selected(true)
+                .build();
+    }
+
     public Cart updateToEntity(CartRequestDto cartRequestDto, Cart cart) {
         return Cart.builder()
                 .id(cart.getId())
@@ -34,7 +45,6 @@ public class CartRequestDto {
                 .selected(true)
                 .build();
     }
-
 
     @Builder
     public CartRequestDto(String productCode, String productOption, Integer amount) {

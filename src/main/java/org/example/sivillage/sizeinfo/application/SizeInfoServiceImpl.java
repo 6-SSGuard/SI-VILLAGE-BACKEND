@@ -10,7 +10,6 @@ import org.example.sivillage.sizeinfo.dto.out.SizeInfoResponseDto;
 import org.example.sivillage.sizeinfo.infrastructure.SizeInfoRepository;
 import org.springframework.stereotype.Service;
 
-
 @Service
 @Transactional
 @RequiredArgsConstructor
