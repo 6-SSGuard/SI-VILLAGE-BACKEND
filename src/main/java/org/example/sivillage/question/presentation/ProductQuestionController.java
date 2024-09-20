@@ -25,7 +25,6 @@ public class ProductQuestionController {
 
     private final ProductQuestionServiceImpl productQuestionService;
 
-    // todo: memberUuid 로 email 가져오는 api 만들기 (상품문의,리뷰등록시 사용하기 위해서)
     @Operation(summary = "상품문의 등록", description = "상품문의를 등록합니다.")
     @PostMapping("/{productUuid}")
     public BaseResponse<Void> addProductQuestion(@PathVariable("productUuid") String productUuid, @Valid @RequestBody ProductQuestionRequestVo productQuestionRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
@@ -42,7 +41,7 @@ public class ProductQuestionController {
                         .map(ProductQuestionResponseDto::toResponseVo).toList());
     }
 
-    @Operation(summary = "회원 상품문의 조회", description = "회원의 상품 문의를 조회합니다.")
+    @Operation(summary = "회원 상품문의 조회", description = "회원의 상품 문의를 조회합니다.", tags = "마이페이지-나의 활동 정보")
     @GetMapping("")
     public BaseResponse<List<ProductQuestionResponseVo>> getMemberUuidProductQuestion(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         List<ProductQuestionResponseVo> productQuestionResponseVoList = productQuestionService.getMemberProductQuestion(authUserDetails.getMemberUuid())

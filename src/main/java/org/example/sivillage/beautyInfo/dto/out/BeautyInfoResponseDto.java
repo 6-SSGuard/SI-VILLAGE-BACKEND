@@ -29,7 +29,7 @@ public class BeautyInfoResponseDto {
                 .skinType(beautyInfo.getSkinType())
                 .skinTone(beautyInfo.getSkinTone())
                 .scalpTone(beautyInfo.getScalpTone())
-                .beautyKeyword(convertListBeautykeyword(beautyInfo.getBeautyKeyword())) // Assuming BeautyKeyword is a List<BeautyKeyword>
+                .beautyKeyword(convertListBeautykeyword(beautyInfo.getBeautyKeyword()))
                 .build();
     }
 

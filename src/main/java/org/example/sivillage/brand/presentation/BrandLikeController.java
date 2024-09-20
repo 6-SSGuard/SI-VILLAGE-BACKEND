@@ -24,7 +24,7 @@ public class BrandLikeController {
      * @param authUserDetails 인증된 사용자 정보
      * return GetBrandLikeResponseVo
      */
-    @Operation(summary = "브랜드 좋아요 여부 조회")
+    @Operation(summary = "브랜드 좋아요 여부 조회", description = "브랜드 좋아요 여부를 조회합니다.", tags = "찜하기")
     @GetMapping("/{brandId}/like")
     public BaseResponse<GetBrandLikeResponseVo> getBrandLike(@PathVariable Long brandId, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         return new BaseResponse<>(
@@ -38,7 +38,7 @@ public class BrandLikeController {
      * @param authUserDetails 인증된 사용자 정보
      * return void
      */
-    @Operation(summary = "브랜드 좋아요 토글")
+    @Operation(summary = "브랜드 좋아요 토글", description = "브랜드 좋아요를 토글합니다.", tags = "찜하기")
     @PutMapping("/{brandId}/like")
     public BaseResponse<Void> toggleBrandLike(@PathVariable Long brandId, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         brandLikeService.toggleBrandLike(brandId, authUserDetails.getMemberUuid());
