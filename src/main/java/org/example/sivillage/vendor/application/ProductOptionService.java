@@ -1,6 +1,7 @@
 package org.example.sivillage.vendor.application;
 
 import org.example.sivillage.vendor.dto.in.CreateProductOptionRequestDto;
+import org.example.sivillage.vendor.dto.in.UpdateProductOptionRequestDto;
 import org.example.sivillage.vendor.dto.out.GetProductOptionListResponseDto;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public interface ProductOptionService {
      * @param createProductOptionRequestDto 상품 옵션 등록 요청 DTO
      */
     void addProductOptionList(List<CreateProductOptionRequestDto> createProductOptionRequestDto);
+
+    void updateProductOptionList(List<UpdateProductOptionRequestDto> updateProductOptionRequestDto);
 
     /** 5. 상품 옵션 리스트 정보 조회
      * @param productCode 상품 코드

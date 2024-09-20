@@ -34,6 +34,19 @@ public class ProductImageServiceImpl implements ProductImageService {
         productImageRepository.saveAll(productImageList);
     }
 
+    @Override
+    public void updateProductImageList(List<CreateProductImageListRequestDto> createProductImageListRequestDto) {
+
+        List<ProductImage> productImageList = createProductImageListRequestDto.stream()
+                .map(dto -> {
+                    Long id = productImageRepository.findByProductCode(dto.getProductCode()).getId();
+                    return dto.updateEntity(id);
+                })
+                .toList();
+
+        productImageRepository.saveAll(productImageList);
+    }
+
     /**
      * 7. 상품 썸네일 URL 조회
      * @param productCode 상품 코드

@@ -11,7 +11,6 @@ import org.example.sivillage.vendor.vo.in.AddProductByVendorRequestVo;
 public class AddProductByVendorRequestDto {
 
     private String productCode;
-    private String productName;
     private String vendorName;
     private Boolean mainView;
     private Boolean newProduct;
@@ -19,25 +18,19 @@ public class AddProductByVendorRequestDto {
     private Integer maxOrderCount;
     private Integer minOrderCount;
     private Double discountRate;
-    private Double purchasePrice;
-    private Double sellingPrice;
 
     @Builder
     public AddProductByVendorRequestDto(
             String productCode,
-            String productName,
             String vendorName,
             Boolean mainView,
             Boolean newProduct,
             Boolean display,
             Integer maxOrderCount,
             Integer minOrderCount,
-            Double discountRate,
-            Double purchasePrice,
-            Double sellingPrice
+            Double discountRate
     ) {
         this.productCode = productCode;
-        this.productName = productName;
         this.vendorName = vendorName;
         this.mainView = mainView;
         this.newProduct = newProduct;
@@ -45,14 +38,11 @@ public class AddProductByVendorRequestDto {
         this.maxOrderCount = maxOrderCount;
         this.minOrderCount = minOrderCount;
         this.discountRate = discountRate;
-        this.purchasePrice = purchasePrice;
-        this.sellingPrice = sellingPrice;
     }
 
     public ProductByVendor toEntity() {
         return ProductByVendor.builder()
                 .productCode(productCode)
-                .productName(productName)
                 .vendorName(vendorName)
                 .mainView(mainView)
                 .newProduct(newProduct)
@@ -60,15 +50,12 @@ public class AddProductByVendorRequestDto {
                 .maxOrderCount(maxOrderCount)
                 .minOrderCount(minOrderCount)
                 .discountRate(discountRate)
-                .purchasePrice(purchasePrice)
-                .sellingPrice(sellingPrice)
                 .build();
     }
 
     public static AddProductByVendorRequestDto from(AddProductByVendorRequestVo addProductByVendorVo) {
         return AddProductByVendorRequestDto.builder()
                 .productCode(addProductByVendorVo.getProductCode())
-                .productName(addProductByVendorVo.getProductName())
                 .vendorName(addProductByVendorVo.getVendorName())
                 .mainView(addProductByVendorVo.getMainView())
                 .newProduct(addProductByVendorVo.getNewProduct())
@@ -76,8 +63,20 @@ public class AddProductByVendorRequestDto {
                 .maxOrderCount(addProductByVendorVo.getMaxOrderCount())
                 .minOrderCount(addProductByVendorVo.getMinOrderCount())
                 .discountRate(addProductByVendorVo.getDiscountRate())
-                .purchasePrice(addProductByVendorVo.getPurchasePrice())
-                .sellingPrice(addProductByVendorVo.getSellingPrice())
+                .build();
+    }
+
+    public ProductByVendor updateEntity(Long id) {
+        return ProductByVendor.builder()
+                .id(id)
+                .productCode(productCode)
+                .vendorName(vendorName)
+                .mainView(mainView)
+                .newProduct(newProduct)
+                .display(display)
+                .maxOrderCount(maxOrderCount)
+                .minOrderCount(minOrderCount)
+                .discountRate(discountRate)
                 .build();
     }
 }

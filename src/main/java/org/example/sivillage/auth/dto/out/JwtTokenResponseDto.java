@@ -3,9 +3,11 @@ package org.example.sivillage.auth.dto.out;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.example.sivillage.auth.vo.out.JwtTokenResponseVo;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class JwtTokenResponseDto {
     private String grantType;

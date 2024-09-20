@@ -74,7 +74,9 @@ public class AuthServiceImpl implements AuthService {
         try
         {
             JwtTokenResponseDto jwtTokenResponseDto = createToken(authenticate(member, signInRequestDto.getPassword()));
+            jwtTokenResponseDto.setName(member.getName());
             log.info("token : {}", jwtTokenResponseDto);
+
             return jwtTokenResponseDto;
         } catch (Exception e) {
             throw new BaseException(BaseResponseStatus.FAILED_TO_LOGIN);

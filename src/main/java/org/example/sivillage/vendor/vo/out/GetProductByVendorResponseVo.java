@@ -18,9 +18,6 @@ public class GetProductByVendorResponseVo {
     private Integer maxOrderCount;
     private Integer minOrderCount;
     private Double discountRate;
-    private Double purchasePrice;
-    private Double sellingPrice;
-    private Double productLikeRate;
 
     @Builder
     public GetProductByVendorResponseVo(
@@ -33,10 +30,7 @@ public class GetProductByVendorResponseVo {
             Boolean display,
             Integer maxOrderCount,
             Integer minOrderCount,
-            Double discountRate,
-            Double purchasePrice,
-            Double sellingPrice,
-            Double productLikeRate
+            Double discountRate
     ) {
         this.productByVendorId = productByVendorId;
         this.productCode = productCode;
@@ -48,8 +42,5 @@ public class GetProductByVendorResponseVo {
         this.maxOrderCount = maxOrderCount;
         this.minOrderCount = minOrderCount;
         this.discountRate = discountRate;
-        this.purchasePrice = purchasePrice;
-        this.sellingPrice = sellingPrice;
-        this.productLikeRate = productLikeRate;
     }
 }

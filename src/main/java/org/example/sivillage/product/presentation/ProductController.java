@@ -7,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.product.application.ProductService;
+import org.example.sivillage.product.dto.in.ChangeProductRequestDto;
 import org.example.sivillage.product.dto.in.CreateProductRequestDto;
+import org.example.sivillage.product.vo.in.ChangeProductRequestVo;
 import org.example.sivillage.product.vo.in.CreateProductRequestVo;
 import org.example.sivillage.product.vo.out.CreateProductResponseVo;
 import org.example.sivillage.product.vo.out.GetProductBriefInfoResponseVo;
@@ -47,6 +49,13 @@ public class ProductController {
         return new BaseResponse<>(
                 productService.getProductDetail(productCode).toVo()
         );
+    }
+
+    @Operation(summary = "상품 수정", description = "")
+    @PutMapping
+    public BaseResponse<Void> changeProduct(@RequestBody ChangeProductRequestVo createProductRequestVo) {
+        productService.changeProduct(ChangeProductRequestDto.from(createProductRequestVo));
+        return new BaseResponse<>();
     }
 
 
