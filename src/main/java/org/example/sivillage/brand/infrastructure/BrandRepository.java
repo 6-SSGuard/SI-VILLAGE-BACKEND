@@ -22,4 +22,6 @@ public interface BrandRepository extends JpaRepository<Brand, Long> {
     boolean existsByBrandKorName(String brandKorName);
 
     List<Brand> findAllByOrderByBrandEngNameAsc();
+
+    Optional<Brand> findByBrandEngName(String brandEngName);
 }

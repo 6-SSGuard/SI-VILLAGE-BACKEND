@@ -30,7 +30,6 @@ public class ProductOptionList {
 
     private Boolean soldOut;
 
-    @Column(nullable = false)
     private Integer dangerStock;
 
     @Builder
