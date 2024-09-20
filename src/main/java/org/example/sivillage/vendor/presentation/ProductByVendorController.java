@@ -31,6 +31,15 @@ public class ProductByVendorController {
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "벤더의 상품 수정", description = "상품을 수정합니다.")
+    @PutMapping
+    public BaseResponse<Void> changeProductByVendor(
+            @RequestBody AddProductByVendorRequestVo addProductByVendorRequestVo) {
+
+        productByVendorService.changeProductByVendor(AddProductByVendorRequestDto.from(addProductByVendorRequestVo));
+        return new BaseResponse<>();
+    }
+
     @Operation(summary = "벤더 상품 삭제", description = "상품을 삭제합니다.")
     @DeleteMapping("/{productByVendorId}")
     public BaseResponse<Void> deleteProductByVendor(

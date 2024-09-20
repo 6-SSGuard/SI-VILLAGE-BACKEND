@@ -10,6 +10,8 @@ public interface ProductByVendorService {
 
     void addProductByVendor(AddProductByVendorRequestDto addProductByVendorRequestDto);
 
+    void changeProductByVendor(AddProductByVendorRequestDto addProductByVendorRequestDto);
+
     void deleteProductByVendor(Long productByVendorId);
 
     List<GetProductByVendorResponseDto> getProductByVendorList(String vendorName);
