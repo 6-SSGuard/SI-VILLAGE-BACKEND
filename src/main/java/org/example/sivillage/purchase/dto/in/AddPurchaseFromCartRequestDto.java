@@ -25,7 +25,7 @@ public class AddPurchaseFromCartRequestDto {
         this.shippingMessage = shippingMessage;
     }
 
-    public AddPurchaseFromCartRequestDto from(AddPurchaseFromCartRequestVo vo) {
+    public static AddPurchaseFromCartRequestDto from(AddPurchaseFromCartRequestVo vo) {
         return AddPurchaseFromCartRequestDto.builder()
             .cartIdList(vo.getCartIdList())
             .shippingAddressId(vo.getShippingAddressId())
@@ -33,7 +33,7 @@ public class AddPurchaseFromCartRequestDto {
             .build();
     }
 
-    public PurchaseProduct toEntity(Cart cart) {
+    public static PurchaseProduct toEntity(Cart cart) {
         return PurchaseProduct.builder()
                 .productCode(cart.getProductCode())
                 .productOptionId(cart.getProductOptionId())

@@ -26,7 +26,7 @@ public class AddPurchaseRequestDto {
         this.shippingMessage = shippingMessage;
     }
 
-    public AddPurchaseRequestDto from(AddPurchaseRequestVo vo) {
+    public static AddPurchaseRequestDto from(AddPurchaseRequestVo vo) {
         return AddPurchaseRequestDto.builder()
             .productCode(vo.getProductCode())
             .productOptionId(vo.getProductOptionId())

@@ -5,6 +5,7 @@ import org.example.sivillage.cart.domain.Cart;
 import org.example.sivillage.cart.infrastructure.CartRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
+import org.example.sivillage.product.domain.Product;
 import org.example.sivillage.product.infrastructure.ProductRepository;
 import org.example.sivillage.purchase.dto.in.AddPurchaseFromCartRequestDto;
 import org.example.sivillage.purchase.dto.in.AddPurchaseRequestDto;
@@ -14,7 +15,7 @@ import org.example.sivillage.vendor.infrastructure.ProductByVendorRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
@@ -35,20 +36,20 @@ public class PurchaseServiceImpl implements PurchaseService{
 
     @Override
     public void addPurchase(AddPurchaseRequestDto addPurchaseRequestDto) {
-        String productCode = addPurchaseRequestDto.getProductCode();
-        Integer priceBeforeDiscount = productRepository.findPriceByProductCode(productCode);
+        Product product = productRepository.findByProductCode(addPurchaseRequestDto.getProductCode())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PRODUCT));
 
-        int totalPriceBeforeDiscount = priceBeforeDiscount * addPurchaseRequestDto.getAmount();
-        int totalPriceAfterDiscount = totalPriceBeforeDiscount;
-
-        Optional<Double> discountRate = productByVendorRepository.findDiscountRateByProductCode(productCode);
-
-        if (discountRate.isPresent()) {
-            totalPriceAfterDiscount = (int) (totalPriceBeforeDiscount * (1 - discountRate.get()));
-        }
+        int totalPriceBeforeDiscount = product.getPrice() * addPurchaseRequestDto.getAmount();
+        int totalPriceAfterDiscount = calculateDiscountedPrice(totalPriceBeforeDiscount, product.getProductCode());
 
         purchaseRepository.save(addPurchaseRequestDto.toEntity(totalPriceBeforeDiscount, totalPriceAfterDiscount));
         purchaseProductRepository.save(addPurchaseRequestDto.toEntity());
+    }
+
+    private int calculateDiscountedPrice(int price, String productCode) {
+        return productByVendorRepository.findDiscountRateByProductCode(productCode)
+                .map(discountRate -> (int) (price * (1 - discountRate)))
+                .orElse(price);
     }
 
     @Override
@@ -57,31 +58,24 @@ public class PurchaseServiceImpl implements PurchaseService{
         AtomicInteger totalPriceBeforeDiscount = new AtomicInteger();
         AtomicInteger totalPriceAfterDiscount = new AtomicInteger();
 
-        addPurchaseFromCartRequestDto.getCartIdList().forEach(cartId -> {
-            Cart cart = cartRepository.findById(cartId)
-                    .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_CART));
+        List<Cart> carts = cartRepository.findAllById(addPurchaseFromCartRequestDto.getCartIdList());
+        carts.stream()
+                .filter(Cart::isSelected)
+                .forEach(cart -> saveEachPurchaseProduct(cart, totalPriceBeforeDiscount, totalPriceAfterDiscount));
 
-            if (cart.isSelected()) {
-                Integer price = productRepository.findByProductCode(cart.getProductCode())
-                        .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PRODUCT))
-                        .getPrice();
+        purchaseRepository.save(addPurchaseFromCartRequestDto.toEntity(totalPriceBeforeDiscount.get(), totalPriceAfterDiscount.get()));
+    }
 
-                int calculatedPrice = price * cart.getAmount();
-                totalPriceBeforeDiscount.addAndGet(calculatedPrice);
+    private void saveEachPurchaseProduct(Cart cart, AtomicInteger totalPriceBeforeDiscount, AtomicInteger totalPriceAfterDiscount) {
+        Product product = productRepository.findByProductCode(cart.getProductCode())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PRODUCT));
 
-                Optional<Double> discountRate = productByVendorRepository.findDiscountRateByProductCode(cart.getProductCode());
+        int calculatedPrice = product.getPrice() * cart.getAmount();
+        totalPriceBeforeDiscount.addAndGet(calculatedPrice);
 
-                if (discountRate.isPresent()) {
-                    calculatedPrice = (int) (calculatedPrice * (1 - discountRate.get()));
-                }
+        int discountedPrice = calculateDiscountedPrice(calculatedPrice, product.getProductCode());
+        totalPriceAfterDiscount.addAndGet(discountedPrice);
 
-                totalPriceAfterDiscount.addAndGet(calculatedPrice);
-
-                purchaseProductRepository.save(addPurchaseFromCartRequestDto.toEntity(cart));
-            }
-        });
-
-        addPurchaseFromCartRequestDto.toEntity(totalPriceBeforeDiscount.get(), totalPriceAfterDiscount.get());
-
+        purchaseProductRepository.save(AddPurchaseFromCartRequestDto.toEntity(cart));
     }
 }
