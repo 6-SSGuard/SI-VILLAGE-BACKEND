@@ -21,7 +21,7 @@ public class CartRequestVo {
 
     @Schema(description = "상품옵션", example = "50ml", required = true)
     @NotNull
-    private String productOption;
+    private Long productOptionId;
 
     @Schema(description = "수량", example = "2", required = true)
     @NotNull
@@ -30,7 +30,7 @@ public class CartRequestVo {
     public static CartRequestDto toDto(CartRequestVo cartRequestVo) {
         return CartRequestDto.builder()
                .productCode(cartRequestVo.getProductCode())
-               .productOption(cartRequestVo.getProductOption())
+               .productOptionId(cartRequestVo.getProductOptionId())
                .amount(cartRequestVo.getAmount())
                .build();
     }

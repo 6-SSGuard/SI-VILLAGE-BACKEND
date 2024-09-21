@@ -10,4 +10,6 @@ public interface ProductByVendorRepository extends JpaRepository<ProductByVendor
     List<ProductByVendor> findByVendorName(String vendorName);
 
     Optional<ProductByVendor> findByProductCode(String productCode);
+
+    Optional<Double> findDiscountRateByProductCode(String productCode);
 }

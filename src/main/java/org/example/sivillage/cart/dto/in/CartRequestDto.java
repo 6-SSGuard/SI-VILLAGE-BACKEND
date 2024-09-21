@@ -9,7 +9,7 @@ public class CartRequestDto {
 
     private String productCode;
 
-    private String productOption;
+    private Long productOptionId;
 
     private Integer amount;
 
@@ -18,7 +18,7 @@ public class CartRequestDto {
         return Cart.builder()
                 .memberUuid(memberUuid)
                 .productCode(cartRequestDto.getProductCode())
-                .productOption(cartRequestDto.getProductOption())
+                .productOptionId(cartRequestDto.getProductOptionId())
                 .amount(cartRequestDto.getAmount())
                 .selected(true)
                 .build();
@@ -29,7 +29,7 @@ public class CartRequestDto {
                 .id(cart.getId())
                 .memberUuid(cart.getMemberUuid())
                 .productCode(cart.getProductCode())
-                .productOption(cart.getProductOption())
+                .productOptionId(cart.getProductOptionId())
                 .amount(cart.getAmount() + cartRequestDto.getAmount())
                 .selected(true)
                 .build();
@@ -40,16 +40,16 @@ public class CartRequestDto {
                 .id(cart.getId())
                 .memberUuid(cart.getMemberUuid())
                 .productCode(cart.getProductCode())
-                .productOption(cartRequestDto.getProductOption())
+                .productOptionId(cartRequestDto.getProductOptionId())
                 .amount(cartRequestDto.getAmount())
                 .selected(true)
                 .build();
     }
 
     @Builder
-    public CartRequestDto(String productCode, String productOption, Integer amount) {
+    public CartRequestDto(String productCode, Long productOptionId, Integer amount) {
         this.productCode = productCode;
-        this.productOption = productOption;
+        this.productOptionId = productOptionId;
         this.amount = amount;
     }
 

@@ -36,7 +36,7 @@ public class CartServiceImpl implements CartService {
     }
 
     public void addCart(CartRequestDto cartRequestDto, String memberUuid) {
-        Optional<Cart> existingCartOpt = cartRepository.findByMemberUuidAndProductCodeAndProductOption(memberUuid, cartRequestDto.getProductCode(), cartRequestDto.getProductOption());
+        Optional<Cart> existingCartOpt = cartRepository.findByMemberUuidAndProductCodeAndProductOptionId(memberUuid, cartRequestDto.getProductCode(), cartRequestDto.getProductOptionId());
 
         if (existingCartOpt.isPresent()) {
 
@@ -47,7 +47,7 @@ public class CartServiceImpl implements CartService {
     }
 
     public void addDuplicateCart(CartRequestDto cartRequestDto, String memberUuid) {
-        Optional<Cart> existingCartOpt = cartRepository.findByMemberUuidAndProductCodeAndProductOption(memberUuid, cartRequestDto.getProductCode(), cartRequestDto.getProductOption());
+        Optional<Cart> existingCartOpt = cartRepository.findByMemberUuidAndProductCodeAndProductOptionId(memberUuid, cartRequestDto.getProductCode(), cartRequestDto.getProductOptionId());
         cartRepository.save(cartRequestDto.updateAmount(cartRequestDto,existingCartOpt.get()));
     }
 
