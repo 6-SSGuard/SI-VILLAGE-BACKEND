@@ -11,10 +11,13 @@ import org.example.sivillage.purchase.application.PayService;
 import org.example.sivillage.purchase.application.PurchaseService;
 import org.example.sivillage.purchase.dto.in.AddPurchaseFromCartRequestDto;
 import org.example.sivillage.purchase.dto.in.AddPurchaseRequestDto;
+import org.example.sivillage.purchase.dto.in.KakaoPayRequestDto;
 import org.example.sivillage.purchase.dto.out.ApproveResponse;
 import org.example.sivillage.purchase.dto.out.ReadyResponse;
+import org.example.sivillage.purchase.infrastructure.PurchaseRepository;
 import org.example.sivillage.purchase.vo.in.AddPurchaseFromCartRequestVo;
 import org.example.sivillage.purchase.vo.in.AddPurchaseRequestVo;
+import org.example.sivillage.purchase.vo.in.KakaoPayRequestVo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,17 +32,16 @@ public class PurchaseController {
 
     private final PurchaseService purchaseService;
     private final PayService payService;
+    private final PurchaseRepository purchaseRepository;
 
     @PostMapping("/pay/ready")
-    public ReadyResponse payReady() {
-
-        String name = "민지훈";
-        int totalPrice = 20000;
-
-        log.info("name: {}, totalPrice: {}", name, totalPrice);
+    public ReadyResponse payReady(@AuthenticationPrincipal AuthUserDetails authUserDetails,
+                                  @RequestBody KakaoPayRequestVo kakaoPayRequestVo) {
 
         // 카카오 결제 준비
-        ReadyResponse readyResponse = payService.payReady(name, totalPrice);
+        ReadyResponse readyResponse = payService.payReady(authUserDetails.getMemberUuid(),
+                KakaoPayRequestDto.from(kakaoPayRequestVo));
+
         // 세션에 결제 고유변호(tid) 저장
         SessionUtils.addAttribute("tid", readyResponse.getTid());
         log.info("결제 고유변호(tid): {}", readyResponse.getTid());
@@ -48,14 +50,16 @@ public class PurchaseController {
     }
 
     @GetMapping("/pay/completed")
-    public ModelAndView payCompleted(@RequestParam("pg_token") String pgToken) {
+    public ModelAndView payCompleted(@RequestParam("pg_token") String pgToken,
+                                     @RequestParam("partner_order_id") String partner_order_id,
+                                     @RequestParam("partner_user_id") String partner_user_id) {
 
         String tid = (String) SessionUtils.getAttribute("tid");
         log.info("결제 고유변호(tid): {}", tid);
         log.info("결제 승인 요청을 인증하는 토큰: {}", pgToken);
 
         // 카카오 결제 요청
-        ApproveResponse approveResponse = payService.payApprove(tid, pgToken);
+        ApproveResponse approveResponse = payService.payApprove(tid, pgToken, partner_order_id, partner_user_id);
 
         ModelAndView modelAndView = new ModelAndView();
         // ModelAndView 객체를 사용하여 뷰 이름과 모델 데이터 설정

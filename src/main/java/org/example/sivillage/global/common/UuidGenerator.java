@@ -17,4 +17,8 @@ public class UuidGenerator {
     public static String generateMemberUuid() {
         return UUID.randomUUID().toString().substring(0,8);
     }
+
+    public static String generatePurchaseCode() {
+        return "PC-" + UUID.randomUUID().toString().substring(0,8);
+    }
 }

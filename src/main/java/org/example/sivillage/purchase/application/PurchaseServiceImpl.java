@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.cart.domain.Cart;
 import org.example.sivillage.cart.infrastructure.CartRepository;
+import org.example.sivillage.global.common.UuidGenerator;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.product.domain.Product;
@@ -44,8 +45,10 @@ public class PurchaseServiceImpl implements PurchaseService{
         int totalPriceBeforeDiscount = product.getPrice() * addPurchaseRequestDto.getAmount();
         int totalPriceAfterDiscount = calculateDiscountedPrice(totalPriceBeforeDiscount, product.getProductCode());
 
-        purchaseRepository.save(addPurchaseRequestDto.toEntity(memberUuid, totalPriceBeforeDiscount, totalPriceAfterDiscount));
-        purchaseProductRepository.save(addPurchaseRequestDto.toEntity());
+        String purchaseCode = UuidGenerator.generatePurchaseCode();
+
+        purchaseRepository.save(addPurchaseRequestDto.toEntity(purchaseCode, memberUuid, totalPriceBeforeDiscount, totalPriceAfterDiscount));
+        purchaseProductRepository.save(addPurchaseRequestDto.toEntity(purchaseCode));
     }
 
     private int calculateDiscountedPrice(int price, String productCode) {
@@ -62,16 +65,18 @@ public class PurchaseServiceImpl implements PurchaseService{
 
         log.debug("cartIdList: {}", addPurchaseFromCartRequestDto.getCartIdList());
 
+        String purchaseCode = UuidGenerator.generatePurchaseCode();
+
         List<Cart> carts = cartRepository.findAllById(addPurchaseFromCartRequestDto.getCartIdList());
         carts.stream()
                 .filter(Cart::isSelected)
-                .forEach(cart -> saveEachPurchaseProduct(cart, totalPriceBeforeDiscount, totalPriceAfterDiscount));
+                .forEach(cart -> saveEachPurchaseProduct(purchaseCode, cart, totalPriceBeforeDiscount, totalPriceAfterDiscount));
 
-        purchaseRepository.save(addPurchaseFromCartRequestDto.toEntity(memberUuid, totalPriceBeforeDiscount.get(),
-                totalPriceAfterDiscount.get()));
+        purchaseRepository.save(addPurchaseFromCartRequestDto.toEntity(
+                purchaseCode, memberUuid, totalPriceBeforeDiscount.get(), totalPriceAfterDiscount.get()));
     }
 
-    private void saveEachPurchaseProduct(Cart cart, AtomicInteger totalPriceBeforeDiscount, AtomicInteger totalPriceAfterDiscount) {
+    private void saveEachPurchaseProduct(String purchaseCode, Cart cart, AtomicInteger totalPriceBeforeDiscount, AtomicInteger totalPriceAfterDiscount) {
         Product product = productRepository.findByProductCode(cart.getProductCode())
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PRODUCT));
 
@@ -81,6 +86,6 @@ public class PurchaseServiceImpl implements PurchaseService{
         int discountedPrice = calculateDiscountedPrice(calculatedPrice, product.getProductCode());
         totalPriceAfterDiscount.addAndGet(discountedPrice);
 
-        purchaseProductRepository.save(AddPurchaseFromCartRequestDto.toEntity(cart));
+        purchaseProductRepository.save(AddPurchaseFromCartRequestDto.toEntity(purchaseCode, cart));
     }
 }

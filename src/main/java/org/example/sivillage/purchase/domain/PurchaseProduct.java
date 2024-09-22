@@ -16,6 +16,9 @@ public class PurchaseProduct {
     private Long id;
 
     @Column(nullable = false)
+    private String purchaseCode;
+
+    @Column(nullable = false)
     private String productCode;
 
     private Long productOptionId;
@@ -24,15 +27,17 @@ public class PurchaseProduct {
     private Integer amount;
 
     @Builder
-    public PurchaseProduct(Long id, String productCode, Long productOptionId, Integer amount) {
+    public PurchaseProduct(Long id, String purchaseCode, String productCode, Long productOptionId, Integer amount) {
         this.id = id;
+        this.purchaseCode = purchaseCode;
         this.productCode = productCode;
         this.productOptionId = productOptionId;
         this.amount = amount;
     }
 
     @Builder
-    public PurchaseProduct(String productCode, Long productOptionId, Integer amount) {
+    public PurchaseProduct(String purchaseCode, String productCode, Long productOptionId, Integer amount) {
+        this.purchaseCode = purchaseCode;
         this.productCode = productCode;
         this.productOptionId = productOptionId;
         this.amount = amount;
