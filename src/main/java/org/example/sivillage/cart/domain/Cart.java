@@ -46,4 +46,13 @@ public class Cart extends BaseEntity {
         this.selected = selected;
     }
 
+    @Builder
+    public Cart(String memberUuid, String productCode, Long productOptionId, Integer amount, boolean selected) {
+        this.memberUuid = memberUuid;
+        this.productCode = productCode;
+        this.productOptionId = productOptionId;
+        this.amount = amount;
+        this.selected = selected;
+    }
+
 }

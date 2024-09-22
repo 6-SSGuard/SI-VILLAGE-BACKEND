@@ -36,8 +36,9 @@ public class AddPurchaseRequestDto {
             .build();
     }
 
-    public Purchase toEntity(Integer totalPriceBeforeDiscount, Integer totalPriceAfterDiscount) {
+    public Purchase toEntity(String memberUuid, Integer totalPriceBeforeDiscount, Integer totalPriceAfterDiscount) {
         return Purchase.builder()
+            .memberUuid(memberUuid)
             .shippingMessage(shippingMessage)
             .shippingAddressId(shippingAddressId)
             .totalPriceBeforeDiscount(totalPriceBeforeDiscount)

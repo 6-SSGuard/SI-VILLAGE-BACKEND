@@ -1,6 +1,7 @@
 package org.example.sivillage.purchase.application;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.cart.domain.Cart;
 import org.example.sivillage.cart.infrastructure.CartRepository;
 import org.example.sivillage.global.common.response.BaseResponseStatus;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -35,14 +37,14 @@ public class PurchaseServiceImpl implements PurchaseService{
      */
 
     @Override
-    public void addPurchase(AddPurchaseRequestDto addPurchaseRequestDto) {
+    public void addPurchase(String memberUuid, AddPurchaseRequestDto addPurchaseRequestDto) {
         Product product = productRepository.findByProductCode(addPurchaseRequestDto.getProductCode())
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PRODUCT));
 
         int totalPriceBeforeDiscount = product.getPrice() * addPurchaseRequestDto.getAmount();
         int totalPriceAfterDiscount = calculateDiscountedPrice(totalPriceBeforeDiscount, product.getProductCode());
 
-        purchaseRepository.save(addPurchaseRequestDto.toEntity(totalPriceBeforeDiscount, totalPriceAfterDiscount));
+        purchaseRepository.save(addPurchaseRequestDto.toEntity(memberUuid, totalPriceBeforeDiscount, totalPriceAfterDiscount));
         purchaseProductRepository.save(addPurchaseRequestDto.toEntity());
     }
 
@@ -53,17 +55,20 @@ public class PurchaseServiceImpl implements PurchaseService{
     }
 
     @Override
-    public void addPurchaseFromCart(AddPurchaseFromCartRequestDto addPurchaseFromCartRequestDto) {
+    public void addPurchaseFromCart(String memberUuid, AddPurchaseFromCartRequestDto addPurchaseFromCartRequestDto) {
 
         AtomicInteger totalPriceBeforeDiscount = new AtomicInteger();
         AtomicInteger totalPriceAfterDiscount = new AtomicInteger();
+
+        log.debug("cartIdList: {}", addPurchaseFromCartRequestDto.getCartIdList());
 
         List<Cart> carts = cartRepository.findAllById(addPurchaseFromCartRequestDto.getCartIdList());
         carts.stream()
                 .filter(Cart::isSelected)
                 .forEach(cart -> saveEachPurchaseProduct(cart, totalPriceBeforeDiscount, totalPriceAfterDiscount));
 
-        purchaseRepository.save(addPurchaseFromCartRequestDto.toEntity(totalPriceBeforeDiscount.get(), totalPriceAfterDiscount.get()));
+        purchaseRepository.save(addPurchaseFromCartRequestDto.toEntity(memberUuid, totalPriceBeforeDiscount.get(),
+                totalPriceAfterDiscount.get()));
     }
 
     private void saveEachPurchaseProduct(Cart cart, AtomicInteger totalPriceBeforeDiscount, AtomicInteger totalPriceAfterDiscount) {

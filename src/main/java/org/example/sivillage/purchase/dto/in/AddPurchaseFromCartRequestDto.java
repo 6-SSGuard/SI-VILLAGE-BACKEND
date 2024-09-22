@@ -41,8 +41,9 @@ public class AddPurchaseFromCartRequestDto {
                 .build();
     }
 
-    public Purchase toEntity(int totalPriceBeforeDiscount, int totalPriceAfterDiscount) {
+    public Purchase toEntity(String memberUuid, int totalPriceBeforeDiscount, int totalPriceAfterDiscount) {
         return Purchase.builder()
+            .memberUuid(memberUuid)
             .shippingMessage(shippingMessage)
             .shippingAddressId(shippingAddressId)
             .totalPriceBeforeDiscount(totalPriceBeforeDiscount)
