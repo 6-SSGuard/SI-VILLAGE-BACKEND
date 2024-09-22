@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.cart.domain.Cart;
-import org.example.sivillage.purchase.domain.PayState;
+import org.example.sivillage.purchase.domain.PayStatus;
 import org.example.sivillage.purchase.domain.Purchase;
 import org.example.sivillage.purchase.domain.PurchaseProduct;
 import org.example.sivillage.purchase.vo.in.AddPurchaseFromCartRequestVo;
@@ -34,12 +34,13 @@ public class AddPurchaseFromCartRequestDto {
             .build();
     }
 
-    public static PurchaseProduct toEntity(String purchaseCode, Cart cart) {
+    public static PurchaseProduct toEntity(String purchaseCode, Cart cart, Integer chargedPrice) {
         return PurchaseProduct.builder()
                 .purchaseCode(purchaseCode)
                 .productCode(cart.getProductCode())
                 .productOptionId(cart.getProductOptionId())
                 .amount(cart.getAmount())
+                .chargedPrice(chargedPrice)
                 .build();
     }
 
@@ -51,7 +52,7 @@ public class AddPurchaseFromCartRequestDto {
             .shippingAddressId(shippingAddressId)
             .totalPriceBeforeDiscount(totalPriceBeforeDiscount)
             .totalPriceAfterDiscount(totalPriceAfterDiscount)
-            .payState(PayState.PAYMENT_READY)
+            .payStatus(PayStatus.PAYMENT_READY)
             .build();
     }
 

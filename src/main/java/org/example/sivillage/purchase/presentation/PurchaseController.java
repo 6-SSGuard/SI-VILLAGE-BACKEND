@@ -6,22 +6,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
-import org.example.sivillage.global.util.SessionUtils;
-import org.example.sivillage.purchase.application.PayService;
 import org.example.sivillage.purchase.application.PurchaseService;
 import org.example.sivillage.purchase.dto.in.AddPurchaseFromCartRequestDto;
 import org.example.sivillage.purchase.dto.in.AddPurchaseRequestDto;
-import org.example.sivillage.purchase.dto.in.KakaoPayRequestDto;
-import org.example.sivillage.purchase.dto.out.ApproveResponse;
-import org.example.sivillage.purchase.dto.out.ReadyResponse;
-import org.example.sivillage.purchase.infrastructure.PurchaseRepository;
+import org.example.sivillage.purchase.dto.out.GetPurchaseCodeListResponseDto;
+import org.example.sivillage.purchase.dto.out.GetPurchaseDetailResponseDto;
 import org.example.sivillage.purchase.vo.in.AddPurchaseFromCartRequestVo;
 import org.example.sivillage.purchase.vo.in.AddPurchaseRequestVo;
-import org.example.sivillage.purchase.vo.in.KakaoPayRequestVo;
+import org.example.sivillage.purchase.vo.out.GetPurchaseCodeListResponseVo;
+import org.example.sivillage.purchase.vo.out.GetPurchaseDetailResponseVo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -31,50 +28,30 @@ import org.springframework.web.servlet.ModelAndView;
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
-    private final PayService payService;
-    private final PurchaseRepository purchaseRepository;
 
-    @PostMapping("/pay/ready")
-    public ReadyResponse payReady(@AuthenticationPrincipal AuthUserDetails authUserDetails,
-                                  @RequestBody KakaoPayRequestVo kakaoPayRequestVo) {
+    @Operation(summary = "회원의 주문 code 리스트 조회")
+    @GetMapping("/code-list")
+    public BaseResponse<List<GetPurchaseCodeListResponseVo>> getPurchaseCodeList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
 
-        // 카카오 결제 준비
-        ReadyResponse readyResponse = payService.payReady(authUserDetails.getMemberUuid(),
-                KakaoPayRequestDto.from(kakaoPayRequestVo));
-
-        // 세션에 결제 고유변호(tid) 저장
-        SessionUtils.addAttribute("tid", readyResponse.getTid());
-        log.info("결제 고유변호(tid): {}", readyResponse.getTid());
-
-        return readyResponse;
+        return new BaseResponse<>(
+                purchaseService.getPurchaseCodeList(authUserDetails.getMemberUuid())
+                        .stream()
+                        .map(GetPurchaseCodeListResponseDto::toVo)
+                        .toList()
+        );
     }
 
-    @GetMapping("/pay/completed")
-    public ModelAndView payCompleted(@RequestParam("pg_token") String pgToken,
-                                     @RequestParam("partner_order_id") String partner_order_id,
-                                     @RequestParam("partner_user_id") String partner_user_id) {
-
-        String tid = (String) SessionUtils.getAttribute("tid");
-        log.info("결제 고유변호(tid): {}", tid);
-        log.info("결제 승인 요청을 인증하는 토큰: {}", pgToken);
-
-        // 카카오 결제 요청
-        ApproveResponse approveResponse = payService.payApprove(tid, pgToken, partner_order_id, partner_user_id);
-
-        ModelAndView modelAndView = new ModelAndView();
-        // ModelAndView 객체를 사용하여 뷰 이름과 모델 데이터 설정
-        modelAndView.setViewName("pay/completed");
-        modelAndView.addObject("message", "결제가 성공적으로 완료되었습니다.");
-        modelAndView.addObject("details", approveResponse);
-
-        return modelAndView;
+    @Operation(summary = "회원의 주문 상세 조회")
+    @GetMapping("/{purchaseCode}")
+    public BaseResponse<List<GetPurchaseDetailResponseVo>> getPurchaseDetail(@AuthenticationPrincipal AuthUserDetails authUserDetails,
+                                                                                                @PathVariable String purchaseCode) {
+        return new BaseResponse<>(
+                purchaseService.getPurchaseDetail(authUserDetails.getMemberUuid(), purchaseCode)
+                        .stream().map(GetPurchaseDetailResponseDto::toVo)
+                        .toList()
+        );
     }
 
-    @GetMapping("/pay/completed/success")
-    public String payCompletedSuccess(Model model) {
-        model.addAttribute("message", "결제가 성공적으로 완료되었습니다.");
-        return "pay/completed";
-    }
 
     @Operation(summary = "단일 상품 구매", description = "상품 상세 페이지에서 직접적으로 단일 상품을 구매하는 api")
     @PostMapping

@@ -26,20 +26,27 @@ public class PurchaseProduct {
     @Column(nullable = false)
     private Integer amount;
 
+    @Column(nullable = false)
+    private Integer chargedPrice;
+
     @Builder
-    public PurchaseProduct(Long id, String purchaseCode, String productCode, Long productOptionId, Integer amount) {
+    public PurchaseProduct(Long id, String purchaseCode, String productCode, Long productOptionId, Integer amount,
+                           Integer chargedPrice) {
         this.id = id;
         this.purchaseCode = purchaseCode;
         this.productCode = productCode;
         this.productOptionId = productOptionId;
         this.amount = amount;
+        this.chargedPrice = chargedPrice;
     }
 
     @Builder
-    public PurchaseProduct(String purchaseCode, String productCode, Long productOptionId, Integer amount) {
+    public PurchaseProduct(String purchaseCode, String productCode, Long productOptionId, Integer amount,
+                           Integer chargedPrice) {
         this.purchaseCode = purchaseCode;
         this.productCode = productCode;
         this.productOptionId = productOptionId;
         this.amount = amount;
+        this.chargedPrice = chargedPrice;
     }
 }

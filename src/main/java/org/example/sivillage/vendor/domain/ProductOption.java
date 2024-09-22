@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class ProductOptionList {
+public class ProductOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class ProductOptionList {
     private Integer dangerStock;
 
     @Builder
-    public ProductOptionList(
+    public ProductOption(
             String productCode,
             Long sizeId,
             String volume,

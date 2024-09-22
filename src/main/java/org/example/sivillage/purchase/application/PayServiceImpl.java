@@ -6,7 +6,10 @@ import org.example.sivillage.global.common.response.BaseResponseStatus;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.member.infrastructure.MemberRepository;
 import org.example.sivillage.product.infrastructure.ProductRepository;
+import org.example.sivillage.purchase.domain.PayStatus;
+import org.example.sivillage.purchase.domain.Purchase;
 import org.example.sivillage.purchase.domain.PurchaseProduct;
+import org.example.sivillage.purchase.dto.in.AddPurchaseRequestDto;
 import org.example.sivillage.purchase.dto.in.KakaoPayRequestDto;
 import org.example.sivillage.purchase.dto.out.ApproveResponse;
 import org.example.sivillage.purchase.dto.out.ReadyResponse;
@@ -41,9 +44,10 @@ public class PayServiceImpl implements PayService {
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.MEMBER_NOT_FOUND))
                 .getEmail();
 
-        int totalPrice = purchaseRepository.findByPurchaseCode(kakaoPayRequestDto.getPurchaseCode())
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PURCHASE))
-                .getTotalPriceAfterDiscount();
+        Purchase purchase = purchaseRepository.findByPurchaseCode(kakaoPayRequestDto.getPurchaseCode())
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PURCHASE));
+
+        int totalPrice = purchase.getTotalPriceAfterDiscount();
 
         List<PurchaseProduct> purchaseProducts = purchaseProductRepository.findByPurchaseCode(kakaoPayRequestDto.getPurchaseCode());
 
@@ -80,6 +84,9 @@ public class PayServiceImpl implements PayService {
         ResponseEntity<ReadyResponse> responseEntity = template.postForEntity(url, requestEntity, ReadyResponse.class);
         log.info("결제준비 응답객체: {}", responseEntity.getBody());
 
+        Purchase updatedPurchase = AddPurchaseRequestDto.updatePayStatus(PayStatus.PAYMENT_PENDING, purchase);
+        purchaseRepository.save(updatedPurchase);
+
         return responseEntity.getBody();
     }
 
@@ -104,10 +111,26 @@ public class PayServiceImpl implements PayService {
 
         RestTemplate template = new RestTemplate();
         String url = "https://open-api.kakaopay.com/online/v1/payment/approve";
-        ApproveResponse approveResponse = template.postForObject(url, requestEntity, ApproveResponse.class);
-        log.info("결제승인 응답객체: " + approveResponse);
 
-        // DB에 저장하는 비즈니스 로직 추가
+        ApproveResponse approveResponse;
+        Purchase purchase = purchaseRepository.findByPurchaseCode(partner_order_id)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PURCHASE));
+
+        try {
+            approveResponse = template.postForObject(url, requestEntity, ApproveResponse.class);
+            log.info("결제승인 응답객체: {}", approveResponse);
+
+        } catch (Exception e) {
+            log.error("결제승인 실패: {}", e.getMessage());
+
+            Purchase updatedPurchase = AddPurchaseRequestDto.updatePayStatus(PayStatus.PAYMENT_FAILED, purchase);
+            purchaseRepository.save(updatedPurchase);
+
+            throw new BaseException(BaseResponseStatus.PAYMENT_FAILED);
+        }
+
+        Purchase updatedPurchase = AddPurchaseRequestDto.updatePayStatus(PayStatus.PAYMENT_COMPLETED, purchase);
+        purchaseRepository.save(updatedPurchase);
 
         return approveResponse;
     }

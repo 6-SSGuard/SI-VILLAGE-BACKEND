@@ -36,11 +36,11 @@ public class Purchase extends BaseEntity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private PayState payState;
+    private PayStatus payStatus;
 
     @Builder
     public Purchase(Long id, String purchaseCode, String shippingMessage, Long shippingAddressId, String memberUuid,
-                    Integer totalPriceBeforeDiscount, Integer totalPriceAfterDiscount, PayState payState) {
+                    Integer totalPriceBeforeDiscount, Integer totalPriceAfterDiscount, PayStatus payStatus) {
         this.id = id;
         this.purchaseCode = purchaseCode;
         this.shippingMessage = shippingMessage;
@@ -48,18 +48,18 @@ public class Purchase extends BaseEntity {
         this.memberUuid = memberUuid;
         this.totalPriceBeforeDiscount = totalPriceBeforeDiscount;
         this.totalPriceAfterDiscount = totalPriceAfterDiscount;
-        this.payState = payState;
+        this.payStatus = payStatus;
     }
 
     @Builder
     public Purchase(String purchaseCode, String shippingMessage, Long shippingAddressId, String memberUuid,
-                    Integer totalPriceBeforeDiscount, Integer totalPriceAfterDiscount, PayState payState) {
+                    Integer totalPriceBeforeDiscount, Integer totalPriceAfterDiscount, PayStatus payStatus) {
         this.purchaseCode = purchaseCode;
         this.shippingMessage = shippingMessage;
         this.shippingAddressId = shippingAddressId;
         this.memberUuid = memberUuid;
         this.totalPriceBeforeDiscount = totalPriceBeforeDiscount;
         this.totalPriceAfterDiscount = totalPriceAfterDiscount;
-        this.payState = payState;
+        this.payStatus = payStatus;
     }
 }

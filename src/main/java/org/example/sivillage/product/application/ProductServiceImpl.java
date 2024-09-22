@@ -21,7 +21,7 @@ import org.example.sivillage.product.infrastructure.ProductRepository;
 import org.example.sivillage.vendor.domain.ProductByVendor;
 import org.example.sivillage.vendor.domain.ProductCategoryList;
 import org.example.sivillage.vendor.domain.ProductImage;
-import org.example.sivillage.vendor.domain.ProductOptionList;
+import org.example.sivillage.vendor.domain.ProductOption;
 import org.example.sivillage.vendor.infrastructure.ProductByVendorRepository;
 import org.example.sivillage.vendor.infrastructure.ProductCategoryListRepository;
 import org.example.sivillage.vendor.infrastructure.ProductImageRepository;
@@ -224,7 +224,7 @@ public class ProductServiceImpl implements ProductService {
 
             productImageRepository.save(productImage);
 
-            ProductOptionList productOptionList = ProductOptionList.builder()
+            ProductOption productOption = ProductOption.builder()
                     .productCode(productCode)
                     .volume(volume)
                     .stock(100)
@@ -232,7 +232,7 @@ public class ProductServiceImpl implements ProductService {
                     .soldOut(false)
                     .build();
 
-            productOptionListRepository.save(productOptionList);
+            productOptionListRepository.save(productOption);
 
             ProductByVendor productByVendor = ProductByVendor.builder()
                     .productCode(productCode)

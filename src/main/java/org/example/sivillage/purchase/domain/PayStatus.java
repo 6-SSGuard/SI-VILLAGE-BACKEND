@@ -1,8 +1,8 @@
 package org.example.sivillage.purchase.domain;
 
-public enum PayState {
+public enum PayStatus {
     PAYMENT_READY,
     PAYMENT_PENDING,
-    PAYMENT_COMPLETE,
+    PAYMENT_COMPLETED,
     PAYMENT_FAILED
 }
