@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.cart.domain.Cart;
+import org.example.sivillage.purchase.domain.PayStatus;
 import org.example.sivillage.purchase.domain.Purchase;
 import org.example.sivillage.purchase.domain.PurchaseProduct;
 import org.example.sivillage.purchase.vo.in.AddPurchaseFromCartRequestVo;
@@ -33,21 +34,25 @@ public class AddPurchaseFromCartRequestDto {
             .build();
     }
 
-    public static PurchaseProduct toEntity(Cart cart) {
+    public static PurchaseProduct toEntity(String purchaseCode, Cart cart, Integer chargedPrice) {
         return PurchaseProduct.builder()
+                .purchaseCode(purchaseCode)
                 .productCode(cart.getProductCode())
                 .productOptionId(cart.getProductOptionId())
                 .amount(cart.getAmount())
+                .chargedPrice(chargedPrice)
                 .build();
     }
 
-    public Purchase toEntity(String memberUuid, int totalPriceBeforeDiscount, int totalPriceAfterDiscount) {
+    public Purchase toEntity(String purchaseCode, String memberUuid, int totalPriceBeforeDiscount, int totalPriceAfterDiscount) {
         return Purchase.builder()
+            .purchaseCode(purchaseCode)
             .memberUuid(memberUuid)
             .shippingMessage(shippingMessage)
             .shippingAddressId(shippingAddressId)
             .totalPriceBeforeDiscount(totalPriceBeforeDiscount)
             .totalPriceAfterDiscount(totalPriceAfterDiscount)
+            .payStatus(PayStatus.PAYMENT_READY)
             .build();
     }
 

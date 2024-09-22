@@ -15,4 +15,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 
     Integer findPriceByProductCode(String productCode);
+
 }

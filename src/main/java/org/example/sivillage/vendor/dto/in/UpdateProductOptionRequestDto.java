@@ -3,7 +3,7 @@ package org.example.sivillage.vendor.dto.in;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.vendor.domain.ProductOptionList;
+import org.example.sivillage.vendor.domain.ProductOption;
 import org.example.sivillage.vendor.vo.in.UpdateProductOptionRequestVo;
 
 @Getter
@@ -47,8 +47,8 @@ public class UpdateProductOptionRequestDto {
                 .build();
     }
 
-    public ProductOptionList updateEntity(Long id) {
-        return ProductOptionList.builder()
+    public ProductOption updateEntity(Long id) {
+        return ProductOption.builder()
                 .id(id)
                 .productCode(productCode)
                 .sizeId(sizeId)

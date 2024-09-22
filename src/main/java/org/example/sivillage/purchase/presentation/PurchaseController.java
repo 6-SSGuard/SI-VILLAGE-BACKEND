@@ -3,19 +3,24 @@ package org.example.sivillage.purchase.presentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.purchase.application.PurchaseService;
 import org.example.sivillage.purchase.dto.in.AddPurchaseFromCartRequestDto;
 import org.example.sivillage.purchase.dto.in.AddPurchaseRequestDto;
+import org.example.sivillage.purchase.dto.out.GetPurchaseCodeListResponseDto;
+import org.example.sivillage.purchase.dto.out.GetPurchaseDetailResponseDto;
 import org.example.sivillage.purchase.vo.in.AddPurchaseFromCartRequestVo;
 import org.example.sivillage.purchase.vo.in.AddPurchaseRequestVo;
+import org.example.sivillage.purchase.vo.out.GetPurchaseCodeListResponseVo;
+import org.example.sivillage.purchase.vo.out.GetPurchaseDetailResponseVo;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/purchase")
@@ -23,6 +28,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
+
+    @Operation(summary = "회원의 주문 code 리스트 조회")
+    @GetMapping("/code-list")
+    public BaseResponse<List<GetPurchaseCodeListResponseVo>> getPurchaseCodeList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
+
+        return new BaseResponse<>(
+                purchaseService.getPurchaseCodeList(authUserDetails.getMemberUuid())
+                        .stream()
+                        .map(GetPurchaseCodeListResponseDto::toVo)
+                        .toList()
+        );
+    }
+
+    @Operation(summary = "회원의 주문 상세 조회")
+    @GetMapping("/{purchaseCode}")
+    public BaseResponse<List<GetPurchaseDetailResponseVo>> getPurchaseDetail(@AuthenticationPrincipal AuthUserDetails authUserDetails,
+                                                                                                @PathVariable String purchaseCode) {
+        return new BaseResponse<>(
+                purchaseService.getPurchaseDetail(authUserDetails.getMemberUuid(), purchaseCode)
+                        .stream().map(GetPurchaseDetailResponseDto::toVo)
+                        .toList()
+        );
+    }
+
 
     @Operation(summary = "단일 상품 구매", description = "상품 상세 페이지에서 직접적으로 단일 상품을 구매하는 api")
     @PostMapping

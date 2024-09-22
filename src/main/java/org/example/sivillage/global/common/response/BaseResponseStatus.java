@@ -31,7 +31,7 @@ public enum BaseResponseStatus {
     POSTS_NOT_FOUND(HttpStatus.NOT_FOUND, false, "게시글 정보를 찾을 수 없습니다."),
     BRAND_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 브랜드 명을 찾을 수 없습니다."),
     PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, false, "해당하는 상품 정보를 찾을 수 없습니다."),
-    PRODUCT_OPTION_NOT_FOUND(HttpStatus.NOT_FOUND, false, "제품의 옵션 정보를 찾을 수 없습니다."),
+    NOT_FOUND_PRODUCT_OPTION(HttpStatus.NOT_FOUND, false, "제품의 옵션 정보를 찾을 수 없습니다."),
     BRAND_LIKE_NOT_FOUND(HttpStatus.NOT_FOUND,false, "해당하는 브랜드 좋아요 정보를 찾을 수 없습니다."),
     TOP_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND,false, "해당하는 top 카테고리 정보를 찾을 수 없습니다."),
     MIDDLE_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND,false, "해당하는 middle 카테고리 정보를 찾을 수 없습니다."),
@@ -43,6 +43,7 @@ public enum BaseResponseStatus {
     NOT_FOUND_COLOR(HttpStatus.NOT_FOUND, false, "해당하는 색상 정보를 찾을 수 없습니다."),
     NOT_FOUND_SIZE(HttpStatus.NOT_FOUND, false, "해당하는 사이즈 정보를 찾을 수 없습니다."),
     NOT_FOUND_PRODUCT(HttpStatus.NOT_FOUND, false, "해당하는 상품 정보를 찾을 수 없습니다."),
+    NOT_FOUND_PURCHASE(HttpStatus.NOT_FOUND, false, "해당하는 구매 정보를 찾을 수 없습니다."),
 
     /*
      * 405 METHOD_NOT_ALLOWED: 허용되지 않은 Request Method 호출
@@ -55,6 +56,7 @@ public enum BaseResponseStatus {
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, false, "내부 서버 오류입니다."),
     VALIDATION_FAILURE(HttpStatus.BAD_REQUEST, false, "유효성 검사에 실패했습니다."),
     INVALID_REQUEST_BODY(HttpStatus.BAD_REQUEST, false, "요청 본문이 유효하지 않습니다."),
+    PAYMENT_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, false, "결제에 실패했습니다."),
 
     // 인증 관련
     FAILED_TO_LOGIN(HttpStatus.INTERNAL_SERVER_ERROR, false, "로그인에 실패했습니다."),
@@ -76,6 +78,7 @@ public enum BaseResponseStatus {
     NO_AUTHORITY_FOUND(HttpStatus.NOT_FOUND, false,  "회원의 권한 정보를 찾을 수 없습니다"),
     UNAUTHORIZED_MEMBER(HttpStatus.UNAUTHORIZED, false,  "접근 권한이 없습니다."),
     UNAUTHORIZED_TASK(HttpStatus.UNAUTHORIZED, false,  "허용되지 않은 권한입니다."),
+
 
     // 중복 요청 관련
     DUPLICATE_CART(HttpStatus.CONFLICT,false,"이미 쇼핑백에 담겨 있는 상품입니다. 쇼핑백 수량을 추가 하시겠습니까?"),

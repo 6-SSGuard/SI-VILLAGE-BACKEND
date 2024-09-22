@@ -16,6 +16,9 @@ public class Purchase extends BaseEntity {
     @Column(name = "purchase_id")
     private Long id;
 
+    @Column(nullable = false, unique = true)
+    private String purchaseCode;
+
     @Column(nullable = false)
     private String shippingMessage;
 
@@ -31,25 +34,32 @@ public class Purchase extends BaseEntity {
     @Column(nullable = false)
     private Integer totalPriceAfterDiscount;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PayStatus payStatus;
+
     @Builder
-    public Purchase(Long id, String shippingMessage, Long shippingAddressId, String memberUuid,
-                    Integer totalPriceBeforeDiscount, Integer totalPriceAfterDiscount) {
+    public Purchase(Long id, String purchaseCode, String shippingMessage, Long shippingAddressId, String memberUuid,
+                    Integer totalPriceBeforeDiscount, Integer totalPriceAfterDiscount, PayStatus payStatus) {
         this.id = id;
+        this.purchaseCode = purchaseCode;
         this.shippingMessage = shippingMessage;
         this.shippingAddressId = shippingAddressId;
         this.memberUuid = memberUuid;
         this.totalPriceBeforeDiscount = totalPriceBeforeDiscount;
         this.totalPriceAfterDiscount = totalPriceAfterDiscount;
-
+        this.payStatus = payStatus;
     }
 
     @Builder
-    public Purchase(String shippingMessage, Long shippingAddressId, String memberUuid,
-                    Integer totalPriceBeforeDiscount, Integer totalPriceAfterDiscount) {
+    public Purchase(String purchaseCode, String shippingMessage, Long shippingAddressId, String memberUuid,
+                    Integer totalPriceBeforeDiscount, Integer totalPriceAfterDiscount, PayStatus payStatus) {
+        this.purchaseCode = purchaseCode;
         this.shippingMessage = shippingMessage;
         this.shippingAddressId = shippingAddressId;
         this.memberUuid = memberUuid;
         this.totalPriceBeforeDiscount = totalPriceBeforeDiscount;
         this.totalPriceAfterDiscount = totalPriceAfterDiscount;
+        this.payStatus = payStatus;
     }
 }

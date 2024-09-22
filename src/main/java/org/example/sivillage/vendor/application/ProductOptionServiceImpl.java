@@ -2,7 +2,7 @@ package org.example.sivillage.vendor.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.sivillage.vendor.domain.ProductOptionList;
+import org.example.sivillage.vendor.domain.ProductOption;
 import org.example.sivillage.vendor.dto.in.CreateProductOptionRequestDto;
 import org.example.sivillage.vendor.dto.in.UpdateProductOptionRequestDto;
 import org.example.sivillage.vendor.dto.out.GetProductOptionListResponseDto;
@@ -40,11 +40,11 @@ public class ProductOptionServiceImpl implements ProductOptionService {
                 throw new IllegalArgumentException("dangerStock 값이 0보다 작습니다.");
             }
         }
-        List<ProductOptionList> productOptionList = createProductOptionRequestDto.stream()
+        List<ProductOption> productOption = createProductOptionRequestDto.stream()
                 .map(CreateProductOptionRequestDto::toEntity)
                 .toList();
 
-        productOptionRepository.saveAll(productOptionList);
+        productOptionRepository.saveAll(productOption);
     }
 
     @Override
@@ -56,13 +56,13 @@ public class ProductOptionServiceImpl implements ProductOptionService {
             }
         }
 
-        List<ProductOptionList> productOptionList = updateProductOptionRequestDto.stream()
+        List<ProductOption> productOption = updateProductOptionRequestDto.stream()
                 .map(dto -> {
                     return dto.updateEntity(dto.getId());
                 })
                 .toList();
 
-        productOptionRepository.saveAll(productOptionList);
+        productOptionRepository.saveAll(productOption);
     }
 
     /**
