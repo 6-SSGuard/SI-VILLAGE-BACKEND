@@ -11,7 +11,7 @@ public interface CartService {
 
     List<IdListResponseDto<Long>> getMemberCartIds(String memberUuid);
     CartResponseDto getCartInfo(Long cartId);
-    CartAmountResponseDto getCartAmount(String memberUuid);
+    CartAmountResponseDto getCartQuantity(String memberUuid);
     void addCart(CartRequestDto cartRequestDto, String memberUuid);
     void addDuplicateCart(CartRequestDto cartRequestDto, String memberUuid);
     void changeCart(Long cartId, CartRequestDto cartRequestDto);

@@ -47,7 +47,7 @@ public class CartController {
     @Operation(summary = "장바구니 수량 조회", description = "회원의 장바구니 수량을 조회합니다.")
     @GetMapping("/count")
     public BaseResponse<CartAmountResponseVo> getMemberCartAmount(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        CartAmountResponseDto cartAmountResponseDto = cartService.getCartAmount(authUserDetails.getMemberUuid());
+        CartAmountResponseDto cartAmountResponseDto = cartService.getCartQuantity(authUserDetails.getMemberUuid());
         return new BaseResponse<>(cartAmountResponseDto.toResponseVo());
     }
 

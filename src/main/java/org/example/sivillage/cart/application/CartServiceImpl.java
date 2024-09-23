@@ -36,7 +36,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Transactional(readOnly = true)
-    public CartAmountResponseDto getCartAmount(String memberUuid) {
+    public CartAmountResponseDto getCartQuantity(String memberUuid) {
         return CartAmountResponseDto.from(cartRepository.countByMemberUuid(memberUuid));
     }
 
