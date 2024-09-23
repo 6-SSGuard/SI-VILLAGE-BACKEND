@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/purchase")
+@RequestMapping("/api/purchase/member")
 @Tag(name = "상품 구매", description = "상품 구매 관련 API")
 public class PurchaseController {
 

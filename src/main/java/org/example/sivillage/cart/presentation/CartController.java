@@ -25,13 +25,13 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/api/cart")
+@RequestMapping("/api/cart/member")
 public class CartController {
 
     private final CartServiceImpl cartService;
 
     @Operation(summary = "회원의 장바구니 id 조회", description = "회원의 장바구니 id 리스트를 반환")
-    @GetMapping("")
+    @GetMapping("/ids")
     public BaseResponse<List<IdListResponseVo<Long>>> getMemberCartIds(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         List<IdListResponseVo<Long>> idListResponseVoList = cartService.getMemberCartIds(authUserDetails.getMemberUuid())
                 .stream().map(IdListResponseDto::toVo).toList();
@@ -53,14 +53,14 @@ public class CartController {
     }
 
     @Operation(summary = "장바구니 추가", description = "장바구니에 상품을 추가합니다.")
-    @PostMapping("")
+    @PostMapping
     public BaseResponse<Void> addCart(@RequestBody CartRequestVo cartRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         cartService.addCart(CartRequestDto.from(cartRequestVo), authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
     @Operation(summary = "중복된 상품 장바구니 추가", description = "중복된 상품을 장바구니에 저장합니다.")
-    @DeleteMapping("/all")
+    @DeleteMapping("/duplicate")
     public BaseResponse<Void> addDuplicateCart(@RequestBody CartRequestVo cartRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         cartService.addDuplicateCart(CartRequestDto.from(cartRequestVo), authUserDetails.getMemberUuid());
         return new BaseResponse<>();

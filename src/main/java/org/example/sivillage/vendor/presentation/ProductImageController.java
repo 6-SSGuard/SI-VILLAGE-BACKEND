@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/vendor/product/image")
+    @RequestMapping("/api/vendor/product/image")
 @Tag(name = "벤더의 상품 관리 API")
 public class ProductImageController {
 

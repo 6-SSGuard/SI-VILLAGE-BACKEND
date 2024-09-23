@@ -11,7 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@RequestMapping("/api/product/like")
+@RequestMapping("/api/product-like/member/")
 @RestController
 @Tag(name= "상품 관리 API", description = "상품 관련 API endpoints")
 public class ProductLikeController {
@@ -20,9 +20,9 @@ public class ProductLikeController {
 
 
     @Operation(summary = "상품 좋아요 버튼 토글", description = "좋아요 -> 좋아요 해제, 좋아요 해제 -> 좋아요")
-    @PutMapping("/product/like/{productUuid}")
-    public BaseResponse<Void> toggleProductLike(@PathVariable String productUuid, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
-        productLikeService.toggleProductLike(productUuid, authUserDetails.getMemberUuid());
+    @PutMapping("/{productCode}")
+    public BaseResponse<Void> toggleProductLike(@PathVariable String productCode, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
+        productLikeService.toggleProductLike(productCode, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 

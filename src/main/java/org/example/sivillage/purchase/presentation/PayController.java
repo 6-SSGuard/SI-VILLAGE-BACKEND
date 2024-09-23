@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/pay")
+@RequestMapping("/api/pay/member")
 @Tag(name = "상품 결제", description = "상품 주문 이후 결제 관련 API")
 public class PayController {
 

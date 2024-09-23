@@ -25,7 +25,7 @@ public class ProductController {
     private final ProductService productService;
 
     @Operation(summary = "상품 등록")
-    @PostMapping
+    @PostMapping("/vendor")
     public BaseResponse<CreateProductResponseVo> addProduct(@RequestBody CreateProductRequestVo createProductRequestVo) {
 
         return new BaseResponse<>(
@@ -52,14 +52,14 @@ public class ProductController {
     }
 
     @Operation(summary = "상품 수정", description = "")
-    @PutMapping
+    @PutMapping("/vendor")
     public BaseResponse<Void> changeProduct(@RequestBody ChangeProductRequestVo createProductRequestVo) {
         productService.changeProduct(ChangeProductRequestDto.from(createProductRequestVo));
         return new BaseResponse<>();
     }
 
     @Operation(summary = "CSV 파일로 상품 등록", description = "")
-    @PostMapping(value ="/csv", consumes = "multipart/form-data")
+    @PostMapping(value ="/admin/csv", consumes = "multipart/form-data")
     public BaseResponse<Void> addProductByCsv(@RequestParam("file") MultipartFile file) {
         productService.addProductByCsv(file);
         return new BaseResponse<>();

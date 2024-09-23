@@ -19,8 +19,8 @@ public interface ProductLikeService {
 
     /**
      * 2. toggleProductLike 상품 좋아요 토글
-     * @param productUuid 상품 UUID
+     * @param productCode 상품 UUID
      * @param memberUuid 회원 UUID
      */
-    void toggleProductLike(String productUuid, String memberUuid);
+    void toggleProductLike(String productCode, String memberUuid);
 }

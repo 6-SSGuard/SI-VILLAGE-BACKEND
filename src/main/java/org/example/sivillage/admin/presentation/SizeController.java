@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "사이즈 관리 API", description = "사이즈 관련 API endpoints")
-@RequestMapping("/api/size")
+@RequestMapping("/api/size/admin")
 public class SizeController {
 
     private final SizeService sizeService;

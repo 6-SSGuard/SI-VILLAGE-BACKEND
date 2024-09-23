@@ -18,27 +18,27 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/api/size-info")
+@RequestMapping("/api/size-info/member")
 public class SizeInfoController {
 
     private final SizeInfoServiceImpl sizeInfoService;
 
     @Operation(summary = "사이즈 정보 등록", description = "사이즈 정보를 등록합니다.", tags = "마이페이지-나의 정보 관리")
-    @PostMapping()
+    @PostMapping
     public BaseResponse<Void> addSizeInfo(@Valid @RequestBody SizeInfoRequestVo sizeInfoRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         sizeInfoService.addSizeInfo(SizeInfoRequestVo.toDto(sizeInfoRequestVo), authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
     @Operation(summary = "사이즈 정보 조회", description = "사이즈 정보를 조회합니다.", tags = "마이페이지-나의 정보 관리")
-    @GetMapping()
+    @GetMapping
     public BaseResponse<SizeInfoResponseVo> getSizeInfo(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         SizeInfoResponseDto sizeInfoResponseDto = sizeInfoService.getSizeInfo(authUserDetails.getMemberUuid());
         return new BaseResponse<>(sizeInfoResponseDto.toResponseVo());
     }
 
     @Operation(summary = "사이즈 정보 수정", description = "사이즈 정보를 수정합니다.", tags = "마이페이지-나의 정보 관리")
-    @PutMapping()
+    @PutMapping
     public BaseResponse<Void> changeSizeInfo(@Valid @RequestBody SizeInfoRequestVo sizeInfoRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         sizeInfoService.changeSizeInfo(SizeInfoRequestVo.toDto(sizeInfoRequestVo), authUserDetails.getMemberUuid());
         return new BaseResponse<>();
@@ -46,7 +46,7 @@ public class SizeInfoController {
     }
 
     @Operation(summary = "사이즈 정보 삭제", description = "사이즈 정보를 삭제합니다.", tags = "마이페이지-나의 정보 관리")
-    @DeleteMapping()
+    @DeleteMapping
     public BaseResponse<Void> deleteSizeInfo(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         sizeInfoService.removeSizeInfo(authUserDetails.getMemberUuid());
         return new BaseResponse<>();

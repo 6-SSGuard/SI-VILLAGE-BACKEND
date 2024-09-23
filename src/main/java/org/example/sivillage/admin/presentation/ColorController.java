@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "색상 관리 API", description = "색상 관련 API endpoints")
-@RequestMapping("/api/color")
+@RequestMapping("/api/color/admin")
 public class ColorController {
 
     /**
