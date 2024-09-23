@@ -47,7 +47,21 @@ public class ShippingAddressRequestDto {
                 .build();
     }
 
-    public ShippingAddress deactivateDefaultAddress(ShippingAddress shippingAddress){
+    public static ShippingAddress updateToDefaultShippingAddress (ShippingAddress shippingAddress, boolean isDefaultAddress) {
+        return ShippingAddress.builder()
+                .id(shippingAddress.getId())
+                .addressName(shippingAddress.getAddressName())
+                .recipient(shippingAddress.getRecipient())
+                .phone(shippingAddress.getPhone())
+                .address(shippingAddress.getAddress())
+                .detailedAddress(shippingAddress.getDetailedAddress())
+                .postalCode(shippingAddress.getPostalCode())
+                .defaultAddress(isDefaultAddress)
+                .memberUuid(shippingAddress.getMemberUuid())
+                .build();
+    }
+
+    public static ShippingAddress deactivateDefaultAddress(ShippingAddress shippingAddress){
         return ShippingAddress.builder()
                 .id(shippingAddress.getId())
                 .addressName(shippingAddress.getAddressName())

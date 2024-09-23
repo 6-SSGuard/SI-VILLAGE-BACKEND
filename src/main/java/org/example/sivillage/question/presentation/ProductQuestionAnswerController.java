@@ -20,19 +20,19 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/api/product-question-answer")
+@RequestMapping("/api/product/answer")
 public class ProductQuestionAnswerController {
 
     private final ProductQuestionAnswerServiceImpl productQuestionAnswerService;
 
-    @Operation(summary = "상품문의 답변 등록", description = "상품문의 답변을 등록합니다.")
-    @PostMapping("/{productQuestionId}")
+    @Operation(summary = "상품 문의 답변 등록", description = "상품문의 답변을 등록합니다.")
+    @PostMapping("/vendor/{productQuestionId}")
     public BaseResponse<Void> addProductQuestionAnswer(@PathVariable("productQuestionId") Long productQuestionId, @Valid @RequestBody ProductQuestionAnswerRequestVo productQuestionAnswerRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         productQuestionAnswerService.addProductQuestionAnswer(ProductQuestionAnswerRequestVo.toDto(productQuestionAnswerRequestVo), productQuestionId, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "상품문의 답변 단일 조회", description = "상품문의 답변을 조회합니다.")
+    @Operation(summary = "상품 문의 답변 단일 조회", description = "상품문의 답변을 조회합니다.")
     @GetMapping("/{productQuestionId}")
     public BaseResponse<ProductQuestionAnswerResponseVo> getProductQuestionAnswer(@PathVariable("productQuestionId") Long productQuestionId) { // 상품 문의 id로 조회
         ProductQuestionAnswerResponseDto productQuestionResponseAnswerDto = productQuestionAnswerService.getProductQuestionAnswer(productQuestionId);
@@ -41,7 +41,7 @@ public class ProductQuestionAnswerController {
     }
 
     @Operation(summary = "판매자의 상품문의답변 조회", description = "판매자의 상품문의 답변을 조회합니다.")
-    @GetMapping("")
+    @GetMapping("/vendor")
     public BaseResponse<List<ProductQuestionAnswerResponseVo>> getVendorProductQuestionAnswer(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         List<ProductQuestionAnswerResponseVo> productQuestionAnswerResponseVoList = productQuestionAnswerService.getVendorProductQuestionAnswer(authUserDetails.getMemberUuid())
                 .stream()
@@ -50,7 +50,7 @@ public class ProductQuestionAnswerController {
     }
 
     @Operation(summary = "상품문의 답변 수정", description = "상품문의 답변을 수정합니다.")
-    @PutMapping("/{productQuestionAnswerId}")
+    @PutMapping("/vendor/{productQuestionAnswerId}")
     public BaseResponse<Void> updateProductQuestionAnswer(@PathVariable("productQuestionAnswerId") Long productQuestionAnswerId, @Valid @RequestBody ProductQuestionAnswerRequestVo productQuestionAnswerRequestVo) {
         productQuestionAnswerService.changeProductQuestionAnswer(ProductQuestionAnswerRequestVo.toDto(productQuestionAnswerRequestVo), productQuestionAnswerId);
         return new BaseResponse<>();

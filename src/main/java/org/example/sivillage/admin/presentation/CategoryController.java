@@ -22,7 +22,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @Operation(summary = "카테고리 생성", description = "parentCategoryCode =\"\"입력시 최상위 카테고리 생성")
-    @PostMapping("/")
+    @PostMapping("/admin")
     public BaseResponse<Void> addCategory(
             @RequestBody AddCategoryRequestVo addCategoryRequestVo) {
 
@@ -31,7 +31,7 @@ public class CategoryController {
     }
 
     @Operation(summary = "JSON 파일 기반으로 카테고리 생성")
-    @PostMapping(value = "/json", consumes = "multipart/form-data")
+    @PostMapping(value = "/admin/json", consumes = "multipart/form-data")
     public BaseResponse<Void> addCategoryFromFile(@RequestPart("file") MultipartFile file) {
         categoryService.addCategoryFromFile(file);
         return new BaseResponse<>();

@@ -1,37 +1,22 @@
 package org.example.sivillage.cart.vo.in;
 
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.example.sivillage.cart.dto.in.CartRequestDto;
 
-@Builder
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class CartRequestVo {
 
-    @Schema(description = "상품코드", example = "productUuid", required = true)
-    @NotNull
     private String productCode;
 
-    @Schema(description = "상품옵션", example = "50ml", required = true)
-    @NotNull
-    private String productOption;
+    private Long productOptionId;
 
-    @Schema(description = "수량", example = "2", required = true)
-    @NotNull
-    private Integer amount;
+    private Integer quantity;
 
-    public static CartRequestDto toDto(CartRequestVo cartRequestVo) {
-        return CartRequestDto.builder()
-               .productCode(cartRequestVo.getProductCode())
-               .productOption(cartRequestVo.getProductOption())
-               .amount(cartRequestVo.getAmount())
-               .build();
+    public CartRequestVo(String productCode, Long productOptionId, Integer quantity) {
+        this.productCode = productCode;
+        this.productOptionId = productOptionId;
+        this.quantity = quantity;
     }
 }

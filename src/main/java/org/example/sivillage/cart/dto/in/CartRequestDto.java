@@ -2,35 +2,64 @@ package org.example.sivillage.cart.dto.in;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.example.sivillage.cart.domain.Cart;
+import org.example.sivillage.cart.vo.in.CartRequestVo;
 
 @Getter
+@NoArgsConstructor
 public class CartRequestDto {
 
     private String productCode;
 
-    private String productOption;
+    private Long productOptionId;
 
-    private Integer amount;
+    private Integer quantity;
+
+    @Builder
+    public CartRequestDto(String productCode, Long productOptionId, Integer quantity) {
+        this.productCode = productCode;
+        this.productOptionId = productOptionId;
+        this.quantity = quantity;
+    }
+
+    public static CartRequestDto from(CartRequestVo cartRequestVo) {
+        return CartRequestDto.builder()
+                .productCode(cartRequestVo.getProductCode())
+                .productOptionId(cartRequestVo.getProductOptionId())
+                .quantity(cartRequestVo.getQuantity())
+                .build();
+    }
 
 
     public static Cart toEntity(CartRequestDto cartRequestDto, String memberUuid) {
         return Cart.builder()
                 .memberUuid(memberUuid)
                 .productCode(cartRequestDto.getProductCode())
-                .productOption(cartRequestDto.getProductOption())
-                .amount(cartRequestDto.getAmount())
+                .productOptionId(cartRequestDto.getProductOptionId())
+                .quantity(cartRequestDto.getQuantity())
                 .selected(true)
                 .build();
     }
 
-    public Cart updateAmount(CartRequestDto cartRequestDto, Cart cart){
+    public Cart updatePlusQuantity(CartRequestDto cartRequestDto, Cart cart){
         return Cart.builder()
                 .id(cart.getId())
                 .memberUuid(cart.getMemberUuid())
                 .productCode(cart.getProductCode())
-                .productOption(cart.getProductOption())
-                .amount(cart.getAmount() + cartRequestDto.getAmount())
+                .productOptionId(cart.getProductOptionId())
+                .quantity(cart.getQuantity() + cartRequestDto.getQuantity())
+                .selected(true)
+                .build();
+    }
+
+    public static Cart updateQuantity(Cart cart, Integer quantity){
+        return Cart.builder()
+                .id(cart.getId())
+                .memberUuid(cart.getMemberUuid())
+                .productCode(cart.getProductCode())
+                .productOptionId(cart.getProductOptionId())
+                .quantity(quantity)
                 .selected(true)
                 .build();
     }
@@ -40,17 +69,10 @@ public class CartRequestDto {
                 .id(cart.getId())
                 .memberUuid(cart.getMemberUuid())
                 .productCode(cart.getProductCode())
-                .productOption(cartRequestDto.getProductOption())
-                .amount(cartRequestDto.getAmount())
+                .productOptionId(cartRequestDto.getProductOptionId())
+                .quantity(cartRequestDto.getQuantity())
                 .selected(true)
                 .build();
-    }
-
-    @Builder
-    public CartRequestDto(String productCode, String productOption, Integer amount) {
-        this.productCode = productCode;
-        this.productOption = productOption;
-        this.amount = amount;
     }
 
 }

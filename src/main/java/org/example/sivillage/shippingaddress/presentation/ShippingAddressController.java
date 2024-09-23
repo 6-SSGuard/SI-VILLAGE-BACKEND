@@ -20,20 +20,20 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/api/shipping-addresses")
+@RequestMapping("/api/shipping-address/member")
 public class ShippingAddressController {
 
     private final ShippingAddressServiceImpl shippingAddressService;
 
     @Operation(summary = "배송지 등록", description = "기본 배송지를 등록합니다.", tags = "마이페이지-나의 정보 관리")
-    @PostMapping("")
+    @PostMapping
     public BaseResponse<Void> addShippingAddress (@Valid @RequestBody ShippingAddressRequestVo vo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         shippingAddressService.addShippingAddress(ShippingAddressRequestVo.toDto(vo), authUserDetails.getMemberUuid()); // vo -> dto
         return new BaseResponse<>();
     }
 
     @Operation(summary ="배송지 목록 조회", description = "배송지 목록을 조회합니다.", tags = "마이페이지-나의 정보 관리")
-    @GetMapping()
+    @GetMapping
     public BaseResponse<List<ShippingAddressResponseVo>> getShippingAddresses(@AuthenticationPrincipal AuthUserDetails authUserDetails){
         List<ShippingAddressResponseVo> shippingAddressResponseVoList = shippingAddressService.getShippingAddress(authUserDetails.getMemberUuid())
                 .stream()
@@ -45,6 +45,13 @@ public class ShippingAddressController {
     @PutMapping("/{shippingAddressId}")
     public BaseResponse<Void> changeShippingAddress(@PathVariable("shippingAddressId") Long shippingAddressId, @Valid @RequestBody ShippingAddressRequestVo vo, @AuthenticationPrincipal AuthUserDetails authUserDetails){
         shippingAddressService.changeShippingAddress(ShippingAddressRequestVo.toDto(vo),authUserDetails.getMemberUuid(),shippingAddressId);
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "기본 배송지 설정", description = "기본배송지로 수정합니다.", tags = "마이페이지-나의 정보 관리")
+    @PutMapping("/{shippingAddressId}/default")
+    public BaseResponse<Void> changeToDefaultShippingAddress(@PathVariable("shippingAddressId") Long shippingAddressId, @AuthenticationPrincipal AuthUserDetails authUserDetails){
+        shippingAddressService.changeToDefaultShippingAddress(shippingAddressId, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
     }
 

@@ -52,7 +52,22 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/category/json", "/api/vendor/", "/api/").hasAuthority("ADMIN")
+
+                        .requestMatchers("/api/category/admin/**", "/api/product/admin/**",
+                                "/api/purchase/admin/**", "/api/brand/admin/**",
+                                "/api/size/admin/**", "/api/color/admin/**").hasAuthority("ADMIN")
+
+                        .requestMatchers("/api/vendor/**", "/api/event/vendor/**",
+                                "/api/product/vendor/**", "/api/product/answer/vendor/**",
+                                "/api/vendor/product/image/**", "/api/vendor/product/**",
+                                "/api/vendor/product/option/**").hasAuthority("VENDOR")
+
+                        .requestMatchers("/api/brand-like/member/**", "/api/cart/member/**",
+                                "/api/product-like/member/**", "/api/pay/member/**",
+                                "/api/purchase/member/**", "/api/product/question/member/**",
+                                "/api/review/member/**", "/api/review-like/member/**",
+                                "/api/shipping-address/member", "/api/size-info/member").hasAuthority("MEMBER")
+
                         .anyRequest().permitAll()
                 )
                 .authenticationProvider(authenticationProvider)

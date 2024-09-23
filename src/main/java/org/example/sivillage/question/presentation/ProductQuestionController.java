@@ -20,13 +20,13 @@ import java.util.List;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/api/product-question")
+@RequestMapping("/api/product/question")
 public class ProductQuestionController {
 
     private final ProductQuestionServiceImpl productQuestionService;
 
     @Operation(summary = "상품문의 등록", description = "상품문의를 등록합니다.")
-    @PostMapping("/{productUuid}")
+    @PostMapping("/member/{productUuid}")
     public BaseResponse<Void> addProductQuestion(@PathVariable("productUuid") String productUuid, @Valid @RequestBody ProductQuestionRequestVo productQuestionRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         productQuestionService.addProductQuestion(ProductQuestionRequestVo.toDto(productQuestionRequestVo), productUuid, authUserDetails.getMemberUuid());
         return new BaseResponse<>();
@@ -42,7 +42,7 @@ public class ProductQuestionController {
     }
 
     @Operation(summary = "회원 상품문의 조회", description = "회원의 상품 문의를 조회합니다.", tags = "마이페이지-나의 활동 정보")
-    @GetMapping("")
+    @GetMapping("/member")
     public BaseResponse<List<ProductQuestionResponseVo>> getMemberUuidProductQuestion(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         List<ProductQuestionResponseVo> productQuestionResponseVoList = productQuestionService.getMemberProductQuestion(authUserDetails.getMemberUuid())
                 .stream()
@@ -51,7 +51,7 @@ public class ProductQuestionController {
     }
 
     @Operation(summary = "회원 상품문의 삭제", description = "회원의 상품 문의를 삭제합니다.")
-    @DeleteMapping("/{productQuestionId}")
+    @DeleteMapping("/member/{productQuestionId}")
     public BaseResponse<List<ProductQuestionResponseVo>> removeProductQuestion(@PathVariable("productQuestionId") Long productQuestionId,@AuthenticationPrincipal AuthUserDetails authUserDetails) {
         productQuestionService.removeProductQuestion(productQuestionId);
         return new BaseResponse<>();

@@ -12,18 +12,18 @@ public class CartResponseDto {
 
     private String productCode;
 
-    private String productOption;
+    private Long productOptionId;
 
-    private Integer amount;
+    private Integer quantity;
 
     private boolean selected;
 
     public static CartResponseDto from(Cart cart){
         return CartResponseDto.builder()
                 .cartId(cart.getId())
-               .productCode(cart.getProductCode())
-                .productOption(cart.getProductOption())
-                .amount(cart.getAmount())
+                .productCode(cart.getProductCode())
+                .productOptionId(cart.getProductOptionId())
+                .quantity(cart.getQuantity())
                 .selected(cart.isSelected())
                 .build();
     }
@@ -32,17 +32,17 @@ public class CartResponseDto {
     return CartResponseVo.builder()
                 .cartId(cartId)
                .productCode(productCode)
-               .productOption(productOption)
-               .amount(amount)
+               .productOptionId(productOptionId)
+               .quantity(quantity)
                .selected(selected)
                .build();
 }
 
 @Builder
-public CartResponseDto(Long cartId, String productCode, String productOption, Integer amount, boolean selected) {
+public CartResponseDto(Long cartId, String productCode, Long productOptionId, Integer quantity, boolean selected) {
     this.cartId = cartId;
     this.productCode = productCode;
-    this.productOption = productOption;
-    this.amount = amount;
+    this.productOptionId = productOptionId;
+    this.quantity = quantity;
     this.selected = selected;}
 }

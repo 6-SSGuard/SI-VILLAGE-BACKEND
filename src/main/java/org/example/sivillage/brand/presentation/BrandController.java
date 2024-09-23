@@ -42,7 +42,7 @@ public class BrandController {
      * return void
      */
     @Operation(summary = "브랜드 추가")
-    @PostMapping("/")
+    @PostMapping("/admin")
     public BaseResponse<Void> addBrand(@Valid @RequestBody AddBrandRequestVo addBrandRequestVo) {
 
         brandService.addBrand(AddBrandRequestDto.from(addBrandRequestVo));
@@ -55,8 +55,8 @@ public class BrandController {
      * @param authUserDetails 인증된 사용자 정보
      * return GetBrandIdListResponseVo
      */
-    @Operation(summary = "브랜드 리스트 조회")
-    @GetMapping("/")
+    @Operation(summary = "브랜드 id 리스트 조회")
+    @GetMapping("/ids")
     public BaseResponse<List<GetBrandsListResponseVo>> getBrandIdList(@AuthenticationPrincipal AuthUserDetails authUserDetails) {
 
         List<GetBrandsListResponseDto> getBrandsListResponseDtoList = brandService.getBrandList(authUserDetails.getMemberUuid());
@@ -87,7 +87,7 @@ public class BrandController {
      * return void
      */
     @Operation(summary = "CSV 파일로 브랜드 추가")
-    @PostMapping(value = "/csv", consumes = "multipart/form-data")
+    @PostMapping(value = "/admin/csv", consumes = "multipart/form-data")
     public BaseResponse<Void> addBrandFromCsv(@RequestParam("file") MultipartFile file) {
         brandService.addBrandFromCsv(file);
         return new BaseResponse<>();

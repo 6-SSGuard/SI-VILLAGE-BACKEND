@@ -50,7 +50,7 @@ public class ProductByVendorController {
     }
 
     @Operation(summary = "벤더의 상품 리스트 조회", description = "상품을 조회합니다.")
-    @GetMapping("/by-vendor/{vendorName}")
+    @GetMapping("/list/{vendorName}")
     public BaseResponse<List<GetProductByVendorResponseVo>> getProductByVendorList(
             @PathVariable String vendorName) {
 
