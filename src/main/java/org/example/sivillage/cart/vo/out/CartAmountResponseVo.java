@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CartAmountResponseVo {
 
-    private Integer amount;
+    private Integer quantity;
 }

@@ -14,20 +14,20 @@ public class CartRequestDto {
 
     private Long productOptionId;
 
-    private Integer amount;
+    private Integer quantity;
 
     @Builder
-    public CartRequestDto(String productCode, Long productOptionId, Integer amount) {
+    public CartRequestDto(String productCode, Long productOptionId, Integer quantity) {
         this.productCode = productCode;
         this.productOptionId = productOptionId;
-        this.amount = amount;
+        this.quantity = quantity;
     }
 
     public static CartRequestDto from(CartRequestVo cartRequestVo) {
         return CartRequestDto.builder()
                 .productCode(cartRequestVo.getProductCode())
                 .productOptionId(cartRequestVo.getProductOptionId())
-                .amount(cartRequestVo.getAmount())
+                .quantity(cartRequestVo.getQuantity())
                 .build();
     }
 
@@ -37,18 +37,29 @@ public class CartRequestDto {
                 .memberUuid(memberUuid)
                 .productCode(cartRequestDto.getProductCode())
                 .productOptionId(cartRequestDto.getProductOptionId())
-                .amount(cartRequestDto.getAmount())
+                .quantity(cartRequestDto.getQuantity())
                 .selected(true)
                 .build();
     }
 
-    public Cart updateAmount(CartRequestDto cartRequestDto, Cart cart){
+    public Cart updatePlusQuantity(CartRequestDto cartRequestDto, Cart cart){
         return Cart.builder()
                 .id(cart.getId())
                 .memberUuid(cart.getMemberUuid())
                 .productCode(cart.getProductCode())
                 .productOptionId(cart.getProductOptionId())
-                .amount(cart.getAmount() + cartRequestDto.getAmount())
+                .quantity(cart.getQuantity() + cartRequestDto.getQuantity())
+                .selected(true)
+                .build();
+    }
+
+    public static Cart updateQuantity(Cart cart, Integer quantity){
+        return Cart.builder()
+                .id(cart.getId())
+                .memberUuid(cart.getMemberUuid())
+                .productCode(cart.getProductCode())
+                .productOptionId(cart.getProductOptionId())
+                .quantity(quantity)
                 .selected(true)
                 .build();
     }
@@ -59,7 +70,7 @@ public class CartRequestDto {
                 .memberUuid(cart.getMemberUuid())
                 .productCode(cart.getProductCode())
                 .productOptionId(cartRequestDto.getProductOptionId())
-                .amount(cartRequestDto.getAmount())
+                .quantity(cartRequestDto.getQuantity())
                 .selected(true)
                 .build();
     }

@@ -18,7 +18,7 @@ public class CartResponseVo {
 
     private Long productOptionId;
 
-    private Integer amount;
+    private Integer quantity;
 
     private boolean selected;
 

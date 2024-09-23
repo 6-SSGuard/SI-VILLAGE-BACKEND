@@ -14,7 +14,7 @@ public class CartResponseDto {
 
     private Long productOptionId;
 
-    private Integer amount;
+    private Integer quantity;
 
     private boolean selected;
 
@@ -23,7 +23,7 @@ public class CartResponseDto {
                 .cartId(cart.getId())
                 .productCode(cart.getProductCode())
                 .productOptionId(cart.getProductOptionId())
-                .amount(cart.getAmount())
+                .quantity(cart.getQuantity())
                 .selected(cart.isSelected())
                 .build();
     }
@@ -33,16 +33,16 @@ public class CartResponseDto {
                 .cartId(cartId)
                .productCode(productCode)
                .productOptionId(productOptionId)
-               .amount(amount)
+               .quantity(quantity)
                .selected(selected)
                .build();
 }
 
 @Builder
-public CartResponseDto(Long cartId, String productCode, Long productOptionId, Integer amount, boolean selected) {
+public CartResponseDto(Long cartId, String productCode, Long productOptionId, Integer quantity, boolean selected) {
     this.cartId = cartId;
     this.productCode = productCode;
     this.productOptionId = productOptionId;
-    this.amount = amount;
+    this.quantity = quantity;
     this.selected = selected;}
 }

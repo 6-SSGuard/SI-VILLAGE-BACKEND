@@ -137,7 +137,7 @@ public class PurchaseServiceImpl implements PurchaseService{
         Product product = productRepository.findByProductCode(cart.getProductCode())
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PRODUCT));
 
-        int calculatedPrice = product.getPrice() * cart.getAmount();
+        int calculatedPrice = product.getPrice() * cart.getQuantity();
         totalPriceBeforeDiscount.addAndGet(calculatedPrice);
 
         int discountedPrice = calculateDiscountedPrice(calculatedPrice, product.getProductCode());

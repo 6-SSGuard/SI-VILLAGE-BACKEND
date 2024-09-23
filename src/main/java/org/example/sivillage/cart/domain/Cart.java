@@ -27,7 +27,7 @@ public class Cart extends BaseEntity {
     private Long productOptionId;
 
     @Column(nullable = false)
-    private Integer amount;
+    private Integer quantity;
 
     @Column(nullable = false)
     private boolean selected;
@@ -37,21 +37,21 @@ public class Cart extends BaseEntity {
     }
 
     @Builder
-    public Cart(Long id, String memberUuid, String productCode, Long productOptionId, Integer amount, boolean selected) {
+    public Cart(Long id, String memberUuid, String productCode, Long productOptionId, Integer quantity, boolean selected) {
         this.id = id;
         this.memberUuid = memberUuid;
         this.productCode = productCode;
         this.productOptionId = productOptionId;
-        this.amount = amount;
+        this.quantity = quantity;
         this.selected = selected;
     }
 
     @Builder
-    public Cart(String memberUuid, String productCode, Long productOptionId, Integer amount, boolean selected) {
+    public Cart(String memberUuid, String productCode, Long productOptionId, Integer quantity, boolean selected) {
         this.memberUuid = memberUuid;
         this.productCode = productCode;
         this.productOptionId = productOptionId;
-        this.amount = amount;
+        this.quantity = quantity;
         this.selected = selected;
     }
 
