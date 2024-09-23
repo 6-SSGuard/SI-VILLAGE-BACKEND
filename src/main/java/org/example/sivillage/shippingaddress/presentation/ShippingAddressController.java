@@ -48,6 +48,13 @@ public class ShippingAddressController {
         return new BaseResponse<>();
     }
 
+    @Operation(summary = "기본 배송지 설정", description = "기본배송지로 수정합니다.", tags = "마이페이지-나의 정보 관리")
+    @PutMapping("/{shippingAddressId}/default")
+    public BaseResponse<Void> changeToDefaultShippingAddress(@PathVariable("shippingAddressId") Long shippingAddressId, @AuthenticationPrincipal AuthUserDetails authUserDetails){
+        shippingAddressService.changeToDefaultShippingAddress(shippingAddressId, authUserDetails.getMemberUuid());
+        return new BaseResponse<>();
+    }
+
     @Operation(summary = "배송지 삭제", description = "배송지 정보를 삭제합니다.", tags = "마이페이지-나의 정보 관리")
     @DeleteMapping("/{shippingAddressId}")
     public BaseResponse<Void> removeShippingAddress(@PathVariable("shippingAddressId") Long shippingAddressId, @AuthenticationPrincipal AuthUserDetails authUserDetails) {

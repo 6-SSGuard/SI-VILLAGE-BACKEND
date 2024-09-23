@@ -19,7 +19,7 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
 
     public void addShippingAddress(ShippingAddressRequestDto shippingAddressRequestDto, String memberUuid) {
         shippingAddressRepository.findByMemberUuidAndDefaultAddress(memberUuid, shippingAddressRequestDto.isDefaultAddress())
-                .ifPresent(address -> shippingAddressRepository.save(shippingAddressRequestDto.deactivateDefaultAddress(address)));
+                .ifPresent(address -> shippingAddressRepository.save(ShippingAddressRequestDto.deactivateDefaultAddress(address)));
         shippingAddressRepository.save(shippingAddressRequestDto.toEntity(shippingAddressRequestDto, memberUuid));
     }
 
@@ -28,6 +28,14 @@ public class ShippingAddressServiceImpl implements ShippingAddressService {
                 .stream()
                 .map(ShippingAddressResponseDto::from).toList();
     }
+
+    public void changeToDefaultShippingAddress(Long shippingAddressId, String memberUuid){
+        ShippingAddress shippingAddress = shippingAddressRepository.findById(shippingAddressId).get();
+        shippingAddressRepository.findByMemberUuidAndDefaultAddress(memberUuid, true)
+                .ifPresent(address -> shippingAddressRepository.save(ShippingAddressRequestDto.deactivateDefaultAddress(address)));
+       shippingAddressRepository.save(ShippingAddressRequestDto.updateToDefaultShippingAddress(shippingAddress,true));
+    }
+
 
     public void changeShippingAddress(ShippingAddressRequestDto shippingAddressRequestDto, String memberUuid, Long shippingAddressId) {
 
