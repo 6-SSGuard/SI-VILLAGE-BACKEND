@@ -15,6 +15,8 @@ public interface CartService {
     void addCart(CartRequestDto cartRequestDto, String memberUuid);
     void addDuplicateCart(CartRequestDto cartRequestDto, String memberUuid);
     void changeCart(Long cartId, CartRequestDto cartRequestDto);
+    void increaseQuantity(Long cartId);
+    void decreaseQuantity(Long cartId);
     void changeCartSelected(Long cartId);
     void removeCart(Long cartId);
 

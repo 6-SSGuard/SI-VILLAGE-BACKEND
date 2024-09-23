@@ -1,6 +1,5 @@
 package org.example.sivillage.cart.presentation;
 
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +55,20 @@ public class CartController {
     @PostMapping("")
     public BaseResponse<Void> addCart(@RequestBody CartRequestVo cartRequestVo, @AuthenticationPrincipal AuthUserDetails authUserDetails) {
         cartService.addCart(CartRequestDto.from(cartRequestVo), authUserDetails.getMemberUuid());
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "장바구니 수량 증가", description = "장바구니에 상품 수량을 추가합니다.")
+    @PostMapping("/increase/{cartId}")
+    public BaseResponse<Void> increaseCartQuantity(@PathVariable Long cartId) {
+        cartService.increaseQuantity(cartId);
+        return new BaseResponse<>();
+    }
+
+    @Operation(summary = "장바구니 수량 감소", description = "장바구니에 상품 수량을 추가합니다.")
+    @PostMapping("/decrease/{cartId}")
+    public BaseResponse<Void> decreaseCartQuantity(@PathVariable Long cartId) {
+        cartService.decreaseQuantity(cartId);
         return new BaseResponse<>();
     }
 

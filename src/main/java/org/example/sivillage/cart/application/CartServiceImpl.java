@@ -52,7 +52,7 @@ public class CartServiceImpl implements CartService {
 
     public void addDuplicateCart(CartRequestDto cartRequestDto, String memberUuid) {
         Optional<Cart> existingCartOpt = cartRepository.findByMemberUuidAndProductCodeAndProductOptionId(memberUuid, cartRequestDto.getProductCode(), cartRequestDto.getProductOptionId());
-        cartRepository.save(cartRequestDto.updateAmount(cartRequestDto,existingCartOpt.get()));
+        cartRepository.save(cartRequestDto.updatePlusQuantity(cartRequestDto,existingCartOpt.get()));
     }
 
     public void changeCart(Long cartId, CartRequestDto cartRequestDto) {
@@ -60,6 +60,17 @@ public class CartServiceImpl implements CartService {
         cartRepository.save(cartRequestDto.updateToEntity(cartRequestDto, cart));
     }
 
+    public void increaseQuantity(Long cartId) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_CART));
+        cartRepository.save((CartRequestDto.updateQuantity(cart,cart.getQuantity() + 1)));
+
+    }
+
+    public void decreaseQuantity(Long cartId) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_CART));
+        if (cart.getQuantity() > 1)
+            cartRepository.save((CartRequestDto.updateQuantity(cart, cart.getQuantity() - 1)));
+    }
 
     public void changeCartSelected(Long cartId) {
         Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_CART));

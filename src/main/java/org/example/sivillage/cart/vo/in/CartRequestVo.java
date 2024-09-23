@@ -12,11 +12,11 @@ public class CartRequestVo {
 
     private Long productOptionId;
 
-    private Integer amount;
+    private Integer quantity;
 
-    public CartRequestVo(String productCode, Long productOptionId, Integer amount) {
+    public CartRequestVo(String productCode, Long productOptionId, Integer quantity) {
         this.productCode = productCode;
         this.productOptionId = productOptionId;
-        this.amount = amount;
+        this.quantity = quantity;
     }
 }

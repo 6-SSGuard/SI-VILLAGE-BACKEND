@@ -39,7 +39,7 @@ public class AddPurchaseFromCartRequestDto {
                 .purchaseCode(purchaseCode)
                 .productCode(cart.getProductCode())
                 .productOptionId(cart.getProductOptionId())
-                .amount(cart.getAmount())
+                .amount(cart.getQuantity())
                 .chargedPrice(chargedPrice)
                 .build();
     }
