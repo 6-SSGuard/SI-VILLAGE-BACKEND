@@ -13,6 +13,7 @@ public enum BaseResponseStatus {
     SUCCESS(HttpStatus.OK, true, "요청에 성공하였습니다."),
 
     // 400: Bad Request
+    AUTH_CODE_INVALID(HttpStatus.BAD_REQUEST, false, "인증 코드가 틀렸습니다."),
     BAD_REQUEST(HttpStatus.BAD_REQUEST, false, "잘못된 요청입니다."),
     NOT_FOUND_BEAUTY_INFO(HttpStatus.NOT_FOUND, false,"뷰티 정보가 등록되어 있지 않습니다. 뷰티 정보를 먼저 생성해주세요."),
     NOT_FOUND_SIZE_INFO(HttpStatus.NOT_FOUND,false,"사이즈 정보가 등록되어 있지 않습니다. 사이즈 정보를 먼저 생성해주세요"),

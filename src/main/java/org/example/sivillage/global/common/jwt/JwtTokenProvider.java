@@ -147,6 +147,15 @@ public class JwtTokenProvider {
                 .build();
     }
 
+    public String buildEmailToken(String email){
+        return Jwts.builder()
+                .setSubject(email)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 15 * 60 * 1000))
+                .signWith(SignatureAlgorithm.HS512,secret)
+                .compact();
+    }
+
     public Key getSignKey() {
         if (secret == null) {
             throw new BaseException(BaseResponseStatus.WRONG_JWT_TOKEN);
