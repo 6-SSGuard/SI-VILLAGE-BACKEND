@@ -16,7 +16,6 @@ import java.util.Date;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -39,7 +38,8 @@ public class Member {
     private Date birth;
 
     @Builder
-    public Member(String memberUuid, String email, Role role, String name, String password, Date birth) {
+    public Member(Long id, String memberUuid, String email, Role role, String name, String password, Date birth) {
+        this.id = id;
         this.memberUuid = memberUuid;
         this.email = email;
         this.role = role;
