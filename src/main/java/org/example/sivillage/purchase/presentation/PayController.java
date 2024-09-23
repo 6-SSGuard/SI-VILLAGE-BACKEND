@@ -1,5 +1,6 @@
 package org.example.sivillage.purchase.presentation;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,8 @@ public class PayController {
 
     private final PayService payService;
 
-    @PostMapping("/pay/ready")
+    @Operation(summary = "카카오 결제 준비", description = "카카오 결제 준비 API")
+    @PostMapping("/ready")
     public ReadyResponse payReady(@AuthenticationPrincipal AuthUserDetails authUserDetails,
                                   @RequestBody KakaoPayRequestVo kakaoPayRequestVo) {
 
@@ -38,7 +40,8 @@ public class PayController {
         return readyResponse;
     }
 
-    @GetMapping("/pay/completed")
+    @Operation(summary = "카카오 결제 승인", description = "카카오 결제 승인 API")
+    @GetMapping("/completed")
     public ModelAndView payCompleted(@RequestParam("pg_token") String pgToken,
                                      @RequestParam("partner_order_id") String partner_order_id,
                                      @RequestParam("partner_user_id") String partner_user_id) {
@@ -59,7 +62,8 @@ public class PayController {
         return modelAndView;
     }
 
-    @GetMapping("/pay/cancel")
+    @Operation(summary = "카카오 결제 취소", description = "카카오 결제 취소 API")
+    @GetMapping("/cancel")
     public ModelAndView payCancel() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("pay/cancel");
@@ -67,7 +71,8 @@ public class PayController {
         return modelAndView;
     }
 
-    @GetMapping("/pay/fail")
+    @Operation(summary = "카카오 결제 실패", description = "카카오 결제 실패 API")
+    @GetMapping("/fail")
     public ModelAndView payFail() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("pay/fail");
