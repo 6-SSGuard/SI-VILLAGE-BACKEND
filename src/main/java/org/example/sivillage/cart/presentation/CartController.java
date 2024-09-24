@@ -9,6 +9,7 @@ import org.example.sivillage.cart.application.CartServiceImpl;
 import org.example.sivillage.cart.dto.in.CartRequestDto;
 import org.example.sivillage.cart.dto.out.CartAmountResponseDto;
 import org.example.sivillage.cart.dto.out.CartResponseDto;
+import org.example.sivillage.cart.vo.CartQuantityRequestVo;
 import org.example.sivillage.cart.vo.in.CartRequestVo;
 import org.example.sivillage.cart.vo.out.CartAmountResponseVo;
 import org.example.sivillage.cart.vo.out.CartResponseVo;
@@ -58,17 +59,10 @@ public class CartController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "장바구니 수량 증가", description = "장바구니에 상품 수량을 추가합니다.")
+    @Operation(summary = "장바구니 수량 변경", description = "장바구니에 상품 수량 추가합니다")
     @PostMapping("/increase/{cartId}")
-    public BaseResponse<Void> increaseCartQuantity(@PathVariable Long cartId) {
-        cartService.increaseQuantity(cartId);
-        return new BaseResponse<>();
-    }
-
-    @Operation(summary = "장바구니 수량 감소", description = "장바구니에 상품 수량을 추가합니다.")
-    @PostMapping("/decrease/{cartId}")
-    public BaseResponse<Void> decreaseCartQuantity(@PathVariable Long cartId) {
-        cartService.decreaseQuantity(cartId);
+    public BaseResponse<Void> changeCartQuantity(@PathVariable Long cartId, @RequestBody CartQuantityRequestVo cartQuantityRequestVo) {
+        cartService.changeCartQuantity(cartId,CartQuantityRequestVo.toDto(cartQuantityRequestVo));
         return new BaseResponse<>();
     }
 
