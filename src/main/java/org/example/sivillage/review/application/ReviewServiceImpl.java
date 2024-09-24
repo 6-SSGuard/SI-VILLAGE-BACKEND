@@ -1,5 +1,8 @@
 package org.example.sivillage.review.application;
 
+import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.csv.CSVFormat;
@@ -13,6 +16,7 @@ import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.member.infrastructure.MemberRepository;
 import org.example.sivillage.review.domain.CategoryType;
+import org.example.sivillage.review.domain.QReview;
 import org.example.sivillage.review.domain.Review;
 import org.example.sivillage.review.dto.in.ReviewRequestDto;
 import org.example.sivillage.review.dto.out.ReviewResponseDto;
@@ -25,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Transactional
@@ -37,6 +42,7 @@ public class ReviewServiceImpl implements ReviewService {
     private final BeautyInfoRepository beautyInfoRepository;
     private final SizeInfoRepository sizeInfoRepository;
     private final MemberRepository memberRepository;
+    private final JPAQueryFactory jpaQueryFactory;
 
     // 상품에 대한 리뷰 id 리스트
     public List<IdListResponseDto<Long>> getProductReviewIds(String productCode) {
@@ -121,8 +127,33 @@ public class ReviewServiceImpl implements ReviewService {
         }
     }
 
+    public List<IdListResponseDto<Long>> getSortReviewsByCreatedAt(Long cursor, int pageSize){
 
-}
+        QReview review = QReview.review;
+        JPAQuery<Long> query = jpaQueryFactory.select(review.id).from(review);
+
+        if (cursor != null) {
+            LocalDateTime cursorDate = jpaQueryFactory.select(review.createdDate)
+                    .from(review)
+                    .where(review.id.eq(cursor))
+                    .fetchOne();
+
+            if (cursorDate != null) {
+                query.where(review.createdDate.lt(cursorDate));
+            }
+        }
+
+        query.orderBy(review.createdDate.desc())
+                .limit(pageSize);
+
+        return query.fetch()
+                .stream()
+                .map(IdListResponseDto::from)
+                .toList();
+    }
+    }
+
+
 
 
 

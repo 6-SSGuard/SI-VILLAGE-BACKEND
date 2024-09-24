@@ -23,6 +23,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Tag(name = "리뷰 관리 API", description = "리뷰 관련 API endpoints")
@@ -56,6 +57,17 @@ public class ReviewController {
                 .toList();
         return new BaseResponse<>(idListResponseVoList);
     }
+
+    @Operation(summary = "최신순 리뷰id 조회", description = "상품의 최신순으로 등록된 리뷰 id 리스트를 반환")
+    @GetMapping("/sort-date")
+    public BaseResponse<List<IdListResponseVo<Long>>> getSortReviewsByCreatedAt (@RequestParam(required = false) Long cursor,  @RequestParam(defaultValue = "5") int pageSize) {
+        List<IdListResponseVo<Long>> idListResponseVoList = reviewService.getSortReviewsByCreatedAt(cursor, pageSize)
+                .stream()
+                .map(IdListResponseDto::toVo)
+                .toList();
+        return new BaseResponse<>(idListResponseVoList);
+    }
+
 
     @Operation(summary = "리뷰 등록", description = "리뷰를 등록합니다.")
     @PostMapping("/member/{productCode}")
