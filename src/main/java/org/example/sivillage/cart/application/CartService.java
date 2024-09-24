@@ -1,5 +1,6 @@
 package org.example.sivillage.cart.application;
 
+import org.example.sivillage.cart.dto.CartQuantityRequestDto;
 import org.example.sivillage.cart.dto.in.CartRequestDto;
 import org.example.sivillage.cart.dto.out.CartAmountResponseDto;
 import org.example.sivillage.cart.dto.out.CartResponseDto;
@@ -15,8 +16,7 @@ public interface CartService {
     void addCart(CartRequestDto cartRequestDto, String memberUuid);
     void addDuplicateCart(CartRequestDto cartRequestDto, String memberUuid);
     void changeCart(Long cartId, CartRequestDto cartRequestDto);
-    void increaseQuantity(Long cartId);
-    void decreaseQuantity(Long cartId);
+    void changeCartQuantity(Long cartId, CartQuantityRequestDto cartQuantityRequestDto);
     void changeCartSelected(Long cartId);
     void removeCart(Long cartId);
 

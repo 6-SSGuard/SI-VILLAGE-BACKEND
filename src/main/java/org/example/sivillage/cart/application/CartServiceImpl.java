@@ -3,6 +3,7 @@ package org.example.sivillage.cart.application;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.cart.domain.Cart;
+import org.example.sivillage.cart.dto.CartQuantityRequestDto;
 import org.example.sivillage.cart.dto.in.CartRequestDto;
 import org.example.sivillage.cart.dto.out.CartAmountResponseDto;
 import org.example.sivillage.cart.dto.out.CartResponseDto;
@@ -60,16 +61,9 @@ public class CartServiceImpl implements CartService {
         cartRepository.save(cartRequestDto.updateToEntity(cartRequestDto, cart));
     }
 
-    public void increaseQuantity(Long cartId) {
+    public void changeCartQuantity(Long cartId, CartQuantityRequestDto cartQuantityRequestDto){
         Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_CART));
-        cartRepository.save((CartRequestDto.updateQuantity(cart,cart.getQuantity() + 1)));
-
-    }
-
-    public void decreaseQuantity(Long cartId) {
-        Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_CART));
-        if (cart.getQuantity() > 1)
-            cartRepository.save((CartRequestDto.updateQuantity(cart, cart.getQuantity() - 1)));
+            cartRepository.save((CartRequestDto.updateQuantity(cart,cartQuantityRequestDto)));
     }
 
     public void changeCartSelected(Long cartId) {

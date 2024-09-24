@@ -88,6 +88,8 @@ public class EventController {
     @Operation(summary = "이벤트 이미지 등록", description = "이벤트 이미지를 등록합니다.")
     @PostMapping("/{eventId}/images")
     public BaseResponse<List<String>> addEventImages(@PathVariable("eventId") Long eventId, @Valid @RequestBody List<EventImageRequestVo> eventImageRequestVo) {
+    @PostMapping("/vendor/{eventId}/images")
+    public BaseResponse<Void> addEventImages(@PathVariable("eventId") Long eventId, @Valid @RequestBody List<EventImageRequestVo> eventImageRequestVo) {
         List<EventImageRequestDto> eventImageRequestDtoList = eventImageRequestVo.stream()
                 .map(EventImageRequestVo::toDto)
                 .toList();

@@ -1,8 +1,6 @@
 package org.example.sivillage.review.infrastructure;
 
 import io.lettuce.core.dynamic.annotation.Param;
-import org.example.sivillage.global.common.response.dto.IdListResponseDto;
-import org.example.sivillage.global.common.response.vo.IdListResponseVo;
 import org.example.sivillage.review.domain.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
