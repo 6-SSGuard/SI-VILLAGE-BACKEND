@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.sivillage.cart.domain.Cart;
+import org.example.sivillage.cart.dto.CartQuantityRequestDto;
 import org.example.sivillage.cart.vo.in.CartRequestVo;
 
 @Getter
@@ -53,13 +54,13 @@ public class CartRequestDto {
                 .build();
     }
 
-    public static Cart updateQuantity(Cart cart, Integer quantity){
+    public static Cart updateQuantity(Cart cart, CartQuantityRequestDto cartQuantityRequestDto){
         return Cart.builder()
                 .id(cart.getId())
                 .memberUuid(cart.getMemberUuid())
                 .productCode(cart.getProductCode())
                 .productOptionId(cart.getProductOptionId())
-                .quantity(quantity)
+                .quantity(cartQuantityRequestDto.getQuantity())
                 .selected(true)
                 .build();
     }

@@ -1,8 +1,8 @@
 package org.example.sivillage.auth.application;
 
+import jakarta.servlet.http.HttpSession;
 import org.example.sivillage.auth.domain.AuthUserDetails;
-import org.example.sivillage.auth.dto.in.SignInRequestDto;
-import org.example.sivillage.auth.dto.in.SignUpRequestDto;
+import org.example.sivillage.auth.dto.in.*;
 import org.example.sivillage.auth.dto.out.JwtTokenResponseDto;
 import org.example.sivillage.auth.vo.in.RefreshTokenRequestDto;
 
@@ -45,4 +45,8 @@ public interface AuthService {
      * return void
      */
     void signOut(AuthUserDetails authUserDetails);
+    void sendPasswordResetEmail(AuthRequestDto authRequestDto);
+    void sendAuthCodeEmail(HttpSession session);
+    void verifyAuthCode(AuthCodeRequestDto dto, HttpSession session);
+    void changePassword(PasswordRequestDto passwordRequestDto, String memberUUid);
 }
