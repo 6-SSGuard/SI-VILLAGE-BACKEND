@@ -17,14 +17,14 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/vendor/product/option")
+@RequestMapping("/api/product/option")
 @Tag(name = "벤더의 상품 관리 API")
 public class ProductOptionController {
 
     private final ProductOptionService productOptionService;
 
     @Operation(summary = "상품 옵션 등록")
-    @PostMapping
+    @PostMapping("/vendor")
     public BaseResponse<Void> addProductOptionList(@RequestBody List<CreateProductOptionRequestVo> createProductOptionRequestVo) {
 
         List<CreateProductOptionRequestDto> createProductOptionRequestDtoList =
@@ -37,7 +37,7 @@ public class ProductOptionController {
     }
 
     @Operation(summary = "상품 옵션 수정")
-    @PutMapping
+    @PutMapping("/vendor")
     public BaseResponse<Void> updateProductOptionList(@RequestBody List<UpdateProductOptionRequestVo> updateProductOptionRequestVo) {
 
         List<UpdateProductOptionRequestDto> updateProductOptionRequestDtoList =
@@ -51,7 +51,8 @@ public class ProductOptionController {
 
     @Operation(summary = "상품에 등록된 옵션 정보 리스트 조회", description = """
     사이즈, 용량, 재고를 조회합니다.
-    """)
+    """
+    , tags = {"상품 정보 조회"})
     @GetMapping("/details/{productCode}")
     public BaseResponse<List<GetProductOptionListResponseVo>> getProductOptionList(@PathVariable String productCode) {
 

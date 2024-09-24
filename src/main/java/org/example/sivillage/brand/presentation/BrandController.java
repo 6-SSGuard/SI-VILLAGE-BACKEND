@@ -86,7 +86,7 @@ public class BrandController {
      * @param file CSV 파일
      * return void
      */
-    @Operation(summary = "CSV 파일로 브랜드 추가")
+    @Operation(summary = "CSV 파일로 브랜드 추가", tags = {"admin-pre-data"})
     @PostMapping(value = "/admin/csv", consumes = "multipart/form-data")
     public BaseResponse<Void> addBrandFromCsv(@RequestParam("file") MultipartFile file) {
         brandService.addBrandFromCsv(file);

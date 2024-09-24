@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductCategoryListRepository extends JpaRepository<ProductCategoryList, Long>  {
+public interface ProductCategoryListRepository extends JpaRepository<ProductCategoryList, Long>, ProductCategoryListRepositoryCustom  {
     @Query("SELECT p.productCode FROM ProductCategoryList p WHERE " +
             "(:topCategoryCode IS NULL OR p.topCategoryCode = :topCategoryCode) AND " +
             "(:middleCategoryCode IS NULL OR p.middleCategoryCode = :middleCategoryCode) AND " +

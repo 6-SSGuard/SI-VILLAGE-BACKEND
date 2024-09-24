@@ -4,13 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.vendor.dto.in.ProductCategoryListRequestDto;
 import org.example.sivillage.vendor.infrastructure.ProductCategoryListRepository;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class ProductCategoryListServiceImpl {
+public class ProductCategoryListServiceImpl implements ProductCategoryListService {
 
     private final ProductCategoryListRepository productCategoryListRepository;
 
@@ -18,16 +18,19 @@ public class ProductCategoryListServiceImpl {
         productCategoryListRepository.save(productCategoryListRequestDto.toEntity());
     }
 
-    public List<IdListResponseDto<String>> getProductCodeListByCategories(
+    @Override
+    public Slice<IdListResponseDto<String>> getProductCodeListByCategories(
             String topCategoryCode,
             String middleCategoryCode,
             String bottomCategoryCode,
-            String subCategoryCode) {
+            String subCategoryCode,
+            String lastProductCode,
+            Pageable pageable) {
+
 
         return productCategoryListRepository
-                .findAllProductCodeByCategories(topCategoryCode, middleCategoryCode, bottomCategoryCode, subCategoryCode)
-                .stream()
-                .map(IdListResponseDto::from)
-                .toList();
+                .findProductsByCategoriesWithCursorPaging(topCategoryCode, middleCategoryCode,
+                        bottomCategoryCode, subCategoryCode, lastProductCode, pageable)
+                .map(IdListResponseDto::from);
     }
 }

@@ -16,14 +16,14 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-    @RequestMapping("/api/vendor/product/image")
+    @RequestMapping("/api/product/image")
 @Tag(name = "벤더의 상품 관리 API")
 public class ProductImageController {
 
     private final ProductImageService productImageService;
 
     @Operation(summary = "상품 이미지 리스트 등록")
-    @PostMapping
+    @PostMapping("/vendor")
     public BaseResponse<Void> addProductImageList(@RequestBody List<CreateProductImageListRequestVo> createProductImageListRequestVo) {
 
         List<CreateProductImageListRequestDto> createProductImageListRequestDtoList =
@@ -36,7 +36,7 @@ public class ProductImageController {
     }
 
     @Operation(summary = "상품 이미지 리스트 수정")
-    @PutMapping
+    @PutMapping("/vendor")
     public BaseResponse<Void> updateProductImageList(@RequestBody List<CreateProductImageListRequestVo> createProductImageListRequestVo) {
 
         List<CreateProductImageListRequestDto> createProductImageListRequestDtoList =
@@ -50,7 +50,8 @@ public class ProductImageController {
 
     @Operation(summary = "상품 썸네일 URL 조회", description = """
         상품 썸네일 URL을 조회하는 API
-        """)
+        """
+            , tags = {"상품 정보 조회"})
     @GetMapping("/brief/thumbnail/{productCode}")
     public BaseResponse<GetProductThumbnailUrlResponseVo> getProductThumbnailUrl(@PathVariable String productCode) {
 
@@ -61,7 +62,8 @@ public class ProductImageController {
 
     @Operation(summary = "상품 이미지 URL 리스트 조회", description = """
         상품 이미지 URL 리스트를 조회하는 API
-        """)
+        """
+            , tags = {"상품 정보 조회"})
     @GetMapping("/details/images/{productCode}")
     public BaseResponse<List<GetProductImageUrlListResponseVo>> getProductImageUrlList(@PathVariable String productCode) {
 
