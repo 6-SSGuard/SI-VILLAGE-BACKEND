@@ -59,7 +59,7 @@ public class CartController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "장바구니 수량 변경", description = "장바구니에 상품 수량을 추가합니다.")
+    @Operation(summary = "장바구니 수량 변경", description = "장바구니에 상품 수량 추가합니다")
     @PostMapping("/increase/{cartId}")
     public BaseResponse<Void> changeCartQuantity(@PathVariable Long cartId, @RequestBody CartQuantityRequestVo cartQuantityRequestVo) {
         cartService.changeCartQuantity(cartId,CartQuantityRequestVo.toDto(cartQuantityRequestVo));
