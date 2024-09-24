@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/review-like")
+@Tag(name = "찜하기")
 public class ReviewLikeController {
 
     private final ReviewLikeService reviewLikeService;

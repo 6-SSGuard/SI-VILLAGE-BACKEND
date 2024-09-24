@@ -59,8 +59,9 @@ public class SecurityConfig {
 
                         .requestMatchers("/api/vendor/**", "/api/event/vendor/**",
                                 "/api/product/vendor/**", "/api/product/answer/vendor/**",
-                                "/api/vendor/product/image/**", "/api/vendor/product/**",
-                                "/api/vendor/product/option/**").hasAuthority("VENDOR")
+                                "/api/product/image/vendor/**",
+                                "/api/product/policy/vendor/**",
+                                "/api/product/option/vendor/**").hasAuthority("VENDOR")
 
                         .requestMatchers("/api/brand-like/member/**", "/api/cart/member/**",
                                 "/api/product-like/member/**", "/api/pay/member/**",

@@ -85,7 +85,7 @@ public class ReviewController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "CSV 파일로 리뷰 추가")
+    @Operation(summary = "CSV 파일로 리뷰 추가", tags = {"admin-pre-data"})
     @PostMapping(value = "/admin/csv", consumes = "multipart/form-data")
     public BaseResponse<Void> addReviewCSV(@RequestParam("file") MultipartFile file) {
         reviewService.addReviewFromCsv(file);
