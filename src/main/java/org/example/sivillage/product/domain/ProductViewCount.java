@@ -22,7 +22,8 @@ public class ProductViewCount {
     private String productCode;
 
     @Builder
-    public ProductViewCount(Double viewCount, String productCode) {
+    public ProductViewCount(Long id, Double viewCount, String productCode) {
+        this.id = id;
         this.viewCount = viewCount;
         this.productCode = productCode;
     }

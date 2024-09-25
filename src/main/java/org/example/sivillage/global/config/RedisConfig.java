@@ -27,4 +27,13 @@ public class RedisConfig {
         template.setValueSerializer(new StringRedisSerializer());
         return template;
     }
+
+    @Bean
+    public RedisTemplate<String, Long> longRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Long> template = new RedisTemplate<>();
+        template.setConnectionFactory(redisConnectionFactory);
+        template.setKeySerializer(new StringRedisSerializer()); // 직렬화 문제 해결함
+        template.setValueSerializer(new StringRedisSerializer());
+        return template;
+    }
 }

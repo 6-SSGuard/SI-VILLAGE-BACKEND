@@ -3,6 +3,7 @@ package org.example.sivillage.product.application;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.sivillage.product.dto.in.ProductViewCountRequestDto;
 import org.example.sivillage.product.infrastructure.ProductViewCountRepository;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -14,30 +15,33 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 @Transactional
-
+@Slf4j
 public class ProductViewCountServiceImpl implements ProductViewCountService {
-
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Long> redisTemplate;
     private final ProductViewCountRepository productViewCountRepository;
 
-    // 상품 조회수 증가
+
     public void incrementViewProduct(String productCode) {
-        String key = "product:viewCount";
-        redisTemplate.opsForZSet().incrementScore(key, productCode, 1);
+        log.info("Incrementing view count for product: {}", productCode);
+        redisTemplate.opsForValue().increment("productViewCount:" + productCode, 1); // 조회수 1 증가
+
     }
 
 
     @Scheduled(fixedRate = 1000) // 10초 마다 db에 저장
     public void addProductViewCount() {
 
-        String key = "product:viewCount";
-        Set<Object> productViews = redisTemplate.opsForZSet().range(key, 0, -1); // 모든 상품 코드 가져오기
+        String keyPattern = "productViewCount:*";
+        Set<String> keys = redisTemplate.keys(keyPattern);
 
-        if (productViews != null) {
-            productViews.forEach(productCodeObj -> {
-                String productCode = (String) productCodeObj;
-                Double viewCount = redisTemplate.opsForZSet().score(key, productCode);
-                productViewCountRepository.save(ProductViewCountRequestDto.toEntity(productCode, viewCount)); //
+        if (keys != null) {
+
+            keys.forEach(key -> {
+                Long viewCount = redisTemplate.opsForValue().get(key);
+                if (viewCount != null) {
+                    String productCode = key.replace("productViewCount:", "");
+                    productViewCountRepository.save(ProductViewCountRequestDto.toEntity(productCode, viewCount));
+                }
             });
         }
     }
