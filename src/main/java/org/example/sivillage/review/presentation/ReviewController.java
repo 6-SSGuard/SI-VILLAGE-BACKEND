@@ -9,6 +9,7 @@ import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.global.common.response.vo.IdListResponseVo;
+import org.example.sivillage.review.application.ReviewFilterService;
 import org.example.sivillage.review.application.ReviewImageServiceImpl;
 import org.example.sivillage.review.application.ReviewLikeServiceImpl;
 import org.example.sivillage.review.application.ReviewServiceImpl;
@@ -35,7 +36,11 @@ public class ReviewController {
 
     private final ReviewServiceImpl reviewService;
     private final ReviewImageServiceImpl reviewImageService;
+<<<<<<< Updated upstream
 
+=======
+    private final ReviewFilterService reviewFilterService;
+>>>>>>> Stashed changes
 
     @Operation(summary = "상품의 리뷰id 조회", description = "상품의 리뷰 id 리스트를 반환")
     @GetMapping("/product/{productCode}")
@@ -57,10 +62,10 @@ public class ReviewController {
         return new BaseResponse<>(idListResponseVoList);
     }
 
-    @Operation(summary = "최신순 리뷰id 조회", description = "상품의 최신순으로 등록된 리뷰 id 리스트를 반환")
-    @GetMapping("/sort-date")
-    public BaseResponse<List<IdListResponseVo<Long>>> getSortReviewsByCreatedAt (@RequestParam(required = false) Long cursor,  @RequestParam(defaultValue = "5") int pageSize) {
-        List<IdListResponseVo<Long>> idListResponseVoList = reviewService.getSortReviewsByCreatedAt(cursor, pageSize)
+    @Operation(summary = "리뷰 필터링", description = "리뷰를 최근등록순, 좋아요순, 베스트 순으로 정렬합니다.  sort : created, likes, best")
+    @GetMapping("/sort")
+    public BaseResponse<List<IdListResponseVo<Long>>> getSortReviews (@RequestParam(required = false) Long cursor,  @RequestParam(defaultValue = "5") int pageSize, @RequestParam(defaultValue = "created") String sort) {
+        List<IdListResponseVo<Long>> idListResponseVoList = reviewFilterService.getSortReviews(cursor, pageSize, sort)
                 .stream()
                 .map(IdListResponseDto::toVo)
                 .toList();

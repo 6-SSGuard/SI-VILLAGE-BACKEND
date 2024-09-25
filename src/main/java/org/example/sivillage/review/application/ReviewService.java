@@ -15,5 +15,5 @@ public interface ReviewService {
     void changeReview(ReviewRequestDto reviewRequestDto, Long reviewId);
     void removeReview(Long reviewId);
     void addReviewFromCsv(MultipartFile file);
-    List<IdListResponseDto<Long>> getSortReviewsByCreatedAt(Long cursor, int pageSize);
+
 }

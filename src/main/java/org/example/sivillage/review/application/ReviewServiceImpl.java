@@ -63,8 +63,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     //단일 리뷰 조회
     public ReviewResponseDto getReview(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId).get();
-        return ReviewResponseDto.from(review);
+        return ReviewResponseDto.from(reviewRepository.findById(reviewId).orElseThrow(()-> new BaseException(BaseResponseStatus.REVIEW_NOT_FOUND)));
     }
 
     // 리뷰 등록
@@ -91,8 +90,6 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     public void removeReview(Long reviewId) {
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.REVIEW_NOT_FOUND));
         reviewRepository.deleteById(reviewId);
     }
 
@@ -127,30 +124,6 @@ public class ReviewServiceImpl implements ReviewService {
         }
     }
 
-    public List<IdListResponseDto<Long>> getSortReviewsByCreatedAt(Long cursor, int pageSize){
-
-        QReview review = QReview.review;
-        JPAQuery<Long> query = jpaQueryFactory.select(review.id).from(review);
-
-        if (cursor != null) {
-            LocalDateTime cursorDate = jpaQueryFactory.select(review.createdDate)
-                    .from(review)
-                    .where(review.id.eq(cursor))
-                    .fetchOne();
-
-            if (cursorDate != null) {
-                query.where(review.createdDate.lt(cursorDate));
-            }
-        }
-
-        query.orderBy(review.createdDate.desc())
-                .limit(pageSize);
-
-        return query.fetch()
-                .stream()
-                .map(IdListResponseDto::from)
-                .toList();
-    }
     }
 
 
