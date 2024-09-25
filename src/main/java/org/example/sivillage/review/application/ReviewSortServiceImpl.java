@@ -1,5 +1,5 @@
 package org.example.sivillage.review.application;
-import com.querydsl.core.types.OrderSpecifier;
+
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -16,7 +16,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ReviewFilterServiceImpl implements ReviewFilterService {
+public class ReviewSortServiceImpl implements ReviewSortService {
 
     private final JPAQueryFactory jpaQueryFactory;
 
@@ -25,28 +25,30 @@ public class ReviewFilterServiceImpl implements ReviewFilterService {
         QReview review = QReview.review;
         QReviewLike reviewLike = QReviewLike.reviewLike1;
 
-        JPAQuery<Long> query = jpaQueryFactory
-                .select(review.id)
-                .from(review)
-                .leftJoin(reviewLike).on(review.id.eq(reviewLike.reviewId))
-                .groupBy(review.id);
+        Map<String, JPAQuery<Long>> queryMap = Map.of(
+                "created", jpaQueryFactory
+                        .select(review.id)
+                        .from(review)
+                        .orderBy(review.createdDate.desc()),
 
-        // 정렬 조건 설정
-        Map<String, OrderSpecifier<?>> sortMap = Map.of(
-                "likes", reviewLike.count().desc(),
-                "created", review.createdDate.desc(),
-                "best", review.score.desc()
-        );
+                "likes", jpaQueryFactory
+                        .select(reviewLike.reviewId)
+                        .from(reviewLike)
+                        .groupBy(reviewLike.reviewId)
+                        .orderBy(reviewLike.count().desc()),
 
-        // 정렬 조건을 추가
-        query.orderBy(sortMap.getOrDefault(sort, review.createdDate.desc())); // 기본값으로 최신 등록 순
+                "best", jpaQueryFactory
+                        .select(review.id)
+                        .from(review)
+                        .orderBy(review.score.desc(), review.createdDate.desc()));
 
-        // 커서 기준으로 필터링
+        JPAQuery<Long> query = queryMap.getOrDefault(sort, queryMap.get(sort));
+
+
         if (cursor != null) {
-            query.where(review.id.gt(cursor)); // 커서 기준으로 필터링
+            query.where(review.id.gt(cursor));
         }
 
-        // 페이지 사이즈 제한 및 결과 반환
         return query.limit(pageSize)
                 .fetch()
                 .stream()

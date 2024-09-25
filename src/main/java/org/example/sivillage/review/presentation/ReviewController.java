@@ -9,10 +9,9 @@ import org.example.sivillage.auth.domain.AuthUserDetails;
 import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.global.common.response.vo.IdListResponseVo;
-import org.example.sivillage.review.application.ReviewFilterService;
 import org.example.sivillage.review.application.ReviewImageServiceImpl;
-import org.example.sivillage.review.application.ReviewLikeServiceImpl;
 import org.example.sivillage.review.application.ReviewServiceImpl;
+import org.example.sivillage.review.application.ReviewSortServiceImpl;
 import org.example.sivillage.review.dto.in.ReviewImageRequestDto;
 import org.example.sivillage.review.dto.out.ReviewImageResponseDto;
 import org.example.sivillage.review.dto.out.ReviewResponseDto;
@@ -36,7 +35,7 @@ public class ReviewController {
 
     private final ReviewServiceImpl reviewService;
     private final ReviewImageServiceImpl reviewImageService;
-    private final ReviewFilterService reviewFilterService;
+    private final ReviewSortServiceImpl reviewSortService;
 
     @Operation(summary = "상품의 리뷰id 조회", description = "상품의 리뷰 id 리스트를 반환")
     @GetMapping("/product/{productCode}")
@@ -58,10 +57,10 @@ public class ReviewController {
         return new BaseResponse<>(idListResponseVoList);
     }
 
-    @Operation(summary = "리뷰 필터링", description = "리뷰를 최근등록순, 좋아요순, 베스트 순으로 정렬합니다.  sort : created, likes, best")
+    @Operation(summary = "리뷰 정렬", description = "리뷰를 최근등록순, 좋아요, 베스트 순으로 정렬합니다.  sort : created, likes, best")
     @GetMapping("/sort")
     public BaseResponse<List<IdListResponseVo<Long>>> getSortReviews (@RequestParam(required = false) Long cursor,  @RequestParam(defaultValue = "5") int pageSize, @RequestParam(defaultValue = "created") String sort) {
-        List<IdListResponseVo<Long>> idListResponseVoList = reviewFilterService.getSortReviews(cursor, pageSize, sort)
+        List<IdListResponseVo<Long>> idListResponseVoList = reviewSortService.getSortReviews(cursor, pageSize, sort)
                 .stream()
                 .map(IdListResponseDto::toVo)
                 .toList();
