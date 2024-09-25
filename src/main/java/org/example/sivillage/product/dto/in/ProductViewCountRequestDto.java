@@ -9,17 +9,25 @@ import org.example.sivillage.product.domain.ProductViewCount;
 @NoArgsConstructor
 public class ProductViewCountRequestDto {
     private String productCode;
-    private double viewCount;
+    private Long viewCount;
 
-    public static ProductViewCount toEntity(String productCode, double viewCount) {
+    public static ProductViewCount toEntity(String productCode, Long viewCount) {
         return ProductViewCount.builder()
                 .productCode(productCode)
                 .viewCount(viewCount)
                 .build();
     }
 
+    public static ProductViewCount updateToEntity(ProductViewCount productViewCount, Long viewCount){
+        return ProductViewCount.builder()
+                .id(productViewCount.getId())
+                .productCode(productViewCount.getProductCode())
+                .viewCount(viewCount)
+                .build();
+    }
+
     @Builder
-    public ProductViewCountRequestDto(String productCode, double viewCount) {
+    public ProductViewCountRequestDto(String productCode, Long viewCount) {
         this.productCode = productCode;
         this.viewCount = viewCount;
     }

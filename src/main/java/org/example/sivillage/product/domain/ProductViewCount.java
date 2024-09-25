@@ -16,13 +16,13 @@ public class ProductViewCount {
     private Long id;
 
     @Column(nullable = false)
-    private Double viewCount;
+    private Long viewCount;
 
     @Column(nullable = false)
     private String productCode;
 
     @Builder
-    public ProductViewCount(Long id, Double viewCount, String productCode) {
+    public ProductViewCount(Long id, Long viewCount, String productCode) {
         this.id = id;
         this.viewCount = viewCount;
         this.productCode = productCode;
