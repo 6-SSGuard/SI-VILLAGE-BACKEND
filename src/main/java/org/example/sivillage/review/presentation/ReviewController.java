@@ -36,11 +36,7 @@ public class ReviewController {
 
     private final ReviewServiceImpl reviewService;
     private final ReviewImageServiceImpl reviewImageService;
-<<<<<<< Updated upstream
-
-=======
     private final ReviewFilterService reviewFilterService;
->>>>>>> Stashed changes
 
     @Operation(summary = "상품의 리뷰id 조회", description = "상품의 리뷰 id 리스트를 반환")
     @GetMapping("/product/{productCode}")
