@@ -24,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductController {
     private final ProductService productService;
 
-    @Operation(summary = "상품 등록")
+    @Operation(summary = "상품 기본 정보 등록")
     @PostMapping("/vendor")
     public BaseResponse<CreateProductResponseVo> addProduct(@RequestBody CreateProductRequestVo createProductRequestVo) {
 
@@ -33,7 +33,7 @@ public class ProductController {
         );
     }
 
-    @Operation(summary = "단일 상품에 대한 간략 정보 조회", description = "")
+    @Operation(summary = "단일 상품에 대한 간략 정보 조회", description = "", tags = {"상품 정보 조회"})
     @GetMapping("/brief/{productCode}")
     public BaseResponse<GetProductBriefInfoResponseVo> getProductBriefInfo(@PathVariable String productCode) {
 
@@ -42,7 +42,7 @@ public class ProductController {
         );
     }
 
-    @Operation(summary = "상품 상세 정보 조회", description = "")
+    @Operation(summary = "상품 상세 정보 조회", description = "", tags = {"상품 정보 조회"})
     @GetMapping("/details/{productCode}")
     public BaseResponse<GetProductDetailsResponseVo> getProductDetail(@PathVariable String productCode) {
 
@@ -58,7 +58,7 @@ public class ProductController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "CSV 파일로 상품 등록", description = "")
+    @Operation(summary = "CSV 파일로 상품 등록", description = "", tags = {"admin-pre-data"})
     @PostMapping(value ="/admin/csv", consumes = "multipart/form-data")
     public BaseResponse<Void> addProductByCsv(@RequestParam("file") MultipartFile file) {
         productService.addProductByCsv(file);
