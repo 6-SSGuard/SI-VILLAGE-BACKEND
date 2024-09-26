@@ -61,13 +61,14 @@ public class SecurityConfig {
                                 "/api/product/vendor/**", "/api/product/answer/vendor/**",
                                 "/api/product/image/vendor/**",
                                 "/api/product/policy/vendor/**",
-                                "/api/product/option/vendor/**").hasAuthority("VENDOR")
+                                "/api/product/option/vendor/**").hasAnyAuthority("VENDOR", "ADMIN")
 
                         .requestMatchers("/api/brand-like/member/**", "/api/cart/member/**",
                                 "/api/product-like/member/**", "/api/pay/member/**",
                                 "/api/purchase/member/**", "/api/product/question/member/**",
                                 "/api/review/member/**", "/api/review-like/member/**",
-                                "/api/shipping-address/member", "/api/size-info/member").hasAuthority("MEMBER")
+                                "/api/shipping-address/member", "/api/size-info/member")
+                        .hasAnyAuthority("MEMBER", "ADMIN")
 
                         .anyRequest().permitAll()
                 )

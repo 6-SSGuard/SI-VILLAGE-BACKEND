@@ -26,6 +26,8 @@ import org.example.sivillage.vendor.infrastructure.ProductByVendorRepository;
 import org.example.sivillage.vendor.infrastructure.ProductCategoryListRepository;
 import org.example.sivillage.vendor.infrastructure.ProductImageRepository;
 import org.example.sivillage.vendor.infrastructure.ProductOptionRepository;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +36,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +46,7 @@ import java.nio.charset.StandardCharsets;
 @Transactional
 public class ProductServiceImpl implements ProductService {
 
+    private final RedisTemplate<String, Object> redisTemplate;
     private final ProductRepository productRepository;
     private final BrandRepository brandRepository;
     private final BrandProductRepository brandProductRepository;
@@ -253,4 +259,6 @@ public class ProductServiceImpl implements ProductService {
             throw new BaseException(BaseResponseStatus.FILE_PARSE_FAILED);
         }
     }
+
+
 }

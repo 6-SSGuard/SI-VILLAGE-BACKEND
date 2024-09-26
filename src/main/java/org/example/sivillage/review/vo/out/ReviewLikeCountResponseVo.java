@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReviewLikeCountResponseVo {
 
- private Integer reviewLikeCount;
+ private Long reviewLikeCount;
 
 }

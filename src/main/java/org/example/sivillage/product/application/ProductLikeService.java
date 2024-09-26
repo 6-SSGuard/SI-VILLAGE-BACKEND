@@ -23,4 +23,6 @@ public interface ProductLikeService {
      * @param memberUuid 회원 UUID
      */
     void toggleProductLike(String productCode, String memberUuid);
+
+    GetLikeInfoResponseDto getLikeInfo(String productCode, String memberUuid);
 }
