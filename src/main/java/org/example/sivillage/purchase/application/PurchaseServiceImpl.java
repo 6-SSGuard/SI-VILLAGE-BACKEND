@@ -2,6 +2,8 @@ package org.example.sivillage.purchase.application;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.sivillage.admin.domain.Color;
+import org.example.sivillage.admin.domain.Size;
 import org.example.sivillage.admin.infrastructure.ColorRepository;
 import org.example.sivillage.admin.infrastructure.SizeRepository;
 import org.example.sivillage.cart.domain.Cart;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
@@ -112,13 +115,12 @@ public class PurchaseServiceImpl implements PurchaseService{
                     ProductOption productOption = productOptionRepository.findById(productOptionId)
                             .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_PRODUCT_OPTION));
 
-                    String colorName = colorRepository.findById(product.getColorId())
-                            .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_COLOR))
-                            .getColorName();
+                    Optional<Color> color = colorRepository.findById(product.getColorId());
+                    String colorName = color.isPresent()? color.get().getColorName() : "";
 
-                    String size = sizeRepository.findById(productOption.getSizeId())
-                            .orElseThrow(() -> new BaseException(BaseResponseStatus.NOT_FOUND_SIZE))
-                            .getSizeName();
+                    Long sizeId = productOption.getSizeId();
+                    String sizeName = (sizeId == null) ? "" :
+                            sizeRepository.findById(sizeId).map(Size::getSizeName).orElse("");
 
                     return GetPurchaseDetailResponseDto.builder()
                                     .productName(product.getProductName())
@@ -126,7 +128,7 @@ public class PurchaseServiceImpl implements PurchaseService{
                                     .chargedPrice(purchaseProduct.getChargedPrice())
                                     .volume(productOption.getVolume())
                                     .color(colorName)
-                                    .size(size)
+                                    .size(sizeName)
                                     .build();
                         }
                 )
