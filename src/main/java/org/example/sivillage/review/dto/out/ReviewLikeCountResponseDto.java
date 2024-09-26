@@ -7,9 +7,9 @@ import org.example.sivillage.review.vo.out.ReviewLikeCountResponseVo;
 @Getter
 public class ReviewLikeCountResponseDto {
 
-    private Integer reviewLikeCount;
+    private Long reviewLikeCount;
 
-    public static ReviewLikeCountResponseDto from(Integer reviewLikeCount){
+    public static ReviewLikeCountResponseDto from(Long reviewLikeCount){
     return ReviewLikeCountResponseDto.builder()
             .reviewLikeCount(reviewLikeCount)
             .build();
@@ -23,7 +23,7 @@ public class ReviewLikeCountResponseDto {
     }
 
     @Builder
-    public ReviewLikeCountResponseDto(Integer reviewLikeCount){
+    public ReviewLikeCountResponseDto(Long reviewLikeCount){
         this.reviewLikeCount = reviewLikeCount;
     }
 }

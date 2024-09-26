@@ -36,4 +36,5 @@ public class ReviewLikeController {
         ReviewLikeCountResponseDto reviewLikeCountResponseDto = reviewLikeService.getReviewLikeCount(reviewId);
         return new BaseResponse<>(reviewLikeCountResponseDto.toResponseVo());
     }
+
 }
