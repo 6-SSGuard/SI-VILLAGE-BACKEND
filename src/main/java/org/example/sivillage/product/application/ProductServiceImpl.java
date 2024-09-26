@@ -224,14 +224,12 @@ public class ProductServiceImpl implements ProductService {
                     .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND))
                     .getId();
 
-            int randomPrice = (random.nextInt(1000) + 1) * 100; // 1만원에서 100만원 사이의 100원 단위로 가격 설정
-
             // DB에 데이터 저장
             Product product = Product.builder()
-                    .productName(productName) // 고유한 상품명
-                    .price(randomPrice) // 가격을 약간씩 변경
+                    .productName(productName)
+                    .price(price)
                     .colorId(colorId)
-                    .productCode(productCode) // 고유한 상품 코드
+                    .productCode(productCode)
                     .detailContent(detailContent)
                     .brandId(brandId)
                     .build();
@@ -258,7 +256,7 @@ public class ProductServiceImpl implements ProductService {
             ProductImage productImage = ProductImage.builder()
                     .productCode(productCode)
                     .productImageUrl(imageUrl)
-                    .thumbnail(i == 0) // 첫 번째 상품만 썸네일로 설정
+                    .thumbnail(true)
                     .build();
 
             productImageRepository.save(productImage);
@@ -266,7 +264,7 @@ public class ProductServiceImpl implements ProductService {
             ProductOption productOption = ProductOption.builder()
                     .productCode(productCode)
                     .volume(volume)
-                    .stock(100 + i) // 재고를 다르게 설정
+                    .stock(100)
                     .dangerStock(10)
                     .soldOut(false)
                     .build();
@@ -276,7 +274,7 @@ public class ProductServiceImpl implements ProductService {
             ProductByVendor productByVendor = ProductByVendor.builder()
                     .productCode(productCode)
                     .vendorName("민지훈")
-                    .mainView(i == 0) // 첫 번째 상품만 메인으로 설정
+                    .mainView(false)
                     .newProduct(newProduct)
                     .display(true)
                     .maxOrderCount(10)
