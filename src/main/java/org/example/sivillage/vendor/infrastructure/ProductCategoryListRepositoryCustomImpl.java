@@ -2,21 +2,24 @@ package org.example.sivillage.vendor.infrastructure;
 
 import com.querydsl.core.types.Order;
 import com.querydsl.core.types.OrderSpecifier;
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.NumberExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.example.sivillage.global.common.response.dto.ProductDto;
 import org.example.sivillage.product.domain.QProduct;
 import org.example.sivillage.vendor.domain.QProductByVendor;
 import org.example.sivillage.vendor.domain.QProductCategoryList;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,78 +27,71 @@ public class ProductCategoryListRepositoryCustomImpl implements ProductCategoryL
 
     private final JPAQueryFactory queryFactory;
 
+    private JPAQuery<ProductDto> getDiscountedPriceQuery(QProduct product, QProductByVendor productByVendor, boolean asc) {
+        NumberExpression<Integer> discountedPrice = product.price.multiply(
+                Expressions.numberTemplate(Double.class, "1 - ({0} / 100.0)", productByVendor.discountRate)
+        );
+
+        Order order = asc ? Order.ASC : Order.DESC;
+        return queryFactory.select(
+                        Projections.constructor(ProductDto.class, product.productCode, discountedPrice)
+                )
+                .from(product)
+                .join(productByVendor).on(product.productCode.eq(productByVendor.productCode))
+                .orderBy(new OrderSpecifier<>(order, discountedPrice));
+    }
 
     @Override
-    public Slice<String> findProductsByCategoriesWithCursorPaging(
+    public Slice<ProductDto> findProductsByCategoriesWithCursorPaging(
             String topCategoryCode, String middleCategoryCode, String bottomCategoryCode, String subCategoryCode,
-            String lastProductCode, Pageable pageable) {
+            String lastProductCode, int pageSize, String sort) {
 
         QProductCategoryList productCategoryList = QProductCategoryList.productCategoryList;
         QProductByVendor productByVendor = QProductByVendor.productByVendor;
         QProduct product = QProduct.product;
 
-        // 정렬 옵션을 결정
-        List<OrderSpecifier<?>> orderSpecifiers = getOrderSpecifiers(pageable.getSort(), productByVendor, product);
-
-        List<String> productCodes = queryFactory.select(productCategoryList.productCode)
-                .from(productCategoryList)
-                .join(product).on(productCategoryList.productCode.eq(product.productCode))  // Product와 조인
-                .join(productByVendor).on(productCategoryList.productCode.eq(productByVendor.productCode))  // ProductByVendor와 조인
-                .where(
-                        productCategoryList.topCategoryCode.eq(topCategoryCode),
-                        productCategoryList.middleCategoryCode.eq(middleCategoryCode),
-                        productCategoryList.bottomCategoryCode.eq(bottomCategoryCode),
-                        subCategoryCode != null ? productCategoryList.subCategoryCode.eq(subCategoryCode) : null
-                )
-                .orderBy(orderSpecifiers.toArray(new OrderSpecifier[0]))  // 선택된 정렬 기준 적용
-                .limit(pageable.getPageSize() + 1)  // 다음 페이지 확인을 위해 +1
-                .fetch();
-
-        boolean hasNext = productCodes.size() > pageable.getPageSize();
-
-        if (hasNext) {
-            productCodes.remove(productCodes.size() - 1);  // 다음 페이지 확인용으로 조회된 마지막 요소 제거
-        }
-
-        return new SliceImpl<>(productCodes, pageable, hasNext);
-    }
-
-    // Pageable의 Sort 객체를 기반으로 OrderSpecifier 목록을 생성
-    private List<OrderSpecifier<?>> getOrderSpecifiers(Sort sort, QProductByVendor productByVendor, QProduct product) {
-        List<OrderSpecifier<?>> orderSpecifiers = new ArrayList<>();
-
-        for (Sort.Order order : sort) {
-            Order direction = order.isAscending() ? Order.ASC : Order.DESC;
-            switch (order.getProperty()) {
-                case "price":
-                    // 할인된 가격 정렬
-                    NumberExpression<Integer> discountedPrice = product.price.multiply(
-                            Expressions.numberTemplate(Double.class, "1 - ({0} / 100.0)", productByVendor.discountRate)
-                    );
-                    orderSpecifiers.add(new OrderSpecifier<>(direction, discountedPrice));
-                    break;
-                case "discountRate":
-                    // 할인율 정렬
-                    orderSpecifiers.add(new OrderSpecifier<>(direction, productByVendor.discountRate));
-                    break;
-                case "createdDate":
-                default:
-                    // 신상품순 정렬
-                    orderSpecifiers.add(new OrderSpecifier<>(direction, productByVendor.createdDate));
-                    break;
-            }
-        }
-
-        return orderSpecifiers;
-    }
-
-    // 할인된 가격으로 정렬
-    private OrderSpecifier<?> getDiscountedPriceOrder(Order order, QProduct product, QProductByVendor productByVendor) {
-        // 할인된 가격 계산: 가격 * (1 - 할인율 / 100)
-        NumberExpression<Integer> discountedPrice = product.price.multiply(
-                Expressions.numberTemplate(Double.class, "1 - ({0} / 100.0)", productByVendor.discountRate)
+        // 정렬 쿼리 매핑
+        Map<String, JPAQuery<ProductDto>> queryMap = Map.of(
+                "priceAsc", getDiscountedPriceQuery(product, productByVendor, true),
+                "priceDesc", getDiscountedPriceQuery(product, productByVendor, false),
+                "newest", queryFactory.select(
+                                Projections.constructor(ProductDto.class, product.productCode, productByVendor.createdDate))
+                        .from(productCategoryList)
+                        .join(product).on(productCategoryList.productCode.eq(product.productCode))
+                        .join(productByVendor).on(productCategoryList.productCode.eq(productByVendor.productCode))
+                        .orderBy(productByVendor.createdDate.desc())
         );
 
-        return new OrderSpecifier<>(order, discountedPrice);
+        JPAQuery<ProductDto> query = queryMap.getOrDefault(sort, queryMap.get("newest"));
+
+        // 마지막 값 설정에 대한 조건 처리
+        if (lastProductCode != null && sort.equals("newest")) {
+            LocalDateTime lastProductDateTime = LocalDateTime.parse(lastProductCode);
+            query.where(productByVendor.createdDate.lt(lastProductDateTime));
+        } else if (lastProductCode != null && sort.equals("priceAsc")) {
+            query.where(product.price.gt(Integer.parseInt(lastProductCode)));
+        } else if (lastProductCode != null && sort.equals("priceDesc")) {
+            query.where(product.price.lt(Integer.parseInt(lastProductCode)));
+        }
+
+        // 카테고리 조건 처리
+        query.where(
+                topCategoryCode != null ? productCategoryList.topCategoryCode.eq(topCategoryCode) : null,
+                middleCategoryCode != null ? productCategoryList.middleCategoryCode.eq(middleCategoryCode) : null,
+                bottomCategoryCode != null ? productCategoryList.bottomCategoryCode.eq(bottomCategoryCode) : null,
+                subCategoryCode != null ? productCategoryList.subCategoryCode.eq(subCategoryCode) : null
+        );
+
+        // 페이지 사이즈 + 1로 다음 페이지 여부 확인
+        List<ProductDto> results = query.limit(pageSize + 1).fetch();
+
+        // 다음 페이지가 있는지 확인
+        boolean hasNext = results.size() > pageSize;
+        if (hasNext) {
+            results.remove(results.size() - 1);  // 다음 페이지 확인용으로 조회된 마지막 요소 제거
+        }
+
+        // Slice로 반환
+        return new SliceImpl<>(results, Pageable.unpaged(), hasNext);
     }
 }

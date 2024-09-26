@@ -1,8 +1,6 @@
 package org.example.sivillage.review.application;
 
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.csv.CSVFormat;
@@ -16,7 +14,6 @@ import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.global.error.BaseException;
 import org.example.sivillage.member.infrastructure.MemberRepository;
 import org.example.sivillage.review.domain.CategoryType;
-import org.example.sivillage.review.domain.QReview;
 import org.example.sivillage.review.domain.Review;
 import org.example.sivillage.review.dto.in.ReviewRequestDto;
 import org.example.sivillage.review.dto.out.ReviewResponseDto;
@@ -29,8 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.List;
+import java.util.Random;
 
 @Transactional
 @RequiredArgsConstructor
@@ -63,7 +60,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     //단일 리뷰 조회
     public ReviewResponseDto getReview(Long reviewId) {
-        return ReviewResponseDto.from(reviewRepository.findById(reviewId).orElseThrow(()-> new BaseException(BaseResponseStatus.REVIEW_NOT_FOUND)));
+        return ReviewResponseDto.from(reviewRepository.findById(reviewId).orElseThrow(() -> new BaseException(BaseResponseStatus.REVIEW_NOT_FOUND)));
     }
 
     // 리뷰 등록
@@ -72,11 +69,11 @@ public class ReviewServiceImpl implements ReviewService {
         BeautyInfo beautyInfo = beautyInfoRepository.findByMemberUuid(memberUuid).orElse(new BeautyInfo());
         SizeInfo sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid).orElse(new SizeInfo());
         CategoryType categoryType = CategoryType.fromCategoryPath(categoryPathService.getCategoryPath(productCode));
-        categoryType.getInfo(beautyInfo,sizeInfo);
+        categoryType.getInfo(beautyInfo, sizeInfo);
 
         Review review = reviewRepository.save(reviewRequestDto.toEntity(reviewRequestDto,
                 memberRepository.findEmailByMemberUuid(memberUuid),
-                categoryType.getInfo(beautyInfo,sizeInfo),
+                categoryType.getInfo(beautyInfo, sizeInfo),
                 memberUuid,
                 productCode));
 
@@ -99,7 +96,12 @@ public class ReviewServiceImpl implements ReviewService {
              CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader())) {
 
             List<CSVRecord> records = csvParser.getRecords();
+            Random random = new Random();
+
             for (CSVRecord record : records) {
+                // 1~100 사이의 랜덤 숫자를 생성
+                int randomReviewCount = random.nextInt(100) + 1;
+
                 Double score = Double.valueOf(record.get("score")); // CSV 컬럼 이름 사용
                 String reviewContent = record.get("reviewContent");
                 String authorEmail = record.get("authorEmail");
@@ -107,28 +109,27 @@ public class ReviewServiceImpl implements ReviewService {
                 String memberUuid = record.get("memberUuid");
                 String productCode = record.get("productCode");
 
-                // 브랜드 엔티티 생성 및 저장
-                Review review = Review.builder()
-                        .score(score)
-                        .reviewContent(reviewContent)
-                        .authorEmail(authorEmail)
-                        .memberInformation(memberInformation)
-                        .memberUuid(memberUuid)
-                        .productCode(productCode)
-                        .build();
+                // 랜덤한 수만큼 리뷰 생성 및 저장
+                for (int i = 0; i < randomReviewCount; i++) {
+                    Review review = Review.builder()
+                            .score(score)
+                            .reviewContent(reviewContent)
+                            .authorEmail(authorEmail)
+                            .memberInformation(memberInformation)
+                            .memberUuid(memberUuid)
+                            .productCode(productCode)
+                            .build();
 
-                reviewRepository.save(review);
+                    reviewRepository.save(review);
+                }
             }
         } catch (Exception e) {
             throw new BaseException(BaseResponseStatus.INTERNAL_SERVER_ERROR);
+
         }
     }
 
-    }
-
-
-
-
+}
 
 
 
