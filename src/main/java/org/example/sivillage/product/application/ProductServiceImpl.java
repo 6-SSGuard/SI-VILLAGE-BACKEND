@@ -37,7 +37,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -59,7 +58,6 @@ public class ProductServiceImpl implements ProductService {
     private final ProductByVendorRepository productByVendorRepository;
 
     private static final int THREAD_POOL_SIZE = 10; // 사용할 스레드 수 정의
-    private static final Random random = new Random();
 
 
     /**
@@ -226,72 +224,67 @@ public class ProductServiceImpl implements ProductService {
                     .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND))
                     .getId();
 
-            // 100개의 상품을 생성하는 반복문 추가
-            for (int i = 0; i < 100; i++) {
-                String uniqueProductName = productName + " #" + (i + 1); // 상품명에 숫자 추가
-                int randomPrice = (random.nextInt(20000 - 10 + 1) + 10) * 100; // 1000원에서 200만원 사이의 100원 단위로 가격 설정
-                String uniqueProductCode = productCode + "_" + i; // 상품 코드에 숫자 추가
+            int randomPrice = (random.nextInt(1000) + 1) * 100; // 1만원에서 100만원 사이의 100원 단위로 가격 설정
 
-                // DB에 데이터 저장
-                Product product = Product.builder()
-                        .productName(uniqueProductName) // 고유한 상품명
-                        .price(randomPrice) // 가격을 약간씩 변경
-                        .colorId(colorId)
-                        .productCode(uniqueProductCode) // 고유한 상품 코드
-                        .detailContent(detailContent)
-                        .brandId(brandId)
-                        .build();
+            // DB에 데이터 저장
+            Product product = Product.builder()
+                    .productName(productName) // 고유한 상품명
+                    .price(randomPrice) // 가격을 약간씩 변경
+                    .colorId(colorId)
+                    .productCode(productCode) // 고유한 상품 코드
+                    .detailContent(detailContent)
+                    .brandId(brandId)
+                    .build();
 
-                productRepository.save(product);
+            productRepository.save(product);
 
-                BrandProduct brandProduct = BrandProduct.builder()
-                        .brandId(brandId)
-                        .productCode(uniqueProductCode)
-                        .build();
+            BrandProduct brandProduct = BrandProduct.builder()
+                    .brandId(brandId)
+                    .productCode(productCode)
+                    .build();
 
-                brandProductRepository.save(brandProduct);
+            brandProductRepository.save(brandProduct);
 
-                ProductCategoryList productCategoryList = ProductCategoryList.builder()
-                        .productCode(uniqueProductCode)
-                        .topCategoryCode(topCategoryCode)
-                        .middleCategoryCode(middleCategoryCode)
-                        .bottomCategoryCode(bottomCategoryCode)
-                        .subCategoryCode(subCategoryCode)
-                        .build();
+            ProductCategoryList productCategoryList = ProductCategoryList.builder()
+                    .productCode(productCode)
+                    .topCategoryCode(topCategoryCode)
+                    .middleCategoryCode(middleCategoryCode)
+                    .bottomCategoryCode(bottomCategoryCode)
+                    .subCategoryCode(subCategoryCode)
+                    .build();
 
-                productCategoryListRepository.save(productCategoryList);
+            productCategoryListRepository.save(productCategoryList);
 
-                ProductImage productImage = ProductImage.builder()
-                        .productCode(uniqueProductCode)
-                        .productImageUrl(imageUrl)
-                        .thumbnail(i == 0) // 첫 번째 상품만 썸네일로 설정
-                        .build();
+            ProductImage productImage = ProductImage.builder()
+                    .productCode(productCode)
+                    .productImageUrl(imageUrl)
+                    .thumbnail(i == 0) // 첫 번째 상품만 썸네일로 설정
+                    .build();
 
-                productImageRepository.save(productImage);
+            productImageRepository.save(productImage);
 
-                ProductOption productOption = ProductOption.builder()
-                        .productCode(uniqueProductCode)
-                        .volume(volume)
-                        .stock(100 + i) // 재고를 다르게 설정
-                        .dangerStock(10)
-                        .soldOut(false)
-                        .build();
+            ProductOption productOption = ProductOption.builder()
+                    .productCode(productCode)
+                    .volume(volume)
+                    .stock(100 + i) // 재고를 다르게 설정
+                    .dangerStock(10)
+                    .soldOut(false)
+                    .build();
 
-                productOptionListRepository.save(productOption);
+            productOptionListRepository.save(productOption);
 
-                ProductByVendor productByVendor = ProductByVendor.builder()
-                        .productCode(uniqueProductCode)
-                        .vendorName("민지훈")
-                        .mainView(i == 0) // 첫 번째 상품만 메인으로 설정
-                        .newProduct(newProduct)
-                        .display(true)
-                        .maxOrderCount(10)
-                        .minOrderCount(1)
-                        .discountRate(discountRate)
-                        .build();
+            ProductByVendor productByVendor = ProductByVendor.builder()
+                    .productCode(productCode)
+                    .vendorName("민지훈")
+                    .mainView(i == 0) // 첫 번째 상품만 메인으로 설정
+                    .newProduct(newProduct)
+                    .display(true)
+                    .maxOrderCount(10)
+                    .minOrderCount(1)
+                    .discountRate(discountRate)
+                    .build();
 
-                productByVendorRepository.save(productByVendor);
-            }
+            productByVendorRepository.save(productByVendor);
 
         } catch (Exception e) {
             log.error("레코드 처리 중 오류 발생: {}", e.getMessage(), e);
