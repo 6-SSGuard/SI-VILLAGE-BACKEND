@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.sivillage.product.domain.ProductLike;
 import org.example.sivillage.product.dto.out.GetLikeCountResponseDto;
 import org.example.sivillage.product.infrastructure.ProductLikeRepository;
-import org.example.sivillage.product.infrastructure.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,33 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductLikeServiceImpl implements ProductLikeService {
 
     private final ProductLikeRepository productLikeRepository;
-    private final ProductRepository productRepository;
-//    private final MemberRepository memberRepository;
 
 
-//    @CacheEvict(value = "procductLikes", key = "#product.productCode + '-' + #member.memberUuid")
-//    public void unlikeProduct(UnlikeProductRequestDto request) {
-//        Product product = getProduct(request.getProductCode());
-//        Member member = getMember(request.getMemberUuid());
-//        productLikeRepository.deleteByProductAndMember(product, member);
-//    }
-//
-//    @Cacheable(value = "procductLikes", key = "#product.productCode + '-' + #member.memberUuid")
-//    public boolean isProductLikedByMember(String productCode, String memberUuid) {
-//        Product product = getProduct(productCode);
-//        Member member = getMember(memberUuid);
-//        return productLikeRepository.existsByProductAndMember(product, member);
-//    }
-
-//    @CachePut(value = "procductLikes", key = "#product.productUuid + '-' + #member.memberUuid")
-//    public void likeProduct(LikeProductRequestDto request) {
-//        Product product = getProduct(request.getProductCode());
-//        Member member = getMember(request.getMemberUuid());
-//
-//        ProductLike productLike = ProductLike.createProductLike(product, member);
-//        productLikeRepository.save(productLike);
-//    }
-//
     @Transactional(readOnly = true)
     public GetLikeCountResponseDto getLikeCount(String productCode) {
         return GetLikeCountResponseDto.from(productLikeRepository.countByProductCode(productCode));
@@ -57,14 +31,12 @@ public class ProductLikeServiceImpl implements ProductLikeService {
         productLikeRepository.save(productLike);
     }
 
-//    private Product getProduct(String productCode) {
-//        return productRepository.findByProductCode(productCode)
-//                .orElseThrow(() -> new BaseException(BaseResponseStatus.PRODUCT_NOT_FOUND));
-//    }
-//
-//    private Member getMember(String memberUuid) {
-//        return memberRepository.findByMemberUuid(memberUuid)
-//                .orElseThrow(() -> new BaseException(BaseResponseStatus.MEMBER_NOT_FOUND));
-//    }
-
+    @Override
+    public GetLikeInfoResponseDto getLikeInfo(String productCode, String memberUuid) {
+        return productLikeRepository.findByProductCodeAndMemberUuid(productCode, memberUuid)
+                .map(GetLikeInfoResponseDto::from)
+                .orElse(GetLikeInfoResponseDto.builder()
+                        .liked(false)
+                        .build());
+    }
 }
