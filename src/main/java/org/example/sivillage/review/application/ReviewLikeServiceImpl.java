@@ -25,7 +25,9 @@ public class ReviewLikeServiceImpl implements ReviewLikeService {
     }
 
     public ReviewLikeCountResponseDto getReviewLikeCount(Long reviewId){
-       return ReviewLikeCountResponseDto.from(reviewLikeRepository.countByReviewId(reviewId));
+       return ReviewLikeCountResponseDto.from(reviewLikeRepository.countByReviewIdAndLike(reviewId));
     }
+
+
 
 }
