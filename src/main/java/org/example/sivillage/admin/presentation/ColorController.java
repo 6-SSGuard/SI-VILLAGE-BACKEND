@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "색상 관리 API", description = "색상 관련 API endpoints")
-@RequestMapping("/api/color/admin")
+@RequestMapping("/api/color")
 public class ColorController {
 
     /**
@@ -37,7 +37,7 @@ public class ColorController {
      * @return BaseResponse<Void>
      */
     @Operation(summary = "색상 추가 API", description = "색상을 추가합니다.")
-    @PostMapping(value = "/")
+    @PostMapping(value = "/admin")
     public BaseResponse<Void> addColor(@RequestBody AddColorRequestVo addColorRequestVo) {
         colorService.addColor(AddColorRequestDto.from(addColorRequestVo));
         return new BaseResponse<>();
@@ -49,7 +49,7 @@ public class ColorController {
      * @return BaseResponse<Void>
      */
     @Operation(summary = "색상 수정 API", description = "색상을 수정합니다.")
-    @PutMapping(value = "/")
+    @PutMapping(value = "/admin")
     public BaseResponse<Void> changeColor(@RequestBody ChangeColorRequestVo changeColorRequestVo) {
         colorService.changeColor(ChangeColorRequestDto.from(changeColorRequestVo));
         return new BaseResponse<>();
@@ -61,7 +61,7 @@ public class ColorController {
      * @return BaseResponse<Void>
      */
     @Operation(summary = "색상 삭제 API", description = "색상을 삭제합니다.")
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/admin/{id}")
     public BaseResponse<Void> removeColor(@PathVariable Long id) {
         colorService.removeColor(id);
         return new BaseResponse<>();
@@ -72,7 +72,7 @@ public class ColorController {
      * @param id 색상 ID
      * @return BaseResponse<GetColorResponseVo>
      */
-    @Operation(summary = "색상 조회 API", description = "색상을 조회합니다.")
+    @Operation(summary = "색상 조회 API", description = "색상을 조회합니다.", tags = "상품 정보 조회")
     @GetMapping(value = "/{id}")
     public BaseResponse<GetColorResponseVo> getColor(@PathVariable Long id) {
         return new BaseResponse<>(
