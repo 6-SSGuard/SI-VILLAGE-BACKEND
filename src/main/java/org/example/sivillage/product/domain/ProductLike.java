@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class ProductLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_like_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(nullable = false)
@@ -26,16 +26,4 @@ public class ProductLike {
     @Column(nullable = false)
     private boolean liked;
 
-    // 좋아요 생성 메서드
-    public static ProductLike toEntity(String productCode, String memberUuid) {
-        return ProductLike.builder()
-                .productCode(productCode)
-                .memberUuid(memberUuid)
-                .liked(false)
-                .build();
-    }
-
-    public void toggleLike() {
-        this.liked = !this.liked;
-    }
 }

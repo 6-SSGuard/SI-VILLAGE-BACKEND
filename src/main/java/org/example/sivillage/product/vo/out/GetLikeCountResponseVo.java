@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @Getter
 public class GetLikeCountResponseVo {
 
-    private int likeCount;
+    private Long likeCount;
 
     @Builder
-    public GetLikeCountResponseVo(int likeCount) {
+    public GetLikeCountResponseVo(Long likeCount) {
         this.likeCount = likeCount;
     }
 }

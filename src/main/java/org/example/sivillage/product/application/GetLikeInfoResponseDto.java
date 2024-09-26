@@ -17,9 +17,9 @@ public class GetLikeInfoResponseDto {
         this.liked = liked;
     }
 
-    public static GetLikeInfoResponseDto from(ProductLike productLike) {
+    public static GetLikeInfoResponseDto from(boolean liked) {
         return GetLikeInfoResponseDto.builder()
-                .liked(productLike.isLiked())
+                .liked(liked)
                 .build();
     }
 

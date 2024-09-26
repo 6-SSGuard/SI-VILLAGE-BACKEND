@@ -9,14 +9,14 @@ import org.example.sivillage.product.vo.out.GetLikeCountResponseVo;
 @NoArgsConstructor
 public class GetLikeCountResponseDto {
 
-    private int likeCount;
+    private Long likeCount;
 
     @Builder
-    public GetLikeCountResponseDto(int likeCount) {
+    public GetLikeCountResponseDto(Long likeCount) {
         this.likeCount = likeCount;
     }
 
-    public static GetLikeCountResponseDto from(Integer likeCount) {
+    public static GetLikeCountResponseDto from(Long likeCount) {
         return GetLikeCountResponseDto.builder()
                 .likeCount(likeCount)
                 .build();

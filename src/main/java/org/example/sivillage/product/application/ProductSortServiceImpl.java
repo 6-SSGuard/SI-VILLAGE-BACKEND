@@ -4,6 +4,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.product.domain.QProductLike;
+import org.example.sivillage.product.domain.QProductLikeCount;
 import org.example.sivillage.product.domain.QProductViewCount;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class ProductSortServiceImpl implements ProductSortService{
 
     public List<IdListResponseDto<String>> getSortBestProduct(String sort) {
         QProductViewCount productViewCount = QProductViewCount.productViewCount;
-        QProductLike productLike = QProductLike.productLike;
+        QProductLikeCount productLikeCount = QProductLikeCount.productLikeCount;
 
         Map<String, JPAQuery<String>> queryMap = Map.of(
                 "viewCount", jpaQueryFactory
@@ -29,10 +30,10 @@ public class ProductSortServiceImpl implements ProductSortService{
                         .limit(100), // 상위 100개만 조회
 
                 "likes", jpaQueryFactory
-                        .select(productLike.productCode)
-                        .from(productLike)
-                        .groupBy(productLike.productCode) //
-                        .orderBy(productLike.count().desc()) // 좋아요 수에 따라 정렬
+                        .select(productLikeCount.productCode)
+                        .from(productLikeCount)
+                        .groupBy(productLikeCount.productCode) //
+                        .orderBy(productLikeCount.count().desc()) // 좋아요 수에 따라 정렬
                         .limit(100)// 상위 100개만 조회
         );
 
