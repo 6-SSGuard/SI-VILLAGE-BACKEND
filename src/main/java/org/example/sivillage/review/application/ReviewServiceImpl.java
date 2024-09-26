@@ -60,7 +60,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     //단일 리뷰 조회
     public ReviewResponseDto getReview(Long reviewId) {
-        return ReviewResponseDto.from(reviewRepository.findById(reviewId).orElseThrow(() -> new BaseException(BaseResponseStatus.REVIEW_NOT_FOUND)));
+        return ReviewResponseDto.from(reviewRepository.findById(reviewId).orElseThrow(()-> new BaseException(BaseResponseStatus.REVIEW_NOT_FOUND)));
     }
 
     // 리뷰 등록
@@ -69,11 +69,11 @@ public class ReviewServiceImpl implements ReviewService {
         BeautyInfo beautyInfo = beautyInfoRepository.findByMemberUuid(memberUuid).orElse(new BeautyInfo());
         SizeInfo sizeInfo = sizeInfoRepository.findByMemberUuid(memberUuid).orElse(new SizeInfo());
         CategoryType categoryType = CategoryType.fromCategoryPath(categoryPathService.getCategoryPath(productCode));
-        categoryType.getInfo(beautyInfo, sizeInfo);
+        categoryType.getInfo(beautyInfo,sizeInfo);
 
         Review review = reviewRepository.save(reviewRequestDto.toEntity(reviewRequestDto,
                 memberRepository.findEmailByMemberUuid(memberUuid),
-                categoryType.getInfo(beautyInfo, sizeInfo),
+                categoryType.getInfo(beautyInfo,sizeInfo),
                 memberUuid,
                 productCode));
 
