@@ -13,11 +13,11 @@ public class GetLikeInfoRequestDto {
     private String productCode;
     private String memberUuid;
 
-    public static ProductLike updateToEntity(ProductLikeCount productLikeCount, String memberUuid, boolean liked) {
+    public static ProductLike updateToEntity(ProductLike productLike, boolean liked) {
         return ProductLike.builder()
-                .id(productLikeCount.getId())
-                .productCode(productLikeCount.getProductCode())
-                .memberUuid(memberUuid)
+                .id(productLike.getId())
+                .productCode(productLike.getProductCode())
+                .memberUuid(productLike.getMemberUuid())
                 .build();
     }
 

@@ -21,7 +21,8 @@ public class ProductLikeCount {
     private String productCode;
 
     @Builder
-    public ProductLikeCount(Long likeCount, String productCode) {
+    public ProductLikeCount(Long id, Long likeCount, String productCode) {
+        this.id = id;
         this.likeCount = likeCount;
         this.productCode = productCode;
     }

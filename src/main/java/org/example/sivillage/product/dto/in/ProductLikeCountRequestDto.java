@@ -23,9 +23,10 @@ public class ProductLikeCountRequestDto {
 
     public static ProductLikeCount updateToEntity(ProductLikeCount productLikeCount, Long likeCount) {
         return ProductLikeCount.builder()
-               .productCode(productLikeCount.getProductCode())
-               .likeCount(likeCount)
-               .build();
+                .id(productLikeCount.getId())
+                .productCode(productLikeCount.getProductCode())
+                .likeCount(likeCount)
+                .build();
     }
 
     @Builder
