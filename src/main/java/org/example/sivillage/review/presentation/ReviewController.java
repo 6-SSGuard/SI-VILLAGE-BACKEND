@@ -57,10 +57,22 @@ public class ReviewController {
         return new BaseResponse<>(idListResponseVoList);
     }
 
-    @Operation(summary = "리뷰 정렬", description = "리뷰를 최근등록순, 좋아요, 베스트 순으로 정렬합니다.  sort : created, likes, best")
+    @Operation(summary = "리뷰 정렬",
+            description = """
+            
+            리뷰 목록은 페이징 처리되며, 사용자는 `sort` 파라미터를 통해 정렬 기준을 선택할 수 있습니다.
+            페이징 처리된 리뷰의 마지막 ID를 기준으로 커서 페이징이 적용됩니다.
+
+            만약 `lastReviewId`가 주어지지 않으면, 첫 페이지를 조회합니다.
+
+            sort 파라미터는 다음과 같은 옵션을 제공합니다:
+            - `created`: 리뷰 생성일 기준으로 내림차순 정렬
+            - `likes`: 리뷰 좋아요 개수를 기준으로 내림차순 정렬
+            - `best`: 평점을 기준으로 오름차순 정렬
+            """)
     @GetMapping("/sort")
-    public BaseResponse<List<IdListResponseVo<Long>>> getSortReviews (@RequestParam(required = false) Long cursor,  @RequestParam(defaultValue = "5") int pageSize, @RequestParam(defaultValue = "created") String sort) {
-        List<IdListResponseVo<Long>> idListResponseVoList = reviewSortService.getSortReviews(cursor, pageSize, sort)
+    public BaseResponse<List<IdListResponseVo<Long>>> getSortReviews (@RequestParam(required = false) Long lastReviewId,  @RequestParam(defaultValue = "5") int pageSize, @RequestParam(defaultValue = "created") String sort) {
+        List<IdListResponseVo<Long>> idListResponseVoList = reviewSortService.getSortReviews(lastReviewId, pageSize, sort)
                 .stream()
                 .map(IdListResponseDto::toVo)
                 .toList();
