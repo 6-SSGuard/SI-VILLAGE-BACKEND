@@ -27,7 +27,6 @@ import org.example.sivillage.vendor.infrastructure.ProductCategoryListRepository
 import org.example.sivillage.vendor.infrastructure.ProductImageRepository;
 import org.example.sivillage.vendor.infrastructure.ProductOptionRepository;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,9 +35,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -55,6 +56,9 @@ public class ProductServiceImpl implements ProductService {
     private final ProductImageRepository productImageRepository;
     private final ProductOptionRepository productOptionListRepository;
     private final ProductByVendorRepository productByVendorRepository;
+
+    private static final int THREAD_POOL_SIZE = 10; // 사용할 스레드 수 정의
+
 
     /**
      * 1. 상품 등록
@@ -134,11 +138,31 @@ public class ProductServiceImpl implements ProductService {
             throw new BaseException(BaseResponseStatus.INVALID_FILE_FORMAT);
         }
 
+        // 작업 시작 시간 기록
+        Instant start = Instant.now();
+
         try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8))) {
 
             Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(reader);
-            records.forEach(this::parseProductCsvRecord);
+
+            // 스레드 풀 생성
+            ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+
+            // 각 레코드를 스레드 풀에 제출하여 비동기로 처리
+            records.forEach(record -> {
+                executorService.submit(() -> {
+                    try {
+                        parseProductCsvRecord(record);
+                    } catch (Exception e) {
+                        log.error("레코드 처리 중 오류 발생: {}", e.getMessage(), e);
+                    }
+                });
+            });
+
+            // 모든 작업이 완료될 때까지 기다림
+            executorService.shutdown();
+            executorService.awaitTermination(1, TimeUnit.HOURS);
 
         } catch (IOException e) {
             log.error("파일을 읽는 중 오류 발생: {}", e.getMessage(), e);
@@ -148,10 +172,18 @@ public class ProductServiceImpl implements ProductService {
             throw new BaseException(BaseResponseStatus.INTERNAL_SERVER_ERROR);
         }
 
+        // 작업 종료 시간 기록
+        Instant end = Instant.now();
+
+        // 소요 시간 계산 및 출력
+        Duration timeElapsed = Duration.between(start, end);
+        log.info("CSV 파일 처리가 완료되었습니다. 소요 시간: {}초", timeElapsed.toSeconds());
     }
 
     private void parseProductCsvRecord(CSVRecord record) {
         try {
+            // 기존의 상품 데이터 처리 로직 (생략)
+
             String productName = record.get("productName");
             Integer price = Integer.parseInt(record.get("price"));
             Long colorId = Long.parseLong(record.get("colorId"));
@@ -161,9 +193,8 @@ public class ProductServiceImpl implements ProductService {
             String topCategoryCode = categoryRepository.findFirstByCategoryNameOrderByIdAsc(record.get("topCategoryName"))
                     .orElseThrow(() -> new BaseException(BaseResponseStatus.TOP_CATEGORY_NOT_FOUND)).getCategoryCode();
 
-
             String middleCategoryCode = categoryRepository.findFirstByCategoryNameOrderByIdAsc(record.get("middleCategoryName"))
-                        .orElseThrow(() -> new BaseException(BaseResponseStatus.MIDDLE_CATEGORY_NOT_FOUND)).getCategoryCode();
+                    .orElseThrow(() -> new BaseException(BaseResponseStatus.MIDDLE_CATEGORY_NOT_FOUND)).getCategoryCode();
 
             String bottomCategoryCode = categoryRepository.findFirstByCategoryNameOrderByIdAsc(record.get("bottomCategoryName"))
                     .orElseThrow(() -> new BaseException(BaseResponseStatus.BOTTOM_CATEGORY_NOT_FOUND)).getCategoryCode();
@@ -188,12 +219,12 @@ public class ProductServiceImpl implements ProductService {
                 discountRate = Double.parseDouble(record.get("discountRate"));
             }
 
-
             // 브랜드 ID 처리
             Long brandId = brandRepository.findByBrandEngName(brandName)
                     .orElseThrow(() -> new BaseException(BaseResponseStatus.BRAND_NOT_FOUND))
                     .getId();
 
+            // DB에 데이터 저장
             Product product = Product.builder()
                     .productName(productName)
                     .price(price)
@@ -259,6 +290,4 @@ public class ProductServiceImpl implements ProductService {
             throw new BaseException(BaseResponseStatus.FILE_PARSE_FAILED);
         }
     }
-
-
 }
