@@ -8,7 +8,6 @@ import org.example.sivillage.global.common.response.BaseResponse;
 import org.example.sivillage.global.common.response.dto.IdListResponseDto;
 import org.example.sivillage.global.common.response.vo.IdListResponseVo;
 import org.example.sivillage.product.application.ProductService;
-import org.example.sivillage.product.application.ProductSortService;
 import org.example.sivillage.product.application.ProductSortServiceImpl;
 import org.example.sivillage.product.application.ProductViewCountService;
 import org.example.sivillage.product.dto.in.ChangeProductRequestDto;
