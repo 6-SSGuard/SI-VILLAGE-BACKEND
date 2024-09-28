@@ -23,7 +23,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Tag(name = "리뷰 관리 API", description = "리뷰 관련 API endpoints")
@@ -145,7 +144,7 @@ public class ReviewController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "CSV 파일로 리뷰 이미지 추가")
+    @Operation(summary = "CSV 파일로 리뷰 이미지 추가", tags = {"admin-pre-data"})
     @PostMapping(value = "/admin/csv/Image", consumes = "multipart/form-data")
     public BaseResponse<Void> addReviewImageCSV(@RequestParam("file") MultipartFile file) {
         reviewImageService.addReviewImageFromCsv(file);
