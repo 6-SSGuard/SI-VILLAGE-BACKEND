@@ -1,0 +1,1000 @@
+score,reviewContent,authorEmail,memberInformation,memberUuid,productCode
+0.3,이 제품은 정말 좋습니다!,user1@example.com,사이즈:L,1,PTZBCZZRR1QL4J
+1.9,별로 기대하지 마세요.,user2@example.com,뷰티 키워드:모공,2,PTOMSN6B6175UM
+3.2,다시 사고 싶지 않아요.,user3@example.com,뷰티 키워드:주름,3,PT230JRQQLNMFI
+4.5,다시 사고 싶지 않아요.,user4@example.com,뷰티 키워드:트러블,4,PT5I63L77UNOOC
+1.2,별로 기대하지 마세요.,user5@example.com,스킨 타입:복합성,5,PTJX9833WL8LCF
+0.4,보통입니다.,user6@example.com,두피 타입:지성,6,PT06PCW1YCHFV1
+1.8,만족스러운 구매였습니다!,user7@example.com,사이즈:S,7,PTRT3XVIYKUJMD
+0.5,아주 나쁜 제품입니다.,user8@example.com,사이즈:XL,8,PTND9M13E2HRN7
+0.6,정말 추천합니다!,user9@example.com,뷰티 키워드:주름,9,PT5DUONXUUOJ9G
+2.7,그냥 그렇네요.,user10@example.com,뷰티 키워드:모공,10,PTLZY5AQ7CJHVG
+4.3,아주 나쁜 제품입니다.,user11@example.com,사이즈:XXL,1,PTX3VCMTVQZV4Y
+4.2,다시 구매하고 싶습니다!,user12@example.com,피부톤:쿨톤,2,PT3GGC8A7PCB12
+3.3,최고의 제품입니다!,user13@example.com,사이즈:XXL,3,PTBVOQXA4HLCEK
+2.7,그냥 그렇네요.,user14@example.com,뷰티 키워드:트러블,4,PTJE8YSRC8QXFM
+3.3,최고의 제품입니다!,user15@example.com,신발 사이즈:220,5,PTPBF9M9O00VL0
+0.6,다시 구매하고 싶습니다!,user16@example.com,신발 사이즈:255,6,PTA0G4Q3UF34ND
+0.4,아주 나쁜 제품입니다.,user17@example.com,신발 사이즈:280,7,PTYMHUOKWXF7YX
+2.2,그냥 그렇네요.,user18@example.com,뷰티 키워드:주름,8,PT7I8W239D7S4T
+4.4,보통입니다.,user19@example.com,사이즈:M,9,PTPBB3XC6IEGO1
+2.6,별로 기대하지 마세요.,user20@example.com,사이즈:S,10,PT15ERG0IKM4SO
+2.2,최고의 제품입니다!,user21@example.com,스킨 타입:건성,1,PT12UDXCJZ3QI1
+1.4,다시 구매하고 싶습니다!,user22@example.com,두피 타입:지성,2,PT11AARCA177HL
+3.7,별로 기대하지 마세요.,user23@example.com,신발 사이즈:285,3,PTCONJO2TR3BG9
+4.5,그냥 그렇네요.,user24@example.com,스킨 타입:건성,4,PTAJ7YYG6YBB40
+1.7,다시 사고 싶지 않아요.,user25@example.com,사이즈:XL,5,PT1Q8P8ZNTM9OA
+1.6,별로 기대하지 마세요.,user26@example.com,스킨 타입:건성,6,PTNCFWL0FOV228
+2.1,다시 사고 싶지 않아요.,user27@example.com,스킨 타입:건성,7,PTOQVIM35S1H03
+2.0,다시 사고 싶지 않아요.,user28@example.com,스킨 타입:복합성,8,PTXITO8ZDYBUUZ
+1.5,다시 구매하고 싶습니다!,user29@example.com,신발 사이즈:275,9,PTYTPECSU0LIPW
+0.2,만족스러운 구매였습니다!,user30@example.com,뷰티 키워드:트러블,10,PT0VDI5M3TCK3S
+1.7,정말 추천합니다!,user31@example.com,사이즈:XXL,1,PT2IYP8MQ4QIHN
+4.9,정말 추천합니다!,user32@example.com,사이즈:L,2,PT0W1FISDQPERW
+1.3,보통입니다.,user33@example.com,뷰티 키워드:모공,3,PTZCPHGEQAFX4W
+2.5,그냥 그렇네요.,user34@example.com,스킨 타입:건성,4,PTL4UOXFHJWTET
+1.0,다시 사고 싶지 않아요.,user35@example.com,사이즈:XS,5,PTV1043REDEM7T
+5.0,만족스러운 구매였습니다!,user36@example.com,두피 타입:건성,6,PT4Y8LITZGALF5
+4.5,만족스러운 구매였습니다!,user37@example.com,신발 사이즈:240,7,PTX5U0WNCS3Z2C
+2.6,최고의 제품입니다!,user38@example.com,스킨 타입:복합성,8,PT5Y0SBSF7QQG5
+2.9,정말 추천합니다!,user39@example.com,사이즈:L,9,PTALKCMP10WV2S
+3.9,이 제품은 정말 좋습니다!,user40@example.com,피부톤:쿨톤,10,PT7XXYJ2YYEQSG
+1.8,별로 기대하지 마세요.,user41@example.com,뷰티 키워드:트러블,1,PTWC38PT7XNMIZ
+1.4,다시 구매하고 싶습니다!,user42@example.com,뷰티 키워드:모공,2,PT834IS1M66OY2
+0.5,최고의 제품입니다!,user43@example.com,스킨 타입:건성,3,PTDZ5535M16E5K
+2.1,아주 나쁜 제품입니다.,user44@example.com,뷰티 키워드:트러블,4,PTL2CLKVJHGQ58
+1.5,만족스러운 구매였습니다!,user45@example.com,뷰티 키워드:모공,5,PT5NKZ3E77SEFO
+0.5,그냥 그렇네요.,user46@example.com,사이즈:XS,6,PT362KGAQZQ73K
+2.0,그냥 그렇네요.,user47@example.com,사이즈:XXL,7,PTBREHR3K3GXHC
+2.7,아주 나쁜 제품입니다.,user48@example.com,신발 사이즈:225,8,PT4EHWS8Q2P3IL
+1.2,이 제품은 정말 좋습니다!,user49@example.com,두피 타입:건성,9,PTJ960FD9UCCNR
+0.0,아주 나쁜 제품입니다.,user50@example.com,사이즈:XL,10,PT72HA9H7TUAXV
+3.0,최고의 제품입니다!,user51@example.com,뷰티 키워드:모공,1,PT0FX92NXT3INL
+4.4,만족스러운 구매였습니다!,user52@example.com,두피 타입:복합성,2,PTQWSA8W1C0X73
+4.2,최고의 제품입니다!,user53@example.com,스킨 타입:건성,3,PT85T6AIIAAWJL
+0.6,이 제품은 정말 좋습니다!,user54@example.com,사이즈:XS,4,PTINIDC5QV8UJ8
+1.0,다시 구매하고 싶습니다!,user55@example.com,사이즈:S,5,PT48PAVQGBEVTE
+3.3,아주 나쁜 제품입니다.,user56@example.com,두피 타입:복합성,6,PTSOEZLKJ82J3R
+4.9,보통입니다.,user57@example.com,스킨 타입:지성,7,PTGZ2T9D4WDVWT
+2.2,만족스러운 구매였습니다!,user58@example.com,사이즈:M,8,PTN9KSYBN01TFF
+4.1,다시 사고 싶지 않아요.,user59@example.com,신발 사이즈:245,9,PTC4FPG3HRHOD3
+0.3,만족스러운 구매였습니다!,user60@example.com,뷰티 키워드:모공,10,PTQGQ3V5QUYSH2
+0.7,보통입니다.,user61@example.com,신발 사이즈:235,1,PTUXZIGW1J4D2A
+2.1,최고의 제품입니다!,user62@example.com,신발 사이즈:275,2,PTPUBREY43BFM5
+1.4,이 제품은 정말 좋습니다!,user63@example.com,피부톤:쿨톤,3,PTU2MY3MMPXU44
+3.0,다시 사고 싶지 않아요.,user64@example.com,두피 타입:지성,4,PTHREDYHLQGNTP
+1.6,아주 나쁜 제품입니다.,user65@example.com,스킨 타입:건성,5,PTQXR2IF8H80DU
+4.2,별로 기대하지 마세요.,user66@example.com,두피 타입:복합성,6,PTF93EJ44HIRNC
+1.9,정말 추천합니다!,user67@example.com,뷰티 키워드:트러블,7,PTCJBUIAQRW6QI
+3.9,그냥 그렇네요.,user68@example.com,두피 타입:복합성,8,PT1Z8WY0ZQBKCJ
+2.3,다시 구매하고 싶습니다!,user69@example.com,스킨 타입:지성,9,PTVWX7JGOP2Y7G
+4.7,그냥 그렇네요.,user70@example.com,스킨 타입:지성,10,PTPJA0WP1H8N5S
+1.6,다시 사고 싶지 않아요.,user71@example.com,피부톤:쿨톤,1,PTK42FPU7AUT68
+4.6,만족스러운 구매였습니다!,user72@example.com,피부톤:쿨톤,2,PTWL6QNGORF2KC
+2.8,만족스러운 구매였습니다!,user73@example.com,스킨 타입:복합성,3,PT0I90IUKE98RJ
+1.3,다시 구매하고 싶습니다!,user74@example.com,피부톤:웜톤,4,PT3S0ADQLDC50B
+4.9,이 제품은 정말 좋습니다!,user75@example.com,사이즈:L,5,PTVAPRRED66V8X
+3.5,별로 기대하지 마세요.,user76@example.com,피부톤:웜톤,6,PTITMK2Z7S3C54
+2.0,정말 추천합니다!,user77@example.com,두피 타입:지성,7,PT3WWV25RQARQM
+3.1,최고의 제품입니다!,user78@example.com,두피 타입:복합성,8,PTHZ979XPJY12I
+1.3,아주 나쁜 제품입니다.,user79@example.com,신발 사이즈:300,9,PTFM3EA1JV8VW6
+0.4,별로 기대하지 마세요.,user80@example.com,신발 사이즈:255,10,PTEX1OE00AXZX8
+4.5,다시 구매하고 싶습니다!,user81@example.com,두피 타입:건성,1,PTOCOSWMLQJQXV
+3.2,만족스러운 구매였습니다!,user82@example.com,피부톤:웜톤,2,PTG5VEIC7RNI6J
+2.6,아주 나쁜 제품입니다.,user83@example.com,피부톤:웜톤,3,PTU0VN3N5N77EF
+3.1,아주 나쁜 제품입니다.,user84@example.com,사이즈:XS,4,PTXGQGC5N9FD9Q
+3.4,다시 사고 싶지 않아요.,user85@example.com,사이즈:L,5,PT45NM6MNSOD3X
+0.3,아주 나쁜 제품입니다.,user86@example.com,스킨 타입:지성,6,PT7BCYVDCIZ921
+0.0,이 제품은 정말 좋습니다!,user87@example.com,신발 사이즈:285,7,PTEBP3VHTS3ON2
+0.3,별로 기대하지 마세요.,user88@example.com,신발 사이즈:290,8,PTXAIONOEEDJL0
+1.2,보통입니다.,user89@example.com,사이즈:L,9,PTV45VZFNWVVJZ
+0.5,만족스러운 구매였습니다!,user90@example.com,신발 사이즈:280,10,PT0LEH5X9BLMLT
+5.0,다시 사고 싶지 않아요.,user91@example.com,뷰티 키워드:트러블,1,PT952DXGC91KEU
+4.2,최고의 제품입니다!,user92@example.com,두피 타입:건성,2,PTFJLTXWXUX6VA
+3.4,최고의 제품입니다!,user93@example.com,신발 사이즈:275,3,PTYAUF8EP9E1UL
+2.7,별로 기대하지 마세요.,user94@example.com,피부톤:웜톤,4,PTYP7PFOK00I8D
+4.7,보통입니다.,user95@example.com,사이즈:S,5,PT5BMR6ATQGVKH
+4.9,최고의 제품입니다!,user96@example.com,스킨 타입:건성,6,PTNI8KBCQMXI4O
+0.4,이 제품은 정말 좋습니다!,user97@example.com,뷰티 키워드:모공,7,PTE4K2H4NJBTX8
+2.1,보통입니다.,user98@example.com,사이즈:XS,8,PTRMWT1F5BN5JK
+3.5,다시 사고 싶지 않아요.,user99@example.com,뷰티 키워드:주름,9,PT0RXAIF6R1Y6U
+2.6,그냥 그렇네요.,user100@example.com,피부톤:쿨톤,10,PT9VUWHGQFCGNC
+2.9,아주 나쁜 제품입니다.,user101@example.com,스킨 타입:지성,1,PT6PE2U736X4D0
+1.1,다시 구매하고 싶습니다!,user102@example.com,피부톤:웜톤,2,PTXOGU0BZ5ZPHC
+0.5,보통입니다.,user103@example.com,뷰티 키워드:모공,3,PTKZIUXX6NT0EM
+1.3,보통입니다.,user104@example.com,뷰티 키워드:주름,4,PTEJH8MV5J2J96
+0.1,아주 나쁜 제품입니다.,user105@example.com,사이즈:XS,5,PT80BUR7L05ZPL
+2.5,다시 사고 싶지 않아요.,user106@example.com,피부톤:쿨톤,6,PTP3505626A6U7
+1.5,정말 추천합니다!,user107@example.com,사이즈:L,7,PT4BI05DASL0WD
+0.8,만족스러운 구매였습니다!,user108@example.com,스킨 타입:건성,8,PT7GYW661EHVRJ
+3.7,다시 구매하고 싶습니다!,user109@example.com,스킨 타입:지성,9,PTOZ9029K2XSMB
+0.3,다시 구매하고 싶습니다!,user110@example.com,피부톤:쿨톤,10,PT0Y8DU4H0AONF
+3.4,보통입니다.,user111@example.com,사이즈:M,1,PTP1WMXI9F5QPT
+4.6,이 제품은 정말 좋습니다!,user112@example.com,뷰티 키워드:주름,2,PT2H6B25YXDEK7
+3.6,아주 나쁜 제품입니다.,user113@example.com,스킨 타입:건성,3,PTFU79T2XUDO8A
+1.2,만족스러운 구매였습니다!,user114@example.com,신발 사이즈:230,4,PTX5LUWI5BTYNU
+3.7,최고의 제품입니다!,user115@example.com,피부톤:쿨톤,5,PTD4LX6G9I35VV
+2.5,별로 기대하지 마세요.,user116@example.com,스킨 타입:지성,6,PTN400OC7196PH
+2.4,다시 구매하고 싶습니다!,user117@example.com,사이즈:S,7,PTHFRR7LI9PGJU
+1.6,다시 사고 싶지 않아요.,user118@example.com,스킨 타입:복합성,8,PT4K6Z3ULOQ6FR
+0.2,아주 나쁜 제품입니다.,user119@example.com,피부톤:쿨톤,9,PTK3KIKAPFK75O
+1.4,다시 구매하고 싶습니다!,user120@example.com,두피 타입:복합성,10,PT1G07ZLD4MEBV
+2.0,보통입니다.,user121@example.com,피부톤:웜톤,1,PT08J6X8UHHT23
+1.5,최고의 제품입니다!,user122@example.com,두피 타입:복합성,2,PTIRHXBVWR7G1P
+2.1,그냥 그렇네요.,user123@example.com,피부톤:쿨톤,3,PTLG9BI9XIWYLT
+2.2,정말 추천합니다!,user124@example.com,뷰티 키워드:주름,4,PTN079B5TO8IXU
+1.2,아주 나쁜 제품입니다.,user125@example.com,사이즈:XXL,5,PTPFFVB6EKVRG3
+4.3,최고의 제품입니다!,user126@example.com,신발 사이즈:245,6,PTH0EQA0EIHBFH
+2.1,별로 기대하지 마세요.,user127@example.com,뷰티 키워드:트러블,7,PTINN3NU7JESHF
+4.1,정말 추천합니다!,user128@example.com,사이즈:XL,8,PTLRPQ4FFFO4W7
+3.4,정말 추천합니다!,user129@example.com,두피 타입:복합성,9,PT0WW2VDJC6DG9
+4.1,최고의 제품입니다!,user130@example.com,피부톤:쿨톤,10,PTGLTVZDU0GX15
+3.5,최고의 제품입니다!,user131@example.com,스킨 타입:건성,1,PTRISPBNLWYQNV
+4.5,별로 기대하지 마세요.,user132@example.com,뷰티 키워드:주름,2,PTDTT2ILWL6R8L
+4.4,보통입니다.,user133@example.com,사이즈:L,3,PTLP6RWENCZV9P
+3.7,아주 나쁜 제품입니다.,user134@example.com,뷰티 키워드:트러블,4,PTYFZSA698M4BE
+0.2,보통입니다.,user135@example.com,신발 사이즈:300,5,PTIWXG8C868Y2I
+1.5,별로 기대하지 마세요.,user136@example.com,피부톤:웜톤,6,PTHOA7INILKION
+3.0,이 제품은 정말 좋습니다!,user137@example.com,뷰티 키워드:모공,7,PT81IED498GF4V
+2.8,그냥 그렇네요.,user138@example.com,두피 타입:지성,8,PT1O9S9NZLF04O
+3.5,만족스러운 구매였습니다!,user139@example.com,두피 타입:지성,9,PTLVOBOZGMTJ75
+3.4,이 제품은 정말 좋습니다!,user140@example.com,신발 사이즈:225,10,PT05EUVUE17MOT
+4.1,다시 구매하고 싶습니다!,user141@example.com,두피 타입:지성,1,PTOJED0TYV3BV7
+2.7,그냥 그렇네요.,user142@example.com,두피 타입:지성,2,PT1L7NHUDA3QIP
+1.9,보통입니다.,user143@example.com,사이즈:M,3,PTY036EEBNN78T
+0.8,정말 추천합니다!,user144@example.com,신발 사이즈:220,4,PTOZT21NED64UV
+3.5,정말 추천합니다!,user145@example.com,피부톤:웜톤,5,PTCE224P86PZNY
+2.0,이 제품은 정말 좋습니다!,user146@example.com,신발 사이즈:240,6,PT8OC5QKI1RXTX
+1.8,별로 기대하지 마세요.,user147@example.com,피부톤:쿨톤,7,PTXJKP9WVFV7RU
+3.2,다시 구매하고 싶습니다!,user148@example.com,피부톤:웜톤,8,PTJPG4YYBAZT0Z
+5.0,만족스러운 구매였습니다!,user149@example.com,피부톤:웜톤,9,PTH82GYHS8HR5V
+3.6,최고의 제품입니다!,user150@example.com,신발 사이즈:225,10,PT9MPGQ7OY4UNQ
+3.7,별로 기대하지 마세요.,user151@example.com,뷰티 키워드:모공,1,PT84Y20JM5MB7O
+0.0,최고의 제품입니다!,user152@example.com,피부톤:웜톤,2,PTLON1VBYTEBY9
+1.6,별로 기대하지 마세요.,user153@example.com,스킨 타입:복합성,3,PTDIP595Z6ZK34
+1.3,그냥 그렇네요.,user154@example.com,뷰티 키워드:주름,4,PTQO60DPPAAO3T
+3.9,별로 기대하지 마세요.,user155@example.com,두피 타입:건성,5,PTWJXW9RXTVBQC
+4.7,만족스러운 구매였습니다!,user156@example.com,피부톤:쿨톤,6,PTR2NR4YHXVQ3K
+4.3,보통입니다.,user157@example.com,스킨 타입:건성,7,PT3BQXITT0KP75
+3.7,그냥 그렇네요.,user158@example.com,두피 타입:건성,8,PT86RCEPWSM8NL
+1.3,아주 나쁜 제품입니다.,user159@example.com,피부톤:쿨톤,9,PTCFIRRHX4CULZ
+2.3,이 제품은 정말 좋습니다!,user160@example.com,스킨 타입:지성,10,PT5JVQW38U8KLU
+1.5,만족스러운 구매였습니다!,user161@example.com,피부톤:쿨톤,1,PTNE8IXOOWSA80
+2.7,이 제품은 정말 좋습니다!,user162@example.com,신발 사이즈:265,2,PT753RUL1E66PZ
+2.1,그냥 그렇네요.,user163@example.com,두피 타입:지성,3,PT02C8T67N8EWU
+0.2,이 제품은 정말 좋습니다!,user164@example.com,두피 타입:복합성,4,PTH9ITHW5ASIG4
+0.3,별로 기대하지 마세요.,user165@example.com,신발 사이즈:265,5,PTA727HM770MMJ
+3.2,그냥 그렇네요.,user166@example.com,사이즈:XL,6,PT69EWX125CLBT
+1.2,별로 기대하지 마세요.,user167@example.com,두피 타입:건성,7,PTSO8NJCE3WQ8V
+3.9,그냥 그렇네요.,user168@example.com,신발 사이즈:265,8,PTIGCSXLW5ZDI7
+1.0,아주 나쁜 제품입니다.,user169@example.com,두피 타입:복합성,9,PTW447466LFWCO
+4.6,이 제품은 정말 좋습니다!,user170@example.com,스킨 타입:지성,10,PTL5E8KGWIV858
+4.5,정말 추천합니다!,user171@example.com,피부톤:쿨톤,1,PTD2XOZKQ7UE3M
+2.9,만족스러운 구매였습니다!,user172@example.com,스킨 타입:복합성,2,PTA4MMKOK3KSUP
+2.1,별로 기대하지 마세요.,user173@example.com,스킨 타입:지성,3,PT1DM1ZDFTEOP9
+3.7,아주 나쁜 제품입니다.,user174@example.com,스킨 타입:지성,4,PTQTUR9IBL9C6H
+1.2,이 제품은 정말 좋습니다!,user175@example.com,사이즈:XS,5,PTC65XIOFHUCEW
+1.3,보통입니다.,user176@example.com,피부톤:쿨톤,6,PTOBCRDRMN4N7X
+1.2,다시 사고 싶지 않아요.,user177@example.com,스킨 타입:복합성,7,PTLGUPTG7MR262
+4.7,이 제품은 정말 좋습니다!,user178@example.com,신발 사이즈:260,8,PTFCIJJ1WODS9M
+0.5,정말 추천합니다!,user179@example.com,신발 사이즈:260,9,PT0XLU7KCFNYQ8
+3.5,그냥 그렇네요.,user180@example.com,신발 사이즈:295,10,PTIUEQIZ0G7B3Q
+2.0,아주 나쁜 제품입니다.,user181@example.com,피부톤:웜톤,1,PTFKPWNT5ARMIL
+1.1,다시 사고 싶지 않아요.,user182@example.com,두피 타입:지성,2,PT9QXB5QXQ5RIA
+2.6,다시 사고 싶지 않아요.,user183@example.com,신발 사이즈:280,3,PT998C42SGLP51
+5.0,만족스러운 구매였습니다!,user184@example.com,스킨 타입:건성,4,PTCPRXL4647HKU
+4.0,다시 구매하고 싶습니다!,user185@example.com,피부톤:웜톤,5,PT57A537X65BQI
+4.4,별로 기대하지 마세요.,user186@example.com,사이즈:XS,6,PTNUZSRH2VQ8O3
+0.7,정말 추천합니다!,user187@example.com,사이즈:XXL,7,PT2DN3IL9TT0FO
+0.2,보통입니다.,user188@example.com,두피 타입:지성,8,PTNBWAA83D6UKL
+0.1,만족스러운 구매였습니다!,user189@example.com,사이즈:M,9,PTXLYYCPWRKXKC
+4.6,만족스러운 구매였습니다!,user190@example.com,피부톤:쿨톤,10,PTP3GXT1SY4AG9
+2.4,보통입니다.,user191@example.com,스킨 타입:건성,1,PTUTPPXEMZGEIF
+2.3,다시 사고 싶지 않아요.,user192@example.com,두피 타입:지성,2,PT0NNXCUQMFX2B
+1.3,만족스러운 구매였습니다!,user193@example.com,사이즈:XL,3,PT35X00VQTGHJQ
+3.0,별로 기대하지 마세요.,user194@example.com,피부톤:쿨톤,4,PTAPXND6KYJ3AQ
+1.7,그냥 그렇네요.,user195@example.com,피부톤:쿨톤,5,PTIGQG0P5B12KR
+3.6,다시 구매하고 싶습니다!,user196@example.com,신발 사이즈:235,6,PTAMMW48LBJDER
+0.7,그냥 그렇네요.,user197@example.com,스킨 타입:지성,7,PTQRATA1G2GP12
+3.1,만족스러운 구매였습니다!,user198@example.com,뷰티 키워드:트러블,8,PTAUUWO15K8N2W
+1.7,보통입니다.,user199@example.com,사이즈:XS,9,PT31KVI106331X
+2.2,별로 기대하지 마세요.,user200@example.com,피부톤:웜톤,10,PTTV5DSALEQ3MU
+1.5,아주 나쁜 제품입니다.,user201@example.com,사이즈:M,1,PTDEY0VHIEHNOK
+3.2,다시 사고 싶지 않아요.,user202@example.com,두피 타입:건성,2,PT04SPUYP3U2I6
+0.4,별로 기대하지 마세요.,user203@example.com,두피 타입:건성,3,PTGE38WM1KDPOE
+5.0,별로 기대하지 마세요.,user204@example.com,사이즈:XS,4,PTCJQYG9I98L0X
+2.5,그냥 그렇네요.,user205@example.com,피부톤:웜톤,5,PTRK7726ZT66LA
+3.4,정말 추천합니다!,user206@example.com,피부톤:쿨톤,6,PTYHY75JPHQACF
+2.3,그냥 그렇네요.,user207@example.com,신발 사이즈:250,7,PTNAWGX28Z5HWR
+4.8,별로 기대하지 마세요.,user208@example.com,뷰티 키워드:주름,8,PT08FNFHXRLI1B
+0.9,최고의 제품입니다!,user209@example.com,사이즈:S,9,PT68MDYE7VREN4
+3.1,정말 추천합니다!,user210@example.com,피부톤:웜톤,10,PTJXAI8F145KQ3
+2.0,그냥 그렇네요.,user211@example.com,스킨 타입:지성,1,PTQSY4WIRDGBC1
+0.9,이 제품은 정말 좋습니다!,user212@example.com,두피 타입:복합성,2,PTIBBPCYMFCL36
+3.9,이 제품은 정말 좋습니다!,user213@example.com,사이즈:M,3,PT4X4TUINXKOVK
+3.2,만족스러운 구매였습니다!,user214@example.com,피부톤:쿨톤,4,PT2D7O9KCH9XKX
+2.5,정말 추천합니다!,user215@example.com,뷰티 키워드:모공,5,PTVHIDDBZSVBKV
+5.0,보통입니다.,user216@example.com,사이즈:XS,6,PT1JIKQFM4MB84
+2.5,최고의 제품입니다!,user217@example.com,뷰티 키워드:모공,7,PTDVB3LJ7FIUZ1
+3.3,보통입니다.,user218@example.com,피부톤:쿨톤,8,PTS901G11FEU4X
+3.2,다시 구매하고 싶습니다!,user219@example.com,사이즈:M,9,PT8MVS054V18KS
+1.8,만족스러운 구매였습니다!,user220@example.com,두피 타입:복합성,10,PT8S19QVK11BOM
+3.6,최고의 제품입니다!,user221@example.com,사이즈:L,1,PTDDGL6XUPW2GC
+1.8,정말 추천합니다!,user222@example.com,스킨 타입:건성,2,PTNNQM1A5DF6PO
+4.1,보통입니다.,user223@example.com,뷰티 키워드:모공,3,PTVJFNOO417X40
+3.6,그냥 그렇네요.,user224@example.com,피부톤:웜톤,4,PTAX76WAYNJPCE
+1.6,정말 추천합니다!,user225@example.com,뷰티 키워드:모공,5,PTZJXELR32R2EO
+2.4,다시 사고 싶지 않아요.,user226@example.com,신발 사이즈:250,6,PTGZZ37LTN09JJ
+1.6,이 제품은 정말 좋습니다!,user227@example.com,신발 사이즈:300,7,PT7BXHTUSYSEZC
+4.2,보통입니다.,user228@example.com,뷰티 키워드:모공,8,PTFYHLQ7FIK994
+1.0,보통입니다.,user229@example.com,피부톤:웜톤,9,PTBU6S42X6AF2Y
+3.3,다시 구매하고 싶습니다!,user230@example.com,스킨 타입:건성,10,PTP9BK1U322BSJ
+2.3,보통입니다.,user231@example.com,신발 사이즈:280,1,PTR9QDDRRHNXUY
+0.6,보통입니다.,user232@example.com,두피 타입:복합성,2,PTJLL51AY99Y3D
+4.4,아주 나쁜 제품입니다.,user233@example.com,신발 사이즈:290,3,PTO5TDRSAAN5TG
+1.7,다시 구매하고 싶습니다!,user234@example.com,피부톤:웜톤,4,PT4IYDQV2S1LO6
+2.1,보통입니다.,user235@example.com,신발 사이즈:225,5,PTRF16MIOYAOHL
+1.5,이 제품은 정말 좋습니다!,user236@example.com,스킨 타입:지성,6,PTTA9ODKT7PHZR
+2.0,만족스러운 구매였습니다!,user237@example.com,신발 사이즈:240,7,PTZ2GCL5A3OYTU
+2.8,아주 나쁜 제품입니다.,user238@example.com,신발 사이즈:255,8,PTPULQZCONKGY3
+4.8,보통입니다.,user239@example.com,피부톤:웜톤,9,PTDVK9FPO5M5WL
+1.4,보통입니다.,user240@example.com,피부톤:웜톤,10,PTD0SZN6XOFFQT
+1.6,별로 기대하지 마세요.,user241@example.com,사이즈:M,1,PTJ8T352R3R07V
+0.2,별로 기대하지 마세요.,user242@example.com,피부톤:웜톤,2,PTOITQVVYZY57H
+2.4,보통입니다.,user243@example.com,사이즈:L,3,PTBTAC6X8ZG73R
+0.4,아주 나쁜 제품입니다.,user244@example.com,사이즈:XXL,4,PTWI7TCJIMAB9C
+4.1,다시 구매하고 싶습니다!,user245@example.com,스킨 타입:지성,5,PTD6J89VYEHW4Z
+3.5,별로 기대하지 마세요.,user246@example.com,스킨 타입:건성,6,PT18H20IPDSYTJ
+2.6,만족스러운 구매였습니다!,user247@example.com,피부톤:쿨톤,7,PTWNAKIIDNNIV7
+4.5,이 제품은 정말 좋습니다!,user248@example.com,뷰티 키워드:모공,8,PTLIC43ON8RK91
+3.9,다시 사고 싶지 않아요.,user249@example.com,신발 사이즈:290,9,PT2E952PF1UI8B
+2.8,만족스러운 구매였습니다!,user250@example.com,피부톤:웜톤,10,PT3W9P3SNIYAY2
+0.3,최고의 제품입니다!,user251@example.com,스킨 타입:복합성,1,PT8LIYT3MMHEF0
+1.2,그냥 그렇네요.,user252@example.com,피부톤:쿨톤,2,PTJ6T0R516KDDI
+3.6,최고의 제품입니다!,user253@example.com,뷰티 키워드:트러블,3,PT71WG0H3IKPHI
+1.7,다시 사고 싶지 않아요.,user254@example.com,두피 타입:복합성,4,PTHJYHQBQ5MHLA
+1.5,별로 기대하지 마세요.,user255@example.com,사이즈:XXL,5,PTK5R3TIJG4MIY
+2.7,만족스러운 구매였습니다!,user256@example.com,뷰티 키워드:트러블,6,PTW3I7GCVV4ZDR
+1.0,정말 추천합니다!,user257@example.com,뷰티 키워드:트러블,7,PTLX593F1SW52C
+0.1,정말 추천합니다!,user258@example.com,스킨 타입:건성,8,PTNWR397Z8XT9X
+0.3,정말 추천합니다!,user259@example.com,신발 사이즈:285,9,PTR9PQCCYG7UR2
+1.0,그냥 그렇네요.,user260@example.com,사이즈:M,10,PTE8MQXWX9NOGX
+0.2,아주 나쁜 제품입니다.,user261@example.com,스킨 타입:복합성,1,PTWSJM7PP7FVA4
+1.2,그냥 그렇네요.,user262@example.com,사이즈:L,2,PTBIPYXRFMEDY5
+1.1,아주 나쁜 제품입니다.,user263@example.com,스킨 타입:복합성,3,PTLEWZ0KQ919QS
+4.3,다시 사고 싶지 않아요.,user264@example.com,사이즈:L,4,PTGQGB0U1LNY2Y
+2.7,다시 구매하고 싶습니다!,user265@example.com,두피 타입:복합성,5,PT9ULIN464VS0O
+1.2,다시 사고 싶지 않아요.,user266@example.com,뷰티 키워드:주름,6,PTYF53RVVVA38Z
+0.6,이 제품은 정말 좋습니다!,user267@example.com,피부톤:웜톤,7,PTW5HRP967DH7T
+5.0,보통입니다.,user268@example.com,두피 타입:복합성,8,PT3X2BIKP7H5GC
+0.8,별로 기대하지 마세요.,user269@example.com,피부톤:쿨톤,9,PTFEAYWFBUBFCL
+0.1,정말 추천합니다!,user270@example.com,스킨 타입:건성,10,PTYRP75RP6U4S6
+0.6,별로 기대하지 마세요.,user271@example.com,스킨 타입:건성,1,PT05TXMVR0MPYN
+4.8,별로 기대하지 마세요.,user272@example.com,스킨 타입:건성,2,PTLF8SZ4CXEMJB
+0.1,정말 추천합니다!,user273@example.com,사이즈:M,3,PTJD7EHJ63K13Z
+4.9,별로 기대하지 마세요.,user274@example.com,신발 사이즈:250,4,PT60L2WFIMW2IT
+4.0,만족스러운 구매였습니다!,user275@example.com,뷰티 키워드:트러블,5,PTNMNZ0WRS9B7J
+3.7,만족스러운 구매였습니다!,user276@example.com,두피 타입:건성,6,PTHAY0VGFA0FKT
+3.9,별로 기대하지 마세요.,user277@example.com,피부톤:웜톤,7,PTZFKMLJFO9PAM
+1.1,아주 나쁜 제품입니다.,user278@example.com,두피 타입:지성,8,PTHQZC1VUXCMVK
+1.7,만족스러운 구매였습니다!,user279@example.com,신발 사이즈:300,9,PT36RUXE5A8MTY
+0.8,이 제품은 정말 좋습니다!,user280@example.com,사이즈:XXL,10,PTF86YE0OAB8F1
+0.2,이 제품은 정말 좋습니다!,user281@example.com,사이즈:S,1,PTSXRGH1RLG3F1
+2.3,그냥 그렇네요.,user282@example.com,스킨 타입:복합성,2,PTBOSJM3MKBEPL
+0.0,다시 사고 싶지 않아요.,user283@example.com,뷰티 키워드:주름,3,PT85YC54JH7279
+3.2,그냥 그렇네요.,user284@example.com,피부톤:쿨톤,4,PTTVGO3I6IDDQW
+0.2,다시 사고 싶지 않아요.,user285@example.com,신발 사이즈:225,5,PTHVD5F0RL596Z
+3.7,별로 기대하지 마세요.,user286@example.com,스킨 타입:지성,6,PTBM1EXZOBQU5J
+0.5,정말 추천합니다!,user287@example.com,스킨 타입:지성,7,PTG37LOJZG0TR6
+0.9,다시 구매하고 싶습니다!,user288@example.com,사이즈:XS,8,PTQ7ZNW045LQD9
+2.4,다시 사고 싶지 않아요.,user289@example.com,사이즈:S,9,PT1AS2DFSMCVSF
+4.9,다시 사고 싶지 않아요.,user290@example.com,스킨 타입:복합성,10,PT4W4WRIWXZR7N
+2.7,보통입니다.,user291@example.com,피부톤:쿨톤,1,PTO305J66H963E
+2.2,다시 구매하고 싶습니다!,user292@example.com,피부톤:웜톤,2,PTE3UECOJZYBG7
+2.2,정말 추천합니다!,user293@example.com,뷰티 키워드:모공,3,PT62W9KVWG0A1X
+3.4,최고의 제품입니다!,user294@example.com,사이즈:L,4,PT4NVDEZCZP7QI
+0.7,최고의 제품입니다!,user295@example.com,두피 타입:지성,5,PT8PWSDZHOJVJB
+3.1,그냥 그렇네요.,user296@example.com,뷰티 키워드:모공,6,PTQ1YJ9CUAC5GZ
+4.4,정말 추천합니다!,user297@example.com,두피 타입:지성,7,PTTUIVV3C443BY
+3.4,다시 사고 싶지 않아요.,user298@example.com,스킨 타입:지성,8,PTLFLBXWKGYL2U
+2.2,만족스러운 구매였습니다!,user299@example.com,신발 사이즈:230,9,PTODYPMWFM47QQ
+3.7,다시 사고 싶지 않아요.,user300@example.com,사이즈:L,10,PTA1D8LZWAIJ3H
+1.3,이 제품은 정말 좋습니다!,user301@example.com,뷰티 키워드:주름,1,PTWCI1M22AXHI8
+3.0,아주 나쁜 제품입니다.,user302@example.com,피부톤:웜톤,2,PTS5D4T1JKKLWU
+3.0,이 제품은 정말 좋습니다!,user303@example.com,두피 타입:복합성,3,PTD2F7NGC0UPRR
+4.7,다시 사고 싶지 않아요.,user304@example.com,피부톤:웜톤,4,PTPA4KXSII5EI0
+1.4,만족스러운 구매였습니다!,user305@example.com,신발 사이즈:255,5,PT0ZMZH4M87Z5F
+3.8,정말 추천합니다!,user306@example.com,피부톤:웜톤,6,PTLAUUK4A4NV1F
+4.5,다시 구매하고 싶습니다!,user307@example.com,신발 사이즈:225,7,PTR7IIAXLWHU72
+4.9,그냥 그렇네요.,user308@example.com,스킨 타입:건성,8,PTIP9097DOWL0S
+3.8,이 제품은 정말 좋습니다!,user309@example.com,뷰티 키워드:트러블,9,PTWCWGXE6QSPO6
+3.4,만족스러운 구매였습니다!,user310@example.com,스킨 타입:지성,10,PT1WZHCARJM91H
+0.7,아주 나쁜 제품입니다.,user311@example.com,피부톤:웜톤,1,PTRYTL2S1L9LWF
+1.7,다시 사고 싶지 않아요.,user312@example.com,뷰티 키워드:주름,2,PTV0ZGLHZRFQRP
+0.8,별로 기대하지 마세요.,user313@example.com,두피 타입:복합성,3,PTFTFVFA8XMNVX
+2.8,보통입니다.,user314@example.com,두피 타입:복합성,4,PTRXUH5PAA3Z31
+0.1,최고의 제품입니다!,user315@example.com,스킨 타입:복합성,5,PT5DSE6FWAG14I
+1.2,그냥 그렇네요.,user316@example.com,피부톤:쿨톤,6,PTL5PX84Q57NSX
+4.1,다시 사고 싶지 않아요.,user317@example.com,두피 타입:복합성,7,PTVXIKAI5UHP4S
+3.1,정말 추천합니다!,user318@example.com,스킨 타입:복합성,8,PT2FJFZYHIST6S
+2.3,만족스러운 구매였습니다!,user319@example.com,두피 타입:지성,9,PTEDQLDRX3YE84
+2.4,별로 기대하지 마세요.,user320@example.com,스킨 타입:건성,10,PTRO94BFHCDB61
+2.7,보통입니다.,user321@example.com,신발 사이즈:275,1,PTAASIQQODL9UY
+2.4,다시 사고 싶지 않아요.,user322@example.com,신발 사이즈:270,2,PT8R3ZO51NQDQZ
+4.8,다시 사고 싶지 않아요.,user323@example.com,사이즈:XS,3,PTPI4O7WGSJIYE
+1.8,다시 구매하고 싶습니다!,user324@example.com,두피 타입:지성,4,PTQ9JUN5SD3GQX
+1.8,최고의 제품입니다!,user325@example.com,스킨 타입:지성,5,PT8R2KRKGR0W0P
+4.0,다시 사고 싶지 않아요.,user326@example.com,피부톤:쿨톤,6,PTVRAMOLJZFH5A
+1.1,이 제품은 정말 좋습니다!,user327@example.com,사이즈:M,7,PT2TFA9YZ9BAA6
+4.4,만족스러운 구매였습니다!,user328@example.com,스킨 타입:복합성,8,PT1PTCD3BE19MJ
+0.1,다시 구매하고 싶습니다!,user329@example.com,뷰티 키워드:모공,9,PTO7LJH6G70ONJ
+3.6,다시 구매하고 싶습니다!,user330@example.com,사이즈:XS,10,PT3AEUBHL210EN
+0.7,아주 나쁜 제품입니다.,user331@example.com,뷰티 키워드:주름,1,PTV2ZQ7DU43V9X
+3.2,만족스러운 구매였습니다!,user332@example.com,두피 타입:건성,2,PTWZG1VJYG6G39
+2.4,보통입니다.,user333@example.com,신발 사이즈:285,3,PTMF7YVO42U6PK
+1.6,만족스러운 구매였습니다!,user334@example.com,신발 사이즈:290,4,PTI79GV7XZZKAI
+3.0,이 제품은 정말 좋습니다!,user335@example.com,사이즈:M,5,PTPZK57N786GFV
+1.2,다시 구매하고 싶습니다!,user336@example.com,뷰티 키워드:트러블,6,PT679FDW6X44M2
+3.8,별로 기대하지 마세요.,user337@example.com,사이즈:XL,7,PTNTFHQ3W9K8DF
+0.2,정말 추천합니다!,user338@example.com,스킨 타입:건성,8,PT5FY6GUDYV22T
+0.7,다시 구매하고 싶습니다!,user339@example.com,스킨 타입:복합성,9,PTZRIG7CHRWBEU
+1.8,다시 사고 싶지 않아요.,user340@example.com,뷰티 키워드:모공,10,PT62HC3URE0SQO
+0.1,다시 구매하고 싶습니다!,user341@example.com,스킨 타입:지성,1,PTPG6TH686OJF1
+4.8,만족스러운 구매였습니다!,user342@example.com,신발 사이즈:290,2,PT500CIX1R5OBW
+1.1,아주 나쁜 제품입니다.,user343@example.com,사이즈:XL,3,PTWK4PQF3578D2
+0.6,정말 추천합니다!,user344@example.com,뷰티 키워드:트러블,4,PTNQ0UHJQY8Y8B
+1.6,정말 추천합니다!,user345@example.com,두피 타입:건성,5,PTTIOE1E3A51S0
+1.1,이 제품은 정말 좋습니다!,user346@example.com,뷰티 키워드:트러블,6,PTUVSBJJFEREK0
+0.9,그냥 그렇네요.,user347@example.com,스킨 타입:지성,7,PTV5T4HQDA1CWY
+4.7,이 제품은 정말 좋습니다!,user348@example.com,스킨 타입:건성,8,PTJ1N3A4404HWL
+1.3,다시 사고 싶지 않아요.,user349@example.com,신발 사이즈:290,9,PTYGEWQ5V244VL
+0.1,다시 구매하고 싶습니다!,user350@example.com,사이즈:XXL,10,PT77WT5OS158V9
+0.5,다시 사고 싶지 않아요.,user351@example.com,피부톤:쿨톤,1,PTLHPBOYQTTT3F
+4.6,보통입니다.,user352@example.com,스킨 타입:지성,2,PTNGN14PJOBMKJ
+4.7,다시 구매하고 싶습니다!,user353@example.com,사이즈:M,3,PT17MGNTGW5WBE
+4.7,다시 사고 싶지 않아요.,user354@example.com,뷰티 키워드:모공,4,PT2H1U7652NY28
+3.8,아주 나쁜 제품입니다.,user355@example.com,신발 사이즈:260,5,PTYZROIJEPY0YT
+1.5,이 제품은 정말 좋습니다!,user356@example.com,스킨 타입:지성,6,PTJCY0U31JL4G7
+3.1,별로 기대하지 마세요.,user357@example.com,신발 사이즈:240,7,PTB0QCZKFEHI3C
+3.8,만족스러운 구매였습니다!,user358@example.com,두피 타입:건성,8,PTMIAJDCYOI1PM
+4.1,아주 나쁜 제품입니다.,user359@example.com,뷰티 키워드:모공,9,PT3NW4UK3IRTUO
+3.9,다시 구매하고 싶습니다!,user360@example.com,피부톤:웜톤,10,PTSUZ5WQY8BXUH
+3.0,정말 추천합니다!,user361@example.com,두피 타입:건성,1,PTNXS6KCCA9PVK
+0.2,정말 추천합니다!,user362@example.com,두피 타입:지성,2,PTTALE6UKTHDT6
+0.2,다시 구매하고 싶습니다!,user363@example.com,뷰티 키워드:모공,3,PTHDQ6F9BZK03R
+4.1,아주 나쁜 제품입니다.,user364@example.com,신발 사이즈:270,4,PT3ZTOVOIN8DQ6
+0.2,이 제품은 정말 좋습니다!,user365@example.com,신발 사이즈:240,5,PTKVL02R78GVWM
+3.7,다시 사고 싶지 않아요.,user366@example.com,스킨 타입:지성,6,PT9450PASP4GLO
+1.0,아주 나쁜 제품입니다.,user367@example.com,스킨 타입:복합성,7,PTAB6QGD8AQC6O
+0.2,정말 추천합니다!,user368@example.com,사이즈:M,8,PTI65TEQ6SYYB7
+1.4,다시 사고 싶지 않아요.,user369@example.com,신발 사이즈:235,9,PTL3HBMOS4HDT4
+3.7,다시 사고 싶지 않아요.,user370@example.com,신발 사이즈:280,10,PT828FUSVICOPZ
+0.4,정말 추천합니다!,user371@example.com,사이즈:M,1,PTB3I0C2F6RG0O
+4.8,다시 구매하고 싶습니다!,user372@example.com,신발 사이즈:250,2,PTDFC5JUYTGI4C
+4.4,정말 추천합니다!,user373@example.com,신발 사이즈:270,3,PT61X3TQD11I4T
+1.4,별로 기대하지 마세요.,user374@example.com,뷰티 키워드:주름,4,PTUV3RAD64H531
+5.0,정말 추천합니다!,user375@example.com,스킨 타입:건성,5,PT87WAMNTF6SW2
+2.0,최고의 제품입니다!,user376@example.com,두피 타입:지성,6,PTII2ZEQJQDWBR
+4.6,그냥 그렇네요.,user377@example.com,두피 타입:건성,7,PTIZBKWMTD9R5U
+0.2,아주 나쁜 제품입니다.,user378@example.com,두피 타입:복합성,8,PTL91RLLVHXUU0
+4.2,정말 추천합니다!,user379@example.com,스킨 타입:건성,9,PT0ZHWM0TXH89L
+2.6,별로 기대하지 마세요.,user380@example.com,사이즈:L,10,PTWCWNTDITA8S7
+4.7,만족스러운 구매였습니다!,user381@example.com,스킨 타입:복합성,1,PTL2YIOCWK3470
+0.1,최고의 제품입니다!,user382@example.com,피부톤:쿨톤,2,PTPD2UQEDSGTSB
+3.2,이 제품은 정말 좋습니다!,user383@example.com,사이즈:M,3,PT91EKCHJ81XVT
+3.6,보통입니다.,user384@example.com,스킨 타입:건성,4,PTNZ9JW9L0IHFU
+4.9,보통입니다.,user385@example.com,두피 타입:복합성,5,PTJPCB8PND7MO3
+0.5,그냥 그렇네요.,user386@example.com,사이즈:XXL,6,PT4BN09Y9ICJ6S
+4.6,별로 기대하지 마세요.,user387@example.com,피부톤:쿨톤,7,PT1SNW1TQ13HCQ
+4.8,정말 추천합니다!,user388@example.com,뷰티 키워드:주름,8,PTGQPLHCPNJW1V
+3.7,이 제품은 정말 좋습니다!,user389@example.com,뷰티 키워드:모공,9,PT0PIZG6TAF5DP
+1.0,별로 기대하지 마세요.,user390@example.com,뷰티 키워드:모공,10,PTAM8P6ZGWJJPV
+3.7,정말 추천합니다!,user391@example.com,사이즈:XXL,1,PTGHJ4YSHLRW2A
+1.4,만족스러운 구매였습니다!,user392@example.com,스킨 타입:복합성,2,PTYNOM9PR2BIFV
+4.4,보통입니다.,user393@example.com,피부톤:쿨톤,3,PTNHS9EXTSM8XM
+0.7,보통입니다.,user394@example.com,뷰티 키워드:주름,4,PTESLO5J3KV6X0
+0.1,아주 나쁜 제품입니다.,user395@example.com,두피 타입:지성,5,PTJKR0BDM76KBG
+0.9,정말 추천합니다!,user396@example.com,두피 타입:지성,6,PTWG8KEIXMUAV3
+5.0,보통입니다.,user397@example.com,스킨 타입:건성,7,PTDVISGCCTY40U
+0.4,보통입니다.,user398@example.com,피부톤:웜톤,8,PT0KZBJFYMR5IF
+0.3,정말 추천합니다!,user399@example.com,뷰티 키워드:트러블,9,PT4H0BUS6351U7
+4.9,아주 나쁜 제품입니다.,user400@example.com,신발 사이즈:245,10,PTNC67Z3BCP1RI
+2.8,보통입니다.,user401@example.com,스킨 타입:복합성,1,PT801ORX1E6XVO
+1.6,다시 사고 싶지 않아요.,user402@example.com,두피 타입:건성,2,PTP6ATSH5TI29I
+3.9,정말 추천합니다!,user403@example.com,피부톤:쿨톤,3,PTNUW7335LDSI0
+0.5,이 제품은 정말 좋습니다!,user404@example.com,스킨 타입:지성,4,PT6GRGXU3KKKUO
+2.7,그냥 그렇네요.,user405@example.com,스킨 타입:복합성,5,PTUK04MZ8YA457
+2.7,그냥 그렇네요.,user406@example.com,신발 사이즈:275,6,PT7VAWHW9H8YTH
+1.3,다시 사고 싶지 않아요.,user407@example.com,사이즈:XL,7,PTZ1T5BZAN6RJT
+3.2,보통입니다.,user408@example.com,사이즈:S,8,PT5OHOQCEN30V3
+4.1,다시 사고 싶지 않아요.,user409@example.com,신발 사이즈:230,9,PTRRVWBAV6HJAO
+0.0,그냥 그렇네요.,user410@example.com,피부톤:쿨톤,10,PTHN8EEO58YY57
+3.2,보통입니다.,user411@example.com,신발 사이즈:250,1,PTMM6E8DSK308F
+2.8,정말 추천합니다!,user412@example.com,뷰티 키워드:주름,2,PT7LRZS95YPJE1
+1.8,만족스러운 구매였습니다!,user413@example.com,스킨 타입:복합성,3,PTEAV6PBLRH8YH
+0.4,다시 구매하고 싶습니다!,user414@example.com,신발 사이즈:275,4,PTFO2LTL0Q7YVO
+2.6,아주 나쁜 제품입니다.,user415@example.com,사이즈:S,5,PTUMMJ88ABRXW2
+1.7,별로 기대하지 마세요.,user416@example.com,스킨 타입:건성,6,PTW55UZ72BOQQB
+2.2,아주 나쁜 제품입니다.,user417@example.com,사이즈:S,7,PT7K9BQ5C0HMR4
+2.4,정말 추천합니다!,user418@example.com,스킨 타입:지성,8,PT3HU75PQ27SGN
+2.8,별로 기대하지 마세요.,user419@example.com,신발 사이즈:240,9,PTRDJYBZX40T8J
+1.6,최고의 제품입니다!,user420@example.com,신발 사이즈:260,10,PTY6YSTPDXN0LJ
+4.6,다시 사고 싶지 않아요.,user421@example.com,신발 사이즈:300,1,PT0A5LS02O1JKL
+3.3,정말 추천합니다!,user422@example.com,두피 타입:지성,2,PTB90XATO7D4XF
+3.0,보통입니다.,user423@example.com,사이즈:XL,3,PTJY62N3OMPBSK
+3.9,이 제품은 정말 좋습니다!,user424@example.com,뷰티 키워드:주름,4,PTRCMLME8QRTLS
+5.0,그냥 그렇네요.,user425@example.com,뷰티 키워드:모공,5,PTMHQLZZBM46QA
+3.7,보통입니다.,user426@example.com,뷰티 키워드:트러블,6,PTSV3ICJUCF65B
+0.2,다시 사고 싶지 않아요.,user427@example.com,신발 사이즈:230,7,PTNQ2I6KZKC5UA
+2.4,그냥 그렇네요.,user428@example.com,스킨 타입:건성,8,PTCDXJ62BDEJPP
+4.8,만족스러운 구매였습니다!,user429@example.com,신발 사이즈:265,9,PTXEM3DM9R698B
+3.5,보통입니다.,user430@example.com,뷰티 키워드:트러블,10,PT66H4ZK4KU2SQ
+1.7,보통입니다.,user431@example.com,피부톤:웜톤,1,PTBWPENIHHUCYD
+4.0,별로 기대하지 마세요.,user432@example.com,사이즈:L,2,PT668H3LVMRQXJ
+0.1,그냥 그렇네요.,user433@example.com,스킨 타입:지성,3,PT9RAG5REUH1MK
+1.0,아주 나쁜 제품입니다.,user434@example.com,두피 타입:지성,4,PTW08AR8B4ZNZ9
+3.2,정말 추천합니다!,user435@example.com,두피 타입:건성,5,PT34ZMKHWIRKSW
+2.6,이 제품은 정말 좋습니다!,user436@example.com,피부톤:쿨톤,6,PTATFMY0R8JJMX
+1.8,별로 기대하지 마세요.,user437@example.com,신발 사이즈:235,7,PTZ507VHE1KOMC
+4.0,보통입니다.,user438@example.com,피부톤:웜톤,8,PTTS347K3TBWIJ
+3.1,다시 구매하고 싶습니다!,user439@example.com,뷰티 키워드:모공,9,PTEDQFDEYDH1EY
+2.9,정말 추천합니다!,user440@example.com,피부톤:쿨톤,10,PTCUHMR2X3NXDR
+4.6,정말 추천합니다!,user441@example.com,뷰티 키워드:모공,1,PTO63NBZKH5UU3
+0.9,다시 구매하고 싶습니다!,user442@example.com,뷰티 키워드:트러블,2,PTBJS3814RC11Q
+3.8,정말 추천합니다!,user443@example.com,사이즈:XS,3,PTFFEBCQF3XWGJ
+3.0,그냥 그렇네요.,user444@example.com,피부톤:쿨톤,4,PT290W3JBJ6VMQ
+3.4,이 제품은 정말 좋습니다!,user445@example.com,사이즈:M,5,PT6G98Y5MA8Y89
+3.2,최고의 제품입니다!,user446@example.com,피부톤:웜톤,6,PTZMV413DIR7LE
+4.7,만족스러운 구매였습니다!,user447@example.com,피부톤:쿨톤,7,PT0TIGEL9LIAHD
+1.1,그냥 그렇네요.,user448@example.com,신발 사이즈:295,8,PT4KK1YDTYBWCU
+3.8,이 제품은 정말 좋습니다!,user449@example.com,두피 타입:건성,9,PTG3IUQFTZBWF3
+4.2,이 제품은 정말 좋습니다!,user450@example.com,사이즈:L,10,PTFGRNVUPTUKXM
+3.9,이 제품은 정말 좋습니다!,user451@example.com,스킨 타입:지성,1,PTT7KFAQS7Z1RR
+4.9,다시 사고 싶지 않아요.,user452@example.com,신발 사이즈:260,2,PTES5UBVAWIELX
+2.6,정말 추천합니다!,user453@example.com,스킨 타입:건성,3,PTNQZFLL3961K5
+0.6,만족스러운 구매였습니다!,user454@example.com,피부톤:웜톤,4,PTR0QLK6I6BPIJ
+2.1,최고의 제품입니다!,user455@example.com,신발 사이즈:245,5,PTGC1A3SWGKLDV
+4.2,만족스러운 구매였습니다!,user456@example.com,뷰티 키워드:모공,6,PT55XSXEWWIGVO
+3.7,다시 구매하고 싶습니다!,user457@example.com,피부톤:쿨톤,7,PTEAF5S3G08J5K
+1.9,다시 구매하고 싶습니다!,user458@example.com,신발 사이즈:270,8,PTGOOQLKI0B48G
+3.2,만족스러운 구매였습니다!,user459@example.com,피부톤:쿨톤,9,PTBTW9S90OV4DR
+3.4,다시 구매하고 싶습니다!,user460@example.com,스킨 타입:지성,10,PTTZXTUBCZ05JX
+4.5,정말 추천합니다!,user461@example.com,사이즈:XL,1,PTE7T1HWJGYPRT
+3.8,보통입니다.,user462@example.com,두피 타입:지성,2,PTVXZF5KAXL7RZ
+4.5,최고의 제품입니다!,user463@example.com,사이즈:S,3,PTD0DQMVXG2U73
+0.6,최고의 제품입니다!,user464@example.com,피부톤:쿨톤,4,PTFM9TU8C6G1JL
+0.4,별로 기대하지 마세요.,user465@example.com,피부톤:쿨톤,5,PTEICIKOG8FCPM
+2.3,정말 추천합니다!,user466@example.com,뷰티 키워드:모공,6,PTENSRKK3A74D7
+1.2,별로 기대하지 마세요.,user467@example.com,두피 타입:지성,7,PTV2JRT5LZJMEQ
+3.7,이 제품은 정말 좋습니다!,user468@example.com,피부톤:웜톤,8,PTRASOR5BNP36G
+1.5,별로 기대하지 마세요.,user469@example.com,두피 타입:건성,9,PTJG8AZ8RDJLKF
+4.9,보통입니다.,user470@example.com,피부톤:웜톤,10,PTUFSKCI02U1AH
+1.2,다시 사고 싶지 않아요.,user471@example.com,뷰티 키워드:모공,1,PTE86YRKSUXGFF
+0.4,최고의 제품입니다!,user472@example.com,스킨 타입:지성,2,PT7ZQES9OI5XTM
+4.1,만족스러운 구매였습니다!,user473@example.com,두피 타입:복합성,3,PTQA3100N56DHQ
+2.1,이 제품은 정말 좋습니다!,user474@example.com,뷰티 키워드:트러블,4,PTFUVMK1QTOX1C
+2.2,이 제품은 정말 좋습니다!,user475@example.com,신발 사이즈:255,5,PTT53K21PZBRIO
+2.8,이 제품은 정말 좋습니다!,user476@example.com,두피 타입:건성,6,PT2TXJFI653MWW
+3.7,아주 나쁜 제품입니다.,user477@example.com,신발 사이즈:240,7,PT4UCARRYUSIZU
+4.2,별로 기대하지 마세요.,user478@example.com,피부톤:쿨톤,8,PT1L4KK1BU80Q9
+1.1,그냥 그렇네요.,user479@example.com,스킨 타입:지성,9,PTXMZWIPFY62X4
+3.5,다시 구매하고 싶습니다!,user480@example.com,신발 사이즈:300,10,PT7UXHRY4XP1RU
+1.0,다시 구매하고 싶습니다!,user481@example.com,피부톤:쿨톤,1,PTEJJEN7CPQVA7
+0.5,보통입니다.,user482@example.com,신발 사이즈:250,2,PTCYM6GC85862J
+3.6,이 제품은 정말 좋습니다!,user483@example.com,사이즈:M,3,PT77KF89QM455S
+2.5,아주 나쁜 제품입니다.,user484@example.com,피부톤:쿨톤,4,PT61UVE7MRNRVB
+2.7,아주 나쁜 제품입니다.,user485@example.com,두피 타입:건성,5,PTWWM3666AYS9L
+4.8,보통입니다.,user486@example.com,피부톤:쿨톤,6,PTPOEL8H6HLGZY
+2.6,보통입니다.,user487@example.com,신발 사이즈:295,7,PTR2AYGQ5GKHDY
+0.9,만족스러운 구매였습니다!,user488@example.com,사이즈:XL,8,PTZIXAWZF87TBY
+1.4,정말 추천합니다!,user489@example.com,신발 사이즈:270,9,PTQI0KCISSFWVT
+2.3,아주 나쁜 제품입니다.,user490@example.com,두피 타입:지성,10,PT8O0SEBBNU1R7
+2.4,별로 기대하지 마세요.,user491@example.com,신발 사이즈:290,1,PT4KPVD0TH51JH
+1.9,그냥 그렇네요.,user492@example.com,신발 사이즈:300,2,PTF8R6476USN2U
+2.0,이 제품은 정말 좋습니다!,user493@example.com,신발 사이즈:285,3,PTAHE4K5Q5H09K
+0.8,정말 추천합니다!,user494@example.com,스킨 타입:복합성,4,PT7HJ4XDSV2USJ
+3.1,보통입니다.,user495@example.com,사이즈:XL,5,PTEOZQ9BMM0ZCV
+2.5,만족스러운 구매였습니다!,user496@example.com,피부톤:쿨톤,6,PTZZRM0G04BDMC
+2.9,별로 기대하지 마세요.,user497@example.com,사이즈:M,7,PTMA228C8ICQ6C
+4.5,별로 기대하지 마세요.,user498@example.com,스킨 타입:복합성,8,PT7GCK6CB7MGT6
+2.9,다시 사고 싶지 않아요.,user499@example.com,신발 사이즈:295,9,PTHGVU4BGGFHON
+3.0,만족스러운 구매였습니다!,user500@example.com,피부톤:쿨톤,10,PTS01GA0N6KK15
+3.2,이 제품은 정말 좋습니다!,user501@example.com,신발 사이즈:270,1,PT777WBGNGAZPR
+4.7,아주 나쁜 제품입니다.,user502@example.com,뷰티 키워드:모공,2,PTD9340XSBL2EA
+3.9,이 제품은 정말 좋습니다!,user503@example.com,스킨 타입:복합성,3,PTY9YYDYBIS360
+1.6,만족스러운 구매였습니다!,user504@example.com,피부톤:웜톤,4,PTITZ3BI21U644
+4.2,그냥 그렇네요.,user505@example.com,사이즈:L,5,PT7MZD614PDP1J
+1.8,다시 사고 싶지 않아요.,user506@example.com,스킨 타입:건성,6,PTNOLSX9AV1VET
+3.6,다시 사고 싶지 않아요.,user507@example.com,피부톤:웜톤,7,PTT324T7W3R6AT
+2.4,이 제품은 정말 좋습니다!,user508@example.com,사이즈:XS,8,PTG19PZTE9E4JA
+2.0,정말 추천합니다!,user509@example.com,사이즈:L,9,PTXYJBXO6ZF90M
+3.3,아주 나쁜 제품입니다.,user510@example.com,사이즈:XXL,10,PTJVJ3UM7NOSSW
+1.3,정말 추천합니다!,user511@example.com,두피 타입:복합성,1,PTPXF3YXRX29Z2
+1.0,만족스러운 구매였습니다!,user512@example.com,피부톤:쿨톤,2,PTW5XSBZHAYWLO
+2.7,아주 나쁜 제품입니다.,user513@example.com,사이즈:XS,3,PT7LSLF5DQOPR3
+2.3,정말 추천합니다!,user514@example.com,두피 타입:건성,4,PT3G6JPE6WCVP7
+4.2,그냥 그렇네요.,user515@example.com,피부톤:쿨톤,5,PTQ9HAMKZ4JAN5
+1.5,만족스러운 구매였습니다!,user516@example.com,두피 타입:건성,6,PTM2ZVYJOSW0GN
+2.8,최고의 제품입니다!,user517@example.com,신발 사이즈:220,7,PT87L97HBCZUKJ
+0.3,다시 구매하고 싶습니다!,user518@example.com,피부톤:웜톤,8,PTH5AA8XZBG8SB
+2.6,아주 나쁜 제품입니다.,user519@example.com,뷰티 키워드:트러블,9,PT6QH3VUWHHCTR
+5.0,이 제품은 정말 좋습니다!,user520@example.com,두피 타입:지성,10,PTMSQBUFLCCJJK
+2.2,별로 기대하지 마세요.,user521@example.com,피부톤:쿨톤,1,PTT18UEMB8RN5P
+1.2,그냥 그렇네요.,user522@example.com,두피 타입:복합성,2,PTAHW1ZT916PQI
+1.1,보통입니다.,user523@example.com,두피 타입:복합성,3,PT2M9T0585QF0B
+3.5,보통입니다.,user524@example.com,신발 사이즈:250,4,PTQN5T0O4F9MS0
+4.7,그냥 그렇네요.,user525@example.com,두피 타입:건성,5,PT5XA5XRICB8CT
+3.9,다시 사고 싶지 않아요.,user526@example.com,사이즈:L,6,PT9B2O98DRM2LH
+0.9,별로 기대하지 마세요.,user527@example.com,사이즈:XS,7,PTCRVD77M5IOFR
+4.4,정말 추천합니다!,user528@example.com,사이즈:XL,8,PTHI8LRB7IT50L
+2.0,다시 사고 싶지 않아요.,user529@example.com,스킨 타입:지성,9,PTVPTIOD0SSLJW
+0.9,최고의 제품입니다!,user530@example.com,신발 사이즈:280,10,PTMHQ88XTM0Y3K
+2.5,정말 추천합니다!,user531@example.com,사이즈:L,1,PTKP9ORZNVW7GT
+1.3,다시 구매하고 싶습니다!,user532@example.com,뷰티 키워드:주름,2,PT2I23LH07H8WK
+4.9,만족스러운 구매였습니다!,user533@example.com,스킨 타입:지성,3,PTZN9Z49LFLKE4
+3.4,만족스러운 구매였습니다!,user534@example.com,사이즈:S,4,PT4D9IJOXDFEB8
+3.7,이 제품은 정말 좋습니다!,user535@example.com,스킨 타입:건성,5,PTVGX9WZH0QPOI
+0.7,아주 나쁜 제품입니다.,user536@example.com,스킨 타입:건성,6,PTB591SKEO2WKM
+1.6,보통입니다.,user537@example.com,사이즈:XXL,7,PTTZXGNSES1U43
+3.9,보통입니다.,user538@example.com,두피 타입:복합성,8,PTFBCPQCI6FUB5
+2.6,다시 사고 싶지 않아요.,user539@example.com,두피 타입:건성,9,PTKG4ZG71Z6B00
+1.6,별로 기대하지 마세요.,user540@example.com,두피 타입:지성,10,PTPI4EU391VSBH
+5.0,보통입니다.,user541@example.com,두피 타입:지성,1,PTZA31ENRCJ70Y
+0.9,다시 구매하고 싶습니다!,user542@example.com,피부톤:쿨톤,2,PTGUJBTJCFBCX8
+2.2,다시 구매하고 싶습니다!,user543@example.com,뷰티 키워드:모공,3,PTEKUK5T85HZUE
+3.6,그냥 그렇네요.,user544@example.com,스킨 타입:지성,4,PT3XZW1TAY8F08
+3.9,이 제품은 정말 좋습니다!,user545@example.com,피부톤:쿨톤,5,PTDMUBYP2SF6K0
+3.5,다시 사고 싶지 않아요.,user546@example.com,신발 사이즈:295,6,PT4RMAFP5PIHDC
+2.9,별로 기대하지 마세요.,user547@example.com,피부톤:웜톤,7,PTHY1EYQ22DOZS
+2.5,정말 추천합니다!,user548@example.com,피부톤:웜톤,8,PTEJDLT9OUKFHH
+3.7,아주 나쁜 제품입니다.,user549@example.com,스킨 타입:건성,9,PTNTJ0IBBJY1NO
+0.9,다시 사고 싶지 않아요.,user550@example.com,사이즈:XS,10,PTL7ZY4AHKSOV6
+4.1,만족스러운 구매였습니다!,user551@example.com,뷰티 키워드:트러블,1,PT53TSNTVQVND9
+2.1,다시 사고 싶지 않아요.,user552@example.com,사이즈:L,2,PT90X9ZUMLBDXG
+4.4,만족스러운 구매였습니다!,user553@example.com,피부톤:쿨톤,3,PTX9VHLD9KAJQK
+1.9,그냥 그렇네요.,user554@example.com,피부톤:쿨톤,4,PTM7T3EPPPSVE1
+3.9,아주 나쁜 제품입니다.,user555@example.com,피부톤:웜톤,5,PTTM3CIW5C6AWH
+1.6,최고의 제품입니다!,user556@example.com,두피 타입:지성,6,PT3DNKZ7BN5ZAF
+3.3,보통입니다.,user557@example.com,뷰티 키워드:모공,7,PT8ODHPWJ7F686
+4.3,다시 구매하고 싶습니다!,user558@example.com,스킨 타입:복합성,8,PT4DND4SXHQL88
+4.5,다시 구매하고 싶습니다!,user559@example.com,신발 사이즈:230,9,PT7CJVT0VTG1P3
+0.1,그냥 그렇네요.,user560@example.com,사이즈:XL,10,PTAGQMMEUA0ROD
+2.1,정말 추천합니다!,user561@example.com,스킨 타입:건성,1,PTA0DAKH825GG6
+1.8,이 제품은 정말 좋습니다!,user562@example.com,신발 사이즈:240,2,PTWS12YO6B6QGP
+2.3,그냥 그렇네요.,user563@example.com,두피 타입:복합성,3,PTMB1Y20STP8BQ
+1.0,최고의 제품입니다!,user564@example.com,사이즈:XXL,4,PTZXNQSQPFZWN1
+1.9,정말 추천합니다!,user565@example.com,피부톤:웜톤,5,PT5MEIZOT4OP6Q
+4.2,이 제품은 정말 좋습니다!,user566@example.com,두피 타입:복합성,6,PT1QT7KI2951V4
+4.1,별로 기대하지 마세요.,user567@example.com,피부톤:쿨톤,7,PTL9IU52ORC97C
+3.5,그냥 그렇네요.,user568@example.com,두피 타입:지성,8,PTAGMLM0CZE7K0
+5.0,다시 사고 싶지 않아요.,user569@example.com,스킨 타입:건성,9,PTJTLVH1COQ4R3
+0.5,만족스러운 구매였습니다!,user570@example.com,뷰티 키워드:모공,10,PTIMEXW2FQFUXB
+3.9,별로 기대하지 마세요.,user571@example.com,신발 사이즈:240,1,PT1HMZNHWLD6G7
+1.5,최고의 제품입니다!,user572@example.com,신발 사이즈:260,2,PTHTRI7FZLR6GT
+0.8,이 제품은 정말 좋습니다!,user573@example.com,뷰티 키워드:주름,3,PTYU0UJLJSRT94
+1.1,이 제품은 정말 좋습니다!,user574@example.com,사이즈:XS,4,PTRC4TS6UN4AWU
+2.9,별로 기대하지 마세요.,user575@example.com,두피 타입:복합성,5,PTQR6W2APD77SP
+2.8,별로 기대하지 마세요.,user576@example.com,사이즈:S,6,PTHQ7P9F9PY9M8
+1.1,다시 구매하고 싶습니다!,user577@example.com,스킨 타입:지성,7,PT9IGECZO8LQKM
+4.0,정말 추천합니다!,user578@example.com,사이즈:L,8,PT959NB1DZF205
+0.5,다시 구매하고 싶습니다!,user579@example.com,신발 사이즈:260,9,PTDMLE41MWUHV5
+1.2,정말 추천합니다!,user580@example.com,피부톤:쿨톤,10,PTIRYKNMNVKMIH
+0.8,보통입니다.,user581@example.com,피부톤:쿨톤,1,PTIM5FKDUIN9ZT
+2.7,별로 기대하지 마세요.,user582@example.com,뷰티 키워드:모공,2,PT7QHLF6V614T7
+0.7,만족스러운 구매였습니다!,user583@example.com,신발 사이즈:265,3,PTWU8J057HGBF8
+1.9,아주 나쁜 제품입니다.,user584@example.com,사이즈:XL,4,PTJTCMOV95LZ09
+4.6,별로 기대하지 마세요.,user585@example.com,사이즈:M,5,PTM5D11TS4DNI1
+2.5,다시 사고 싶지 않아요.,user586@example.com,뷰티 키워드:주름,6,PTNQRBEGO2AVSV
+2.9,아주 나쁜 제품입니다.,user587@example.com,피부톤:쿨톤,7,PTLM6UBWB32IS7
+3.9,이 제품은 정말 좋습니다!,user588@example.com,스킨 타입:지성,8,PT55H2YCDYYBNN
+0.8,보통입니다.,user589@example.com,두피 타입:건성,9,PTT9RSF9MK36PH
+3.5,보통입니다.,user590@example.com,뷰티 키워드:트러블,10,PTW2R4VKKNZGA4
+4.5,정말 추천합니다!,user591@example.com,뷰티 키워드:모공,1,PTLJJCPZ28J3EV
+2.3,최고의 제품입니다!,user592@example.com,사이즈:S,2,PTF13PNNONSWKZ
+3.6,다시 구매하고 싶습니다!,user593@example.com,피부톤:쿨톤,3,PTEG421W95VUCG
+2.7,정말 추천합니다!,user594@example.com,뷰티 키워드:모공,4,PTPMWODRI4RJED
+1.9,보통입니다.,user595@example.com,두피 타입:복합성,5,PTY3SC6UVCOWXD
+3.0,그냥 그렇네요.,user596@example.com,스킨 타입:건성,6,PT551NEGJZLF6I
+4.5,다시 사고 싶지 않아요.,user597@example.com,피부톤:쿨톤,7,PTL8EDFIP7WBU1
+2.5,아주 나쁜 제품입니다.,user598@example.com,스킨 타입:복합성,8,PTDO1LJKXYBONK
+3.5,그냥 그렇네요.,user599@example.com,두피 타입:건성,9,PTFU681KV1NF5F
+1.8,보통입니다.,user600@example.com,피부톤:쿨톤,10,PTJTCRST0TJQWU
+4.3,그냥 그렇네요.,user601@example.com,사이즈:XS,1,PTE2ZKTHGYCCM7
+0.7,아주 나쁜 제품입니다.,user602@example.com,두피 타입:건성,2,PT0GGNJ36YF2XO
+0.5,만족스러운 구매였습니다!,user603@example.com,신발 사이즈:275,3,PTEJ7KEUZLAJRW
+0.8,정말 추천합니다!,user604@example.com,피부톤:웜톤,4,PTZ0HLMJOD8V9L
+4.0,보통입니다.,user605@example.com,사이즈:M,5,PTXY8N0MV97QOX
+0.5,아주 나쁜 제품입니다.,user606@example.com,스킨 타입:건성,6,PT9CS1PYMIFG0D
+1.4,아주 나쁜 제품입니다.,user607@example.com,두피 타입:지성,7,PTH5J646JSBDLY
+1.1,최고의 제품입니다!,user608@example.com,스킨 타입:복합성,8,PT0NXVSO3U2CQ8
+4.2,다시 사고 싶지 않아요.,user609@example.com,피부톤:쿨톤,9,PTUKYLP3AFCLEQ
+3.7,최고의 제품입니다!,user610@example.com,사이즈:XS,10,PTXE7LVUHSE3EB
+2.0,보통입니다.,user611@example.com,스킨 타입:복합성,1,PTCBW0V0C87YNC
+1.0,정말 추천합니다!,user612@example.com,두피 타입:건성,2,PTGMBLP6AYR8GX
+2.4,이 제품은 정말 좋습니다!,user613@example.com,두피 타입:지성,3,PTRFKH00PH7W2J
+4.0,다시 사고 싶지 않아요.,user614@example.com,뷰티 키워드:주름,4,PT2QWKODLW37ZU
+1.8,그냥 그렇네요.,user615@example.com,스킨 타입:지성,5,PTPVQFC43AWU10
+2.6,다시 구매하고 싶습니다!,user616@example.com,뷰티 키워드:모공,6,PTMTZJPXC39PDS
+1.1,정말 추천합니다!,user617@example.com,두피 타입:복합성,7,PTEZGD31H0O730
+0.8,만족스러운 구매였습니다!,user618@example.com,사이즈:XXL,8,PTNEDYB6DEWUOR
+1.4,최고의 제품입니다!,user619@example.com,스킨 타입:건성,9,PT499KG650MP1P
+0.0,별로 기대하지 마세요.,user620@example.com,스킨 타입:건성,10,PTIMYVH7MQCX9F
+3.9,다시 구매하고 싶습니다!,user621@example.com,스킨 타입:지성,1,PT6376EXJHKZKS
+3.2,그냥 그렇네요.,user622@example.com,사이즈:XXL,2,PTUWDHBVVF8DB4
+3.1,보통입니다.,user623@example.com,피부톤:웜톤,3,PTP3O0KZVU3J71
+2.4,그냥 그렇네요.,user624@example.com,피부톤:웜톤,4,PT70GCI9GWQ05I
+0.1,보통입니다.,user625@example.com,스킨 타입:건성,5,PTNHASD61JCJ5J
+4.5,정말 추천합니다!,user626@example.com,피부톤:웜톤,6,PT2A9CK5GLE25D
+4.5,만족스러운 구매였습니다!,user627@example.com,피부톤:쿨톤,7,PTK3G13ZDSA2GU
+4.9,다시 사고 싶지 않아요.,user628@example.com,사이즈:XL,8,PTK0W7RNVGGTIO
+1.2,다시 구매하고 싶습니다!,user629@example.com,두피 타입:건성,9,PTSPC2OP3RYFKG
+0.6,그냥 그렇네요.,user630@example.com,피부톤:쿨톤,10,PTRBNTQH1KHODJ
+5.0,다시 사고 싶지 않아요.,user631@example.com,사이즈:XXL,1,PT2NUENFM7QP00
+4.4,이 제품은 정말 좋습니다!,user632@example.com,신발 사이즈:240,2,PT5T0UQL9S3HZE
+0.7,별로 기대하지 마세요.,user633@example.com,스킨 타입:복합성,3,PT9E50VAO64DKM
+1.3,정말 추천합니다!,user634@example.com,신발 사이즈:265,4,PT7MJ214JR5Z88
+1.8,최고의 제품입니다!,user635@example.com,사이즈:XXL,5,PT1C629WRSC1QB
+4.9,별로 기대하지 마세요.,user636@example.com,스킨 타입:지성,6,PT05GEQ3DR79WP
+2.3,만족스러운 구매였습니다!,user637@example.com,스킨 타입:건성,7,PTK95PPXXFF1XP
+3.6,다시 구매하고 싶습니다!,user638@example.com,스킨 타입:지성,8,PTUYR01YE2GQYA
+2.0,별로 기대하지 마세요.,user639@example.com,피부톤:웜톤,9,PT8VLU5B0105UC
+3.3,별로 기대하지 마세요.,user640@example.com,사이즈:L,10,PTC4LIPNRDIYU1
+3.7,별로 기대하지 마세요.,user641@example.com,두피 타입:지성,1,PTMXCLWTJCJ97Y
+3.5,정말 추천합니다!,user642@example.com,스킨 타입:지성,2,PTC0DICY5WO8PT
+3.2,다시 구매하고 싶습니다!,user643@example.com,사이즈:XL,3,PT9E7C6QGGT4Z6
+1.1,다시 구매하고 싶습니다!,user644@example.com,뷰티 키워드:주름,4,PTJDP60SX1JUZC
+3.8,정말 추천합니다!,user645@example.com,스킨 타입:복합성,5,PT863Z0ZB164EJ
+0.4,만족스러운 구매였습니다!,user646@example.com,스킨 타입:건성,6,PTI0SG3RM2ZN08
+3.3,그냥 그렇네요.,user647@example.com,스킨 타입:지성,7,PTCGGI4U2PLM87
+2.4,다시 구매하고 싶습니다!,user648@example.com,사이즈:XXL,8,PTCN7Z7RFDFFKN
+0.2,별로 기대하지 마세요.,user649@example.com,피부톤:쿨톤,9,PT9F0BVHQHP1UC
+4.9,정말 추천합니다!,user650@example.com,사이즈:XL,10,PTJH0BVV3P1986
+2.9,아주 나쁜 제품입니다.,user651@example.com,스킨 타입:건성,1,PTWXE3KTCC3OPE
+0.7,정말 추천합니다!,user652@example.com,스킨 타입:복합성,2,PTBGWYK86JO1U3
+4.4,이 제품은 정말 좋습니다!,user653@example.com,뷰티 키워드:모공,3,PTR4WMDT8IWKK8
+1.2,만족스러운 구매였습니다!,user654@example.com,뷰티 키워드:주름,4,PTJD06UH8P333K
+1.8,다시 사고 싶지 않아요.,user655@example.com,스킨 타입:건성,5,PTKLIEJ7XNQH8H
+2.6,그냥 그렇네요.,user656@example.com,뷰티 키워드:주름,6,PT8JJBO73U9T7O
+1.7,만족스러운 구매였습니다!,user657@example.com,두피 타입:지성,7,PTHOHP6CMGB4BK
+4.5,보통입니다.,user658@example.com,뷰티 키워드:주름,8,PTDELZR36QM8J4
+4.2,다시 구매하고 싶습니다!,user659@example.com,피부톤:쿨톤,9,PT8ZU4VESHYTXG
+0.3,이 제품은 정말 좋습니다!,user660@example.com,사이즈:XS,10,PT8YV5GVW4T6RV
+3.8,최고의 제품입니다!,user661@example.com,피부톤:쿨톤,1,PTR91XSCQ8DGZF
+4.3,만족스러운 구매였습니다!,user662@example.com,스킨 타입:건성,2,PTCL0S2JPDYX27
+2.7,다시 사고 싶지 않아요.,user663@example.com,피부톤:쿨톤,3,PT8H0NI4P6I0PT
+3.7,정말 추천합니다!,user664@example.com,피부톤:웜톤,4,PTA9V1N8BP23K8
+2.2,만족스러운 구매였습니다!,user665@example.com,신발 사이즈:295,5,PTZ4O8NGIOGPFJ
+2.3,별로 기대하지 마세요.,user666@example.com,스킨 타입:지성,6,PTL1YCYAKEJ13L
+4.6,보통입니다.,user667@example.com,사이즈:S,7,PTNEW9QJ668JTU
+4.8,아주 나쁜 제품입니다.,user668@example.com,사이즈:XXL,8,PTMOYGUEYG7241
+3.8,그냥 그렇네요.,user669@example.com,사이즈:L,9,PTGGOYQ6MAHDTV
+4.3,다시 사고 싶지 않아요.,user670@example.com,사이즈:XL,10,PTV09OI8IUPYPN
+4.6,보통입니다.,user671@example.com,스킨 타입:복합성,1,PTC6EBXHB2JZOF
+3.3,만족스러운 구매였습니다!,user672@example.com,사이즈:XL,2,PTE8J9Z1DTLAP1
+0.4,별로 기대하지 마세요.,user673@example.com,피부톤:쿨톤,3,PTXFWWY4MC9EGU
+1.5,만족스러운 구매였습니다!,user674@example.com,신발 사이즈:290,4,PTTDU4WZ87A2SF
+3.5,보통입니다.,user675@example.com,신발 사이즈:300,5,PT8FFUX80RRHYB
+2.0,정말 추천합니다!,user676@example.com,뷰티 키워드:모공,6,PT5VI5K4J2I1BP
+2.3,만족스러운 구매였습니다!,user677@example.com,사이즈:L,7,PT56GOGBOFPGMS
+2.1,다시 구매하고 싶습니다!,user678@example.com,피부톤:웜톤,8,PTNGKEGJWZQ6BM
+4.5,별로 기대하지 마세요.,user679@example.com,두피 타입:건성,9,PTXQ4QTVOVLXD2
+2.6,최고의 제품입니다!,user680@example.com,피부톤:쿨톤,10,PTJQ7S08QYW5UN
+2.8,보통입니다.,user681@example.com,신발 사이즈:235,1,PTARWMWCTLV84Y
+0.6,정말 추천합니다!,user682@example.com,스킨 타입:복합성,2,PTTIG3C4WZFIOF
+2.2,그냥 그렇네요.,user683@example.com,스킨 타입:건성,3,PTW1DLY3K27D5A
+2.7,아주 나쁜 제품입니다.,user684@example.com,피부톤:웜톤,4,PTKBXDDDGJX7R2
+2.6,최고의 제품입니다!,user685@example.com,스킨 타입:건성,5,PTUWT26AM3W1DY
+3.3,만족스러운 구매였습니다!,user686@example.com,두피 타입:건성,6,PT6P3O27D9TH26
+1.4,다시 사고 싶지 않아요.,user687@example.com,신발 사이즈:255,7,PTKE5T1YQ05IWU
+3.7,이 제품은 정말 좋습니다!,user688@example.com,사이즈:L,8,PTK7PO9MU734AD
+4.5,아주 나쁜 제품입니다.,user689@example.com,신발 사이즈:240,9,PTEESQVL7SLGT9
+3.7,만족스러운 구매였습니다!,user690@example.com,두피 타입:복합성,10,PT72XY3LPQ0Y4V
+4.3,그냥 그렇네요.,user691@example.com,피부톤:쿨톤,1,PTW6NU0MBS17Z2
+4.3,만족스러운 구매였습니다!,user692@example.com,두피 타입:건성,2,PTXY70NGX808E8
+3.6,별로 기대하지 마세요.,user693@example.com,두피 타입:지성,3,PTKNIEDALD8FEG
+0.2,그냥 그렇네요.,user694@example.com,사이즈:M,4,PT6N8NVZL1M0EF
+4.2,그냥 그렇네요.,user695@example.com,피부톤:쿨톤,5,PT0PG0L2GGI7BD
+4.1,정말 추천합니다!,user696@example.com,신발 사이즈:275,6,PTZOJRF0G7I2TY
+1.8,최고의 제품입니다!,user697@example.com,스킨 타입:복합성,7,PTXJR1T3I9O5GY
+0.6,별로 기대하지 마세요.,user698@example.com,사이즈:XXL,8,PTZ7JQ5E7XPU8U
+3.3,보통입니다.,user699@example.com,뷰티 키워드:모공,9,PT0XBK5N0N02BM
+3.6,만족스러운 구매였습니다!,user700@example.com,피부톤:쿨톤,10,PT3J0TGGFIS6XD
+1.0,그냥 그렇네요.,user701@example.com,피부톤:쿨톤,1,PT2135ZYU1C6RD
+3.8,만족스러운 구매였습니다!,user702@example.com,뷰티 키워드:주름,2,PT90FVQ26GB3G0
+4.9,보통입니다.,user703@example.com,피부톤:웜톤,3,PTZTBDMB4L4IFL
+3.6,아주 나쁜 제품입니다.,user704@example.com,뷰티 키워드:트러블,4,PTEE5WQU393C3H
+0.1,다시 사고 싶지 않아요.,user705@example.com,사이즈:L,5,PTQ9B35E5H5ZOT
+1.2,아주 나쁜 제품입니다.,user706@example.com,신발 사이즈:295,6,PTU383P8IIQKHU
+4.9,다시 사고 싶지 않아요.,user707@example.com,뷰티 키워드:모공,7,PTOWLSPWXJHVGS
+1.4,최고의 제품입니다!,user708@example.com,사이즈:S,8,PTZ90RU1KPO3F8
+4.5,다시 구매하고 싶습니다!,user709@example.com,신발 사이즈:220,9,PTLQF9YQ7VRLNX
+1.9,다시 사고 싶지 않아요.,user710@example.com,피부톤:웜톤,10,PTDFEQSO16LWZJ
+0.6,별로 기대하지 마세요.,user711@example.com,두피 타입:지성,1,PTNL4NO23NRRSR
+0.7,정말 추천합니다!,user712@example.com,사이즈:S,2,PT5VRO7GALCYJX
+2.3,이 제품은 정말 좋습니다!,user713@example.com,두피 타입:복합성,3,PT63XTTMHZH8K8
+3.9,다시 구매하고 싶습니다!,user714@example.com,신발 사이즈:240,4,PTCME87NNVKIDE
+2.0,아주 나쁜 제품입니다.,user715@example.com,뷰티 키워드:주름,5,PTXBM4GW9WZ3G9
+0.9,다시 구매하고 싶습니다!,user716@example.com,뷰티 키워드:트러블,6,PT7Q1TWK99RJOP
+2.1,그냥 그렇네요.,user717@example.com,스킨 타입:건성,7,PTXWHP1FXBZIFK
+2.0,다시 사고 싶지 않아요.,user718@example.com,스킨 타입:건성,8,PTDG1U3SZ7FHT0
+2.5,보통입니다.,user719@example.com,뷰티 키워드:트러블,9,PT4XRCFO6GJWA5
+4.2,보통입니다.,user720@example.com,스킨 타입:복합성,10,PTNC5TBA8U2TLI
+1.9,정말 추천합니다!,user721@example.com,신발 사이즈:235,1,PT1KR2YSUEO7P9
+0.4,다시 사고 싶지 않아요.,user722@example.com,두피 타입:지성,2,PT993R0VIHJAFB
+2.0,정말 추천합니다!,user723@example.com,두피 타입:건성,3,PT6J5AFNAUECVU
+0.3,최고의 제품입니다!,user724@example.com,피부톤:쿨톤,4,PTKVMSQVPL7IDO
+3.1,이 제품은 정말 좋습니다!,user725@example.com,뷰티 키워드:모공,5,PTJITWKUWA0HAW
+4.5,이 제품은 정말 좋습니다!,user726@example.com,신발 사이즈:300,6,PT7KBJBHFMUB34
+3.6,다시 사고 싶지 않아요.,user727@example.com,피부톤:웜톤,7,PTB3KWGGQ431CO
+1.6,아주 나쁜 제품입니다.,user728@example.com,두피 타입:건성,8,PT3YXE2181ICH7
+1.1,다시 사고 싶지 않아요.,user729@example.com,두피 타입:지성,9,PTRIW9GI6GOC3R
+3.1,만족스러운 구매였습니다!,user730@example.com,스킨 타입:복합성,10,PTTPYCP5E5HNHN
+3.4,보통입니다.,user731@example.com,뷰티 키워드:트러블,1,PTLRWK92Z2ZX9V
+3.3,정말 추천합니다!,user732@example.com,신발 사이즈:265,2,PTMKJ0B85WN494
+1.0,정말 추천합니다!,user733@example.com,스킨 타입:건성,3,PTPC3URXI224TZ
+4.7,정말 추천합니다!,user734@example.com,뷰티 키워드:주름,4,PTGS5AYCUQZTEE
+0.5,별로 기대하지 마세요.,user735@example.com,피부톤:쿨톤,5,PT5OGO5RDTK7XS
+3.8,그냥 그렇네요.,user736@example.com,스킨 타입:건성,6,PTR3YH4DL311E8
+0.3,아주 나쁜 제품입니다.,user737@example.com,뷰티 키워드:주름,7,PT5AP8UXOOMHZC
+0.8,다시 구매하고 싶습니다!,user738@example.com,신발 사이즈:285,8,PTRHPKNE22SYMK
+2.9,정말 추천합니다!,user739@example.com,사이즈:XL,9,PTQ6MM6J1XVEFO
+1.6,그냥 그렇네요.,user740@example.com,뷰티 키워드:모공,10,PTAKTXXRKM23WZ
+4.0,최고의 제품입니다!,user741@example.com,신발 사이즈:280,1,PT8NJBOG8F6EF0
+4.3,보통입니다.,user742@example.com,두피 타입:건성,2,PTM0LC3YAF54SG
+2.5,아주 나쁜 제품입니다.,user743@example.com,뷰티 키워드:주름,3,PTSJ866GO1JQ7R
+1.2,정말 추천합니다!,user744@example.com,피부톤:웜톤,4,PTI4ERCSWE4WZO
+4.4,정말 추천합니다!,user745@example.com,뷰티 키워드:주름,5,PTJ79EOMFF0S6T
+1.6,별로 기대하지 마세요.,user746@example.com,피부톤:쿨톤,6,PTC7NDFKVTS2AG
+1.3,이 제품은 정말 좋습니다!,user747@example.com,두피 타입:복합성,7,PTD8PTJDGUAKQU
+0.4,만족스러운 구매였습니다!,user748@example.com,스킨 타입:지성,8,PTBWGWD4BUVRAB
+0.1,그냥 그렇네요.,user749@example.com,스킨 타입:건성,9,PT3SPUL2MRSXCN
+1.5,만족스러운 구매였습니다!,user750@example.com,사이즈:XS,10,PTYEGYM9JY3XCY
+3.1,아주 나쁜 제품입니다.,user751@example.com,스킨 타입:건성,1,PT3AP41W48VPC1
+0.8,이 제품은 정말 좋습니다!,user752@example.com,사이즈:S,2,PTYTH2RJCI1CN7
+1.5,아주 나쁜 제품입니다.,user753@example.com,스킨 타입:지성,3,PTD35GR51UOR46
+0.3,정말 추천합니다!,user754@example.com,뷰티 키워드:주름,4,PTM6LNF33HF7GU
+4.7,만족스러운 구매였습니다!,user755@example.com,뷰티 키워드:모공,5,PT5TWOKVPG2J8V
+3.1,최고의 제품입니다!,user756@example.com,두피 타입:복합성,6,PTQKD3PA4F9PMT
+0.2,정말 추천합니다!,user757@example.com,뷰티 키워드:주름,7,PTVYNX2EY2DOYQ
+3.0,별로 기대하지 마세요.,user758@example.com,피부톤:웜톤,8,PTT9HBNJI98ECS
+2.4,다시 사고 싶지 않아요.,user759@example.com,두피 타입:복합성,9,PTEZU9CKIKP9LV
+4.3,최고의 제품입니다!,user760@example.com,스킨 타입:지성,10,PTHIUHJ99FQ2MX
+4.7,별로 기대하지 마세요.,user761@example.com,신발 사이즈:255,1,PTFQ6PZFSJSUEY
+2.3,만족스러운 구매였습니다!,user762@example.com,뷰티 키워드:트러블,2,PT1QQZCB62EV8V
+4.8,최고의 제품입니다!,user763@example.com,사이즈:XL,3,PTAXCANN0L7FBU
+3.3,보통입니다.,user764@example.com,사이즈:M,4,PTTO62AMNY0GVI
+2.0,이 제품은 정말 좋습니다!,user765@example.com,스킨 타입:복합성,5,PTQ6L3670EJ7XS
+1.5,보통입니다.,user766@example.com,피부톤:웜톤,6,PTXG9V2UGE4MZR
+3.9,별로 기대하지 마세요.,user767@example.com,신발 사이즈:280,7,PTA3JHF87MNW1V
+2.9,만족스러운 구매였습니다!,user768@example.com,뷰티 키워드:주름,8,PT9ML3MBI3V9UB
+3.3,별로 기대하지 마세요.,user769@example.com,뷰티 키워드:주름,9,PTTPBDT5WR3VY2
+3.5,보통입니다.,user770@example.com,피부톤:웜톤,10,PTEGYRYTONVQ8M
+2.2,별로 기대하지 마세요.,user771@example.com,사이즈:L,1,PTWEG4OYH1E68J
+3.4,그냥 그렇네요.,user772@example.com,스킨 타입:건성,2,PTQNF43FTIB5K6
+0.4,이 제품은 정말 좋습니다!,user773@example.com,뷰티 키워드:트러블,3,PTJ0LBS71APWPI
+1.8,만족스러운 구매였습니다!,user774@example.com,피부톤:쿨톤,4,PTJRV8N25VSD1I
+2.1,정말 추천합니다!,user775@example.com,스킨 타입:복합성,5,PTXTBO0QE2SJLU
+1.2,다시 구매하고 싶습니다!,user776@example.com,스킨 타입:건성,6,PTDH7VOBKWQ8QT
+2.2,최고의 제품입니다!,user777@example.com,두피 타입:건성,7,PTE23XLLVKRVM5
+1.1,다시 구매하고 싶습니다!,user778@example.com,사이즈:S,8,PTKRMFSNOOL3XQ
+4.6,다시 구매하고 싶습니다!,user779@example.com,사이즈:S,9,PTFAAFXBONCDY5
+0.9,만족스러운 구매였습니다!,user780@example.com,뷰티 키워드:모공,10,PT4EL8UG4YT0TY
+5.0,만족스러운 구매였습니다!,user781@example.com,스킨 타입:지성,1,PTT44H4OTNPCEF
+2.9,아주 나쁜 제품입니다.,user782@example.com,뷰티 키워드:모공,2,PTUWK8WFMFUB78
+1.3,정말 추천합니다!,user783@example.com,두피 타입:건성,3,PTWBEVG36JIPD4
+4.7,별로 기대하지 마세요.,user784@example.com,뷰티 키워드:주름,4,PT7B7EQJFNN4Y7
+3.7,정말 추천합니다!,user785@example.com,피부톤:쿨톤,5,PTE5D66FHWHQ3I
+2.3,이 제품은 정말 좋습니다!,user786@example.com,사이즈:XL,6,PTRT52K4PKQ4U2
+1.9,별로 기대하지 마세요.,user787@example.com,두피 타입:건성,7,PTKW33SLW52HQ2
+3.2,이 제품은 정말 좋습니다!,user788@example.com,신발 사이즈:235,8,PTVJ8MOQAF5X28
+2.8,아주 나쁜 제품입니다.,user789@example.com,뷰티 키워드:모공,9,PT4MFAT4W0YKQC
+2.4,별로 기대하지 마세요.,user790@example.com,뷰티 키워드:모공,10,PTIMWKHCMZ45HR
+4.7,다시 사고 싶지 않아요.,user791@example.com,사이즈:L,1,PTQIIT86KE7UAJ
+4.2,만족스러운 구매였습니다!,user792@example.com,피부톤:웜톤,2,PTIZ2KJINQXWB0
+2.3,이 제품은 정말 좋습니다!,user793@example.com,사이즈:XS,3,PT0ZQ3W9XJ1NZH
+2.8,그냥 그렇네요.,user794@example.com,스킨 타입:지성,4,PTAEFBAJEXC4K9
+2.0,최고의 제품입니다!,user795@example.com,신발 사이즈:280,5,PTU4MIA6VTYHBA
+4.9,다시 구매하고 싶습니다!,user796@example.com,사이즈:XXL,6,PTA14G1RA1AVY5
+0.6,만족스러운 구매였습니다!,user797@example.com,두피 타입:건성,7,PTME00LWB8KQL0
+1.6,그냥 그렇네요.,user798@example.com,두피 타입:복합성,8,PTCBGYII495BYF
+1.5,만족스러운 구매였습니다!,user799@example.com,스킨 타입:건성,9,PTZJ9F45H8A03O
+0.5,최고의 제품입니다!,user800@example.com,피부톤:웜톤,10,PTLERX1ZTT7MA3
+4.9,정말 추천합니다!,user801@example.com,두피 타입:복합성,1,PTONL06P89FKXC
+4.5,다시 구매하고 싶습니다!,user802@example.com,신발 사이즈:285,2,PTUPMX83Y19CQ9
+0.4,다시 사고 싶지 않아요.,user803@example.com,두피 타입:건성,3,PTMAV9VFR0TO7C
+1.0,그냥 그렇네요.,user804@example.com,두피 타입:지성,4,PT2VOA1JEB4VGK
+0.1,별로 기대하지 마세요.,user805@example.com,뷰티 키워드:모공,5,PTG2WH710C8X2O
+1.0,만족스러운 구매였습니다!,user806@example.com,스킨 타입:복합성,6,PT7SIX4E934M59
+4.1,정말 추천합니다!,user807@example.com,사이즈:XL,7,PT2EBVL7TLTUM2
+3.7,만족스러운 구매였습니다!,user808@example.com,신발 사이즈:265,8,PTV9QP9TB81JBI
+3.4,그냥 그렇네요.,user809@example.com,스킨 타입:건성,9,PT0V1LL5X22Z5E
+3.2,다시 구매하고 싶습니다!,user810@example.com,사이즈:S,10,PTTUFQAPP4YHRS
+2.8,아주 나쁜 제품입니다.,user811@example.com,사이즈:L,1,PT8WSOFCMZQ18N
+1.8,아주 나쁜 제품입니다.,user812@example.com,뷰티 키워드:모공,2,PTVROJ9X2DP69X
+3.9,다시 사고 싶지 않아요.,user813@example.com,두피 타입:건성,3,PT2IENTV4C36F5
+2.2,정말 추천합니다!,user814@example.com,스킨 타입:복합성,4,PTD2UQKNS29D6X
+0.4,다시 구매하고 싶습니다!,user815@example.com,뷰티 키워드:트러블,5,PT3P5M6LW0HDX5
+0.1,이 제품은 정말 좋습니다!,user816@example.com,사이즈:XL,6,PTIF8VNILICDL3
+1.0,최고의 제품입니다!,user817@example.com,스킨 타입:건성,7,PTOYNREQEJE4WX
+0.9,아주 나쁜 제품입니다.,user818@example.com,두피 타입:복합성,8,PTPJ119DEZM6BE
+4.0,아주 나쁜 제품입니다.,user819@example.com,피부톤:웜톤,9,PTWZI9TIH69DHZ
+2.3,보통입니다.,user820@example.com,사이즈:XXL,10,PTFU12792YI26U
+4.8,최고의 제품입니다!,user821@example.com,스킨 타입:지성,1,PT0Q27B8BFXCGQ
+3.0,정말 추천합니다!,user822@example.com,두피 타입:지성,2,PTJW7YXYGJE5KR
+0.2,다시 구매하고 싶습니다!,user823@example.com,사이즈:XL,3,PTGX744J7BG0C3
+1.1,그냥 그렇네요.,user824@example.com,뷰티 키워드:주름,4,PTSJ8ZV4OHJ5DF
+0.5,아주 나쁜 제품입니다.,user825@example.com,두피 타입:복합성,5,PTKURE8DQ9HU7S
+3.4,그냥 그렇네요.,user826@example.com,스킨 타입:복합성,6,PTLIOT3DN7RHV1
+0.1,보통입니다.,user827@example.com,신발 사이즈:245,7,PTSQ007MUP38AU
+2.4,다시 사고 싶지 않아요.,user828@example.com,두피 타입:복합성,8,PTM0EA5A7WIG67
+0.9,최고의 제품입니다!,user829@example.com,피부톤:웜톤,9,PTA7QRXYHCPMR7
+3.9,만족스러운 구매였습니다!,user830@example.com,뷰티 키워드:주름,10,PTCI9HEMO3NTYH
+3.6,만족스러운 구매였습니다!,user831@example.com,뷰티 키워드:주름,1,PTO75O6AY3GH02
+1.0,아주 나쁜 제품입니다.,user832@example.com,신발 사이즈:220,2,PT5SRKN1NOXY73
+4.8,정말 추천합니다!,user833@example.com,피부톤:쿨톤,3,PT6H6DKW7AHNBU
+3.8,그냥 그렇네요.,user834@example.com,신발 사이즈:300,4,PTL83KPVSVI7UL
+1.9,그냥 그렇네요.,user835@example.com,스킨 타입:복합성,5,PTPBU7SZ5S4W2W
+2.8,별로 기대하지 마세요.,user836@example.com,신발 사이즈:275,6,PTVA2GB3U04H86
+2.5,다시 사고 싶지 않아요.,user837@example.com,신발 사이즈:255,7,PT1KV44R0DZ0R0
+1.4,정말 추천합니다!,user838@example.com,사이즈:XXL,8,PT5AOC1ZAJMDTE
+4.1,별로 기대하지 마세요.,user839@example.com,사이즈:XL,9,PTTETRS3DTRZKG
+1.1,그냥 그렇네요.,user840@example.com,뷰티 키워드:모공,10,PT4I1PUPYADW45
+3.5,그냥 그렇네요.,user841@example.com,스킨 타입:지성,1,PTW227NH8056CC
+4.9,보통입니다.,user842@example.com,뷰티 키워드:트러블,2,PTD9QYG0S69Q2N
+0.1,만족스러운 구매였습니다!,user843@example.com,뷰티 키워드:모공,3,PT3FRRCA7UG3BQ
+3.8,다시 구매하고 싶습니다!,user844@example.com,사이즈:L,4,PTNOQ3Z29OZ0OS
+2.9,최고의 제품입니다!,user845@example.com,신발 사이즈:240,5,PT6TPVH3W5V600
+3.2,최고의 제품입니다!,user846@example.com,뷰티 키워드:모공,6,PTLKV1VLRBDJJT
+4.5,보통입니다.,user847@example.com,뷰티 키워드:주름,7,PT9MO1HJYL57A4
+2.9,보통입니다.,user848@example.com,뷰티 키워드:모공,8,PT2ZHN8O67TCI4
+4.3,다시 사고 싶지 않아요.,user849@example.com,두피 타입:복합성,9,PTL7ADLKOBA7U6
+0.1,아주 나쁜 제품입니다.,user850@example.com,피부톤:쿨톤,10,PTH67H7ZSY81W6
+1.6,다시 사고 싶지 않아요.,user851@example.com,뷰티 키워드:주름,1,PTD5ZNH8S7WQ78
+0.3,그냥 그렇네요.,user852@example.com,스킨 타입:복합성,2,PTLBKQAHI63DSP
+3.6,최고의 제품입니다!,user853@example.com,신발 사이즈:300,3,PT78A7275EYUY2
+1.8,이 제품은 정말 좋습니다!,user854@example.com,피부톤:웜톤,4,PT8EXOPI7JP3JL
+2.5,다시 구매하고 싶습니다!,user855@example.com,피부톤:웜톤,5,PT83QO64EI4ZTL
+1.3,최고의 제품입니다!,user856@example.com,피부톤:웜톤,6,PTSPL8MSZYGKO9
+1.9,정말 추천합니다!,user857@example.com,두피 타입:복합성,7,PTIFWCAPJH69TO
+1.8,별로 기대하지 마세요.,user858@example.com,신발 사이즈:280,8,PTLZGI94EPMM6S
+3.1,최고의 제품입니다!,user859@example.com,뷰티 키워드:주름,9,PTJMO1XI8YCSOL
+4.7,정말 추천합니다!,user860@example.com,뷰티 키워드:트러블,10,PTA5WP67HX8KGD
+4.5,다시 구매하고 싶습니다!,user861@example.com,두피 타입:건성,1,PTH4SSTKADTT0A
+2.1,보통입니다.,user862@example.com,뷰티 키워드:트러블,2,PTROWNCMSEDUUB
+1.0,그냥 그렇네요.,user863@example.com,피부톤:웜톤,3,PT7QQ9Y9OSCVD5
+3.2,만족스러운 구매였습니다!,user864@example.com,피부톤:웜톤,4,PTM3ZLYCH53PEB
+3.1,다시 사고 싶지 않아요.,user865@example.com,뷰티 키워드:트러블,5,PT1P24PJI71MUW
+0.4,이 제품은 정말 좋습니다!,user866@example.com,두피 타입:건성,6,PTFCUMAVVMFXJ4
+2.8,아주 나쁜 제품입니다.,user867@example.com,뷰티 키워드:모공,7,PTOBLJ2R0DF6KI
+4.6,최고의 제품입니다!,user868@example.com,스킨 타입:복합성,8,PT5OD2HW4PI59J
+3.7,이 제품은 정말 좋습니다!,user869@example.com,스킨 타입:건성,9,PTD0T8OAKGKN6N
+4.5,다시 사고 싶지 않아요.,user870@example.com,피부톤:쿨톤,10,PT2SBO1NLKKCPW
+2.5,그냥 그렇네요.,user871@example.com,스킨 타입:건성,1,PT2TJI3VMVXRK7
+0.2,보통입니다.,user872@example.com,뷰티 키워드:모공,2,PT5ZSFE3GKKG8Q
+4.5,다시 구매하고 싶습니다!,user873@example.com,스킨 타입:복합성,3,PTZGI9HVT0D7AP
+4.3,아주 나쁜 제품입니다.,user874@example.com,스킨 타입:복합성,4,PTO0U5DQXC9ZW0
+2.1,그냥 그렇네요.,user875@example.com,신발 사이즈:245,5,PTYDX9P14FOYY5
+1.7,만족스러운 구매였습니다!,user876@example.com,스킨 타입:복합성,6,PT7CDPTKW28T1U
+2.3,다시 사고 싶지 않아요.,user877@example.com,스킨 타입:복합성,7,PTEQ16GUTRLNZZ
+2.4,다시 사고 싶지 않아요.,user878@example.com,두피 타입:건성,8,PT3CPMG0ISSUZ4
+0.6,다시 구매하고 싶습니다!,user879@example.com,두피 타입:복합성,9,PTE0KG28Y94EM2
+1.2,아주 나쁜 제품입니다.,user880@example.com,신발 사이즈:260,10,PTIPQCN8M3B5O6
+4.9,별로 기대하지 마세요.,user881@example.com,두피 타입:지성,1,PT02MPXTCXQ8QP
+2.8,보통입니다.,user882@example.com,뷰티 키워드:주름,2,PTOLYFJRVUI96U
+2.2,다시 사고 싶지 않아요.,user883@example.com,사이즈:L,3,PT4HOYOAB30UIW
+3.1,최고의 제품입니다!,user884@example.com,스킨 타입:지성,4,PT4RT2O1THAJTT
+3.3,최고의 제품입니다!,user885@example.com,뷰티 키워드:주름,5,PTUXZMNOL6MNX2
+3.6,다시 사고 싶지 않아요.,user886@example.com,사이즈:XXL,6,PTN8EEKQS04GNN
+4.4,아주 나쁜 제품입니다.,user887@example.com,뷰티 키워드:트러블,7,PT84YLIFBI0HTQ
+3.6,최고의 제품입니다!,user888@example.com,피부톤:웜톤,8,PTSER6D275GS89
+4.8,보통입니다.,user889@example.com,사이즈:L,9,PTVQX1ACM2KA9F
+4.1,그냥 그렇네요.,user890@example.com,신발 사이즈:230,10,PTZ7L30CU0Q7YS
+1.9,별로 기대하지 마세요.,user891@example.com,뷰티 키워드:모공,1,PT7EZ7MB0LARIJ
+4.5,이 제품은 정말 좋습니다!,user892@example.com,신발 사이즈:275,2,PTFRZPFTY7HHTW
+2.2,정말 추천합니다!,user893@example.com,사이즈:S,3,PT1OIBBXVKEKHN
+0.7,정말 추천합니다!,user894@example.com,두피 타입:건성,4,PTHPH731A64APV
+2.9,이 제품은 정말 좋습니다!,user895@example.com,스킨 타입:건성,5,PTZLTB0JKPPAOI
+1.4,다시 사고 싶지 않아요.,user896@example.com,신발 사이즈:270,6,PTUO0F8W3S2XIQ
+3.1,보통입니다.,user897@example.com,사이즈:M,7,PTQHW35BN13TQS
+2.8,만족스러운 구매였습니다!,user898@example.com,두피 타입:복합성,8,PT38WA6YKXZGWA
+3.3,보통입니다.,user899@example.com,두피 타입:건성,9,PTM2HK6MB77C2P
+2.5,아주 나쁜 제품입니다.,user900@example.com,피부톤:웜톤,10,PT1NJ13JGB34GH
+4.9,다시 사고 싶지 않아요.,user901@example.com,신발 사이즈:275,1,PTSA4EG11ETPSE
+4.3,정말 추천합니다!,user902@example.com,신발 사이즈:265,2,PTEK3AU9IOTLGR
+0.8,다시 구매하고 싶습니다!,user903@example.com,두피 타입:건성,3,PT4U3AV3XI2FYJ
+3.8,아주 나쁜 제품입니다.,user904@example.com,뷰티 키워드:모공,4,PTVWXUPLHYQ52J
+1.4,이 제품은 정말 좋습니다!,user905@example.com,사이즈:L,5,PT0YM5FCC5C1QK
+1.1,최고의 제품입니다!,user906@example.com,두피 타입:복합성,6,PTMSGB3KAI5S2C
+0.1,이 제품은 정말 좋습니다!,user907@example.com,뷰티 키워드:주름,7,PTM00GB6E12Y5B
+3.0,다시 사고 싶지 않아요.,user908@example.com,두피 타입:건성,8,PT65UN17U0BX19
+3.6,보통입니다.,user909@example.com,스킨 타입:복합성,9,PTDR3P1CMCG6LG
+4.9,다시 사고 싶지 않아요.,user910@example.com,피부톤:웜톤,10,PT9S4SNDM8Y9NE
+1.9,정말 추천합니다!,user911@example.com,피부톤:웜톤,1,PTP88HS0JDXECU
+2.1,다시 구매하고 싶습니다!,user912@example.com,두피 타입:복합성,2,PTB3L28CU49KM4
+3.1,별로 기대하지 마세요.,user913@example.com,사이즈:M,3,PT7OKMUFZ11AQF
+2.3,보통입니다.,user914@example.com,스킨 타입:지성,4,PTCZVILJ7OEG1W
+1.7,다시 사고 싶지 않아요.,user915@example.com,피부톤:웜톤,5,PTROLHX39TDBD6
+2.1,이 제품은 정말 좋습니다!,user916@example.com,뷰티 키워드:트러블,6,PT785E4VK0O6TQ
+4.9,별로 기대하지 마세요.,user917@example.com,두피 타입:지성,7,PTA4CHGS9QZP4U
+1.1,아주 나쁜 제품입니다.,user918@example.com,스킨 타입:건성,8,PTWBJVOH076B0N
+3.6,만족스러운 구매였습니다!,user919@example.com,피부톤:웜톤,9,PTFR6I6DZ0TDE7
+1.6,최고의 제품입니다!,user920@example.com,뷰티 키워드:주름,10,PTXZ2ILV8SL1GV
+4.7,보통입니다.,user921@example.com,피부톤:웜톤,1,PTHVEVG32PEMZJ
+1.8,다시 사고 싶지 않아요.,user922@example.com,두피 타입:지성,2,PTDA6X1OYKTPCT
+4.6,이 제품은 정말 좋습니다!,user923@example.com,스킨 타입:복합성,3,PTVBE0CNFQMU2D
+2.2,보통입니다.,user924@example.com,신발 사이즈:270,4,PT785OV1I68K53
+1.2,그냥 그렇네요.,user925@example.com,두피 타입:지성,5,PT4S5005JVJR4P
+1.1,다시 사고 싶지 않아요.,user926@example.com,두피 타입:복합성,6,PTZ9M6FOOWSTZ9
+0.2,정말 추천합니다!,user927@example.com,신발 사이즈:230,7,PTP92H151YB5KL
+2.4,만족스러운 구매였습니다!,user928@example.com,사이즈:L,8,PTLAQI8XMGEMPU
+0.5,최고의 제품입니다!,user929@example.com,두피 타입:건성,9,PTQXL4WJDGQSHZ
+0.8,그냥 그렇네요.,user930@example.com,스킨 타입:복합성,10,PTD8XLKIOYF4Y7
+4.8,보통입니다.,user931@example.com,뷰티 키워드:모공,1,PT3U52P63JLCCO
+3.2,다시 사고 싶지 않아요.,user932@example.com,두피 타입:지성,2,PTEW79AEUSAYIV
+3.3,정말 추천합니다!,user933@example.com,신발 사이즈:295,3,PT9R3NYE2RVRTV
+4.4,그냥 그렇네요.,user934@example.com,신발 사이즈:295,4,PTF5A1D9FT7P1M
+2.4,별로 기대하지 마세요.,user935@example.com,두피 타입:복합성,5,PTPW9H291BSC0K
+3.0,보통입니다.,user936@example.com,스킨 타입:건성,6,PTWPGJGPVVP0XO
+3.3,이 제품은 정말 좋습니다!,user937@example.com,스킨 타입:건성,7,PTZE5XG4QRT8HY
+3.9,정말 추천합니다!,user938@example.com,뷰티 키워드:주름,8,PTY5Z1BTBGLRB5
+2.1,별로 기대하지 마세요.,user939@example.com,사이즈:XXL,9,PTVX6VWCULHZN9
+3.9,다시 구매하고 싶습니다!,user940@example.com,사이즈:XL,10,PTQFJASAT06FDF
+3.4,최고의 제품입니다!,user941@example.com,피부톤:웜톤,1,PT18VUOS5EF7QZ
+1.9,최고의 제품입니다!,user942@example.com,사이즈:S,2,PT51LEXJH3L66J
+2.5,다시 사고 싶지 않아요.,user943@example.com,사이즈:XL,3,PT9WYVXIQOTUIW
+4.4,다시 구매하고 싶습니다!,user944@example.com,신발 사이즈:300,4,PT9EZ5ZOS6G0XN
+2.3,정말 추천합니다!,user945@example.com,뷰티 키워드:트러블,5,PTM5CBUGX80QM3
+4.6,아주 나쁜 제품입니다.,user946@example.com,스킨 타입:지성,6,PTZL5IIYIPVQAO
+3.1,보통입니다.,user947@example.com,사이즈:M,7,PTHXIQCLUVWE0P
+4.7,다시 사고 싶지 않아요.,user948@example.com,스킨 타입:복합성,8,PT6A4XX8I05S47
+2.4,보통입니다.,user949@example.com,피부톤:웜톤,9,PTYUB1FQ0BRLSW
+3.3,정말 추천합니다!,user950@example.com,피부톤:쿨톤,10,PTJ3QM6S3R8VSR
+0.3,그냥 그렇네요.,user951@example.com,스킨 타입:복합성,1,PTH3OAE1UZ11GX
+1.4,정말 추천합니다!,user952@example.com,신발 사이즈:250,2,PTRAZ6CFK39BSU
+1.6,만족스러운 구매였습니다!,user953@example.com,뷰티 키워드:주름,3,PTHZUUGTD4TX5R
+3.8,최고의 제품입니다!,user954@example.com,스킨 타입:복합성,4,PT43M7CSP02LEI
+3.3,이 제품은 정말 좋습니다!,user955@example.com,스킨 타입:지성,5,PT512KF3VW39LX
+2.1,그냥 그렇네요.,user956@example.com,두피 타입:건성,6,PT5VCKHYB95U3M
+4.3,다시 사고 싶지 않아요.,user957@example.com,스킨 타입:지성,7,PTF4K3AXY5JSCY
+4.8,이 제품은 정말 좋습니다!,user958@example.com,두피 타입:지성,8,PTRIRG730HUCGZ
+1.5,다시 구매하고 싶습니다!,user959@example.com,신발 사이즈:295,9,PT59N4K577TXTN
+4.3,보통입니다.,user960@example.com,피부톤:쿨톤,10,PTF3J9R40ARGAA
+3.3,별로 기대하지 마세요.,user961@example.com,사이즈:XXL,1,PTT77I8FT3NEWE
+3.6,보통입니다.,user962@example.com,사이즈:S,2,PTRHM2I8QODNS4
+4.7,보통입니다.,user963@example.com,스킨 타입:지성,3,PTRUTMQA50RUYR
+0.3,다시 구매하고 싶습니다!,user964@example.com,사이즈:S,4,PTJTJS015URUW6
+3.8,별로 기대하지 마세요.,user965@example.com,사이즈:L,5,PT7VP1ASVQM2CP
+1.3,보통입니다.,user966@example.com,뷰티 키워드:모공,6,PTM7OA8DA1BHOI
+1.4,만족스러운 구매였습니다!,user967@example.com,피부톤:쿨톤,7,PT9RMZGT7USN4O
+1.3,아주 나쁜 제품입니다.,user968@example.com,두피 타입:지성,8,PTBLKZZ5KMISCD
+2.0,다시 사고 싶지 않아요.,user969@example.com,두피 타입:복합성,9,PTM91J8DB1F8FA
+3.4,다시 사고 싶지 않아요.,user970@example.com,스킨 타입:건성,10,PT9T1S6ZKL2BOT
+4.5,정말 추천합니다!,user971@example.com,두피 타입:복합성,1,PTQRGV3DPNRFIA
+4.8,그냥 그렇네요.,user972@example.com,신발 사이즈:255,2,PTAXL5DIEP2NAF
+2.0,최고의 제품입니다!,user973@example.com,사이즈:M,3,PTVPXBDWSCMLTS
+3.5,다시 구매하고 싶습니다!,user974@example.com,사이즈:L,4,PTPIYA3HNMTGVZ
+3.2,보통입니다.,user975@example.com,사이즈:XXL,5,PTL4OJ7VHGCRHG
+3.0,별로 기대하지 마세요.,user976@example.com,뷰티 키워드:트러블,6,PTB2LYP5QPB32J
+0.6,다시 사고 싶지 않아요.,user977@example.com,뷰티 키워드:트러블,7,PT2NYRDBKHXGV4
+1.8,보통입니다.,user978@example.com,스킨 타입:복합성,8,PTUONDI87S8PJA
+1.8,정말 추천합니다!,user979@example.com,두피 타입:건성,9,PT88K84QJFX490
+1.3,이 제품은 정말 좋습니다!,user980@example.com,신발 사이즈:300,10,PT6NQO1AZJPXHN
+4.6,아주 나쁜 제품입니다.,user981@example.com,두피 타입:지성,1,PT6ZR9YNCK9RIL
+3.8,보통입니다.,user982@example.com,피부톤:쿨톤,2,PTTL3SG9FK1AEU
+1.0,다시 구매하고 싶습니다!,user983@example.com,스킨 타입:건성,3,PT5N8J359KW5J5
+1.4,별로 기대하지 마세요.,user984@example.com,스킨 타입:건성,4,PT2ZOTD31IJN1Z
+3.7,최고의 제품입니다!,user985@example.com,뷰티 키워드:주름,5,PTQRGPWN6MZXNT
+0.9,정말 추천합니다!,user986@example.com,피부톤:쿨톤,6,PT4BTFR3WWIQQ6
+0.8,다시 사고 싶지 않아요.,user987@example.com,스킨 타입:복합성,7,PTCUT8HAP3PE5N
+4.4,최고의 제품입니다!,user988@example.com,신발 사이즈:285,8,PTSM4B69KLK7F8
+4.9,만족스러운 구매였습니다!,user989@example.com,사이즈:S,9,PTTJYLKQVTCHDT
+2.2,별로 기대하지 마세요.,user990@example.com,스킨 타입:복합성,10,PTW3MGT05HRIFL
+4.2,다시 사고 싶지 않아요.,user991@example.com,사이즈:XL,1,PT8SD2X05Y8KHV
+1.3,만족스러운 구매였습니다!,user992@example.com,피부톤:쿨톤,2,PT7UITU4D7P63A
+3.7,만족스러운 구매였습니다!,user993@example.com,뷰티 키워드:트러블,3,PTW2CVC19DZN15
+3.9,정말 추천합니다!,user994@example.com,신발 사이즈:235,4,PTDYMKBGKJLIBJ
+1.2,만족스러운 구매였습니다!,user995@example.com,스킨 타입:복합성,5,PTD6YRS9CNNR1X
+1.5,만족스러운 구매였습니다!,user996@example.com,사이즈:XXL,6,PTZTL1PAJVO69B
+1.6,최고의 제품입니다!,user997@example.com,피부톤:쿨톤,7,PT0682VIRIDHFI
+3.3,정말 추천합니다!,user998@example.com,뷰티 키워드:모공,8,PTRLO1CMJ56XMM
+1.6,별로 기대하지 마세요.,user999@example.com,사이즈:M,9,PT3CZTL3EAH7G1
