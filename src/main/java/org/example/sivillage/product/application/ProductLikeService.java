@@ -25,5 +25,5 @@ public interface ProductLikeService {
     void toggleProductLike(String productCode, String memberUuid);
 
 
-    GetLikeInfoResponseDto getLikeInfo(String productCode, String memberUuid);
+    public void syncProductLikeWithDB();
 }
